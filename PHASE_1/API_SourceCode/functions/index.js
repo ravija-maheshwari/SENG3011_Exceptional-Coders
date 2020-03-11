@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-app.use(cors({ origin: true }));
+app.use(cors ({ origin: true }) );
 
 var serviceAccount = require("./permissions.json");
 
@@ -15,38 +15,25 @@ admin.initializeApp({
 const db = admin.firestore()
 
 
-app.get('/api/testing_endpoint', async (req, res) => {
+app.get('/api/test', async (req, res) => {
     try {
-        // Testing code to send doc to Firestore collection
-        // await db.collection('test_collection').doc().create({response: 'Hello World'});
-        // return res.status(200).send('Hello World!');
-
-        // Testing code to retrieve docs from Firestore
-        // let results = [];
-        //
-        // const snapshot = await db.collection('test_collection').get()
-        // snapshot.forEach(doc => {
-        //     results.push(doc.data())
-        // });
-        //
-        // return res.status(200).send(results)
         await populate_test_collection();
-
     } catch (error) {
         console.log(error);
         return res.status(500).send(error);
     }
 });
 
+//Endpoint to get all article reports
 app.get('/api/articles', async (req, res) => {
     try{
         //Retrieve article records from db
         let all_articles = [];
-        const snapshot = await db.collection('articles').get()
+        const snapshot = await db.collection('test_collection').get()
         snapshot.forEach(doc => {
             all_articles.push(doc.data())
         });
-        //Store logging information
+        //Store logging information - TBD
         //Send response
         if(all_articles.length === 0) {
             const no_results = {message: "No articles found"};
@@ -59,11 +46,42 @@ app.get('/api/articles', async (req, res) => {
     }
 });
 
-app.get('/api/report', async(req, res) => {
-    let date = req.query.date;
-    let keyterms = req.query.keyterms;
-    let location = req.query.location;
+//Endpoint to retrieve specific article
+//TBD:
+//add in error checks + managing optional/compulsory params
+app.get('/api/article', async(req, res) => {
+    try{
+        let start_date = req.query.start_date;
+        let end_date = req.query.end_date;
+        let keyterm = req.query.keyterm;
+        let location = req.query.location;
 
+        start_date = start_date.replace("T", " ");
+        end_date = end_date.replace("T",  " ");
+
+        let all_articles = db.collection('test_collection');
+        let query = all_articles.where('date_of_publication', '>=', start_date)
+            .get()
+            .then(snapshot => {
+                if (snapshot.empty) {
+                    console.log("No matching documents");
+                    const no_results = {message: "No articles found"};
+                    return res.status(204).send(no_results);
+                }
+
+                snapshot.forEach(doc => {
+                    console.log(doc.id, '=>', doc.data());
+                });
+            })
+            .catch(err => {
+                console.log("Error getting documents" , err);
+                return res.status(500).send(error);
+            })
+        return res.status(200).send(query);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+    }
 });
 
 async function populate_test_collection() {
@@ -133,8 +151,23 @@ async function populate_test_collection() {
 
 
 
-    //await db.collection('test_collection').doc().create(article1);
-    await db.collection('test_collection').doc().create(article2);
+    await db.collection('test_collection').doc().create(article1);
+    //await db.collection('test_collection').doc().create(article2);
 
 }
 exports.app = functions.https.onRequest(app);
+
+
+// Testing code to send doc to Firestore collection
+// await db.collection('test_collection').doc().create({response: 'Hello World'});
+// return res.status(200).send('Hello World!');
+
+// Testing code to retrieve docs from Firestore
+// let results = [];
+//
+// const snapshot = await db.collection('test_collection').get()
+// snapshot.forEach(doc => {
+//     results.push(doc.data())
+// });
+//
+// return res.status(200).send(results)
