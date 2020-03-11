@@ -18,6 +18,7 @@ const db = admin.firestore()
 app.get('/api/test', async (req, res) => {
     try {
         await populate_test_collection();
+        return res.status(200);
     } catch (error) {
         console.log(error);
         return res.status(500).send(error);
@@ -50,34 +51,46 @@ app.get('/api/articles', async (req, res) => {
 //TBD:
 //add in error checks + managing optional/compulsory params
 app.get('/api/article', async(req, res) => {
-    try{
+    try {
         let start_date = req.query.start_date;
         let end_date = req.query.end_date;
         let keyterm = req.query.keyterm;
         let location = req.query.location;
 
-        start_date = start_date.replace("T", " ");
-        end_date = end_date.replace("T",  " ");
+        // Converting start_date param into proper Date format
+        start_date = new Date(start_date.replace("T", " "));
+        // end_date = end_date.replace("T",  " ");
 
-        let all_articles = db.collection('test_collection');
-        let query = all_articles.where('date_of_publication', '>=', start_date)
+        let articles = []
+
+        let allArticles = db.collection('test_collection');
+        let query = allArticles.where('date_of_publication', '>=', start_date)
             .get()
             .then(snapshot => {
                 if (snapshot.empty) {
                     console.log("No matching documents");
                     const no_results = {message: "No articles found"};
+
+                    // Returning 204 status means there's no body in response
+                    // Should probably change it to 200 if we want to give an informative message
                     return res.status(204).send(no_results);
                 }
 
+                // snapshot.forEach(doc => {
+                //     console.log(doc.id, '=>', doc.data());
+                // });
                 snapshot.forEach(doc => {
-                    console.log(doc.id, '=>', doc.data());
-                });
+                    articles.push(doc.data())
+                })
+
+                return res.status(200).send(articles)
             })
             .catch(err => {
                 console.log("Error getting documents" , err);
                 return res.status(500).send(error);
             })
-        return res.status(200).send(query);
+
+        return null
     } catch (error) {
         console.log(error);
         return res.status(500).send(error);
@@ -87,27 +100,27 @@ app.get('/api/article', async(req, res) => {
 async function populate_test_collection() {
 
     let article1 = {
-            "url":"https://www.who.int/csr/don/17-january-2020-novel-coronavirus-japan-exchina/en/",
-            "date_of_publication": "2020-10-01 13:00:00",
-            "headline": "Novel Coronavirus - Japan (ex-China)",
-            "main_text": "On 15 January 2020, the Ministry of Health, Labour and    Welfare, Japan (MHLW) reported an imported case of laboratory-confirmed 2019-novel coronavirus...",
-            "reports": [
+            url:"https://www.who.int/csr/don/17-january-2020-novel-coronavirus-japan-exchina/en/",
+            date_of_publication: new Date("2020-10-01 13:00:00"),
+            headline: "Novel Coronavirus - Japan (ex-China)",
+            main_text: "On 15 January 2020, the Ministry of Health, Labour and    Welfare, Japan (MHLW) reported an imported case of laboratory-confirmed 2019-novel coronavirus...",
+            reports: [
                 {
-                    "event_date": "2020-01-03 xx:xx:xx to 2020-01-15",
-                    "locations": [
+                    event_date: "2020-01-03 xx:xx:xx to 2020-01-15",
+                    locations: [
                         {
-                            "country": "China",
-                            "location": "Wuhan, Hubei Province"
+                            country: "China",
+                            location: "Wuhan, Hubei Province"
                         },
                         {
-                            "country": "Japan",
-                            "location": ""
+                            country: "Japan",
+                            location: ""
                         }
                     ],
-                    "diseases": [
+                    diseases: [
                         "2019-nCoV"
                     ],
-                    "syndromes": [
+                    syndromes: [
                         "Fever of unknown Origin"
                     ]
                 }
@@ -115,34 +128,34 @@ async function populate_test_collection() {
         }
 
         let article2 = {
-            "url": "www.who.int/lalala_fake_article",
-            "date_of_publication": "2018-12-12 xx:xx:xx",
-            "headline": "Outbreaks in Southern Vietnam",
-            "main_text": "Three people infected by what is thought to be H5N1 or H7N9  in Ho Chi Minh city. First infection occurred on 1 Dec 2018, and latest is report on 10 December. Two in hospital, one has recovered. Furthermore, two people with fever and rash infected by an unknown disease.",
-            "reports": [
+            url: "www.who.int/lalala_fake_article",
+            date_of_publication: new Date("2018-12-12 12:50:00"),
+            headline: "Outbreaks in Southern Vietnam",
+            main_text: "Three people infected by what is thought to be H5N1 or H7N9  in Ho Chi Minh city. First infection occurred on 1 Dec 2018, and latest is report on 10 December. Two in hospital, one has recovered. Furthermore, two people with fever and rash infected by an unknown disease.",
+            reports: [
                 {
-                    "event_date": "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
-                    "locations": [
+                    event_date: "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
+                    locations: [
                         {
                             "geonames-id": 1566083,
                         }
                     ],
-                    "diseases": [
+                    diseases: [
                         "influenza a/h5n1","influenza a/h7n9"
                     ],
-                    "syndromes": []
+                    syndromes: []
                 },
                 {
-                    "event_date": "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
-                    "locations": [
+                    event_date: "2018-12-01 xx:xx:xx to 2018-12-10 xx:xx:xx",
+                    locations: [
                         {
                             "geonames-id": 1566083,
                         }
                     ],
-                    "diseases": [
+                    diseases: [
                         "unknown"
                     ],
-                    "syndromes": [
+                    syndromes: [
                         "Acute fever and rash"
                     ]
                 }
@@ -152,7 +165,7 @@ async function populate_test_collection() {
 
 
     await db.collection('test_collection').doc().create(article1);
-    //await db.collection('test_collection').doc().create(article2);
+    await db.collection('test_collection').doc().create(article2);
 
 }
 exports.app = functions.https.onRequest(app);
