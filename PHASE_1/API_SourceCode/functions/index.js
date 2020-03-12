@@ -55,7 +55,10 @@ app.get('/api/article', async(req, res) => {
         let start_date = req.query.start_date;
         let end_date = req.query.end_date;
         let keyterm = req.query.keyterm;
+        //keyterm = keyterm.split(",");
         let location = req.query.location;
+
+
 
         // Converting start_date param into proper Date format
         start_date = new Date(start_date.replace("T", " "));
@@ -76,12 +79,20 @@ app.get('/api/article', async(req, res) => {
                     return res.status(204).send(no_results);
                 }
 
-                // snapshot.forEach(doc => {
-                //     console.log(doc.id, '=>', doc.data());
-                // });
+                //Checking if headline contains any of the keyterms
                 snapshot.forEach(doc => {
-                    articles.push(doc.data())
-                })
+                    for(let word of keyterm){
+                        let word_regex = new RegExp(word,"i");
+                        if(word_regex.test(doc.data().headline)) {
+                            articles.push(doc.data());
+                            continue;
+                        }
+                    }
+
+                });
+                // snapshot.forEach(doc => {
+                //     articles.push(doc.data())
+                // })
 
                 return res.status(200).send(articles)
             })
