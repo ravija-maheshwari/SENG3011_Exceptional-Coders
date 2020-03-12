@@ -49,7 +49,8 @@ app.get('/api/all_articles', async (req, res) => {
 
 //Endpoint to retrieve specific article
 //keyterms length == 0 - TBD
-
+//Date should be in proper format (including month + days etc)
+//keyterms AND location
 app.get('/api/articles', async(req, res) => {
     try {
         let startDate = req.query.start_date;
@@ -57,7 +58,7 @@ app.get('/api/articles', async(req, res) => {
         let keyterms = req.query.keyterms;
         let location = req.query.location;
 
-        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' ){
+        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined' ){
             // Or a better error message
             const errorMsg = { message: "Bad Request: Some query parameters are missing." };
             return res.status(400).send(errorMsg); // Bad request
