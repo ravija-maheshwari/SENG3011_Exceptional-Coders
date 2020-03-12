@@ -102,7 +102,6 @@ app.get('/api/articles', async(req, res) => {
                             let hasKeyterm = false
                             if (keyterms.length > 0) {
                                 for (let term of keyterms){
-                                    console.log("In keyterms checking")
                                     let termRegex = new RegExp(term, "i");
                                     if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
                                         //Matching keywords
@@ -113,11 +112,15 @@ app.get('/api/articles', async(req, res) => {
                                 }
                             }
 
+                            if (hasKeyterm && location.length === 0) {
+                                articles.push(doc.data())
+                            }
+
+                            // REDO COMMENT
                             // If current doc has not been pushed to articles
                             // AND location is also provided as query params
-                            if (keyterms.length === 0 || (hasKeyterm && location.length !== 0)) {
+                            else if ((hasKeyterm && location.length !== 0) || (keyterms.length === 0 && location.length !== 0)) {
                                 let locationRegex = new RegExp(location, "i");
-                                console.log("In location checking... ", location.length)
                                 for (let place of doc.data().reports) {
                                     for (let loc of place.locations) {
                                         if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
