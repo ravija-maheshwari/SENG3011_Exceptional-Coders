@@ -48,9 +48,6 @@ app.get('/api/all_articles', async (req, res) => {
 });
 
 //Endpoint to retrieve specific article
-//keyterms length == 0 - TBD
-//Date should be in proper format (including month + days etc)
-//keyterms AND location
 app.get('/api/articles', async(req, res) => {
     try {
         let startDate = req.query.start_date;
@@ -59,19 +56,18 @@ app.get('/api/articles', async(req, res) => {
         let location = req.query.location;
 
         if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined' ){
-            // Or a better error message
             const errorMsg = { message: "Bad Request: Some query parameters are missing." };
             return res.status(400).send(errorMsg); // Bad request
         }
 
         let regexDateFormat = new RegExp(/^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])T(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/);
         if(!(regexDateFormat.test(startDate.toString()) && regexDateFormat.test(endDate.toString()))){
-            const errorMsg = { message: "invalid start or end date format"};
+            const errorMsg = { message: "Invalid Date format"};
             return res.status(400).send(errorMsg);
         }
 
         if (startDate > endDate) {
-            const errorMsg = { message: "start_date has to be before end_date."};
+            const errorMsg = { message: "Start_date has to be before end_date."};
             return res.status(400).send(errorMsg);
         }
 
@@ -102,7 +98,7 @@ app.get('/api/articles', async(req, res) => {
                             return res.status(200).send(noResults);
                         }
 
-                        //Checking if headline contains any of the keyterms
+                        // Checking if headline contains any of the keyterms
                         snapshot.forEach(doc => {
                             //String based search for keyterms
                             let hasKeyterm = false
@@ -110,7 +106,7 @@ app.get('/api/articles', async(req, res) => {
                                 for (let term of keyterms){
                                     let termRegex = new RegExp(term, "i");
                                     if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
-                                        //Matching keywords
+                                        // Matching keywords
                                         // articles.push(doc.data());
                                         hasKeyterm = true;
                                         continue;
@@ -118,11 +114,11 @@ app.get('/api/articles', async(req, res) => {
                                 }
                             }
 
+                            // Push doc to article if keyterm is found and no location provided
                             if (hasKeyterm && location.length === 0) {
                                 articles.push(doc.data())
                             }
 
-                            // REDO COMMENT
                             // If current doc has not been pushed to articles
                             // AND location is also provided as query params
                             else if ((hasKeyterm && location.length !== 0) || (keyterms.length === 0 && location.length !== 0)) {
@@ -130,7 +126,7 @@ app.get('/api/articles', async(req, res) => {
                                 for (let place of doc.data().reports) {
                                     for (let loc of place.locations) {
                                         if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
-                                            //Matching location
+                                            // Matching location
                                             articles.push(doc.data()); 
                                             break;
                                         }
