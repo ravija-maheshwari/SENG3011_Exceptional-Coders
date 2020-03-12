@@ -40,7 +40,7 @@ app.get('/api/all_articles', async (req, res) => {
             const noResults = { message: "No articles found" };
             return res.status(200).send(noResults);
         }
-        return res.status(200).send(all_articles);
+        return res.status(200).send(allArticles);
     } catch (error) {
         console.log(error);
         return res.status(500).send(serverErrorMsg);
