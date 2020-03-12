@@ -27,23 +27,23 @@ app.get('/api/test', async (req, res) => {
 
 //Endpoint to get all article reports
 app.get('/api/all_articles', async (req, res) => {
-    try{
+    try {
         //Retrieve article records from db
-        let all_articles = [];
+        let allArticles = [];
         const snapshot = await db.collection('test_collection').get()
         snapshot.forEach(doc => {
-            all_articles.push(doc.data())
+            allArticles.push(doc.data())
         });
         //Store logging information - TBD
         //Send response
-        if(all_articles.length === 0) {
-            const no_results = {message: "No articles found"};
-            return res.status(204).send(no_results);
+        if(allArticles.length === 0) {
+            const noResults = { message: "No articles found" };
+            return res.status(200).send(noResults);
         }
         return res.status(200).send(all_articles);
     } catch (error) {
         console.log(error);
-        return res.status(500).send(error);
+        return res.status(500).send(serverErrorMsg);
     }
 });
 
