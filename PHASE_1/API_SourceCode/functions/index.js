@@ -64,6 +64,12 @@ app.get('/api/articles', async(req, res) => {
             return res.status(400).send(errorMsg); // Bad request
         }
 
+        let regexDateFormat = new RegExp(/^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])T(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/);
+        if(!(regexDateFormat.test(startDate.toString()) && regexDateFormat.test(endDate.toString()))){
+            const errorMsg = { message: "invalid start or end date format"};
+            return res.status(400).send(errorMsg);
+        }
+
         if (startDate > endDate) {
             const errorMsg = { message: "start_date has to be before end_date."};
             return res.status(400).send(errorMsg);
