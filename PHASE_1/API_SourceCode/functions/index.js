@@ -58,41 +58,60 @@ app.get('/api/article', async(req, res) => {
         keyterm = keyterm.toString().split(",");
         let location = req.query.location;
 
-
-
         // Converting start_date param into proper Date format
         start_date = new Date(start_date.replace("T", " "));
-        // end_date = end_date.replace("T",  " ");
+        end_date = new Date(end_date.replace("T", " "));
 
         let articles = []
 
         let allArticles = db.collection('test_collection');
         let query = allArticles.where('date_of_publication', '>=', start_date)
+            .where('date_of_publication', '<=', end_date)
             .get()
             .then(snapshot => {
                 if (snapshot.empty) {
+                    //No matching dates found
                     console.log("No matching documents");
                     const no_results = {message: "No articles found"};
-
-                    // Returning 204 status means there's no body in response
-                    // Should probably change it to 200 if we want to give an informative message
                     return res.status(204).send(no_results);
                 }
 
                 //Checking if headline contains any of the keyterms
                 snapshot.forEach(doc => {
+                    //String based search for keyterms
                     for(let word of keyterm){
                         let word_regex = new RegExp(word,"i");
                         if(word_regex.test(doc.data().headline) || word_regex.test(doc.data().main_text)) {
+                            //Matching keywords
                             articles.push(doc.data());
                             continue;
                         }
                     }
 
+                    let location_regex = new RegExp(location,"i");
+                    for(let place of doc.data().reports){
+                        for(let l of place.locations){
+                            if(location_regex.test(l.location) || location_regex.test(l.country)){
+                                //Matching location
+                                articles.push(doc.data());
+                                continue;
+                            }
+                        }
+                        //console.log(place.locations.location);
+                    }
+
+                    if(articles.length === 0){
+                        //No matching keywords & locations found
+                        //Still return date matches or return empty response?
+                        console.log("No matching keywords found - returning only matching dates");
+                        snapshot.forEach(doc => {
+                            articles.push(doc.data());
+                        })
+                    }
+
                 });
-                // snapshot.forEach(doc => {
-                //     articles.push(doc.data())
-                // })
+
+
 
                 return res.status(200).send(articles)
             })
