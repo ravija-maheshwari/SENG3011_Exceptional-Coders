@@ -13,7 +13,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore()
-
+const serverErrorMsg = { message: "Internal server error, please try again." }
 
 app.get('/api/test', async (req, res) => {
     try {
@@ -26,7 +26,7 @@ app.get('/api/test', async (req, res) => {
 });
 
 //Endpoint to get all article reports
-app.get('/api/articles', async (req, res) => {
+app.get('/api/all_articles', async (req, res) => {
     try{
         //Retrieve article records from db
         let all_articles = [];
@@ -48,85 +48,98 @@ app.get('/api/articles', async (req, res) => {
 });
 
 //Endpoint to retrieve specific article
-//Keyterm length == 0 - TBD
+//keyterms length == 0 - TBD
 
-app.get('/api/article', async(req, res) => {
+app.get('/api/articles', async(req, res) => {
     try {
-        let start_date = req.query.start_date;
-        let end_date = req.query.end_date;
-        let keyterm = req.query.keyterm;
-
-        if(typeof start_date === 'undefined' || typeof end_date === 'undefined' || typeof keyterm === 'undefined' ){
-            return res.status(400); //Bad request
-        }
-
-        keyterm = keyterm.toString().split(",");
+        let startDate = req.query.start_date;
+        let endDate = req.query.end_date;
+        let keyterms = req.query.keyterms;
         let location = req.query.location;
 
-        // Converting start_date param into proper Date format
-        start_date = new Date(start_date.replace("T", " "));
-        end_date = new Date(end_date.replace("T", " "));
+        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' ){
+            // Or a better error message
+            const errorMsg = { message: "Bad Request: Some query parameters are missing." };
+            return res.status(400).send(errorMsg); // Bad request
+        }
 
-        let articles = []
+        if (startDate > endDate) {
+            const errorMsg = { message: "start_date has to be before end_date."};
+            return res.status(400).send(errorMsg);
+        }
+
+        keyterms = keyterms.toString().split(",");
+
+        // Converting startDate param into proper Date format
+        startDate = new Date(startDate.replace("T", " "));
+        endDate = new Date(endDate.replace("T", " "));
+
+        let articles = [];
 
         let allArticles = db.collection('test_collection');
 
-        let query = allArticles.where('date_of_publication', '>=', start_date)
-            .where('date_of_publication', '<=', end_date)
-            .get()
-            .then(snapshot => {
-                if (snapshot.empty) {
-                    //No matching dates found
-                    console.log("No matching documents");
-                    const no_results = {message: "No articles found"};
-                    return res.status(204).send(no_results);
-                }
-
-                //Checking if headline contains any of the keyterms
-                snapshot.forEach(doc => {
-                    //String based search for keyterms
-                    for(let word of keyterm){
-                        let word_regex = new RegExp(word,"i");
-                        if(word_regex.test(doc.data().headline) || word_regex.test(doc.data().main_text)) {
-                            //Matching keywords
-                            articles.push(doc.data());
-                            continue;
+        let query = allArticles
+                    .where('date_of_publication', '>=', startDate)
+                    .where('date_of_publication', '<=', endDate)
+                    .get()
+                    .then(snapshot => {
+                        if (snapshot.empty) {
+                            //No matching dates found
+                            console.log("No matching documents");
+                            const noResults = { message: "No articles found" };
+                            return res.status(200).send(noResults);
                         }
-                    }
 
-                    let location_regex = new RegExp(location,"i");
-                    for(let place of doc.data().reports){
-                        for(let l of place.locations){
-                            if(location_regex.test(l.location) || location_regex.test(l.country)){
-                                //Matching location
-                                articles.push(doc.data());
-                                continue;
-                            }
-                        }
-                    }
-
-                    if(articles.length === 0){
-                        //No matching keywords & locations found
-                        //Still return date matches or return empty response?
-                        console.log("No matching keywords found - returning only matching dates");
+                        //Checking if headline contains any of the keyterms
                         snapshot.forEach(doc => {
-                            articles.push(doc.data());
-                        })
-                    }
+                            //String based search for keyterms
+                            let docPushed = false
+                            for (let term of keyterms){
+                                let termRegex = new RegExp(term, "i");
+                                if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
+                                    //Matching keywords
+                                    articles.push(doc.data());
+                                    docPushed = true;
+                                    continue;
+                                }
+                            }
 
-                });
+                            // If current doc has not been pushed to articles
+                            // AND location is also provided as query params
+                            if (!docPushed && typeof location !== 'undefined') {
+                                let locationRegex = new RegExp(location, "i");
+                                for (let place of doc.data().reports) {
+                                    for (let loc of place.locations) {
+                                        if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
+                                            //Matching location
+                                            articles.push(doc.data()); 
+                                            continue;
+                                        }
+                                    }
+                                }
+                            }
+                        });
 
-                return res.status(200).send(articles)
-            })
-            .catch(err => {
-                console.log("Error getting documents" , err);
-                return res.status(500).send(error);
-            })
+                        if (articles.length === 0) {
+                            // No matching keywords & locations found
+                            // Still return date matches or return empty response?
+                            console.log("No matching keywords found - returning only matching dates");
+                            snapshot.forEach(doc => {
+                                articles.push(doc.data());
+                            })
+                        }
 
-        return null
+                        return res.status(200).send(articles);
+                    })
+                    .catch(error => {
+                        console.log("Error getting documents: " , error);
+                        return res.status(500).send(serverErrorMsg);
+                    })
+
+        return null;
     } catch (error) {
         console.log(error);
-        return res.status(500).send(error);
+        return res.status(500).send(serverErrorMsg);
     }
 });
 
