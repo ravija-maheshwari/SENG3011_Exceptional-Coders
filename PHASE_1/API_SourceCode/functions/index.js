@@ -69,7 +69,12 @@ app.get('/api/articles', async(req, res) => {
             return res.status(400).send(errorMsg);
         }
 
-        keyterms = keyterms.toString().split(",");
+        if (keyterms.length === 0) {
+            keyterms = []
+        }
+        else {
+            keyterms = keyterms.toString().split(",");
+        }
 
         // Converting startDate param into proper Date format
         startDate = new Date(startDate.replace("T", " "));
@@ -94,34 +99,38 @@ app.get('/api/articles', async(req, res) => {
                         //Checking if headline contains any of the keyterms
                         snapshot.forEach(doc => {
                             //String based search for keyterms
-                            let docPushed = false
-                            for (let term of keyterms){
-                                let termRegex = new RegExp(term, "i");
-                                if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
-                                    //Matching keywords
-                                    articles.push(doc.data());
-                                    docPushed = true;
-                                    continue;
+                            let hasKeyterm = false
+                            if (keyterms.length > 0) {
+                                for (let term of keyterms){
+                                    console.log("In keyterms checking")
+                                    let termRegex = new RegExp(term, "i");
+                                    if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
+                                        //Matching keywords
+                                        // articles.push(doc.data());
+                                        hasKeyterm = true;
+                                        continue;
+                                    }
                                 }
                             }
 
                             // If current doc has not been pushed to articles
                             // AND location is also provided as query params
-                            if (!docPushed && typeof location !== 'undefined') {
+                            if (keyterms.length === 0 || (hasKeyterm && location.length !== 0)) {
                                 let locationRegex = new RegExp(location, "i");
+                                console.log("In location checking... ", location.length)
                                 for (let place of doc.data().reports) {
                                     for (let loc of place.locations) {
                                         if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
                                             //Matching location
                                             articles.push(doc.data()); 
-                                            continue;
+                                            break;
                                         }
                                     }
                                 }
                             }
-                        });
+                        });                        
 
-                        if (articles.length === 0) {
+                        if (articles.length === 0 && keyterms.length === 0 && location.length === 0) {
                             // No matching keywords & locations found
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
