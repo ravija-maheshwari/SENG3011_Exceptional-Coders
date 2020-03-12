@@ -55,7 +55,7 @@ app.get('/api/article', async(req, res) => {
         let start_date = req.query.start_date;
         let end_date = req.query.end_date;
         let keyterm = req.query.keyterm;
-        //keyterm = keyterm.split(",");
+        keyterm = keyterm.toString().split(",");
         let location = req.query.location;
 
 
@@ -83,7 +83,7 @@ app.get('/api/article', async(req, res) => {
                 snapshot.forEach(doc => {
                     for(let word of keyterm){
                         let word_regex = new RegExp(word,"i");
-                        if(word_regex.test(doc.data().headline)) {
+                        if(word_regex.test(doc.data().headline) || word_regex.test(doc.data().main_text)) {
                             articles.push(doc.data());
                             continue;
                         }
