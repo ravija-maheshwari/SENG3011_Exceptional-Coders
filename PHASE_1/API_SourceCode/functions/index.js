@@ -48,13 +48,18 @@ app.get('/api/articles', async (req, res) => {
 });
 
 //Endpoint to retrieve specific article
-//TBD:
-//add in error checks + managing optional/compulsory params
+//Keyterm length == 0 - TBD
+
 app.get('/api/article', async(req, res) => {
     try {
         let start_date = req.query.start_date;
         let end_date = req.query.end_date;
         let keyterm = req.query.keyterm;
+
+        if(typeof start_date === 'undefined' || typeof end_date === 'undefined' || typeof keyterm === 'undefined' ){
+            return res.status(400); //Bad request
+        }
+
         keyterm = keyterm.toString().split(",");
         let location = req.query.location;
 
@@ -65,6 +70,7 @@ app.get('/api/article', async(req, res) => {
         let articles = []
 
         let allArticles = db.collection('test_collection');
+
         let query = allArticles.where('date_of_publication', '>=', start_date)
             .where('date_of_publication', '<=', end_date)
             .get()
@@ -97,7 +103,6 @@ app.get('/api/article', async(req, res) => {
                                 continue;
                             }
                         }
-                        //console.log(place.locations.location);
                     }
 
                     if(articles.length === 0){
@@ -110,8 +115,6 @@ app.get('/api/article', async(req, res) => {
                     }
 
                 });
-
-
 
                 return res.status(200).send(articles)
             })
