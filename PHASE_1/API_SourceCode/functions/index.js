@@ -2,7 +2,16 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+
+const morgan = require('morgan');  //Middleware logger library
+//A write stream for logging requests
+const logStream = fs.createWriteStream(path.join(__dirname, 'requests.log'), { flags: 'a' });
+
 const app = express();
+app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :remote-addr \n', {stream: logStream}));
+
 app.use(cors ({ origin: true }) );
 
 var serviceAccount = require("./permissions.json");
@@ -50,6 +59,7 @@ app.get('/api/all_articles', async (req, res) => {
             const noResults = { error: "No articles found" };
             return res.status(200).send(noResults);
         }
+
         return res.status(200).send(allArticles);
     } catch (error) {
         console.log(error);
@@ -202,7 +212,6 @@ app.get('/api/articles', async(req, res) => {
         return res.status(500).send(serverErrorMsg);
     }
 });
-
 
 // Helper Functions
 
