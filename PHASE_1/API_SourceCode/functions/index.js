@@ -13,7 +13,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore()
-const serverErrorMsg = { message: "Internal server error, please try again." }
+const serverErrorMsg = { error: "Internal server error, please try again." }
 
 app.get('/api/test', async (req, res) => {
     try {
@@ -37,7 +37,7 @@ app.get('/api/all_articles', async (req, res) => {
         //Store logging information - TBD
         //Send response
         if(allArticles.length === 0) {
-            const noResults = { message: "No articles found" };
+            const noResults = { error: "No articles found" };
             return res.status(200).send(noResults);
         }
         return res.status(200).send(allArticles);
@@ -47,7 +47,7 @@ app.get('/api/all_articles', async (req, res) => {
     }
 });
 
-//Endpoint to retrieve specific article
+//Endpoint to retrieve specific articles
 app.get('/api/articles', async(req, res) => {
     try {
         let startDate = req.query.start_date;
@@ -55,19 +55,19 @@ app.get('/api/articles', async(req, res) => {
         let keyterms = req.query.keyterms;
         let location = req.query.location;
 
-        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined' ){
-            const errorMsg = { message: "Bad Request: Some query parameters are missing." };
-            return res.status(400).send(errorMsg); // Bad request
+        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined'){
+            const errorMsg = { error: "Bad Request - Some query parameters are missing." };
+            return res.status(400).send(errorMsg);
         }
 
         let regexDateFormat = new RegExp(/^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])T(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/);
         if(!(regexDateFormat.test(startDate.toString()) && regexDateFormat.test(endDate.toString()))){
-            const errorMsg = { message: "Invalid Date format"};
+            const errorMsg = { error: "Bad Request - Invalid date format."};
             return res.status(400).send(errorMsg);
         }
 
         if (startDate > endDate) {
-            const errorMsg = { message: "Start_date has to be before end_date."};
+            const errorMsg = { error: "Bad Request - start_date has to be before end_date."};
             return res.status(400).send(errorMsg);
         }
 
@@ -94,7 +94,7 @@ app.get('/api/articles', async(req, res) => {
                         if (snapshot.empty) {
                             //No matching dates found
                             console.log("No matching documents");
-                            const noResults = { message: "No articles found" };
+                            const noResults = { error: "No articles found" };
                             return res.status(200).send(noResults);
                         }
 
@@ -106,21 +106,20 @@ app.get('/api/articles', async(req, res) => {
                                 for (let term of keyterms){
                                     let termRegex = new RegExp(term, "i");
                                     if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
-                                        // Matching keywords
-                                        // articles.push(doc.data());
+                                        // Matching keyterms
                                         hasKeyterm = true;
                                         continue;
                                     }
                                 }
                             }
 
-                            // Push doc to article if keyterm is found and no location provided
+                            // Push doc to articles if keyterm is found and no location provided
                             if (hasKeyterm && location.length === 0) {
                                 articles.push(doc.data())
                             }
 
-                            // If current doc has not been pushed to articles
-                            // AND location is also provided as query params
+                            // Push doc if location is also provided in query params
+                            // (and location is found in doc)
                             else if ((hasKeyterm && location.length !== 0) || (keyterms.length === 0 && location.length !== 0)) {
                                 let locationRegex = new RegExp(location, "i");
                                 for (let place of doc.data().reports) {
