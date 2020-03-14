@@ -32,7 +32,17 @@ app.get('/api/all_articles', async (req, res) => {
         let allArticles = [];
         const snapshot = await db.collection('test_collection').get()
         snapshot.forEach(doc => {
-            allArticles.push(doc.data())
+            let formattedDate = returnFormattedDatetime(doc.data().date_of_publication);
+
+            let article = {
+                url: doc.data().url,
+                date_of_publication: formattedDate,
+                headline: doc.data().headline,
+                main_text: doc.data().main_text,
+                reports: doc.data().reports
+            };
+
+            allArticles.push(article);
         });
         //Store logging information - TBD
         //Send response
@@ -115,7 +125,19 @@ app.get('/api/articles', async(req, res) => {
 
                             // Push doc to articles if keyterm is found and no location provided
                             if (hasKeyterm && location.length === 0) {
-                                articles.push(doc.data())
+                                // Needs to be refactored into a function
+                                let formattedDate = returnFormattedDatetime(doc.data().date_of_publication);
+            
+                                let article = {
+                                    url: doc.data().url,
+                                    date_of_publication: formattedDate,
+                                    headline: doc.data().headline,
+                                    main_text: doc.data().main_text,
+                                    reports: doc.data().reports
+                                };
+
+                                articles.push(article);
+                                // articles.push(doc.data())
                             }
 
                             // Push doc if location is also provided in query params
@@ -126,7 +148,19 @@ app.get('/api/articles', async(req, res) => {
                                     for (let loc of place.locations) {
                                         if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
                                             // Matching location
-                                            articles.push(doc.data()); 
+                                            // Needs to be refactored into a function
+                                            let formattedDate = returnFormattedDatetime(doc.data().date_of_publication);
+            
+                                            let article = {
+                                                url: doc.data().url,
+                                                date_of_publication: formattedDate,
+                                                headline: doc.data().headline,
+                                                main_text: doc.data().main_text,
+                                                reports: doc.data().reports
+                                            };
+
+                                            articles.push(article);
+                                            // articles.push(doc.data()); 
                                             break;
                                         }
                                     }
@@ -139,7 +173,19 @@ app.get('/api/articles', async(req, res) => {
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
                             snapshot.forEach(doc => {
-                                articles.push(doc.data());
+                                // Needs to be refactored into a function
+                                let formattedDate = returnFormattedDatetime(doc.data().date_of_publication);
+            
+                                let article = {
+                                    url: doc.data().url,
+                                    date_of_publication: formattedDate,
+                                    headline: doc.data().headline,
+                                    main_text: doc.data().main_text,
+                                    reports: doc.data().reports
+                                };
+
+                                articles.push(article);
+                                // articles.push(doc.data());
                             })
                         }
 
@@ -156,6 +202,9 @@ app.get('/api/articles', async(req, res) => {
         return res.status(500).send(serverErrorMsg);
     }
 });
+
+
+// Helper Functions
 
 async function populate_test_collection() {
 
@@ -226,8 +275,27 @@ async function populate_test_collection() {
 
     await db.collection('test_collection').doc().create(article1);
     await db.collection('test_collection').doc().create(article2);
-
 }
+
+function returnFormattedDatetime(date) {
+    let d = date.toDate();
+    let year = d.getFullYear();
+    let month = d.getMonth()+1;
+    let day = d.getDate();
+    let hours = d.getHours();
+    let mins = d.getMinutes();
+    let seconds = d.getSeconds();
+
+    if (month < 10) { month = "0" + month; }
+    if (day < 10) { day = "0" + day; }
+    if (hours < 10) { hours = "0" + hours; }
+    if (mins < 10) { mins = "0" + mins; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+    
+    let dateString = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + seconds;
+    return dateString;
+}
+
 exports.app = functions.https.onRequest(app);
 
 
