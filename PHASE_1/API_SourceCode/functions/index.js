@@ -10,8 +10,9 @@ const morgan = require('morgan');  //Middleware logger library
 const logStream = fs.createWriteStream(path.join(__dirname, 'requests.log'), { flags: 'a' });
 
 const app = express();
-app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :remote-addr \n', {stream: logStream}));
 
+//Middleware
+app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :remote-addr \n', {stream: logStream}));
 app.use(cors ({ origin: true }) );
 
 var serviceAccount = require("./permissions.json");
