@@ -25,7 +25,7 @@ admin.initializeApp({
 const db = admin.firestore()
 const serverErrorMsg = { error: "Internal server error, please try again." }
 
-app.get('/api/test', async (req, res) => {
+app.get('/api/v1/test', async (req, res) => {
     try {
         await populate_test_collection();
         return res.status(200);
@@ -36,7 +36,7 @@ app.get('/api/test', async (req, res) => {
 });
 
 //Endpoint to get all article reports
-app.get('/api/all_articles', async (req, res) => {
+app.get('/api/v1/all_articles', async (req, res) => {
     try {
         //Retrieve article records from db
         let allArticles = [];
@@ -69,7 +69,7 @@ app.get('/api/all_articles', async (req, res) => {
 });
 
 //Endpoint to retrieve specific articles
-app.get('/api/articles', async(req, res) => {
+app.get('/api/v1/articles', async(req, res) => {
     try {
         let startDate = req.query.start_date;
         let endDate = req.query.end_date;
