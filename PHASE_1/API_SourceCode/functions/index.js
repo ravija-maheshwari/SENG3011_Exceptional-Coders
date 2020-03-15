@@ -7,12 +7,12 @@ const path = require('path');
 
 const morgan = require('morgan');  //Middleware logger library
 //A write stream for logging requests
-const logStream = fs.createWriteStream(path.join(__dirname, 'requests.log'), { flags: 'a' });
+// const logStream = fs.createWriteStream(path.join(__dirname, 'requests.log'), { flags: 'a' });
 
 const app = express();
 
 //Middleware
-app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :remote-addr \n', {stream: logStream}));
+// app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :remote-addr \n', {stream: logStream}));
 app.use(cors ({ origin: true }) );
 
 var serviceAccount = require("./permissions.json");
