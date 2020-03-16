@@ -2,7 +2,17 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+
+const morgan = require('morgan');  //Middleware logger library
+//A write stream for logging requests
+// const logStream = fs.createWriteStream(path.join(__dirname, 'requests.log'), { flags: 'a' });
+
 const app = express();
+
+//Middleware
+// app.use(morgan(':date[web] :method :url :status :res[content-length] - :response-time ms :remote-addr \n', {stream: logStream}));
 app.use(cors ({ origin: true }) );
 
 var serviceAccount = require("./permissions.json");
@@ -13,61 +23,133 @@ admin.initializeApp({
 });
 
 const db = admin.firestore()
-const serverErrorMsg = { message: "Internal server error, please try again." }
+const serverErrorMsg = { error: "Internal server error, please try again." }
 
-app.get('/api/test', async (req, res) => {
-    try {
-        await populate_test_collection();
-        return res.status(200);
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send(error);
-    }
-});
+// Testing Endpoints
 
-//Endpoint to get all article reports
-app.get('/api/all_articles', async (req, res) => {
+// app.get('/api/v1/test', async (req, res) => {
+//     try {
+//         await populate_test_collection();
+//         return res.status(200);
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).send(error);
+//     }
+// });
+
+// //Endpoint to get all article reports
+// app.get('/api/v1/all_articles', async (req, res) => {
+//     try {
+//         let startTime = new Date().getTime()
+//         //Retrieve article records from db
+//         let allArticles = [];
+//         const snapshot = await db.collection('test_collection').get()
+//         snapshot.forEach(doc => {
+//             let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+
+//             let article = {
+//                 url: doc.data().url,
+//                 date_of_publication: formattedDate,
+//                 headline: doc.data().headline,
+//                 main_text: doc.data().main_text,
+//                 reports: doc.data().reports
+//             };
+
+//             allArticles.push(article);
+//         });
+//         //Store logging information - TBD
+//         //Send response
+//         if(allArticles.length === 0) {
+//             // Changed it so that there's an empty list in the response
+//             // const noResults = { error: "No articles found" };
+//             return res.status(200).send(allArticles);
+//         }
+
+//         let endExecTime = new Date().getTime()
+//         let execTime = endExecTime - startExecTime
+//         let log = getLog(req.ip, req.query, 200, execTime)
+//         console.log(log)
+//         return res.status(200).send(allArticles);
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).send(serverErrorMsg);
+//     }
+// });
+
+//Endpoint to get all logs from Firestore
+app.get('/api/v1/logs', async(req, res) => {
     try {
-        //Retrieve article records from db
-        let allArticles = [];
-        const snapshot = await db.collection('test_collection').get()
+        let allLogs = [];
+        const snapshot = await db.collection('logs').get()
         snapshot.forEach(doc => {
-            allArticles.push(doc.data())
+            
+            let log = {
+                AccessTime: doc.data().AccessTime,
+                TeamName: doc.data().TeamName,
+                DataSource: doc.data().DataSource,
+                RemoteAddress: doc.data().RemoteAddress,
+                QueryParameters: doc.data().QueryParameters,
+                ResponseStatus: doc.data().ResponseStatus,
+                ExecutionTime: doc.data.ExecutionTime
+            };
+
+            allLogs.push(log);
         });
-        //Store logging information - TBD
         //Send response
-        if(allArticles.length === 0) {
-            const noResults = { message: "No articles found" };
-            return res.status(200).send(noResults);
+        if(allLogs.length === 0) {
+            return res.status(200).send(allLogs);
         }
-        return res.status(200).send(allArticles);
+        return res.status(200).send(allLogs);
     } catch (error) {
         console.log(error);
         return res.status(500).send(serverErrorMsg);
     }
-});
+})
 
-//Endpoint to retrieve specific article
-app.get('/api/articles', async(req, res) => {
+//Endpoint to retrieve specific articles
+app.get('/api/v1/articles', async(req, res) => {
     try {
+        let startExecTime = new Date().getTime();
+
         let startDate = req.query.start_date;
         let endDate = req.query.end_date;
         let keyterms = req.query.keyterms;
         let location = req.query.location;
 
-        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined' ){
-            const errorMsg = { message: "Bad Request: Some query parameters are missing." };
-            return res.status(400).send(errorMsg); // Bad request
+        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined'){
+            const errorMsg = { error: "Bad Request - Some query parameters are missing." };
+            
+            let endExecTime = new Date().getTime()
+            let execTime = endExecTime - startExecTime
+            
+            let log = getLog(req.ip, req.query, 400, execTime)
+            sendLog(log)
+
+            return res.status(400).send(errorMsg);
         }
 
         let regexDateFormat = new RegExp(/^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])T(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/);
         if(!(regexDateFormat.test(startDate.toString()) && regexDateFormat.test(endDate.toString()))){
-            const errorMsg = { message: "Invalid Date format"};
+            const errorMsg = { error: "Bad Request - Invalid date format."};
+
+            let endExecTime = new Date().getTime()
+            let execTime = endExecTime - startExecTime
+            
+            let log = getLog(req.ip, req.query, 400, execTime)
+            sendLog(log)
+
             return res.status(400).send(errorMsg);
         }
 
         if (startDate > endDate) {
-            const errorMsg = { message: "Start_date has to be before end_date."};
+            const errorMsg = { error: "Bad Request - start_date has to be before end_date."};
+
+            let endExecTime = new Date().getTime()
+            let execTime = endExecTime - startExecTime
+            
+            let log = getLog(req.ip, req.query, 400, execTime)
+            sendLog(log)
+
             return res.status(400).send(errorMsg);
         }
 
@@ -92,10 +174,18 @@ app.get('/api/articles', async(req, res) => {
                     .get()
                     .then(snapshot => {
                         if (snapshot.empty) {
-                            //No matching dates found
-                            console.log("No matching documents");
-                            const noResults = { message: "No articles found" };
-                            return res.status(200).send(noResults);
+                            // No matching dates found
+                            // console.log("No matching documents");
+                            // const noResults = { error: "No articles found" };
+                            
+                            // Changed it so that there's an empty list in the response
+                            let endExecTime = new Date().getTime()
+                            let execTime = endExecTime - startExecTime
+                            
+                            let log = getLog(req.ip, req.query, 200, execTime)
+                            sendLog(log)
+
+                            return res.status(200).send(articles);
                         }
 
                         // Checking if headline contains any of the keyterms
@@ -106,28 +196,51 @@ app.get('/api/articles', async(req, res) => {
                                 for (let term of keyterms){
                                     let termRegex = new RegExp(term, "i");
                                     if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
-                                        // Matching keywords
-                                        // articles.push(doc.data());
+                                        // Matching keyterms
                                         hasKeyterm = true;
                                         continue;
                                     }
                                 }
                             }
 
-                            // Push doc to article if keyterm is found and no location provided
+                            // Push doc to articles if keyterm is found and no location provided
                             if (hasKeyterm && location.length === 0) {
-                                articles.push(doc.data())
+                                // Needs to be refactored into a function
+                                let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+            
+                                let article = {
+                                    url: doc.data().url,
+                                    date_of_publication: formattedDate,
+                                    headline: doc.data().headline,
+                                    main_text: doc.data().main_text,
+                                    reports: doc.data().reports
+                                };
+
+                                articles.push(article);
+                                // articles.push(doc.data())
                             }
 
-                            // If current doc has not been pushed to articles
-                            // AND location is also provided as query params
+                            // Push doc if location is also provided in query params
+                            // (and location is found in doc)
                             else if ((hasKeyterm && location.length !== 0) || (keyterms.length === 0 && location.length !== 0)) {
                                 let locationRegex = new RegExp(location, "i");
                                 for (let place of doc.data().reports) {
                                     for (let loc of place.locations) {
                                         if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
                                             // Matching location
-                                            articles.push(doc.data()); 
+                                            // Needs to be refactored into a function
+                                            let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+            
+                                            let article = {
+                                                url: doc.data().url,
+                                                date_of_publication: formattedDate,
+                                                headline: doc.data().headline,
+                                                main_text: doc.data().main_text,
+                                                reports: doc.data().reports
+                                            };
+
+                                            articles.push(article);
+                                            // articles.push(doc.data()); 
                                             break;
                                         }
                                     }
@@ -140,23 +253,112 @@ app.get('/api/articles', async(req, res) => {
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
                             snapshot.forEach(doc => {
-                                articles.push(doc.data());
+                                // Needs to be refactored into a function
+                                let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+            
+                                let article = {
+                                    url: doc.data().url,
+                                    date_of_publication: formattedDate,
+                                    headline: doc.data().headline,
+                                    main_text: doc.data().main_text,
+                                    reports: doc.data().reports
+                                };
+
+                                articles.push(article);
+                                // articles.push(doc.data());
                             })
                         }
+
+                        let endExecTime = new Date().getTime()
+                        let execTime = endExecTime - startExecTime
+                        
+                        let log = getLog(req.ip, req.query, 200, execTime)
+                        sendLog(log)
 
                         return res.status(200).send(articles);
                     })
                     .catch(error => {
                         console.log("Error getting documents: " , error);
+
+                        let endExecTime = new Date().getTime()
+                        let execTime = endExecTime - startExecTime
+                        
+                        let log = getLog(req.ip, req.query, 500, execTime)
+                        sendLog(log)
+
                         return res.status(500).send(serverErrorMsg);
                     })
 
         return null;
     } catch (error) {
         console.log(error);
+
+        let endExecTime = new Date().getTime()
+        let execTime = endExecTime - startExecTime
+        
+        let log = getLog(req.ip, req.query, 200, execTime)
+        sendLog(log)
+        
         return res.status(500).send(serverErrorMsg);
     }
 });
+
+// Helper Functions
+
+async function sendLog(log) {
+    try {
+        await db.collection('logs').doc().create(log)
+    } catch (error) {
+        console.log("Error while creating log: \n" + error)
+    }
+}
+
+function getFormattedDatetime(date) {
+    let d = date.toDate(); // toDate is a Firebase specific function
+    let year = d.getFullYear();
+    let month = d.getMonth()+1;
+    let day = d.getDate();
+    let hours = d.getHours();
+    let mins = d.getMinutes();
+    let seconds = d.getSeconds();
+
+    if (month < 10) { month = "0" + month; }
+    if (day < 10) { day = "0" + day; }
+    if (hours < 10) { hours = "0" + hours; }
+    if (mins < 10) { mins = "0" + mins; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+    
+    let dateString = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + seconds;
+    return dateString;
+}
+
+function getLog(ip, params, status, execTime) {
+    let currDatetime = new Date()
+    let dateString = currDatetime.toISOString()
+
+    let ipString = ""
+
+    if (typeof ip === 'undefined') { 
+        ipString = "-" 
+    }
+    else { 
+        ipString = ip 
+    }
+
+    // add some more 
+    let log = {
+        AccessTime: dateString,
+        TeamName: "Exception(al) Coders",
+        DataSource: "Flutrackers",
+        RemoteAddress: ipString,
+        RequestPath: "/articles",
+        QueryParameters: params,
+        ResponseStatus: status,
+        ExecutionTime: execTime + "ms"
+    }
+
+    return log
+}
 
 async function populate_test_collection() {
 
@@ -223,13 +425,14 @@ async function populate_test_collection() {
             ]
         }
 
-
-
     await db.collection('test_collection').doc().create(article1);
     await db.collection('test_collection').doc().create(article2);
-
 }
+
 exports.app = functions.https.onRequest(app);
+
+// Log structure
+// Access Time, Team Name, Data Source, Remote Address, Request Path, Query Parameters, Response Status, Execution Time
 
 
 // Testing code to send doc to Firestore collection
