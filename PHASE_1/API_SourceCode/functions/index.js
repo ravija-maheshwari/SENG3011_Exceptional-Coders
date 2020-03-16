@@ -69,6 +69,36 @@ app.get('/api/v1/all_articles', async (req, res) => {
     }
 });
 
+//Endpoint to get all logs from Firestore
+app.get('/api/v1/logs', async(req, res) => {
+    try {
+        let allLogs = [];
+        const snapshot = await db.collection('log_collection').get()
+        snapshot.forEach(doc => {
+
+            let log = {
+                AccessTime: doc.data().AccessTime,
+                TeamName: "Exception(al) Coders",
+                DataSource: "Flutrackers",
+                RemoteAddress: doc.data().RemoteAddress,
+                QueryParameters: doc.data().QueryParameters,
+                ResponseStatus: doc.data().ResponseStatus,
+                ExecutionTime: doc.data.ExecutionTime
+            };
+
+            allLogs.push(log);
+        });
+        //Send response
+        if(allLogs.length === 0) {
+            return res.status(200).send(allLogs);
+        }
+        return res.status(200).send(allLogs);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(serverErrorMsg);
+    }
+})
+
 //Endpoint to retrieve specific articles
 app.get('/api/v1/articles', async(req, res) => {
     try {
