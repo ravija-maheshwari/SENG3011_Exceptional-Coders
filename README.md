@@ -2,10 +2,9 @@
 ## Phase 1
 ### API Source Code
 ### API Documentation
-
- <a href="https://app.swaggerhub.com/apis-docs/saurabhacharya24/ExceptionalCoders/1.0.0#/" target="_blank">Swagger</a>
+ https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/ target="_blank">
  <br></br>
- <a href="https://app.swaggerhub.com/apis-docs/saurabhacharya24/ExceptionalCoders/1.0.0#/" target="_blank">API</a>
+ <a href="https://app.swaggerhub.com/apis-docs/saurabhacharya24/ExceptionalCoders/1.0.0#/" target="_blank">Swagger</a>
  <br></br>
   <a href="https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/logs" target="_blank">Logging endpoint</a>
 ### Test Scripts
