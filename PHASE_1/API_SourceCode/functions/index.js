@@ -57,8 +57,9 @@ app.get('/api/v1/all_articles', async (req, res) => {
         //Store logging information - TBD
         //Send response
         if(allArticles.length === 0) {
-            const noResults = { error: "No articles found" };
-            return res.status(200).send(noResults);
+            // Changed it so that there's an empty list in the response
+            // const noResults = { error: "No articles found" };
+            return res.status(200).send(allArticles);
         }
 
         return res.status(200).send(allArticles);
@@ -113,10 +114,12 @@ app.get('/api/v1/articles', async(req, res) => {
                     .get()
                     .then(snapshot => {
                         if (snapshot.empty) {
-                            //No matching dates found
-                            console.log("No matching documents");
-                            const noResults = { error: "No articles found" };
-                            return res.status(200).send(noResults);
+                            // No matching dates found
+                            // console.log("No matching documents");
+                            // const noResults = { error: "No articles found" };
+                            
+                            // Changed it so that there's an empty list in the response
+                            return res.status(200).send(articles);
                         }
 
                         // Checking if headline contains any of the keyterms
