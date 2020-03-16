@@ -78,13 +78,13 @@ app.get('/api/v1/all_articles', async (req, res) => {
 app.get('/api/v1/logs', async(req, res) => {
     try {
         let allLogs = [];
-        const snapshot = await db.collection('log_collection').get()
+        const snapshot = await db.collection('logs').get()
         snapshot.forEach(doc => {
-
+            
             let log = {
                 AccessTime: doc.data().AccessTime,
-                TeamName: "Exception(al) Coders",
-                DataSource: "Flutrackers",
+                TeamName: doc.data().TeamName,
+                DataSource: doc.data().DataSource,
                 RemoteAddress: doc.data().RemoteAddress,
                 QueryParameters: doc.data().QueryParameters,
                 ResponseStatus: doc.data().ResponseStatus,
@@ -121,7 +121,7 @@ app.get('/api/v1/articles', async(req, res) => {
             let execTime = endExecTime - startExecTime
             
             let log = getLog(req.ip, req.query, 400, execTime)
-            console.log(log)
+            sendLog(log)
 
             return res.status(400).send(errorMsg);
         }
@@ -134,7 +134,7 @@ app.get('/api/v1/articles', async(req, res) => {
             let execTime = endExecTime - startExecTime
             
             let log = getLog(req.ip, req.query, 400, execTime)
-            console.log(log)
+            sendLog(log)
 
             return res.status(400).send(errorMsg);
         }
@@ -146,7 +146,7 @@ app.get('/api/v1/articles', async(req, res) => {
             let execTime = endExecTime - startExecTime
             
             let log = getLog(req.ip, req.query, 400, execTime)
-            console.log(log)
+            sendLog(log)
 
             return res.status(400).send(errorMsg);
         }
@@ -181,7 +181,7 @@ app.get('/api/v1/articles', async(req, res) => {
                             let execTime = endExecTime - startExecTime
                             
                             let log = getLog(req.ip, req.query, 200, execTime)
-                            console.log(log)
+                            sendLog(log)
 
                             return res.status(200).send(articles);
                         }
@@ -271,7 +271,7 @@ app.get('/api/v1/articles', async(req, res) => {
                         let execTime = endExecTime - startExecTime
                         
                         let log = getLog(req.ip, req.query, 200, execTime)
-                        console.log(log)
+                        sendLog(log)
 
                         return res.status(200).send(articles);
                     })
@@ -282,7 +282,7 @@ app.get('/api/v1/articles', async(req, res) => {
                         let execTime = endExecTime - startExecTime
                         
                         let log = getLog(req.ip, req.query, 500, execTime)
-                        console.log(log)
+                        sendLog(log)
 
                         return res.status(500).send(serverErrorMsg);
                     })
@@ -295,13 +295,21 @@ app.get('/api/v1/articles', async(req, res) => {
         let execTime = endExecTime - startExecTime
         
         let log = getLog(req.ip, req.query, 200, execTime)
-        console.log(log)
+        sendLog(log)
         
         return res.status(500).send(serverErrorMsg);
     }
 });
 
 // Helper Functions
+
+async function sendLog(log) {
+    try {
+        await db.collection('logs').doc().create(log)
+    } catch (error) {
+        console.log("Error while creating log: \n" + error)
+    }
+}
 
 async function populate_test_collection() {
 
@@ -397,12 +405,21 @@ function getLog(ip, params, status, execTime) {
     let currDatetime = new Date()
     let dateString = currDatetime.toISOString()
 
+    let ipString = ""
+
+    if (typeof ip === 'undefined') { 
+        ipString = "-" 
+    }
+    else { 
+        ipString = ip 
+    }
+
     // add some more 
     let log = {
         AccessTime: dateString,
         TeamName: "Exception(al) Coders",
         DataSource: "Flutrackers",
-        RemoteAddress: ip,
+        RemoteAddress: ipString,
         RequestPath: "/articles",
         QueryParameters: params,
         ResponseStatus: status,
