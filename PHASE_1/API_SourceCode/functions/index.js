@@ -25,54 +25,56 @@ admin.initializeApp({
 const db = admin.firestore()
 const serverErrorMsg = { error: "Internal server error, please try again." }
 
-app.get('/api/v1/test', async (req, res) => {
-    try {
-        await populate_test_collection();
-        return res.status(200);
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send(error);
-    }
-});
+// Testing Endpoints
 
-//Endpoint to get all article reports
-app.get('/api/v1/all_articles', async (req, res) => {
-    try {
-        let startTime = new Date().getTime()
-        //Retrieve article records from db
-        let allArticles = [];
-        const snapshot = await db.collection('test_collection').get()
-        snapshot.forEach(doc => {
-            let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+// app.get('/api/v1/test', async (req, res) => {
+//     try {
+//         await populate_test_collection();
+//         return res.status(200);
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).send(error);
+//     }
+// });
 
-            let article = {
-                url: doc.data().url,
-                date_of_publication: formattedDate,
-                headline: doc.data().headline,
-                main_text: doc.data().main_text,
-                reports: doc.data().reports
-            };
+// //Endpoint to get all article reports
+// app.get('/api/v1/all_articles', async (req, res) => {
+//     try {
+//         let startTime = new Date().getTime()
+//         //Retrieve article records from db
+//         let allArticles = [];
+//         const snapshot = await db.collection('test_collection').get()
+//         snapshot.forEach(doc => {
+//             let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
 
-            allArticles.push(article);
-        });
-        //Store logging information - TBD
-        //Send response
-        if(allArticles.length === 0) {
-            // Changed it so that there's an empty list in the response
-            // const noResults = { error: "No articles found" };
-            return res.status(200).send(allArticles);
-        }
+//             let article = {
+//                 url: doc.data().url,
+//                 date_of_publication: formattedDate,
+//                 headline: doc.data().headline,
+//                 main_text: doc.data().main_text,
+//                 reports: doc.data().reports
+//             };
 
-        let endExecTime = new Date().getTime()
-        let execTime = endExecTime - startExecTime
-        let log = getLog(req.ip, req.query, 200, execTime)
-        console.log(log)
-        return res.status(200).send(allArticles);
-    } catch (error) {
-        console.log(error);
-        return res.status(500).send(serverErrorMsg);
-    }
-});
+//             allArticles.push(article);
+//         });
+//         //Store logging information - TBD
+//         //Send response
+//         if(allArticles.length === 0) {
+//             // Changed it so that there's an empty list in the response
+//             // const noResults = { error: "No articles found" };
+//             return res.status(200).send(allArticles);
+//         }
+
+//         let endExecTime = new Date().getTime()
+//         let execTime = endExecTime - startExecTime
+//         let log = getLog(req.ip, req.query, 200, execTime)
+//         console.log(log)
+//         return res.status(200).send(allArticles);
+//     } catch (error) {
+//         console.log(error);
+//         return res.status(500).send(serverErrorMsg);
+//     }
+// });
 
 //Endpoint to get all logs from Firestore
 app.get('/api/v1/logs', async(req, res) => {
@@ -311,6 +313,53 @@ async function sendLog(log) {
     }
 }
 
+function getFormattedDatetime(date) {
+    let d = date.toDate(); // toDate is a Firebase specific function
+    let year = d.getFullYear();
+    let month = d.getMonth()+1;
+    let day = d.getDate();
+    let hours = d.getHours();
+    let mins = d.getMinutes();
+    let seconds = d.getSeconds();
+
+    if (month < 10) { month = "0" + month; }
+    if (day < 10) { day = "0" + day; }
+    if (hours < 10) { hours = "0" + hours; }
+    if (mins < 10) { mins = "0" + mins; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+    
+    let dateString = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + seconds;
+    return dateString;
+}
+
+function getLog(ip, params, status, execTime) {
+    let currDatetime = new Date()
+    let dateString = currDatetime.toISOString()
+
+    let ipString = ""
+
+    if (typeof ip === 'undefined') { 
+        ipString = "-" 
+    }
+    else { 
+        ipString = ip 
+    }
+
+    // add some more 
+    let log = {
+        AccessTime: dateString,
+        TeamName: "Exception(al) Coders",
+        DataSource: "Flutrackers",
+        RemoteAddress: ipString,
+        RequestPath: "/articles",
+        QueryParameters: params,
+        ResponseStatus: status,
+        ExecutionTime: execTime + "ms"
+    }
+
+    return log
+}
+
 async function populate_test_collection() {
 
     let article1 = {
@@ -376,57 +425,8 @@ async function populate_test_collection() {
             ]
         }
 
-
-
     await db.collection('test_collection').doc().create(article1);
     await db.collection('test_collection').doc().create(article2);
-}
-
-function getFormattedDatetime(date) {
-    let d = date.toDate(); // toDate is a Firebase specific function
-    let year = d.getFullYear();
-    let month = d.getMonth()+1;
-    let day = d.getDate();
-    let hours = d.getHours();
-    let mins = d.getMinutes();
-    let seconds = d.getSeconds();
-
-    if (month < 10) { month = "0" + month; }
-    if (day < 10) { day = "0" + day; }
-    if (hours < 10) { hours = "0" + hours; }
-    if (mins < 10) { mins = "0" + mins; }
-    if (seconds < 10) { seconds = "0" + seconds; }
-    
-    let dateString = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + seconds;
-    return dateString;
-}
-
-function getLog(ip, params, status, execTime) {
-    let currDatetime = new Date()
-    let dateString = currDatetime.toISOString()
-
-    let ipString = ""
-
-    if (typeof ip === 'undefined') { 
-        ipString = "-" 
-    }
-    else { 
-        ipString = ip 
-    }
-
-    // add some more 
-    let log = {
-        AccessTime: dateString,
-        TeamName: "Exception(al) Coders",
-        DataSource: "Flutrackers",
-        RemoteAddress: ipString,
-        RequestPath: "/articles",
-        QueryParameters: params,
-        ResponseStatus: status,
-        ExecutionTime: execTime + "ms"
-    }
-
-    return log
 }
 
 exports.app = functions.https.onRequest(app);
