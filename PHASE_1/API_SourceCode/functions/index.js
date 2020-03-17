@@ -88,6 +88,7 @@ app.get('/api/v1/logs', async(req, res) => {
                 TeamName: doc.data().TeamName,
                 DataSource: doc.data().DataSource,
                 RemoteAddress: doc.data().RemoteAddress,
+                RequestPath: doc.data().RequestPath,
                 QueryParameters: doc.data().QueryParameters,
                 ResponseStatus: doc.data().ResponseStatus,
                 ExecutionTime: doc.data().ExecutionTime
