@@ -90,7 +90,7 @@ app.get('/api/v1/logs', async(req, res) => {
                 RemoteAddress: doc.data().RemoteAddress,
                 QueryParameters: doc.data().QueryParameters,
                 ResponseStatus: doc.data().ResponseStatus,
-                ExecutionTime: doc.data.ExecutionTime
+                ExecutionTime: doc.data().ExecutionTime
             };
 
             allLogs.push(log);
