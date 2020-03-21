@@ -67,7 +67,7 @@ const serverErrorMsg = { error: "Internal server error, please try again." }
 
 //         let endExecTime = new Date().getTime()
 //         let execTime = endExecTime - startExecTime
-//         let log = getLog(req.ip, req.query, 200, execTime)
+//         let log = getLog(req.headers['x-forwarded-for'], req.query, 200, execTime)
 //         console.log(log)
 //         return res.status(200).send(allArticles);
 //     } catch (error) {
@@ -123,7 +123,7 @@ app.get('/api/v1/articles', async(req, res) => {
             let endExecTime = new Date().getTime()
             let execTime = endExecTime - startExecTime
             
-            let log = getLog(req.ip, req.query, 400, execTime)
+            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
             sendLog(log)
 
             return res.status(400).send(errorMsg);
@@ -136,7 +136,7 @@ app.get('/api/v1/articles', async(req, res) => {
             let endExecTime = new Date().getTime()
             let execTime = endExecTime - startExecTime
             
-            let log = getLog(req.ip, req.query, 400, execTime)
+            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
             sendLog(log)
 
             return res.status(400).send(errorMsg);
@@ -148,7 +148,7 @@ app.get('/api/v1/articles', async(req, res) => {
             let endExecTime = new Date().getTime()
             let execTime = endExecTime - startExecTime
             
-            let log = getLog(req.ip, req.query, 400, execTime)
+            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
             sendLog(log)
 
             return res.status(400).send(errorMsg);
@@ -183,7 +183,7 @@ app.get('/api/v1/articles', async(req, res) => {
                             let endExecTime = new Date().getTime()
                             let execTime = endExecTime - startExecTime
                             
-                            let log = getLog(req.ip, req.query, 200, execTime)
+                            let log = getLog(req.headers['x-forwarded-for'], req.query, 200, execTime)
                             sendLog(log)
 
                             return res.status(200).send(articles);
@@ -273,7 +273,7 @@ app.get('/api/v1/articles', async(req, res) => {
                         let endExecTime = new Date().getTime()
                         let execTime = endExecTime - startExecTime
                         
-                        let log = getLog(req.ip, req.query, 200, execTime)
+                        let log = getLog(req.headers['x-forwarded-for'], req.query, 200, execTime)
                         sendLog(log)
 
                         return res.status(200).send(articles);
@@ -284,7 +284,7 @@ app.get('/api/v1/articles', async(req, res) => {
                         let endExecTime = new Date().getTime()
                         let execTime = endExecTime - startExecTime
                         
-                        let log = getLog(req.ip, req.query, 500, execTime)
+                        let log = getLog(req.headers['x-forwarded-for'], req.query, 500, execTime)
                         sendLog(log)
 
                         return res.status(500).send(serverErrorMsg);
@@ -297,7 +297,7 @@ app.get('/api/v1/articles', async(req, res) => {
         let endExecTime = new Date().getTime()
         let execTime = endExecTime - startExecTime
         
-        let log = getLog(req.ip, req.query, 200, execTime)
+        let log = getLog(req.headers['x-forwarded-for'], req.query, 200, execTime)
         sendLog(log)
         
         return res.status(500).send(serverErrorMsg);
@@ -343,7 +343,7 @@ function getLog(ip, params, status, execTime) {
         ipString = "-" 
     }
     else { 
-        ipString = ip 
+        ipString = ip.split(",")[0] 
     }
 
     // add some more 
