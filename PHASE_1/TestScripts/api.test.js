@@ -1,7 +1,7 @@
 const helpers = require('../API_SourceCode/functions/helpers')
 const errorChecks = require('../API_SourceCode/functions/errorChecks')
 
-// Sample request parameters
+// Input - Sample request parameters
 
 let req1 = {
     query: {
@@ -44,7 +44,7 @@ let missingEndDate = {
     }
 }
 
-let missingLocation = {
+let missingKeyterms = {
     query: {
         start_date: "2016-10-01T12:00:00",
         end_date: "2020-12-01T12:00:00",
@@ -53,7 +53,7 @@ let missingLocation = {
 }
 
 
-let missingKeyterm = {
+let missingLocation = {
     query: {
         start_date: "2016-10-01T12:00:00",
         end_date: "2020-12-01T12:00:00",
@@ -162,12 +162,6 @@ let article2 = {
 
 // Test Cases
 
-// Test 1
-// test('checks missing parameter (keyterms) for req1 and returns true', () => {
-//     expect(errorChecks.checkMissingQueryParams(req1)).toBe(true)
-// })
-
-
 // Testing missing query params
 test('missing start date', () => {
     expect(errorChecks.checkMissingQueryParams(missingStartDate)).toBe(true)
@@ -177,11 +171,11 @@ test('missing end date', () => {
     expect(errorChecks.checkMissingQueryParams(missingEndDate)).toBe(true)
 })
 
-test('missing keyterm date', () => {
-    expect(errorChecks.checkMissingQueryParams(missingKeyterm)).toBe(true)
+test('missing keyterms', () => {
+    expect(errorChecks.checkMissingQueryParams(missingKeyterms)).toBe(true)
 })
 
-test('missing location date', () => {
+test('missing location', () => {
     expect(errorChecks.checkMissingQueryParams(missingLocation)).toBe(true)
 })
 
