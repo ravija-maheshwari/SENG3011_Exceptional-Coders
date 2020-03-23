@@ -119,20 +119,23 @@ app.get('/api/v1/articles', async(req, res) => {
 
                         // Checking if headline contains any of the keyterms
                         snapshot.forEach(doc => {
-                            let hasKeyterm = docHasKeyterm(doc, keyterms)
-                            let hasLocation = docHasLocation(doc, location)
+                            let hasKeyterm = helpers.docHasKeyterm(doc, keyterms)
+                            let hasLocation = helpers.docHasLocation(doc, location)
 
                             // Push doc to articles if keyterm is found and no location provided
-                            if (hasKeyterm && isLocationParamEmpty(location)) {
-                                let article = createArticleObject(doc)
+                            if (hasKeyterm && helpers.isLocationParamEmpty(location)) {
+                                let article = helpers.createArticleObject(doc)
                                 articles.push(article);
                             }
 
                             // Push doc if location is also provided in query params
                             // (and location is found in doc)
-                            else if (hasKeyterm || (hasLocation && !isLocationParamEmpty(location))) {
-                                let article = createArticleObject(doc)
-                                articles.push(article);
+                            else if ((hasKeyterm && !helpers.isLocationParamEmpty(location)) || (helpers.isKeytermsParamEmpty(keyterms) && !helpers.isLocationParamEmpty(location))) {
+                                
+                                if (hasLocation) {
+                                    let article = helpers.createArticleObject(doc)
+                                    articles.push(article);
+                                }
                             }
                         });                        
 
@@ -141,7 +144,7 @@ app.get('/api/v1/articles', async(req, res) => {
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
                             snapshot.forEach(doc => {
-                                let article = createArticleObject(doc)
+                                let article = helpers.createArticleObject(doc)
                                 articles.push(article);
                             })
                         }
@@ -181,91 +184,6 @@ app.get('/api/v1/articles', async(req, res) => {
 });
 
 // Helper Functions
-
-function isKeytermsParamEmpty(keyterms) {
-    if (keyterms.length === 0) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function isLocationParamEmpty(location) {
-    if (location.length === 0) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function docHasKeyterm(doc, keyterms) {
-    let hasKeyterm = false
-
-    if (!isKeytermsParamEmpty(keyterms) > 0) {
-        for (let term of keyterms){
-            let termRegex = new RegExp(term, "i");
-            // Checking if term exists in headline or main_text
-            if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
-                hasKeyterm = true;
-                continue;
-            }
-            else {
-                for (report of doc.data().reports) {
-                    // Checking keyterm in reports
-                    let diseases = report.diseases.map((item) => { return item.toLowerCase(); });
-                    let syndromes = report.syndromes.map((item) => { return item.toLowerCase(); });
-                    let lowerCaseKeyterm = term.toLowerCase();
-                    
-                    // Obtaining a new array after filtering diseases and syndromes
-                    // containing the keyterm
-                    let diseasesWithKeyterm = diseases.filter(item => item.includes(lowerCaseKeyterm))
-                    let syndromesWithKeyterm = syndromes.filter(item => item.includes(lowerCaseKeyterm))
-
-                    // If filtered arrays have some value (ie. length > 0), it means keyterm was found
-                    if (diseasesWithKeyterm.length > 0 || syndromesWithKeyterm.length > 0) {
-                        hasKeyterm = true;
-                        continue;
-                    }
-                }
-            }
-        }
-    }
-
-    return hasKeyterm;
-}
-
-function docHasLocation(doc, location) {
-    let hasLocation = false;
-    let locationRegex = new RegExp(location, "i");
-
-    for (let place of doc.data().reports) {
-        for (let loc of place.locations) {
-            if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
-                hasLocation = true;
-                break;
-            }
-        }
-    }
-
-    return hasLocation;
-}
-
-function createArticleObject(doc) {
-    let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
-            
-    let article = {
-        url: doc.data().url,
-        date_of_publication: formattedDate,
-        headline: doc.data().headline,
-        main_text: doc.data().main_text,
-        reports: doc.data().reports
-    };
-
-    return article
-}
-
 
 const sendLog = exports.sendLog = async function(log) {
     try {
