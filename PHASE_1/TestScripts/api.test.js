@@ -3,23 +3,7 @@ const errorChecks = require('../API_SourceCode/functions/errorChecks')
 
 // Input - Sample request parameters
 
-let req1 = {
-    query: {
-        start_date: "2016-10-01T12:00:00",
-        end_date: "2020-12-01T12:00:00",
-        keyterms: "",
-    }
-}
-
-let req2 = {
-    query: {
-        start_date: "2016-10-01T12:00:00",
-        end_date: "2020-12-01T12:00:00",
-        location: "",
-    }
-}
-
-let req3 = {
+let allParamsPresent = {
     query: {
         start_date: "2016-10-01T12:00:00",
         end_date: "2020-12-01T12:00:00",
@@ -95,7 +79,7 @@ let startAfterEnd = {
 
 // Sample Articles
 
-let article1 = {
+let articleChina = {
     url:"https://www.who.int/csr/don/17-january-2020-novel-coronavirus-japan-exchina/en/",
     date_of_publication: new Date("2020-10-01 13:00:00"),
     headline: "Novel Coronavirus - Japan (ex-China)",
@@ -123,7 +107,7 @@ let article1 = {
     ]
 }
 
-let article2 = {
+let articleVietnam = {
     url: "www.who.int/lalala_fake_article",
     date_of_publication: new Date("2018-12-12 12:50:00"),
     headline: "Outbreaks in Southern Vietnam",
@@ -181,7 +165,7 @@ test('missing location', () => {
 
 // Test for no missing query params
 test('all query params present', () => {
-    expect(errorChecks.checkMissingQueryParams(req3)).toBe(false)
+    expect(errorChecks.checkMissingQueryParams(allParamsPresent)).toBe(false)
 })
 
 // Testing date formats
@@ -199,41 +183,39 @@ test('start date is before end date', () => {
 })
 
 test('start date is after end date', () => {
-    expect(errorChecks.isStartBeforeEnd(req3)).toBe(true)
+    expect(errorChecks.isStartBeforeEnd(allParamsPresent)).toBe(true)
 })
-
-
 
 
 // Tests for keyterms
 test('return value of docHasKeyterm is true', () => {
-    expect(helpers.docHasKeyterm(article2, ['outbreak'])).toBe(true)
+    expect(helpers.docHasKeyterm(articleVietnam, ['outbreak'])).toBe(true)
 })
 
 test('return value of docHasKeyterm is false', () => {
-    expect(helpers.docHasKeyterm(article2, ['corona'])).toBe(false)
+    expect(helpers.docHasKeyterm(articleVietnam, ['corona'])).toBe(false)
 })
 
 test('return value of docHasKeyterm is true for multiple keyterms', () => {
-    expect(helpers.docHasKeyterm(article1, ['corona', 'fever', 'cough'])).toBe(true)
+    expect(helpers.docHasKeyterm(articleChina, ['corona', 'fever', 'cough'])).toBe(true)
 })
 
 test('return value of docHasKeyterm is false for empty keyterms', () => {
-    expect(helpers.docHasKeyterm(article1, [])).toBe(false)
+    expect(helpers.docHasKeyterm(articleChina, [])).toBe(false)
 })
 
 
 // Tests for location
 test('return value of docHasLocation is true', () => {
-    expect(helpers.docHasLocation(article1, "china")).toBe(true)
+    expect(helpers.docHasLocation(articleChina, "china")).toBe(true)
 })
 
 test('return value of docHasLocation is false', () => {
-    expect(helpers.docHasLocation(article1, "Vietnam")).toBe(false)
+    expect(helpers.docHasLocation(articleChina, "Vietnam")).toBe(false)
 })
 
 test('return value of docHasLocation is false for empty location', () => {
-    expect(helpers.docHasLocation(article2, "")).toBe(false)
+    expect(helpers.docHasLocation(articleVietnam, "")).toBe(false)
 })
 
 // Tests for checking if keyterms is empty
