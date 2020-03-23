@@ -92,10 +92,6 @@ default_app = firebase_admin.initialize_app(cred)
 # DEBUGGING ONLY REMOVE
 seen = {}
 ####
-
-cred = credentials.ApplicationDefault()
-
-
 db = firestore.client()
 
 
