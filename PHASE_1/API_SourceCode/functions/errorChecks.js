@@ -38,8 +38,8 @@ exports.isStartBeforeEnd = function isStartBeforeEnd(req) {
         // //Log details
         // let log = helpers.getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
         // helpers.sendLog(log)
-        return true
+        return false
     }
-    return false
+    return true
 }
 

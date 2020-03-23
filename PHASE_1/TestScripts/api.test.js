@@ -28,6 +28,71 @@ let req3 = {
     }
 }
 
+//Sample requests for query params
+let missingStartDate = {
+    query: {
+        end_date: "2020-12-01T12:00:00",
+        keyterms: "",
+        location: ""
+    }
+}
+let missingEndDate = {
+    query: {
+        start_date: "2016-10-01T12:00:00",
+        keyterms: "",
+        location: ""
+    }
+}
+
+let missingLocation = {
+    query: {
+        start_date: "2016-10-01T12:00:00",
+        end_date: "2020-12-01T12:00:00",
+        location: ""
+    }
+}
+
+
+let missingKeyterm = {
+    query: {
+        start_date: "2016-10-01T12:00:00",
+        end_date: "2020-12-01T12:00:00",
+        keyterms: ""
+    }
+}
+
+// Month cannot be 19.
+let incorrectStartMonth = {
+    query: {
+        start_date: "2016-19-01T12:00:00",
+        end_date: "2020-12-01T12:00:00",
+        keyterms: "",
+        location: ""
+    }
+}
+
+// 60:00:00 is an invalid time
+let incorrectStartTime = {
+    query: {
+        start_date: "2016-19-01T60:00:00",
+        end_date: "2020-12-01T12:00:00",
+        keyterms: "",
+        location: ""
+    }
+}
+
+//Start date occurs AFTER end date
+let startAfterEnd = {
+    query: {
+        start_date: "2019-19-01T60:00:00",
+        end_date: "2016-12-01T12:00:00",
+        keyterms: "",
+        location: ""
+    }
+}
+
+
+
 // Sample Articles
 
 let article1 = {
@@ -102,9 +167,48 @@ let article2 = {
 //     expect(errorChecks.checkMissingQueryParams(req1)).toBe(true)
 // })
 
-// Ravija:
-// TODO:
-// Add in multiple tests for the 3 errorChecks function
+
+// Testing missing query params
+test('missing start date', () => {
+    expect(errorChecks.checkMissingQueryParams(missingStartDate)).toBe(true)
+})
+
+test('missing end date', () => {
+    expect(errorChecks.checkMissingQueryParams(missingEndDate)).toBe(true)
+})
+
+test('missing keyterm date', () => {
+    expect(errorChecks.checkMissingQueryParams(missingKeyterm)).toBe(true)
+})
+
+test('missing location date', () => {
+    expect(errorChecks.checkMissingQueryParams(missingLocation)).toBe(true)
+})
+
+// Test for no missing query params
+test('all query params present', () => {
+    expect(errorChecks.checkMissingQueryParams(req3)).toBe(false)
+})
+
+// Testing date formats
+test('start month is invalid', () => {
+    expect(errorChecks.checkDateFormat(incorrectStartMonth)).toBe(true)
+})
+
+test('start time is invalid', () => {
+    expect(errorChecks.checkDateFormat(incorrectStartTime)).toBe(true)
+})
+
+//Start date before end date
+test('start date is before end date', () => {
+    expect(errorChecks.isStartBeforeEnd(startAfterEnd)).toBe(false)
+})
+
+test('start date is after end date', () => {
+    expect(errorChecks.isStartBeforeEnd(req3)).toBe(true)
+})
+
+
 
 
 // Tests for keyterms
@@ -123,6 +227,7 @@ test('return value of docHasKeyterm is true for multiple keyterms', () => {
 test('return value of docHasKeyterm is false for empty keyterms', () => {
     expect(helpers.docHasKeyterm(article1, [])).toBe(false)
 })
+
 
 // Tests for location
 test('return value of docHasLocation is true', () => {
@@ -154,3 +259,4 @@ test('return value of isLocationParamEmpty is true', () => {
 test('return value of isLocationParamEmpty is false', () => {
     expect(helpers.isLocationParamEmpty("Sydney")).toBe(false)
 })
+
