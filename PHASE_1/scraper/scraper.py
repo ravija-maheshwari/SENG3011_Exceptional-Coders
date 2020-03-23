@@ -58,19 +58,19 @@ soup = BeautifulSoup(page.content, 'html.parser')
 
 urls = getURLS()
 
-    if timestamp[0] == 'Today':
-        date = datetime.date.today()
-        date = datetime.datetime(date.year, date.month, date.day, hour, minute)
-    elif timestamp[0] == 'Yesterday':
-        date = datetime.date.today() - datetime.timedelta(days=1)
-        date = datetime.datetime(date.year, date.month, date.day, hour, minute)
-    else:
-        year = int(timestamp[1].strip())
-        date_words = (timestamp[0]).split()
-        month = (datetime.datetime.strptime(date_words[0], '%B')).month
-        day = int((re.split('[a-z]', date_words[1]))[0])
-        date = datetime.datetime(year, month, day, hour, minute)
-    return date
+    # if timestamp[0] == 'Today':
+    #     date = datetime.date.today()
+    #     date = datetime.datetime(date.year, date.month, date.day, hour, minute)
+    # elif timestamp[0] == 'Yesterday':
+    #     date = datetime.date.today() - datetime.timedelta(days=1)
+    #     date = datetime.datetime(date.year, date.month, date.day, hour, minute)
+    # else:
+    #     year = int(timestamp[1].strip())
+    #     date_words = (timestamp[0]).split()
+    #     month = (datetime.datetime.strptime(date_words[0], '%B')).month
+    #     day = int((re.split('[a-z]', date_words[1]))[0])
+    #     date = datetime.datetime(year, month, day, hour, minute)
+    # return date
 
 diseases = ["unknown", "other", "anthrax cutaneous", "anthrax gastrointestinous", "anthrax inhalation", "botulism", "brucellosis", "chikungunya", "cholera", "coronavirus", "cryptococcosis", "cryptosporidiosis", "crimean-congo haemorrhagic fever", "dengue", "diphteria", "ebola haemorrhagic fever", "ehec (e.coli)", "enterovirus 71 infection", "influenza a/h5n1", "influenza a/h7n9", "influenza a/h9n2", "influenza a/h1n1", "influenza a/h1n2", "influenza a/h3n5", "influenza a/h3n2", "influenza a/h2n2", "hand, foot and mouth disease", "hantavirus", "hepatitis a", "hepatitis b", "hepatitis c",
             "hepatitis d", "hepatitis e", "histoplasmosis", "hiv/aids", "lassa fever", "malaria", "marburg virus disease", "measles", "mers-cov", "mumps", "nipah virus", "norovirus infection", "pertussis", "plague", "pneumococcus pneumonia", "poliomyelitis", "q fever", "rabies", "rift valley fever", "rotavirus infection", "rubella", "salmonellosis", "sars", "shigellosis", "smallpox", "staphylococcal enterotoxin b", "thypoid fever", "tuberculosis", "tularemia", "vaccinia and cowpox", "varicella", "west nile virus", "yellow fever", "yersiniosis", "zika", "legionares", "listeriosis", "monkeypox", "COVID-19"]
