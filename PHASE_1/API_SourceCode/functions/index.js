@@ -154,10 +154,6 @@ app.get('/api/v1/articles', async(req, res) => {
                     .get()
                     .then(snapshot => {
                         if (snapshot.empty) {
-                            // No matching dates found
-                            // console.log("No matching documents");
-                            // const noResults = { error: "No articles found" };
-                            
                             // Changed it so that there's an empty list in the response
                             let endExecTime = new Date().getTime()
                             let execTime = endExecTime - startExecTime
@@ -170,62 +166,20 @@ app.get('/api/v1/articles', async(req, res) => {
 
                         // Checking if headline contains any of the keyterms
                         snapshot.forEach(doc => {
-                            //String based search for keyterms
-                            let hasKeyterm = false
-                            if (keyterms.length > 0) {
-                                for (let term of keyterms){
-                                    let termRegex = new RegExp(term, "i");
-                                    if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
-                                        // Matching keyterms
-                                        hasKeyterm = true;
-                                        continue;
-                                    }
-                                }
-                            }
+                            let hasKeyterm = docHasKeyterm(doc, keyterms)
+                            let hasLocation = docHasLocation(doc, location)
 
                             // Push doc to articles if keyterm is found and no location provided
-                            if (hasKeyterm && location.length === 0) {
-                                // Needs to be refactored into a function
-                                //let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
-                                let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
-            
-                                let article = {
-                                    url: doc.data().url,
-                                    date_of_publication: formattedDate,
-                                    headline: doc.data().headline,
-                                    main_text: doc.data().main_text,
-                                    reports: doc.data().reports
-                                };
-
+                            if (hasKeyterm && isLocationParamEmpty(location)) {
+                                let article = createArticleObject(doc)
                                 articles.push(article);
-                                // articles.push(doc.data())
                             }
 
                             // Push doc if location is also provided in query params
                             // (and location is found in doc)
-                            else if ((hasKeyterm && location.length !== 0) || (keyterms.length === 0 && location.length !== 0)) {
-                                let locationRegex = new RegExp(location, "i");
-                                for (let place of doc.data().reports) {
-                                    for (let loc of place.locations) {
-                                        if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
-                                            // Matching location
-                                            // Needs to be refactored into a function
-                                            let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
-            
-                                            let article = {
-                                                url: doc.data().url,
-                                                date_of_publication: formattedDate,
-                                                headline: doc.data().headline,
-                                                main_text: doc.data().main_text,
-                                                reports: doc.data().reports
-                                            };
-
-                                            articles.push(article);
-                                            // articles.push(doc.data()); 
-                                            break;
-                                        }
-                                    }
-                                }
+                            else if (hasKeyterm && hasLocation && !isLocationParamEmpty(location)) {
+                                let article = createArticleObject(doc)
+                                articles.push(article);
                             }
                         });                        
 
@@ -234,19 +188,8 @@ app.get('/api/v1/articles', async(req, res) => {
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
                             snapshot.forEach(doc => {
-                                // Needs to be refactored into a function
-                                let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
-            
-                                let article = {
-                                    url: doc.data().url,
-                                    date_of_publication: formattedDate,
-                                    headline: doc.data().headline,
-                                    main_text: doc.data().main_text,
-                                    reports: doc.data().reports
-                                };
-
+                                let article = createArticleObject(doc)
                                 articles.push(article);
-                                // articles.push(doc.data());
                             })
                         }
 
@@ -285,6 +228,90 @@ app.get('/api/v1/articles', async(req, res) => {
 });
 
 // Helper Functions
+
+function isKeytermsParamEmpty(keyterms) {
+    if (keyterms.length === 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function isLocationParamEmpty(location) {
+    if (location.length === 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function docHasKeyterm(doc, keyterms) {
+    let hasKeyterm = false
+
+    if (!isKeytermsParamEmpty(keyterms) > 0) {
+        for (let term of keyterms){
+            let termRegex = new RegExp(term, "i");
+            // Checking if term exists in headline or main_text
+            if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
+                hasKeyterm = true;
+                continue;
+            }
+            else {
+                for (report of doc.data().reports) {
+                    // Checking keyterm in reports
+                    let diseases = report.diseases.map((item) => { return item.toLowerCase(); });
+                    let syndromes = report.syndromes.map((item) => { return item.toLowerCase(); });
+                    let lowerCaseKeyterm = term.toLowerCase();
+                    
+                    // Obtaining a new array after filtering diseases and syndromes
+                    // containing the keyterm
+                    let diseasesWithKeyterm = diseases.filter(item => item.includes(lowerCaseKeyterm))
+                    let syndromesWithKeyterm = syndromes.filter(item => item.includes(lowerCaseKeyterm))
+
+                    // If filtered arrays have some value (ie. length > 0), it means keyterm was found
+                    if (diseasesWithKeyterm.length > 0 || syndromesWithKeyterm.length > 0) {
+                        hasKeyterm = true;
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+
+    return hasKeyterm;
+}
+
+function docHasLocation(doc, location) {
+    let hasLocation = false;
+    let locationRegex = new RegExp(location, "i");
+
+    for (let place of doc.data().reports) {
+        for (let loc of place.locations) {
+            if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
+                hasLocation = true;
+                break;
+            }
+        }
+    }
+
+    return hasLocation;
+}
+
+function createArticleObject(doc) {
+    let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
+            
+    let article = {
+        url: doc.data().url,
+        date_of_publication: formattedDate,
+        headline: doc.data().headline,
+        main_text: doc.data().main_text,
+        reports: doc.data().reports
+    };
+
+    return article
+}
 
 async function sendLog(log) {
     try {
