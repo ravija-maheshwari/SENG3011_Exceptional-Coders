@@ -130,7 +130,7 @@ app.get('/api/v1/articles', async(req, res) => {
 
                             // Push doc if location is also provided in query params
                             // (and location is found in doc)
-                            else if (hasKeyterm && hasLocation && !isLocationParamEmpty(location)) {
+                            else if (hasKeyterm || (hasLocation && !isLocationParamEmpty(location))) {
                                 let article = createArticleObject(doc)
                                 articles.push(article);
                             }
