@@ -71,17 +71,35 @@ app.get('/api/v1/articles', async(req, res) => {
         let keyterms = req.query.keyterms
         let location = req.query.location
     
-        if(errorCheckers.checkMissingQueryParams(req, startExecTime)){
+        if(errorCheckers.checkMissingQueryParams(req)){
+            let endExecTime = new Date().getTime()
+            let execTime = endExecTime - startExecTime
+            //Log details
+            let log = helpers.getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+            helpers.sendLog(log)
+
             const errorMsg = {error: "Bad Request - Some query parameters are missing."}
             return res.status(400).send(errorMsg)
         }
 
-        if(errorCheckers.checkDateFormat(req, startExecTime)){
+        if(errorCheckers.checkDateFormat(req)){
+            let endExecTime = new Date().getTime()
+            let execTime = endExecTime - startExecTime
+            //Log details
+            let log = helpers.getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+            helpers.sendLog(log)
+
             const errorMsg = { error: "Bad Request - Invalid date format."}
             return res.status(400).send(errorMsg)
         }
 
-        if(errorCheckers.isStartBeforeEnd(req, startExecTime)){
+        if(errorCheckers.isStartBeforeEnd(req)){
+            let endExecTime = new Date().getTime()
+            let execTime = endExecTime - startExecTime
+            //Log details
+            let log = helpers.getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+            helpers.sendLog(log)
+
             const errorMsg = { error: "Bad Request - start_date has to be before end_date."}
             return res.status(400).send(errorMsg)
         }
