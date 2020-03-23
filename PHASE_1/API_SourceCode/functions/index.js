@@ -5,6 +5,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const helpers = require('./helpers');
+const errorCheckers = require('./errorChecks');
 
 const morgan = require('morgan');  //Middleware logger library
 //A write stream for logging requests
@@ -59,88 +60,40 @@ app.get('/api/v1/logs', async(req, res) => {
     }
 })
 
-//Function to check if any query param is missing
-function checkMissingQueryParams(req, startExecTime) {
-
-    let startDate = req.query.start_date;
-    let endDate = req.query.end_date;
-    let keyterms = req.query.keyterms;
-    let location = req.query.location;
-
-    if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined') {
-
-        let endExecTime = new Date().getTime()
-        let execTime = endExecTime - startExecTime
-
-        let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-        sendLog(log)
-
-        return true;
-    }
-    return false;
-}
-
 //Endpoint to retrieve specific articles
 app.get('/api/v1/articles', async(req, res) => {
     try {
         
         let startExecTime = new Date().getTime();
 
-        let startDate = req.query.start_date;
-        let endDate = req.query.end_date;
-        let keyterms = req.query.keyterms;
-        let location = req.query.location;
+        let startDate = req.query.start_date
+        let endDate = req.query.end_date
+        let keyterms = req.query.keyterms
+        let location = req.query.location
     
-        if(checkMissingQueryParams(req, startExecTime)){
-            const errorMsg = {error: "Bad Request - Some query parameters are missing."};
-            return res.status(400).send(errorMsg);
-        }
-        
-        // if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined'){
-        //     const errorMsg = { error: "Bad Request - Some query parameters are missing." };
-        //
-        //     let endExecTime = new Date().getTime()
-        //     let execTime = endExecTime - startExecTime
-        //
-        //     let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-        //     sendLog(log)
-        //
-        //     return res.status(400).send(errorMsg);
-        // }
-
-        let regexDateFormat = new RegExp(/^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])T(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/);
-        if(!(regexDateFormat.test(startDate.toString()) && regexDateFormat.test(endDate.toString()))){
-            const errorMsg = { error: "Bad Request - Invalid date format."};
-
-            let endExecTime = new Date().getTime()
-            let execTime = endExecTime - startExecTime
-            
-            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-            sendLog(log)
-
-            return res.status(400).send(errorMsg);
+        if(errorCheckers.checkMissingQueryParams(req, startExecTime)){
+            const errorMsg = {error: "Bad Request - Some query parameters are missing."}
+            return res.status(400).send(errorMsg)
         }
 
-        if (startDate > endDate) {
-            const errorMsg = { error: "Bad Request - start_date has to be before end_date."};
-
-            let endExecTime = new Date().getTime()
-            let execTime = endExecTime - startExecTime
-            
-            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-            sendLog(log)
-
-            return res.status(400).send(errorMsg);
+        if(errorCheckers.checkDateFormat(req, startExecTime)){
+            const errorMsg = { error: "Bad Request - Invalid date format."}
+            return res.status(400).send(errorMsg)
         }
 
+        if(errorCheckers.isStartBeforeEnd(req, startExecTime)){
+            const errorMsg = { error: "Bad Request - start_date has to be before end_date."}
+            return res.status(400).send(errorMsg)
+        }
+
+        //Parsing keyterms
         if (keyterms.length === 0) {
             keyterms = []
-        }
-        else {
+        }else {
             keyterms = keyterms.toString().split(",");
         }
 
-        // Converting startDate param into proper Date format
+        // Parsing date - converting startDate param into proper Date format
         startDate = new Date(startDate.replace("T", " "));
         endDate = new Date(endDate.replace("T", " "));
 
@@ -285,8 +238,7 @@ app.get('/api/v1/articles', async(req, res) => {
 });
 
 // Helper Functions
-
-async function sendLog(log) {
+exports.sendLog = async function(log) {
     try {
         await db.collection('logs').doc().create(log)
     } catch (error) {
@@ -295,7 +247,7 @@ async function sendLog(log) {
 }
 
 
-function getLog(ip, params, status, execTime) {
+exports.getLog = function(ip, params, status, execTime) {
     let currDatetime = new Date()
     let dateString = currDatetime.toISOString()
 
@@ -319,7 +271,6 @@ function getLog(ip, params, status, execTime) {
         ResponseStatus: status,
         ExecutionTime: execTime + "ms"
     }
-
     return log
 }
 
