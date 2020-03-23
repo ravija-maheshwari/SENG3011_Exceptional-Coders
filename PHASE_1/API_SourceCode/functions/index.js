@@ -62,9 +62,9 @@ app.get('/api/v1/logs', async(req, res) => {
 
 //Endpoint to retrieve specific articles
 app.get('/api/v1/articles', async(req, res) => {
+    let startExecTime = new Date().getTime();
+
     try {
-        
-        let startExecTime = new Date().getTime();
 
         let startDate = req.query.start_date
         let endDate = req.query.end_date
@@ -75,8 +75,8 @@ app.get('/api/v1/articles', async(req, res) => {
             let endExecTime = new Date().getTime()
             let execTime = endExecTime - startExecTime
             //Log details
-            let log = helpers.getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-            helpers.sendLog(log)
+            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+            sendLog(log)
 
             const errorMsg = {error: "Bad Request - Some query parameters are missing."}
             return res.status(400).send(errorMsg)
@@ -86,19 +86,19 @@ app.get('/api/v1/articles', async(req, res) => {
             let endExecTime = new Date().getTime()
             let execTime = endExecTime - startExecTime
             //Log details
-            let log = helpers.getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-            helpers.sendLog(log)
+            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+            sendLog(log)
 
             const errorMsg = { error: "Bad Request - Invalid date format."}
             return res.status(400).send(errorMsg)
         }
 
-        if(errorCheckers.isStartBeforeEnd(req)){
+        if(!errorCheckers.isStartBeforeEnd(req)){
             let endExecTime = new Date().getTime()
             let execTime = endExecTime - startExecTime
             //Log details
-            let log = helpers.getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-            helpers.sendLog(log)
+            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+            sendLog(log)
 
             const errorMsg = { error: "Bad Request - start_date has to be before end_date."}
             return res.status(400).send(errorMsg)
@@ -164,6 +164,8 @@ app.get('/api/v1/articles', async(req, res) => {
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
                             snapshot.forEach(doc => {
+                                doc = doc.data()
+
                                 let article = helpers.createArticleObject(doc)
                                 articles.push(article);
                             })
@@ -196,7 +198,7 @@ app.get('/api/v1/articles', async(req, res) => {
         let endExecTime = new Date().getTime()
         let execTime = endExecTime - startExecTime
         
-        let log = getLog(req.headers['x-forwarded-for'], req.query, 200, execTime)
+        let log = getLog(req.headers['x-forwarded-for'], req.query, 500, execTime)
         sendLog(log)
         
         return res.status(500).send(serverErrorMsg);
