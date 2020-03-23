@@ -31,6 +31,7 @@ const serverErrorMsg = { error: "Internal server error, please try again." }
 app.get('/api/v1/logs', async(req, res) => {
     try {
         let allLogs = [];
+
         const snapshot = await db.collection('logs').get()
         snapshot.forEach(doc => {
 
@@ -58,27 +59,54 @@ app.get('/api/v1/logs', async(req, res) => {
     }
 })
 
+//Function to check if any query param is missing
+function checkMissingQueryParams(req, startExecTime) {
+
+    let startDate = req.query.start_date;
+    let endDate = req.query.end_date;
+    let keyterms = req.query.keyterms;
+    let location = req.query.location;
+
+    if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined') {
+
+        let endExecTime = new Date().getTime()
+        let execTime = endExecTime - startExecTime
+
+        let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+        sendLog(log)
+
+        return true;
+    }
+    return false;
+}
+
 //Endpoint to retrieve specific articles
 app.get('/api/v1/articles', async(req, res) => {
     try {
+        
         let startExecTime = new Date().getTime();
 
         let startDate = req.query.start_date;
         let endDate = req.query.end_date;
         let keyterms = req.query.keyterms;
         let location = req.query.location;
-
-        if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined'){
-            const errorMsg = { error: "Bad Request - Some query parameters are missing." };
-            
-            let endExecTime = new Date().getTime()
-            let execTime = endExecTime - startExecTime
-            
-            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
-            sendLog(log)
-
+    
+        if(checkMissingQueryParams(req, startExecTime)){
+            const errorMsg = {error: "Bad Request - Some query parameters are missing."};
             return res.status(400).send(errorMsg);
         }
+        
+        // if(typeof startDate === 'undefined' || typeof endDate === 'undefined' || typeof keyterms === 'undefined' || typeof location === 'undefined'){
+        //     const errorMsg = { error: "Bad Request - Some query parameters are missing." };
+        //
+        //     let endExecTime = new Date().getTime()
+        //     let execTime = endExecTime - startExecTime
+        //
+        //     let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+        //     sendLog(log)
+        //
+        //     return res.status(400).send(errorMsg);
+        // }
 
         let regexDateFormat = new RegExp(/^(19|20)\d\d([- /.])(0[1-9]|1[012])\2(0[1-9]|[12][0-9]|3[01])T(?:(?:([01]?\d|2[0-3]):)?([0-5]?\d):)?([0-5]?\d)$/);
         if(!(regexDateFormat.test(startDate.toString()) && regexDateFormat.test(endDate.toString()))){
