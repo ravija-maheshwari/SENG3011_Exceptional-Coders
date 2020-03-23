@@ -42,12 +42,12 @@ exports.docHasKeyterm = function(doc, keyterms) {
         for (let term of keyterms){
             let termRegex = new RegExp(term, "i");
             // Checking if term exists in headline or main_text
-            if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
+            if (termRegex.test(doc.headline) || termRegex.test(doc.main_text)) {
                 hasKeyterm = true;
                 continue;
             }
             else {
-                for (report of doc.data().reports) {
+                for (report of doc.reports) {
                     // Checking keyterm in reports
                     let diseases = report.diseases.map((item) => { return item.toLowerCase(); });
                     let syndromes = report.syndromes.map((item) => { return item.toLowerCase(); });
@@ -80,7 +80,7 @@ exports.docHasLocation = function(doc, location) {
     
     let locationRegex = new RegExp(location, "i");
 
-    for (let place of doc.data().reports) {
+    for (let place of doc.reports) {
         for (let loc of place.locations) {
             if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
                 hasLocation = true;
@@ -93,14 +93,14 @@ exports.docHasLocation = function(doc, location) {
 }
 
 exports.createArticleObject = function(doc) {
-    let formattedDate = exports.getFormattedDatetime(doc.data().date_of_publication);
+    let formattedDate = exports.getFormattedDatetime(doc.date_of_publication);
             
     let article = {
-        url: doc.data().url,
+        url: doc.url,
         date_of_publication: formattedDate,
-        headline: doc.data().headline,
-        main_text: doc.data().main_text,
-        reports: doc.data().reports
+        headline: doc.headline,
+        main_text: doc.main_text,
+        reports: doc.reports
     };
 
     return article

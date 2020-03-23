@@ -137,6 +137,8 @@ app.get('/api/v1/articles', async(req, res) => {
 
                         // Checking if headline contains any of the keyterms
                         snapshot.forEach(doc => {
+                            doc = doc.data()
+                            
                             let hasKeyterm = helpers.docHasKeyterm(doc, keyterms)
                             let hasLocation = helpers.docHasLocation(doc, location)
 
