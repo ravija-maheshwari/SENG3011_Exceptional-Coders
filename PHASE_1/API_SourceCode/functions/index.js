@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const helpers = require('./helpers');
 
 const morgan = require('morgan');  //Middleware logger library
 //A write stream for logging requests
@@ -25,56 +26,6 @@ admin.initializeApp({
 const db = admin.firestore()
 const serverErrorMsg = { error: "Internal server error, please try again." }
 
-// Testing Endpoints
-
-// app.get('/api/v1/test', async (req, res) => {
-//     try {
-//         await populate_test_collection();
-//         return res.status(200);
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).send(error);
-//     }
-// });
-
-// //Endpoint to get all article reports
-// app.get('/api/v1/all_articles', async (req, res) => {
-//     try {
-//         let startTime = new Date().getTime()
-//         //Retrieve article records from db
-//         let allArticles = [];
-//         const snapshot = await db.collection('test_collection').get()
-//         snapshot.forEach(doc => {
-//             let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
-
-//             let article = {
-//                 url: doc.data().url,
-//                 date_of_publication: formattedDate,
-//                 headline: doc.data().headline,
-//                 main_text: doc.data().main_text,
-//                 reports: doc.data().reports
-//             };
-
-//             allArticles.push(article);
-//         });
-//         //Store logging information - TBD
-//         //Send response
-//         if(allArticles.length === 0) {
-//             // Changed it so that there's an empty list in the response
-//             // const noResults = { error: "No articles found" };
-//             return res.status(200).send(allArticles);
-//         }
-
-//         let endExecTime = new Date().getTime()
-//         let execTime = endExecTime - startExecTime
-//         let log = getLog(req.headers['x-forwarded-for'], req.query, 200, execTime)
-//         console.log(log)
-//         return res.status(200).send(allArticles);
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(500).send(serverErrorMsg);
-//     }
-// });
 
 //Endpoint to get all logs from Firestore
 app.get('/api/v1/logs', async(req, res) => {
@@ -82,7 +33,7 @@ app.get('/api/v1/logs', async(req, res) => {
         let allLogs = [];
         const snapshot = await db.collection('logs').get()
         snapshot.forEach(doc => {
-            
+
             let log = {
                 AccessTime: doc.data().AccessTime,
                 TeamName: doc.data().TeamName,
@@ -207,7 +158,8 @@ app.get('/api/v1/articles', async(req, res) => {
                             // Push doc to articles if keyterm is found and no location provided
                             if (hasKeyterm && location.length === 0) {
                                 // Needs to be refactored into a function
-                                let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+                                //let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+                                let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
             
                                 let article = {
                                     url: doc.data().url,
@@ -230,7 +182,7 @@ app.get('/api/v1/articles', async(req, res) => {
                                         if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
                                             // Matching location
                                             // Needs to be refactored into a function
-                                            let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+                                            let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
             
                                             let article = {
                                                 url: doc.data().url,
@@ -255,7 +207,7 @@ app.get('/api/v1/articles', async(req, res) => {
                             console.log("No matching keywords found - returning only matching dates");
                             snapshot.forEach(doc => {
                                 // Needs to be refactored into a function
-                                let formattedDate = getFormattedDatetime(doc.data().date_of_publication);
+                                let formattedDate = helpers.getFormattedDatetime(doc.data().date_of_publication);
             
                                 let article = {
                                     url: doc.data().url,
@@ -314,24 +266,6 @@ async function sendLog(log) {
     }
 }
 
-function getFormattedDatetime(date) {
-    let d = date.toDate(); // toDate is a Firebase specific function
-    let year = d.getFullYear();
-    let month = d.getMonth()+1;
-    let day = d.getDate();
-    let hours = d.getHours();
-    let mins = d.getMinutes();
-    let seconds = d.getSeconds();
-
-    if (month < 10) { month = "0" + month; }
-    if (day < 10) { day = "0" + day; }
-    if (hours < 10) { hours = "0" + hours; }
-    if (mins < 10) { mins = "0" + mins; }
-    if (seconds < 10) { seconds = "0" + seconds; }
-    
-    let dateString = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + seconds;
-    return dateString;
-}
 
 function getLog(ip, params, status, execTime) {
     let currDatetime = new Date()
@@ -431,21 +365,3 @@ async function populate_test_collection() {
 }
 
 exports.app = functions.https.onRequest(app);
-
-// Log structure
-// Access Time, Team Name, Data Source, Remote Address, Request Path, Query Parameters, Response Status, Execution Time
-
-
-// Testing code to send doc to Firestore collection
-// await db.collection('test_collection').doc().create({response: 'Hello World'});
-// return res.status(200).send('Hello World!');
-
-// Testing code to retrieve docs from Firestore
-// let results = [];
-//
-// const snapshot = await db.collection('test_collection').get()
-// snapshot.forEach(doc => {
-//     results.push(doc.data())
-// });
-//
-// return res.status(200).send(results)
