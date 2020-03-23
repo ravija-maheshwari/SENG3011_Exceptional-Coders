@@ -4,34 +4,11 @@ import json
 import requests
 import re
 import xml.etree.ElementTree as ET
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
 
 from urllib.parse import urlparse
 from fuzzywuzzy import process as proc
 from datetime import datetime as time
 # some libary that has a list of countries
-
-
-class Article:
-    def __init__(self, url, date_of_publication, headline, main_text):
-        self.url = url
-        self.date_of_publication = date_of_publication
-        self.headline = headline
-        self.main_text = main_text
-
-    # @staticmethod
-    # def from_dict(source):
-    #     # ...
-
-    # def to_dict(self):
-    #     # ...
-
-    def __repr__(self):
-        return(
-            u'Article(headline={}, main_text={}, date_of_publication={}, url={})'
-            .format(self.headline, self.main_text, self.date_of_publication, self.url))
 
 
 def getCountry(lookup):
@@ -85,18 +62,12 @@ urls = getURLS()
 diseases = ["unknown", "other", "anthrax cutaneous", "anthrax gastrointestinous", "anthrax inhalation", "botulism", "brucellosis", "chikungunya", "cholera", "coronavirus", "cryptococcosis", "cryptosporidiosis", "crimean-congo haemorrhagic fever", "dengue", "diphteria", "ebola haemorrhagic fever", "ehec (e.coli)", "enterovirus 71 infection", "influenza a/h5n1", "influenza a/h7n9", "influenza a/h9n2", "influenza a/h1n1", "influenza a/h1n2", "influenza a/h3n5", "influenza a/h3n2", "influenza a/h2n2", "hand, foot and mouth disease", "hantavirus", "hepatitis a", "hepatitis b", "hepatitis c",
             "hepatitis d", "hepatitis e", "histoplasmosis", "hiv/aids", "lassa fever", "malaria", "marburg virus disease", "measles", "mers-cov", "mumps", "nipah virus", "norovirus infection", "pertussis", "plague", "pneumococcus pneumonia", "poliomyelitis", "q fever", "rabies", "rift valley fever", "rotavirus infection", "rubella", "salmonellosis", "sars", "shigellosis", "smallpox", "staphylococcal enterotoxin b", "thypoid fever", "tuberculosis", "tularemia", "vaccinia and cowpox", "varicella", "west nile virus", "yellow fever", "yersiniosis", "zika", "legionares", "listeriosis", "monkeypox", "COVID-19"]
 legit_diseases = {"coronavirus": "COVID-19"}
-default_app = firebase_admin.initialize_app()
 
 # DEBUGGING ONLY REMOVE
 seen = {}
 ####
-
-cred = credentials.ApplicationDefault()
-
-
-db = firestore.client()
-
-
+print(len(urls))
+# print(len(posts))
 for url in urls:
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -119,38 +90,44 @@ for url in urls:
                         'div', class_='b-post__hide-when-deleted')  # b-post__contentd
                     title = soup_post.find(
                         'div', class_='b-media__body')  # b-post__contentd
-                    title = (title.h2.text).strip()
-                    disease = getDisease(title.lower().split(" "))
+                    # link_post = (soup_post.find('a'))['href']
+                    title = (title.h2.text).strip().lower().split(" ")
+                    disease = getDisease(title)
+
                     date = soup_post.find('div', class_='b-post__timestamp')
                     time_str = date.find('time')['datetime']
                     time_obj = getTime(time_str)
 
                     url = soup_post.find(
                         'div', class_='js-post__content-text restore h-wordwrap')
+                    # print(url)
                     url = url.a['href']
                     if "flutrackers" in url:
                         print("NOT RIGHT PROBS", url)
                     text = soup_post.find(
                         'div', class_='js-post__content-text restore h-wordwrap')
                     text = getText(text)
-                    # print("Country: ", country, "\nDisease: ", disease, "\nTime: ", time_obj.strftime(
-                    #     "%Y-%m-%d %H:%M:%S"), "\nURL: ", url, "\nTitle: ", title, "\nText: ...", text)
-                    article = Article(url, time_obj.strftime(
-                        "%Y-%m-%d %H:%M:%S"), title, text)
-                    print(article.__dict__)
-                    db.collection(u'article').document(
-                        u'new-city-id').set(article.__dict__)
+                    print("Country: ", country, "\nDisease: ", disease, "\nTime: ", time_obj.strftime(
+                        "%Y-%m-%d %H:%M:%S"), "\nURL: ", url, "\nText: ...", text)
                     # remove all this seen stuff later
                     if disease in seen:
                         seen[disease] += 1
                     else:
                         seen[disease] = 1
                     print(seen)
-                except Exception as a:
+                except:
                     print("failed to classify")
-                    print(a)
                     pass
 
+# results = 'Australia'
+
+# class DiseaseEntry:
+#     def __init__(self, url, date_of_publication, headline, main_text, reports):
+#         self.url = url
+#         self.date_of_publication = date_of_publication
+#         self.headline = headline
+#         self.main_text = main_text
+#         self.reports = reports
 
 # class Report:
 #     def __init__ (self, diseases, syndromes. event_date. locations):
@@ -158,3 +135,7 @@ for url in urls:
 #         self.syndromes = syndromes
 #         self.event_date = event_date
 #         self.locations = locations
+
+# For each title that has a country mentioned - open associated link
+# Then see if link takes us to an article
+# Search article for
