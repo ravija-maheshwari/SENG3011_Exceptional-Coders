@@ -1,4 +1,7 @@
 # Team: Exception(al) Coders
+## Requirements
+Run
+    pip install requirements.txt 
 ## Phase 1
 ### API Source Code
 ### API Documentation
