@@ -1,5 +1,8 @@
 const helpers = require('../API_SourceCode/functions/helpers')
 const errorChecks = require('../API_SourceCode/functions/errorChecks')
+const suite = require('./apiTestHelpers')
+let Validator = require('jsonschema').Validator;
+let v = new Validator();
 
 // Input - Sample request parameters
 
@@ -144,6 +147,82 @@ let articleVietnam = {
     ]
 }
 
+// Schema for article
+let articleSchema = {
+    "id": "/Article",
+    "type": "object",
+    "properties": {
+        "url": { "type": "string" },
+        "date_of_publication": { "type": "string" },
+        "headline": { "type": "string" },
+        "main_text": { "type": "string" },
+        "reports" : {
+            "type": "array",
+            "items": { "$ref": "/Report" }
+        }
+    },
+    "required": [
+        "url",
+        "date_of_publication",
+        "headline",
+        "main_text",
+        "reports"
+    ]
+};
+
+// Schema for report which is added and referenced in articleSchema
+let reportSchema = {
+    "id": "/Report",
+    "type": "object",
+    "properties": {
+        "event_date": { "type": "string" },
+        "locations": {
+            "type": "array",
+            "items": {
+                "properties": {
+                    "country": { "type": "string" },
+                    "location": { "type": "string" }
+                }
+            }
+        },
+        "diseases": {
+            "type": "array",
+            "items": { "type": "string" }
+        },
+        "syndromes": {
+            "type": "array",
+            "items": { "type": "string" }
+        }
+    },
+    "required": [
+        "event_date",
+        "locations",
+        "diseases",
+        "syndromes"
+    ]
+}
+
+// Final response schema
+let finalResponseJson = {
+    "id": "/FinalJson",
+    "type": "array",
+    "items": {
+        "$ref": "/Article"
+    }
+}
+
+let errorResponse = {
+    "id": "/Error",
+    "type": "object",
+    "properties": {
+        "error": { "type": "string"}
+    }
+}
+
+// Adding both the schemas referenced (ie. "$ref")
+v.addSchema(reportSchema, "/Report");
+v.addSchema(articleSchema, "/Article")
+
 // Test Cases
 
 // Testing missing query params
@@ -236,3 +315,22 @@ test('return value of isLocationParamEmpty is false', () => {
     expect(helpers.isLocationParamEmpty("Sydney")).toBe(false)
 })
 
+test('api call with no keyterms or location', async () => {
+    const res = await suite.getResponse1()
+    const result = v.validate(res, finalResponseJson).errors.length
+    expect(result).toBe(0)
+})
+
+
+// Testing schema of JSON response
+test('api call with keyterm', async () => {
+    const res = await suite.getResponse2()
+    const result = v.validate(res, finalResponseJson).errors.length
+    expect(result).toBe(0)
+})
+
+test('api call with keyterm and location but no articles in response', async () => {
+    const res = await suite.getResponse3()
+    const result = v.validate(res, finalResponseJson).errors.length
+    expect(result).toBe(0)
+})
