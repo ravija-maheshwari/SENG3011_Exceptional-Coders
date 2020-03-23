@@ -16,3 +16,92 @@ exports.getFormattedDatetime = function(date) {
     let dateString = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + seconds;
     return dateString;
 }
+
+exports.isKeytermsParamEmpty = function(keyterms) {
+    if (keyterms.length === 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+exports.isLocationParamEmpty = function(location) {
+    if (location.length === 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+exports.docHasKeyterm = function(doc, keyterms) {
+    let hasKeyterm = false
+
+    if (keyterms.length > 0) {
+        for (let term of keyterms){
+            let termRegex = new RegExp(term, "i");
+            // Checking if term exists in headline or main_text
+            if (termRegex.test(doc.data().headline) || termRegex.test(doc.data().main_text)) {
+                hasKeyterm = true;
+                continue;
+            }
+            else {
+                for (report of doc.data().reports) {
+                    // Checking keyterm in reports
+                    let diseases = report.diseases.map((item) => { return item.toLowerCase(); });
+                    let syndromes = report.syndromes.map((item) => { return item.toLowerCase(); });
+                    let lowerCaseKeyterm = term.toLowerCase();
+                    
+                    // Obtaining a new array after filtering diseases and syndromes
+                    // containing the keyterm
+                    let diseasesWithKeyterm = diseases.filter(item => item.includes(lowerCaseKeyterm))
+                    let syndromesWithKeyterm = syndromes.filter(item => item.includes(lowerCaseKeyterm))
+
+                    // If filtered arrays have some value (ie. length > 0), it means keyterm was found
+                    if (diseasesWithKeyterm.length > 0 || syndromesWithKeyterm.length > 0) {
+                        hasKeyterm = true;
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+
+    return hasKeyterm;
+}
+
+exports.docHasLocation = function(doc, location) {
+    let hasLocation = false;
+
+    if (location.length === 0) {
+        return false;
+    }
+    
+    let locationRegex = new RegExp(location, "i");
+
+    for (let place of doc.data().reports) {
+        for (let loc of place.locations) {
+            if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
+                hasLocation = true;
+                break;
+            }
+        }
+    }
+
+    return hasLocation;
+}
+
+exports.createArticleObject = function(doc) {
+    let formattedDate = exports.getFormattedDatetime(doc.data().date_of_publication);
+            
+    let article = {
+        url: doc.data().url,
+        date_of_publication: formattedDate,
+        headline: doc.data().headline,
+        main_text: doc.data().main_text,
+        reports: doc.data().reports
+    };
+
+    return article
+}
