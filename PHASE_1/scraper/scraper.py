@@ -15,11 +15,12 @@ from datetime import datetime as time
 
 
 class Article:
-    def __init__(self, url, date_of_publication, headline, main_text):
+    def __init__(self, url, date_of_publication, headline, main_text, reports):
         self.url = url
         self.date_of_publication = date_of_publication
         self.headline = headline
         self.main_text = main_text
+        self.report = reports
 
     # @staticmethod
     # def from_dict(source):
@@ -32,6 +33,14 @@ class Article:
         return(
             u'Article(headline={}, main_text={}, date_of_publication={}, url={})'
             .format(self.headline, self.main_text, self.date_of_publication, self.url))
+
+
+class Report:
+    def __init__(self, diseases, syndromes, event_date, locations):
+        self.diseases = diseases
+        self.syndromes = syndromes
+        self.event_date = event_date
+        self.locations = locations
 
 
 def getCountry(lookup):
@@ -85,13 +94,12 @@ urls = getURLS()
 diseases = ["unknown", "other", "anthrax cutaneous", "anthrax gastrointestinous", "anthrax inhalation", "botulism", "brucellosis", "chikungunya", "cholera", "coronavirus", "cryptococcosis", "cryptosporidiosis", "crimean-congo haemorrhagic fever", "dengue", "diphteria", "ebola haemorrhagic fever", "ehec (e.coli)", "enterovirus 71 infection", "influenza a/h5n1", "influenza a/h7n9", "influenza a/h9n2", "influenza a/h1n1", "influenza a/h1n2", "influenza a/h3n5", "influenza a/h3n2", "influenza a/h2n2", "hand, foot and mouth disease", "hantavirus", "hepatitis a", "hepatitis b", "hepatitis c",
             "hepatitis d", "hepatitis e", "histoplasmosis", "hiv/aids", "lassa fever", "malaria", "marburg virus disease", "measles", "mers-cov", "mumps", "nipah virus", "norovirus infection", "pertussis", "plague", "pneumococcus pneumonia", "poliomyelitis", "q fever", "rabies", "rift valley fever", "rotavirus infection", "rubella", "salmonellosis", "sars", "shigellosis", "smallpox", "staphylococcal enterotoxin b", "thypoid fever", "tuberculosis", "tularemia", "vaccinia and cowpox", "varicella", "west nile virus", "yellow fever", "yersiniosis", "zika", "legionares", "listeriosis", "monkeypox", "COVID-19"]
 legit_diseases = {"coronavirus": "COVID-19"}
+syndromes = ["Haemorrhagic Fever", "Acute Flacid Paralysis", "Acute gastroenteritis", "Acute respiratory syndrome", "Influenza-like illness", "Acute fever and rash", "Fever of unknown Origin", "Encephalitis", "Meningitis",
+             ]
 cred = firebase_admin.credentials.Certificate(
     './seng3011-859af-firebase-adminsdk-tbsvx-227c77c920.json')
 default_app = firebase_admin.initialize_app(cred)
 
-# DEBUGGING ONLY REMOVE
-seen = {}
-####
 db = firestore.client()
 
 
@@ -122,7 +130,7 @@ for url in urls:
                     date = soup_post.find('div', class_='b-post__timestamp')
                     time_str = date.find('time')['datetime']
                     time_obj = getTime(time_str)
-
+                    out_time = time_obj.strftime("%Y-%m-%d %H:%M:%S")
                     url = soup_post.find(
                         'div', class_='js-post__content-text restore h-wordwrap')
                     url = url.a['href']
@@ -131,19 +139,26 @@ for url in urls:
                     text = soup_post.find(
                         'div', class_='js-post__content-text restore h-wordwrap')
                     text = getText(text)
+                    report_list = [disease]
+                    syndrome_list = []
+                    for word in text:
+                        if word not in report_list:
+                            if word in diseases:
+                                report_list.append(word)
+                            elif word in syndromes:
+                                syndrome_list.append(word)
                     # print("Country: ", country, "\nDisease: ", disease, "\nTime: ", time_obj.strftime(
                     #     "%Y-%m-%d %H:%M:%S"), "\nURL: ", url, "\nTitle: ", title, "\nText: ...", text)
-                    article = Article(url, time_obj.strftime(
-                        "%Y-%m-%d %H:%M:%S"), title, text)
+                    reports = []
+                    for word in report_list:
+                        report = Report(
+                            report_list, syndrome_list, out_time, country)
+                        reports.append(report.__dict__)
+                    article = Article(url, out_time, title, text, reports)
                     print(article.__dict__)
                     db.collection(u'article').document(
-                        u'new-city-id').set(article.__dict__)
-                    # remove all this seen stuff later
-                    if disease in seen:
-                        seen[disease] += 1
-                    else:
-                        seen[disease] = 1
-                    print(seen)
+                        time_str).set(article.__dict__)
+
                 except Exception as a:
                     print("failed to classify")
                     print(a)
