@@ -117,7 +117,7 @@ app.get('/api/v1/articles', async(req, res) => {
 
         let articles = [];
 
-        let allArticles = db.collection('test_collection');
+        let allArticles = db.collection('articles');
 
         let query = allArticles
                     .where('date_of_publication', '>=', startDate)

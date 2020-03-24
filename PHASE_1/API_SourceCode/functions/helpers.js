@@ -47,7 +47,7 @@ exports.docHasKeyterm = function(doc, keyterms) {
                 continue;
             }
             else {
-                for (report of doc.reports) {
+                for (report of doc.report) {
                     // Checking keyterm in reports
                     let diseases = report.diseases.map((item) => { return item.toLowerCase(); });
                     let syndromes = report.syndromes.map((item) => { return item.toLowerCase(); });
@@ -100,7 +100,7 @@ exports.createArticleObject = function(doc) {
         date_of_publication: formattedDate,
         headline: doc.headline,
         main_text: doc.main_text,
-        reports: doc.reports
+        reports: doc.report
     };
 
     return article
