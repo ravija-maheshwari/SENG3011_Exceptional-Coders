@@ -154,9 +154,9 @@ for url in urls:
                         report = Report(
                             report_list, syndrome_list, out_time, country)
                         reports.append(report.__dict__)
-                    article = Article(url, out_time, title, text, reports)
+                    article = Article(url, time_obj, title, text, reports)
                     print(article.__dict__)
-                    db.collection(u'article').document(
+                    db.collection(u'articles').document(
                         time_str).set(article.__dict__)
 
                 except Exception as a:
