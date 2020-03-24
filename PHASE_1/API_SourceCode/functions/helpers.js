@@ -81,11 +81,16 @@ exports.docHasLocation = function(doc, location) {
     let locationRegex = new RegExp(location, "i");
 
     for (let place of doc.report) {
-        for (let loc of place.locations) {
-            if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
-                hasLocation = true;
-                break;
-            }
+        // for (let loc of place.locations) {
+        //     if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
+        //         hasLocation = true;
+        //         break;
+        //     }
+        // }
+        let loc = place.locations
+        if (locationRegex.test(loc)) {
+            hasLocation = true;
+            break;
         }
     }
 
@@ -95,12 +100,23 @@ exports.docHasLocation = function(doc, location) {
 exports.createArticleObject = function(doc) {
     let formattedDate = exports.getFormattedDatetime(doc.date_of_publication);
             
+    let report = {
+            event_date: doc.report[0].event_date,
+            locations: [
+                {
+                    country: doc.report[0].locations,
+                    location: ""
+                }
+            ],
+            syndromes: doc.report[0].syndromes,
+            diseases: doc.report[0].diseases
+    }
     let article = {
         url: doc.url,
         date_of_publication: formattedDate,
         headline: doc.headline,
         main_text: doc.main_text,
-        reports: doc.report
+        reports: report
     };
 
     return article
