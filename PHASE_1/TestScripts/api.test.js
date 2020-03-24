@@ -315,14 +315,14 @@ test('return value of isLocationParamEmpty is false', () => {
     expect(helpers.isLocationParamEmpty("Sydney")).toBe(false)
 })
 
+
+// Testing schema of JSON response
 test('api call with no keyterms or location', async () => {
     const res = await suite.getResponse1()
     const result = v.validate(res, finalResponseJson).errors.length
     expect(result).toBe(0)
 })
 
-
-// Testing schema of JSON response
 test('api call with keyterm', async () => {
     const res = await suite.getResponse2()
     const result = v.validate(res, finalResponseJson).errors.length
@@ -332,5 +332,17 @@ test('api call with keyterm', async () => {
 test('api call with keyterm and location but no articles in response', async () => {
     const res = await suite.getResponse3()
     const result = v.validate(res, finalResponseJson).errors.length
+    expect(result).toBe(0)
+})
+
+test('api call with missing params', async () => {
+    const res = await suite.getResponse4()
+    const result = v.validate(res, errorResponse).errors.length
+    expect(result).toBe(0)
+})
+
+test('api call with missing params', async () => {
+    const res = await suite.getResponse5()
+    const result = v.validate(res, errorResponse).errors.length
     expect(result).toBe(0)
 })
