@@ -80,7 +80,7 @@ exports.docHasLocation = function(doc, location) {
     
     let locationRegex = new RegExp(location, "i");
 
-    for (let place of doc.reports) {
+    for (let place of doc.report) {
         for (let loc of place.locations) {
             if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
                 hasLocation = true;
