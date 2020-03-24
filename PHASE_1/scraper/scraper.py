@@ -42,6 +42,15 @@ class Report:
         self.event_date = event_date
         self.locations = locations
 
+diseases = ["unknown", "other", "anthrax cutaneous", "anthrax gastrointestinous", "anthrax inhalation", "botulism", "brucellosis", "chikungunya", "cholera", "coronavirus", "cryptococcosis", "cryptosporidiosis", "crimean-congo haemorrhagic fever", "dengue", "diphteria", "ebola haemorrhagic fever", "ehec (e.coli)", "enterovirus 71 infection", "influenza a/h5n1", "influenza a/h7n9", "influenza a/h9n2", "influenza a/h1n1", "influenza a/h1n2", "influenza a/h3n5", "influenza a/h3n2", "influenza a/h2n2", "hand, foot and mouth disease", "hantavirus", "hepatitis a", "hepatitis b", "hepatitis c",
+            "hepatitis d", "hepatitis e", "histoplasmosis", "hiv/aids", "lassa fever", "malaria", "marburg virus disease", "measles", "mers-cov", "mumps", "nipah virus", "norovirus infection", "pertussis", "plague", "pneumococcus pneumonia", "poliomyelitis", "q fever", "rabies", "rift valley fever", "rotavirus infection", "rubella", "salmonellosis", "sars", "shigellosis", "smallpox", "staphylococcal enterotoxin b", "thypoid fever", "tuberculosis", "tularemia", "vaccinia and cowpox", "varicella", "west nile virus", "yellow fever", "yersiniosis", "zika", "legionares", "listeriosis", "monkeypox", "COVID-19"]
+legit_diseases = {"coronavirus": "COVID-19"}
+syndromes = ["Haemorrhagic Fever", "Acute Flacid Paralysis", "Acute gastroenteritis", "Acute respiratory syndrome", "Influenza-like illness", "Acute fever and rash", "Fever of unknown Origin", "Encephalitis", "Meningitis",
+             ]
+
+url = "https://flutrackers.com/forum/search?searchJSON=%7B%22last%22%3A%7B%22from%22%3A%222%22%7D%2C%22sort%22%3A%7B%22created%22%3A%22desc%22%7D%2C%22view%22%3A%22topic%22%2C%22starter_only%22%3A1%2C%22exclude_type%22%3A%5B%22vBForum_PrivateMessage%22%5D%2C%22ignore_protected%22%3A1%7D"
+page = requests.get(url)
+soup = BeautifulSoup(page.content, 'html.parser')
 
 def getCountry(lookup):
     # url =  "https://maps.googleapis.com/maps/api/geocode/json?address={}&key=AIzaSyB4EMW8mIRBZosu2dmcqCje3n_2xo2mrjg".format(lookup)
@@ -72,7 +81,6 @@ def getTime(time_str):
 def getText(text):
     return text.text.strip()
 
-
 def getURLS():
     next_page = soup.find(
         'a', class_='js-pagenav-button js-pagenav-next-button b-button b-button--secondary js-shrink-event-child')
@@ -82,26 +90,13 @@ def getURLS():
         urls.append(str(next_page['href'][:-1]+str(i)))
     return urls
 
-
-url = "https://flutrackers.com/forum/search?searchJSON=%7B%22last%22%3A%7B%22from%22%3A%222%22%7D%2C%22sort%22%3A%7B%22created%22%3A%22desc%22%7D%2C%22view%22%3A%22topic%22%2C%22starter_only%22%3A1%2C%22exclude_type%22%3A%5B%22vBForum_PrivateMessage%22%5D%2C%22ignore_protected%22%3A1%7D"
-page = requests.get(url)
-soup = BeautifulSoup(page.content, 'html.parser')
-
-
 urls = getURLS()
 
-
-diseases = ["unknown", "other", "anthrax cutaneous", "anthrax gastrointestinous", "anthrax inhalation", "botulism", "brucellosis", "chikungunya", "cholera", "coronavirus", "cryptococcosis", "cryptosporidiosis", "crimean-congo haemorrhagic fever", "dengue", "diphteria", "ebola haemorrhagic fever", "ehec (e.coli)", "enterovirus 71 infection", "influenza a/h5n1", "influenza a/h7n9", "influenza a/h9n2", "influenza a/h1n1", "influenza a/h1n2", "influenza a/h3n5", "influenza a/h3n2", "influenza a/h2n2", "hand, foot and mouth disease", "hantavirus", "hepatitis a", "hepatitis b", "hepatitis c",
-            "hepatitis d", "hepatitis e", "histoplasmosis", "hiv/aids", "lassa fever", "malaria", "marburg virus disease", "measles", "mers-cov", "mumps", "nipah virus", "norovirus infection", "pertussis", "plague", "pneumococcus pneumonia", "poliomyelitis", "q fever", "rabies", "rift valley fever", "rotavirus infection", "rubella", "salmonellosis", "sars", "shigellosis", "smallpox", "staphylococcal enterotoxin b", "thypoid fever", "tuberculosis", "tularemia", "vaccinia and cowpox", "varicella", "west nile virus", "yellow fever", "yersiniosis", "zika", "legionares", "listeriosis", "monkeypox", "COVID-19"]
-legit_diseases = {"coronavirus": "COVID-19"}
-syndromes = ["Haemorrhagic Fever", "Acute Flacid Paralysis", "Acute gastroenteritis", "Acute respiratory syndrome", "Influenza-like illness", "Acute fever and rash", "Fever of unknown Origin", "Encephalitis", "Meningitis",
-             ]
 cred = firebase_admin.credentials.Certificate(
     './seng3011-859af-firebase-adminsdk-tbsvx-227c77c920.json')
 default_app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
-
 
 for url in urls:
     page = requests.get(url)
@@ -164,6 +159,9 @@ for url in urls:
                     print(a)
                     pass
 
+def generateReports():
+    # Return a list of reports that are being entered into the db
+    return []
 
 # class Report:
 #     def __init__ (self, diseases, syndromes. event_date. locations):
