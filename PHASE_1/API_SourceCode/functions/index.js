@@ -70,7 +70,13 @@ app.get('/api/v1/articles', async(req, res) => {
         let endDate = req.query.end_date
         let keyterms = req.query.keyterms
         let location = req.query.location
-        let limit = Number(req.query.limit)
+        let limit = req.query.limit
+        if(limit === undefined){
+            limit = 200
+        }else{
+            limit = limit.length === 0 ? 200 : Number(limit)
+        }
+
 
     
         if(errorCheckers.checkMissingQueryParams(req)){
