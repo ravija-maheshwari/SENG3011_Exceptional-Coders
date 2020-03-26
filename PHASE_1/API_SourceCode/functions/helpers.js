@@ -37,6 +37,10 @@ exports.isLocationParamEmpty = function(location) {
 
 exports.docHasKeyterm = function(doc, keyterms) {
     let hasKeyterm = false
+    let reports;
+
+    if (doc.hasOwnProperty('report')) { reports = doc.report; }
+    else if (doc.hasOwnProperty('reports')) { reports = doc.reports; }
 
     if (keyterms.length > 0) {
         for (let term of keyterms){
@@ -47,7 +51,7 @@ exports.docHasKeyterm = function(doc, keyterms) {
                 continue;
             }
             else {
-                for (report of doc.report) {
+                for (report of reports) {
                     // Checking keyterm in reports
                     let diseases = report.diseases.map((item) => { return item.toLowerCase(); });
                     let syndromes = report.syndromes.map((item) => { return item.toLowerCase(); });
@@ -73,6 +77,10 @@ exports.docHasKeyterm = function(doc, keyterms) {
 
 exports.docHasLocation = function(doc, location) {
     let hasLocation = false;
+    let reports;
+
+    if (doc.hasOwnProperty('report')) { reports = doc.report; }
+    else if (doc.hasOwnProperty('reports')) { reports = doc.reports; }
 
     if (location.length === 0) {
         return false;
@@ -80,17 +88,12 @@ exports.docHasLocation = function(doc, location) {
     
     let locationRegex = new RegExp(location, "i");
 
-    for (let place of doc.report) {
-        // for (let loc of place.locations) {
-        //     if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
-        //         hasLocation = true;
-        //         break;
-        //     }
-        // }
-        let loc = place.locations
-        if (locationRegex.test(loc)) {
-            hasLocation = true;
-            break;
+    for (let place of reports) {
+        for (let loc of place.locations) {
+            if(locationRegex.test(loc.location) || locationRegex.test(loc.country)) {
+                hasLocation = true;
+                break;
+            }
         }
     }
 
@@ -99,24 +102,24 @@ exports.docHasLocation = function(doc, location) {
 
 exports.createArticleObject = function(doc) {
     let formattedDate = exports.getFormattedDatetime(doc.date_of_publication);
+    let docReports;
+
+    if (doc.hasOwnProperty('report')) { docReports = doc.report; }
+    else if (doc.hasOwnProperty('reports')) { docReports = doc.reports; }
             
     let report = {
-            event_date: doc.report[0].event_date,
-            locations: [
-                {
-                    country: doc.report[0].locations,
-                    location: ""
-                }
-            ],
-            syndromes: doc.report[0].syndromes,
-            diseases: doc.report[0].diseases
-    }
+            event_date: docReports[0].event_date,
+            locations: docReports[0].locations,
+            syndromes: docReports[0].syndromes,
+            diseases: docReports[0].diseases
+    };
+
     let article = {
         url: doc.url,
         date_of_publication: formattedDate,
         headline: doc.headline,
         main_text: doc.main_text,
-        reports: report
+        reports: [report]
     };
 
     return article
