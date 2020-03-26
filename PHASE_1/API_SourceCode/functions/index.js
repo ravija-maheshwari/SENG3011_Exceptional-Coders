@@ -172,7 +172,7 @@ app.get('/api/v1/articles', async(req, res) => {
                             }
 
 
-                            if(articles.length == limit){
+                            if(articles.length === limit){
                                 break;
                             }
 
