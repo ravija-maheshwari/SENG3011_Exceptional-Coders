@@ -43,3 +43,11 @@ exports.isStartBeforeEnd = function isStartBeforeEnd(req) {
     return true
 }
 
+//Function to check if a start date occurs before end date
+exports.isLimitNegative = function isLimitNegative(req) {
+    if (req.query.limit < 0) {
+        return true
+    }
+    return false
+}
+

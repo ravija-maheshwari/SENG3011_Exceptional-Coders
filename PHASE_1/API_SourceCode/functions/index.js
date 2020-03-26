@@ -70,6 +70,8 @@ app.get('/api/v1/articles', async(req, res) => {
         let endDate = req.query.end_date
         let keyterms = req.query.keyterms
         let location = req.query.location
+        let limit = req.query.limit
+
     
         if(errorCheckers.checkMissingQueryParams(req)){
             let endExecTime = new Date().getTime()
@@ -101,6 +103,17 @@ app.get('/api/v1/articles', async(req, res) => {
             sendLog(log)
 
             const errorMsg = { error: "Bad Request - start_date has to be before end_date."}
+            return res.status(400).send(errorMsg)
+        }
+
+        if(errorCheckers.isLimitNegative(req)){
+            let endExecTime = new Date().getTime()
+            let execTime = endExecTime - startExecTime
+            //Log details
+            let log = getLog(req.headers['x-forwarded-for'], req.query, 400, execTime)
+            sendLog(log)
+
+            const errorMsg = { error: "Bad Request - limit cannot be negative."}
             return res.status(400).send(errorMsg)
         }
 
@@ -136,9 +149,9 @@ app.get('/api/v1/articles', async(req, res) => {
                         }
 
                         // Checking if headline contains any of the keyterms
-                        snapshot.forEach(doc => {
-                            doc = doc.data()
-                            
+                        for(var i in snapshot.docs){
+                            const doc = snapshot.docs[i].data();
+
                             let hasKeyterm = helpers.docHasKeyterm(doc, keyterms)
                             let hasLocation = helpers.docHasLocation(doc, location)
 
@@ -148,16 +161,22 @@ app.get('/api/v1/articles', async(req, res) => {
                                 articles.push(article);
                             }
 
-                            // Push doc if location is also provided in query params
+                                // Push doc if location is also provided in query params
                             // (and location is found in doc)
                             else if ((hasKeyterm && !helpers.isLocationParamEmpty(location)) || (helpers.isKeytermsParamEmpty(keyterms) && !helpers.isLocationParamEmpty(location))) {
-                                
+
                                 if (hasLocation) {
                                     let article = helpers.createArticleObject(doc)
                                     articles.push(article);
                                 }
                             }
-                        });                        
+
+
+                            if(articles.length == limit){
+                                break;
+                            }
+
+                        }
 
                         if (articles.length === 0 && keyterms.length === 0 && location.length === 0) {
                             // No matching keywords & locations found
