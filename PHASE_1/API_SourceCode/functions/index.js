@@ -70,7 +70,7 @@ app.get('/api/v1/articles', async(req, res) => {
         let endDate = req.query.end_date
         let keyterms = req.query.keyterms
         let location = req.query.location
-        let limit = req.query.limit
+        let limit = Number(req.query.limit)
 
     
         if(errorCheckers.checkMissingQueryParams(req)){
@@ -171,7 +171,9 @@ app.get('/api/v1/articles', async(req, res) => {
                                 }
                             }
 
-                            if(articles.length == limit){
+                            console.log(typeof limit);
+                            console.log(typeof articles.length);
+                            if(articles.length === limit){
                                 break;
                             }
 
@@ -186,7 +188,7 @@ app.get('/api/v1/articles', async(req, res) => {
                                 let article = helpers.createArticleObject(doc)
                                 articles.push(article);
 
-                                if(articles.length == limit){
+                                if(articles.length === limit){
                                     break;
                                 }
                             }
