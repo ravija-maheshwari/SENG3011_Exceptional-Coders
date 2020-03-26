@@ -71,9 +71,10 @@ app.get('/api/v1/articles', async(req, res) => {
         let keyterms = req.query.keyterms
         let location = req.query.location
         let limit = req.query.limit
-        if(limit === undefined){
+        
+        if (limit === undefined){
             limit = 200
-        }else{
+        } else {
             limit = limit.length === 0 ? 200 : Number(limit)
         }
 
@@ -154,8 +155,7 @@ app.get('/api/v1/articles', async(req, res) => {
                             return res.status(200).send(articles);
                         }
 
-                        // Checking if headline contains any of the keyterms
-                        for(var i in snapshot.docs){
+                        for (var i in snapshot.docs){
                             const doc = snapshot.docs[i].data();
 
                             let hasKeyterm = helpers.docHasKeyterm(doc, keyterms)
@@ -167,7 +167,7 @@ app.get('/api/v1/articles', async(req, res) => {
                                 articles.push(article);
                             }
 
-                                // Push doc if location is also provided in query params
+                            // Push doc if location is also provided in query params
                             // (and location is found in doc)
                             else if ((hasKeyterm && !helpers.isLocationParamEmpty(location)) || (helpers.isKeytermsParamEmpty(keyterms) && !helpers.isLocationParamEmpty(location))) {
 
@@ -177,9 +177,7 @@ app.get('/api/v1/articles', async(req, res) => {
                                 }
                             }
 
-                            console.log(typeof limit);
-                            console.log(typeof articles.length);
-                            if(articles.length === limit){
+                            if (articles.length === limit){
                                 break;
                             }
 
@@ -189,8 +187,8 @@ app.get('/api/v1/articles', async(req, res) => {
                             // No matching keywords & locations found
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
-                            for(var i in snapshot.docs){
-                                const doc = snapshot.docs[i].data();
+                            for (var j in snapshot.docs){
+                                const doc = snapshot.docs[j].data();
                                 let article = helpers.createArticleObject(doc)
                                 articles.push(article);
 
