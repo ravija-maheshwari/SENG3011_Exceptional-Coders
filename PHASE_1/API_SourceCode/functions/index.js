@@ -171,8 +171,7 @@ app.get('/api/v1/articles', async(req, res) => {
                                 }
                             }
 
-
-                            if(articles.length === limit){
+                            if(articles.length == limit){
                                 break;
                             }
 
@@ -182,12 +181,15 @@ app.get('/api/v1/articles', async(req, res) => {
                             // No matching keywords & locations found
                             // Still return date matches or return empty response?
                             console.log("No matching keywords found - returning only matching dates");
-                            snapshot.forEach(doc => {
-                                doc = doc.data()
-
+                            for(var i in snapshot.docs){
+                                const doc = snapshot.docs[i].data();
                                 let article = helpers.createArticleObject(doc)
                                 articles.push(article);
-                            })
+
+                                if(articles.length == limit){
+                                    break;
+                                }
+                            }
                         }
 
                         let endExecTime = new Date().getTime()
