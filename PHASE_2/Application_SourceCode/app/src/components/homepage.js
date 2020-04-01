@@ -1,15 +1,16 @@
 import React from 'react'
+import NSWMap from './nswMap'
 
 class Homepage extends React.Component {
 
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
 
     render() {
         return (
             <div>
-                <p> Homepage of Project (IN PROGRESS) </p>
+                <NSWMap />
             </div>
         )
     }
