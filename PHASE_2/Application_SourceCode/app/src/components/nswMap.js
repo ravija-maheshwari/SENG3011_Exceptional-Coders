@@ -1,7 +1,7 @@
 import React from 'react'
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
+import GoogleMapReact from 'google-map-react'
 import { MAPS_API_KEY } from '../config'
-import hospitalIcon from '../mapIcons/hospital.png'
+import HospitalMarker from './hospitalMarker'
 
 const HOSPITALS_API_URL = "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals"
 
@@ -33,23 +33,16 @@ class NSWMap extends React.Component {
         let hospitals = this.state.hospitals
         let result = []
 
-        // Hospital icon to be shown on map
-        let hIcon = {
-            url: hospitalIcon,
-            scaledSize: new this.props.google.maps.Size(20,20)
-        }
-
         // Adding markers for each hospital
         hospitals.forEach(h => {
             if (h['ispublic'] && (h['state'] === "NSW")) { // Public hospitals in NSW
                 result.push(
-                    <Marker
-                        icon={hIcon}
-                        key={h['name']}
-                        title={h['name']}
+                    <HospitalMarker 
+                        lat={h['latitude']}
+                        lng={h['longitude']}
                         name={h['name']}
-                        position={{ lat: h['latitude'], lng: h['longitude'] }} >
-                    </Marker>
+                        key={h['name']}
+                    />
                 )
             }
         })
@@ -60,20 +53,17 @@ class NSWMap extends React.Component {
     // Render Map and use displayHospitals() to render markers
     render() {
         return (
-            <Map
-                google={this.props.google}
-                zoom={6}
-                minZoom={6}
-                initialCenter={{ lat: -32.5, lng: 150 }} 
-                streetViewControl={false}
-                fullscreenControl={false}
-                mapTypeControl={false} >
+            <div style={{ height: '100vh', width: '100%' }}>
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: MAPS_API_KEY }}
+                    defaultCenter={{ lat: -33.5, lng: 149 }}
+                    defaultZoom={6}
+                >
                 {this.displayHospitals()}
-            </Map>
+                </GoogleMapReact>
+            </div>
         )
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: MAPS_API_KEY
-}) (NSWMap)
+export default NSWMap
