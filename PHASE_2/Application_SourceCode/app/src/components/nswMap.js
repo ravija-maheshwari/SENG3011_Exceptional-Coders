@@ -59,12 +59,14 @@ class NSWMap extends React.Component {
             if (h['ispublic'] && (h['state'] === "NSW")) { // Public hospitals in NSW
                 let bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases)
                 let totalBeds = getTotalBeds(h, hospitalDetail)
+
                 result.push(
                     <HospitalMarker
                         lat={h['latitude']}
                         lng={h['longitude']}
                         name={h['name']}
                         key={h['name']}
+                        suburb={"Randwick"} //FOR TESTING ONLY
                         totalBeds={totalBeds}
                         bedsAvailable={bedsAvailable}
                     />

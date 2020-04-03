@@ -1,4 +1,5 @@
 import React from 'react'
+import Graph from './graph'
 
 class InfoBox extends React.Component{
 
@@ -14,6 +15,7 @@ class InfoBox extends React.Component{
                 <div className="hospital-detail">
                     <p> Total beds = {this.props.totalBeds}</p>
                     <p> Beds Available = {this.props.bedsAvailable}</p>
+                    <Graph suburb={this.props.suburb}/>
                 </div>
             </div>
         );

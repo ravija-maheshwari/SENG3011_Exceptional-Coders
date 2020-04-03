@@ -34,6 +34,7 @@ class HospitalMarker extends React.Component {
                     closeInfoDisplayed = {this.closeInfo}
                     totalBeds = {this.props.totalBeds}
                     bedsAvailable = {this.props.bedsAvailable}
+                    suburb = {this.props.suburb}
                 />
                 :
                 null}
