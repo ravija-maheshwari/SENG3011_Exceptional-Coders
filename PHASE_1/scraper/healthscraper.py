@@ -29,12 +29,13 @@ default_app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-all_areas = []
+# all_areas = []
 
-for area, num in cases.items():
-    area_num_dict = { 'name': area, 'count': num }
-    all_areas.append(area_num_dict)
+# for area, num in cases.items():
+#     area_num_dict = { 'name': area, 'count': num }
+#     all_areas.append(area_num_dict)
 
-for area in all_areas:
-    print(area)
-    db.collection(u'nsw_cases').document(area['name']).set(area)
+# for area in all_areas:
+#     print(area)
+for case in cases.keys():
+    db.collection(u'nsw_cases').document(case).set({case: cases[case]})
