@@ -32,8 +32,8 @@ class HospitalMarker extends React.Component {
                 <InfoBox
                     name = {this.props.name}
                     closeInfoDisplayed = {this.closeInfo}
-                    totalBeds = {this.props.bedsAvailable}
-                    bedsAvailable = {this.props.totalBeds}
+                    totalBeds = {this.props.totalBeds}
+                    bedsAvailable = {this.props.bedsAvailable}
                 />
                 :
                 null}
