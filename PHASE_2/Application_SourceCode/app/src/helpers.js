@@ -485,3 +485,24 @@ exports.allNswAreas = [
         lng: 151.2554202
     }
 ]
+
+//Returns the radius of the display circle on the map
+exports.getRadius = function(suburbCases,  suburb){
+    suburbCases.forEach(suburbCase => {
+        if(suburb.name == suburbCase.name){
+            let caseCount = getIntegerCases(suburbCase.count)
+            let radius = caseCount/10 * 100
+            return radius
+        }
+    })
+}
+
+//Parses the count field
+exports.getIntegerCases = function(caseCount){
+    if(caseCount.indexOf('-') > -1){
+        //1-4 type of caseCount
+        return Number(caseCount.split("-")[0])
+    }else{
+        return Number(caseCount)
+    }
+}
