@@ -2,7 +2,8 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { MAPS_API_KEY } from '../config'
 import HospitalMarker from './hospitalMarker'
-import { allNswAreas, getRadius } from '../helpers'
+import { getRadius } from '../helpers'
+import { allNswAreas } from '../datasets/nswAreas'
 
 const HOSPITALS_API_URL = "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals"
 const SUBURBS_API_URL = "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/suburbs"
