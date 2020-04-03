@@ -28,11 +28,13 @@ cred = firebase_admin.credentials.Certificate(
 default_app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
-for case in cases.keys():
-    # location = str(cases[case])
-    # case = str(case)
-    # print(case, type(case))
-    # print(case, location)
-    db.collection(u'cases').document(case).set(cases[case])
-    # print(case)
-    # print(cases[case])
+
+all_areas = []
+
+for area, num in cases.items():
+    area_num_dict = { 'name': area, 'count': num }
+    all_areas.append(area_num_dict)
+
+for area in all_areas:
+    print(area)
+    db.collection(u'nsw_cases').document(area['name']).set(area)
