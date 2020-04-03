@@ -28,7 +28,7 @@ class HospitalMarker extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="hospital-marker">
                 <img alt="marker" src={hospitalIcon} style={{ width: 18, height: 18 }} onClick={ this.openInfo } ></img>
                 {this.state.isInfoDisplayed ?
                 <InfoBox

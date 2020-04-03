@@ -9,8 +9,8 @@ class InfoBox extends React.Component{
     render(){
         return(
             <div className="info-box">
-               <h1> {this.props.name} </h1>
-               <button onClick={this.props.closeInfoDisplayed}> Close </button>
+                <span className="close-info-box" onClick={this.props.closeInfoDisplayed}> &#x2715; </span>
+                <p className="hospital-name"> {this.props.name} </p>
             </div>
         );
     }

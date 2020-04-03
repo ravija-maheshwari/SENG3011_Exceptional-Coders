@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.hospital-marker {
+    cursor: pointer;
+}
+
+.info-box {
+    cursor: default;
+    width: 60em;
+    height: 30em;
+    position: absolute;
+    border: 1px solid gray;
+    border-radius: 2px;
+    background-color: white;
+    z-index: 9999
+}
+
+.close-info-box {
+    padding-top: 5px;
+    padding-right: 10px;
+    font-size: 14pt;
+    float: right;
+    color: rgb(121, 121, 121);
+}
+
+.close-info-box:hover {
+    cursor: pointer;
+    color: rgb(32, 32, 32);
+}
+
+.hospital-name {
+    font-size: 18pt;
+    padding-left: 15px;
+}
