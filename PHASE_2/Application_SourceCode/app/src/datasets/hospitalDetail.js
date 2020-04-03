@@ -1,4 +1,4 @@
-exports.hospitals = [
+exports.hospitalDetail = [
     {'name': 'Armidale', 'suburb': 'Armidale', 'total_beds': 94.0},
     {'name': 'Auburn', 'suburb': 'Auburn', 'total_beds': 124.2},
     {'name': 'Ballina', 'suburb': 'Ballina', 'total_beds': 71.3},

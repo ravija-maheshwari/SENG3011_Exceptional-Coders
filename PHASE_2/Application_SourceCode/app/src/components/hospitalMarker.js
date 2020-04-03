@@ -17,23 +17,22 @@ class HospitalMarker extends React.Component {
 
 
      openInfo(){
-        console.log(this.props.name)
         this.setState({isInfoDisplayed: true})
     }
 
     closeInfo(){
-        console.log("In close info")
         this.setState({isInfoDisplayed: false})
     }
 
     render() {
         return (
-            <div class="hospital-marker">
+            <div className="hospital-marker">
                 <img alt="marker" src={hospitalIcon} style={{ width: 18, height: 18 }} onClick={ this.openInfo } ></img>
                 {this.state.isInfoDisplayed ?
                 <InfoBox
                     name = {this.props.name}
                     closeInfoDisplayed = {this.closeInfo}
+                    bedsAvailable = {this.props.bedsAvailable}
                 />
                 :
                 null}

@@ -2,8 +2,9 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { MAPS_API_KEY } from '../config'
 import HospitalMarker from './hospitalMarker'
-import { getRadius } from '../helpers'
+import { getRadius, getAvailableBeds } from '../helpers'
 import { allNswAreas } from '../datasets/nswAreas'
+import { hospitalDetail } from '../datasets/hospitalDetail'
 
 const HOSPITALS_API_URL = "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals"
 const SUBURBS_API_URL = "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/suburbs"
@@ -36,71 +37,59 @@ class NSWMap extends React.Component {
         try {
             const response = await fetch(HOSPITALS_API_URL)
             const hospitals = await response.json()
-            
-            this.setState({ hospitals: hospitals })
+            const suburbResponse = await fetch(SUBURBS_API_URL)
+            const suburbCases = await suburbResponse.json()
+
+            this.setState({ hospitals: hospitals , suburbCases: suburbCases})
+
     
         } catch (error) {
             console.log(error)
         }
     }
 
-    async fetchSuburbs() {
-        try {
-            const response = await fetch(SUBURBS_API_URL)
-            const suburbCases = await response.json()
-
-            this.setState({ suburbCases: suburbCases })
-
-            return suburbCases
-
-        } catch (error) {
-            console.log(error)
-            return []
-        }
-    }
-
     displayHospitals() {
+
         let hospitals = this.state.hospitals
         let result = []
-
+        const suburbCases =  this.state.suburbCases
         // Adding markers for each hospital
         hospitals.forEach(h => {
             if (h['ispublic'] && (h['state'] === "NSW")) { // Public hospitals in NSW
+                let bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases)
+                if(bedsAvailable < 0){
+                    console.log(bedsAvailable)
+                }
                 result.push(
-                    <HospitalMarker 
+                    <HospitalMarker
                         lat={h['latitude']}
                         lng={h['longitude']}
                         name={h['name']}
                         key={h['name']}
+                        bedsAvailable={bedsAvailable}
                     />
                 )
             }
         })
-
         return result
     }
 
-    async displayCircles(map, maps) {
-        try {
-            const suburbCases = await this.fetchSuburbs()
+    displayCircles(map, maps) {
+        const suburbCases = this.state.suburbCases
 
-            allNswAreas.forEach(suburb => {
-                let suburbRadius = getRadius(suburbCases, suburb)
-                new maps.Circle({
-                    // strokeColor: '#FF0000',
-                    // strokeOpacity: 0.8,
-                    strokeWeight: 0,
-                    fillColor: '#FF0000',
-                    fillOpacity: 0.5,
-                    map,
-                    center: { lat: suburb.lat, lng: suburb.lng },
-                    radius: suburbRadius,
-                })
+        allNswAreas.forEach(suburb => {
+            let suburbRadius = getRadius(suburbCases, suburb)
+            new maps.Circle({
+                // strokeColor: '#FF0000',
+                // strokeOpacity: 0.8,
+                strokeWeight: 0,
+                fillColor: '#FF0000',
+                fillOpacity: 0.5,
+                map,
+                center: { lat: suburb.lat, lng: suburb.lng },
+                radius: suburbRadius,
             })
-
-        } catch (error) {
-            console.log(error)
-        }
+        })
     }
 
     // Render Map and use displayHospitals() to render markers

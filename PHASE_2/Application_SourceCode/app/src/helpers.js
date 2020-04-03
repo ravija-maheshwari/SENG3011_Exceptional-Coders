@@ -25,17 +25,25 @@ function getIntegerCases(caseCount){
 
 //Returns the number of beds available in the hospital
 //available beds = total beds - infections
-//Args:  hospital object (name, suburb, total_beds), suburb infections (count, name)
+//Args:  hospital object (name, lat, lng), suburb infections (count, name)
 //Takes into account that total beds could be a decimal
-exports.getAvailableBeds = function(hospital, suburbCases){
+
+exports.getAvailableBeds = function(hospital, hospitalDetail, suburbCases){
     let beds = 0
-    for(var i = 0; i < suburbCases ; i++) {
-        if (hospital.suburb === suburbCases.name) {
-            beds =  Math.floor(hospital.total_beds) - suburbCase.count
-            break
+    for(let i = 0; i < hospitalDetail.length ; i++) {
+        //Going thru hospital details
+        if (hospital.name.includes(hospitalDetail[i].name) || hospitalDetail[i].name.includes(hospital.name)) {
+            //Found a match
+            for (let j = 0; j < suburbCases.length ; j++) {
+                if(hospitalDetail[i].suburb === suburbCases[j].name) {
+                    beds = Math.floor(hospitalDetail[i].total_beds) - getIntegerCases(suburbCases[j].count)
+                    break
+                }
+            }
         }
     }
-    return beds
+
+    return beds > 0 ? beds: 0
 }
 
 
