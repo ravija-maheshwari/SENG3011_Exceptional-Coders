@@ -232,6 +232,39 @@ app.get('/api/v1/articles', async(req, res) => {
     }
 });
 
+// Endpoint to retrieve nsw suburb cases
+app.get('/api/v1/suburbs' , async(req, res) =>{
+    let startExecTime = new Date().getTime()
+
+    try{
+        let allSuburbs = []
+        const snapshot = await db.collection('nsw_cases').get()
+        snapshot.forEach(doc => {
+            let suburb = {
+                count: doc.data().count,
+                name: doc.data().name
+            };
+            allSuburbs.push(suburb);
+        });
+
+        //Send response
+        if(allSuburbs.length === 0) {
+            return res.status(200).send(allSuburbs);
+        }
+        return res.status(200).send(allSuburbs);
+    }catch (error) {
+        console.log(error);
+
+        let endExecTime = new Date().getTime()
+        let execTime = endExecTime - startExecTime
+
+        let log = getLog(req.headers['x-forwarded-for'], req.query, 500, execTime)
+        sendLog(log)
+
+        return res.status(500).send(serverErrorMsg);
+    }
+});
+
 // Helper Functions
 
 const sendLog = exports.sendLog = async function(log) {
