@@ -38,4 +38,4 @@ db = firestore.client()
 # for area in all_areas:
 #     print(area)
 for case in cases.keys():
-    db.collection(u'nsw_cases').document(case).set({case: cases[case]})
+    db.collection(u'nsw_cases').document(case).set({'name': case, 'count': cases[case]})
