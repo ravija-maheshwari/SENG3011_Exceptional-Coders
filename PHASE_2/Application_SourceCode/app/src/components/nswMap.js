@@ -2,8 +2,10 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { MAPS_API_KEY } from '../config'
 import HospitalMarker from './hospitalMarker'
+import { allNswAreas } from '../helpers'
 
 const HOSPITALS_API_URL = "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals"
+const SUBURBS_API_URL = "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/suburbs"
 
 class NSWMap extends React.Component {
 
@@ -12,7 +14,9 @@ class NSWMap extends React.Component {
 
         // To hold all hospital data from myhospitals API
         this.state = {
-            hospitals: []
+            hospitals: [],
+            suburbCases: [],
+            hasSuburbsLoaded: false
         }
     }
 
@@ -26,6 +30,21 @@ class NSWMap extends React.Component {
     
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    async fetchSuburbs() {
+        try {
+            const response = await fetch(SUBURBS_API_URL)
+            const suburbCases = await response.json()
+
+            this.setState({ suburbCases: suburbCases })
+
+            return suburbCases
+
+        } catch (error) {
+            console.log(error)
+            return []
         }
     }
 
@@ -50,6 +69,29 @@ class NSWMap extends React.Component {
         return result
     }
 
+    async displayCircles(map, maps) {
+        try {
+            const suburbCases = await this.fetchSuburbs()
+            console.log(suburbCases)
+
+            allNswAreas.forEach(suburb => {
+                new maps.Circle({
+                    // strokeColor: '#FF0000',
+                    // strokeOpacity: 0.8,
+                    strokeWeight: 0,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.5,
+                    map,
+                    center: { lat: suburb.lat, lng: suburb.lng },
+                    radius: 1200,
+                })
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     // Render Map and use displayHospitals() to render markers
     render() {
         return (
@@ -58,6 +100,8 @@ class NSWMap extends React.Component {
                     bootstrapURLKeys={{ key: MAPS_API_KEY }}
                     defaultCenter={{ lat: -33.5, lng: 149 }}
                     defaultZoom={6}
+                    yesIWantToUseGoogleMapApiInternals
+                    onGoogleApiLoaded={({map, maps}) => this.displayCircles(map, maps)}
                 >
                 {this.displayHospitals()}
                 </GoogleMapReact>
