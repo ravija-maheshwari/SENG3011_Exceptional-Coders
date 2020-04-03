@@ -33,7 +33,7 @@ class HospitalMarker extends React.Component {
                     name = {this.props.name}
                     closeInfoDisplayed = {this.closeInfo}
                     totalBeds = {this.props.bedsAvailable}
-                    bedsAvailable = {this.props.bedsAvailable}
+                    bedsAvailable = {this.props.totalBeds}
                 />
                 :
                 null}

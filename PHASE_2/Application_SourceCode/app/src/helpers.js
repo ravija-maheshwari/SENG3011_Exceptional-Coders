@@ -34,7 +34,7 @@ exports.getAvailableBeds = function(hospital, hospitalDetail, suburbCases){
         if (hospital.name.includes(hospitalDetail[i].name) || hospitalDetail[i].name.includes(hospital.name)) {
             //Found a match
             for (let j = 0; j < suburbCases.length ; j++) {
-                if(hospitalDetail[i].suburb === suburbCases[j].name) {
+                if(hospitalDetail[i].suburb.includes(suburbCases[j].name) || suburbCases[j].name.includes(hospitalDetail[i].suburb)) {
                     beds = Math.floor(hospitalDetail[i].total_beds) - getIntegerCases(suburbCases[j].count)
                     break
                 }
