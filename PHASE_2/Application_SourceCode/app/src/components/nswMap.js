@@ -15,6 +15,8 @@ function createMapOptions() {
             latLngBounds: { north: -27, south: -38, west: 140, east: 155 },
             strictBounds: false
         },
+        gestureHandling: 'greedy',
+        fullscreenControl: false,
         minZoom: 6
     }
 }
