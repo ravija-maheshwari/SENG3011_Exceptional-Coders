@@ -28,7 +28,6 @@ class NSWMap extends React.Component {
         this.state = {
             hospitals: [],
             suburbCases: [],
-            hasSuburbsLoaded: false
         }
     }
 
@@ -70,25 +69,44 @@ class NSWMap extends React.Component {
                 )
             }
         })
+
         return result
     }
 
-    displayCircles(map, maps) {
-        const suburbCases = this.state.suburbCases
+    // Only for displayCircles() cos of weird behaviour
+    async fetchSuburbs() {
+        try {
+            const response = await fetch(SUBURBS_API_URL)
+            const suburbCases = await response.json()
 
-        allNswAreas.forEach(suburb => {
-            let suburbRadius = getRadius(suburbCases, suburb)
-            new maps.Circle({
-                // strokeColor: '#FF0000',
-                // strokeOpacity: 0.8,
-                strokeWeight: 0,
-                fillColor: '#FF0000',
-                fillOpacity: 0.5,
-                map,
-                center: { lat: suburb.lat, lng: suburb.lng },
-                radius: suburbRadius,
+            return suburbCases
+
+        } catch (error) {
+            console.log(error)
+            return []
+        }
+    }
+
+    async displayCircles(map, maps) {
+        try {
+            const suburbCases = await this.fetchSuburbs()
+
+            allNswAreas.forEach(suburb => {
+                let suburbRadius = getRadius(suburbCases, suburb)
+                new maps.Circle({
+                    // strokeColor: '#FF0000',
+                    // strokeOpacity: 0.8,
+                    strokeWeight: 0,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.5,
+                    map,
+                    center: { lat: suburb.lat, lng: suburb.lng },
+                    radius: suburbRadius,
+                })
             })
-        })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     // Render Map and use displayHospitals() to render markers
