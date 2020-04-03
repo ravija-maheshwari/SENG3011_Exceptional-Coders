@@ -2,10 +2,20 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { MAPS_API_KEY } from '../config'
 import HospitalMarker from './hospitalMarker'
-import { allNswAreas } from '../helpers'
+import { allNswAreas, getRadius } from '../helpers'
 
 const HOSPITALS_API_URL = "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals"
 const SUBURBS_API_URL = "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/suburbs"
+
+function createMapOptions() {
+    return {
+        restriction: {
+            latLngBounds: { north: -27, south: -38, west: 140, east: 155 },
+            strictBounds: false
+        },
+        minZoom: 6
+    }
+}
 
 class NSWMap extends React.Component {
 
@@ -72,9 +82,9 @@ class NSWMap extends React.Component {
     async displayCircles(map, maps) {
         try {
             const suburbCases = await this.fetchSuburbs()
-            console.log(suburbCases)
 
             allNswAreas.forEach(suburb => {
+                let suburbRadius = getRadius(suburbCases, suburb)
                 new maps.Circle({
                     // strokeColor: '#FF0000',
                     // strokeOpacity: 0.8,
@@ -83,7 +93,7 @@ class NSWMap extends React.Component {
                     fillOpacity: 0.5,
                     map,
                     center: { lat: suburb.lat, lng: suburb.lng },
-                    radius: 1200,
+                    radius: suburbRadius,
                 })
             })
 
@@ -102,6 +112,7 @@ class NSWMap extends React.Component {
                     defaultZoom={6}
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({map, maps}) => this.displayCircles(map, maps)}
+                    options={createMapOptions}
                 >
                 {this.displayHospitals()}
                 </GoogleMapReact>
