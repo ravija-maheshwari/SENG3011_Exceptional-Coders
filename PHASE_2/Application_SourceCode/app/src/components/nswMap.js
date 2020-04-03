@@ -2,7 +2,7 @@ import React from 'react'
 import GoogleMapReact from 'google-map-react'
 import { MAPS_API_KEY } from '../config'
 import HospitalMarker from './hospitalMarker'
-import { getRadius, getAvailableBeds } from '../helpers'
+import { getRadius, getAvailableBeds, getTotalBeds } from '../helpers'
 import { allNswAreas } from '../datasets/nswAreas'
 import { hospitalDetail } from '../datasets/hospitalDetail'
 
@@ -57,15 +57,14 @@ class NSWMap extends React.Component {
         hospitals.forEach(h => {
             if (h['ispublic'] && (h['state'] === "NSW")) { // Public hospitals in NSW
                 let bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases)
-                if(bedsAvailable < 0){
-                    console.log(bedsAvailable)
-                }
+                let totalBeds = getTotalBeds(h, hospitalDetail)
                 result.push(
                     <HospitalMarker
                         lat={h['latitude']}
                         lng={h['longitude']}
                         name={h['name']}
                         key={h['name']}
+                        totalBeds={totalBeds}
                         bedsAvailable={bedsAvailable}
                     />
                 )
