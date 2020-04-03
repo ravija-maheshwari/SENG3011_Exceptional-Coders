@@ -19,7 +19,7 @@ code {
 .info-box {
     cursor: default;
     width: 60em;
-    height: 30em;
+    height: 35em;
     position: absolute;
     border: 1px solid gray;
     border-radius: 15px;
