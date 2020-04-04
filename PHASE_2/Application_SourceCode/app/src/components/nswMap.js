@@ -5,6 +5,7 @@ import HospitalMarker from './hospitalMarker'
 import { getRadius, getAvailableBeds, getTotalBeds } from '../helpers'
 import { allNswAreas } from '../datasets/nswAreas'
 import { hospitalDetail } from '../datasets/hospitalDetail'
+import { suburbInfection } from '../datasets/suburbInfection'
 
 const HOSPITALS_API_URL = "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals"
 const SUBURBS_API_URL = "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/suburbs"
@@ -97,19 +98,19 @@ class NSWMap extends React.Component {
         try {
             // COMMENTED DUE TO QUOTA LIMITS
             // const suburbCases = await this.fetchSuburbs()
-
+            const suburbCases = suburbInfection
             allNswAreas.forEach(suburb => {
                 // COMMENTED DUE TO QUOTA LIMITS
-                // let suburbRadius = getRadius(suburbCases, suburb)
+                let suburbRadius = getRadius(suburbCases, suburb)
                 new maps.Circle({
                     // strokeColor: '#FF0000',
                     // strokeOpacity: 0.8,
                     strokeWeight: 0,
-                    fillColor: '#FF0000',
+                    fillColor: '#d13431',
                     fillOpacity: 0.5,
                     map,
                     center: { lat: suburb.lat, lng: suburb.lng },
-                    radius: 1000, // Default radius when not using fetchSuburbs()
+                    radius: suburbRadius, // Default radius when not using fetchSuburbs()
                 })
             })
         } catch (error) {
