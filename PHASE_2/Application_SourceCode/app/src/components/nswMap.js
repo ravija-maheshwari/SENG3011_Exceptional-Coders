@@ -38,10 +38,11 @@ class NSWMap extends React.Component {
         try {
             const response = await fetch(HOSPITALS_API_URL)
             const hospitals = await response.json()
-            const suburbResponse = await fetch(SUBURBS_API_URL)
-            const suburbCases = await suburbResponse.json()
+            // COMMENTED DUE TO QUOTA LIMITS
+            // const suburbResponse = await fetch(SUBURBS_API_URL)
+            // const suburbCases = await suburbResponse.json()
 
-            this.setState({ hospitals: hospitals , suburbCases: suburbCases})
+            this.setState({ hospitals: hospitals })
 
     
         } catch (error) {
@@ -78,6 +79,7 @@ class NSWMap extends React.Component {
     }
 
     // Only for displayCircles() cos of weird behaviour
+    // DON'T CALL THIS FUNCTION EXCESSIVELY
     async fetchSuburbs() {
         try {
             const response = await fetch(SUBURBS_API_URL)
@@ -93,10 +95,12 @@ class NSWMap extends React.Component {
 
     async displayCircles(map, maps) {
         try {
-            const suburbCases = await this.fetchSuburbs()
+            // COMMENTED DUE TO QUOTA LIMITS
+            // const suburbCases = await this.fetchSuburbs()
 
             allNswAreas.forEach(suburb => {
-                let suburbRadius = getRadius(suburbCases, suburb)
+                // COMMENTED DUE TO QUOTA LIMITS
+                // let suburbRadius = getRadius(suburbCases, suburb)
                 new maps.Circle({
                     // strokeColor: '#FF0000',
                     // strokeOpacity: 0.8,
@@ -105,7 +109,7 @@ class NSWMap extends React.Component {
                     fillOpacity: 0.5,
                     map,
                     center: { lat: suburb.lat, lng: suburb.lng },
-                    radius: suburbRadius,
+                    radius: 1000, // Default radius when not using fetchSuburbs()
                 })
             })
         } catch (error) {
