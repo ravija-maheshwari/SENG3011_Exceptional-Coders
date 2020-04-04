@@ -55,7 +55,8 @@ class NSWMap extends React.Component {
 
         let hospitals = this.state.hospitals
         let result = []
-        const suburbCases =  this.state.suburbCases
+        //const suburbCases =  this.state.suburbCases
+        const suburbCases = suburbInfection
         // Adding markers for each hospital
         hospitals.forEach(h => {
             if (h['ispublic'] && (h['state'] === "NSW")) { // Public hospitals in NSW
