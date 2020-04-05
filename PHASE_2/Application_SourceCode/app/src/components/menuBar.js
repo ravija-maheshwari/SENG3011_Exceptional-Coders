@@ -25,7 +25,7 @@ class MenuBar extends React.Component {
       //         <p className="nsw-map-menu" onClick={this.switchToNSWMaps}> NSW Map </p>
       //     </div>
       // </div>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect fixed="top" expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="#home">
           <img
             alt=""

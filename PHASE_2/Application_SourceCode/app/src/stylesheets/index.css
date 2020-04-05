@@ -95,16 +95,22 @@ code {
 }
 
 .articles {
-  margin-top: 20px;
+  margin-top: 5%;
   height: 100vh;
-  width: 100%;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-body {
+/* body {
   padding: 40px 10% 20px 10%;
-}
+} */
 h1 {
   padding: 20px 0;
   font-size: 2.5em;
   text-align: center;
+}
+
+.navbar {
+    opacity: 0.85;
 }
