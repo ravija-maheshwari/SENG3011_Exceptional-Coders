@@ -32,19 +32,17 @@ class Homepage extends React.Component {
     let currPage = this.state.currPage;
 
     return (
-      <div>
+      <>
         <MenuBar
           switchToNSWMaps={this.switchToNSWMaps}
           switchToArticlesMaps={this.switchToArticlesMaps}
         />
-        <div>
-          {currPage === "nsw-map" ? (
-            <NSWMap />
-          ) : (
-            <div className="articles">{<Articles />}</div>
-          )}
-        </div>
-      </div>
+        {currPage === "nsw-map" ? (
+          <NSWMap />
+        ) : (
+          <div className="articles">{<Articles />}</div>
+        )}
+      </>
     );
   }
 }

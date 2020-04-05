@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 import Moment from "react-moment";
 
 const OUR_LIT_API_URL =
@@ -102,8 +102,12 @@ class SearchBar extends React.Component {
           value={this.props.filterText}
           onChange={this.handleFilterTextInputChange}
         />
+
         {["checkbox"].map((type) => (
           <div key={`inline-${type}`} className="mb-3">
+            <Form.Label inline>
+              <b>Filters: </b>
+            </Form.Label>
             <Form.Check
               inline
               label="Headline"
@@ -184,7 +188,20 @@ class FilterableContactTable extends React.Component {
 
   render() {
     if (this.state.articles == null) {
-      return <h1>LOADING</h1>;
+      return (
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </div>
+      );
     } else {
       return (
         <div>
