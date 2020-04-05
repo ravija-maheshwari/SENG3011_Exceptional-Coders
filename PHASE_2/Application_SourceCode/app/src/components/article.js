@@ -59,18 +59,22 @@ class ArticleTable extends React.Component {
       rows.push(<ArticleRow contact={contact} />);
     });
     return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Headline</th>
-            <th>Disease</th>
-            <th>Location</th>
-            <th>Date</th>
-            <th>Link</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
+      <div>
+        <p align="right">Showing {rows.length} of {this.props.contacts.length} results</p>
+        
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Headline</th>
+              <th>Disease</th>
+              <th>Location</th>
+              <th>Date</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>{rows}</tbody>
+        </table>
+      </div>
     );
   }
 }
