@@ -18,7 +18,9 @@ class ArticleRow extends React.Component {
           <Moment fromNow>{date}</Moment>
         </td>
         <td>
-          <a href={this.props.contact.url}>Article</a>
+          <a href={this.props.contact.url} target="_blank">
+            Article
+          </a>
         </td>
       </tr>
     );
