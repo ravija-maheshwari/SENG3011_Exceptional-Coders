@@ -26,7 +26,7 @@ class Graph extends React.Component{
             data: {
                 labels: data.map(obj => obj.date),
                 datasets: [{
-                    label: "test",
+                    label: "cases in suburb",
                     data: data.map(obj => obj.count),
                     backgroundColor: "#70CAD1"
                 }]
