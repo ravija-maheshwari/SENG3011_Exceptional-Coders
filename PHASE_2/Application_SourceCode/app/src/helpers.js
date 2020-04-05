@@ -58,3 +58,9 @@ exports.getTotalBeds = function(hospital, hospitalDetail) {
 }
 
 
+exports.getBedsCapacityRatio = function(bedsAvailable, totalBeds) {
+    if (totalBeds === 0) { return 0 }
+    
+    let ratio = bedsAvailable/totalBeds
+    return ratio
+}

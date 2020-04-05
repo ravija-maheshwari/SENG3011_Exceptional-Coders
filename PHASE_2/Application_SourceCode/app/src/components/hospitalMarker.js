@@ -1,6 +1,9 @@
 import React from 'react'
-import hospitalIcon from '../mapIcons/hospital.png'
+import hospitalRed from '../mapIcons/hospitalRed.png'
+import hospitalOrange from '../mapIcons/hospitalOrange.png'
+import hospitalGreen from '../mapIcons/hospitalGreen.png'
 import InfoBox from './infoBox'
+import { getBedsCapacityRatio } from '../helpers'
 
 class HospitalMarker extends React.Component {
 
@@ -15,8 +18,7 @@ class HospitalMarker extends React.Component {
         this.closeInfo = this.closeInfo.bind(this)
     }
 
-
-     openInfo(){
+    openInfo(){
         this.setState({isInfoDisplayed: true})
     }
 
@@ -25,9 +27,20 @@ class HospitalMarker extends React.Component {
     }
 
     render() {
+        let bedsAvailable = this.props.bedsAvailable
+        let totalBeds = this.props.totalBeds
+        let bedsRatio = getBedsCapacityRatio(bedsAvailable, totalBeds)
+
         return (
             <div className="hospital-marker">
-                <img alt="marker" src={hospitalIcon} style={{ width: 18, height: 18 }} onClick={ this.openInfo } ></img>
+                {/* If bedsRatio > 0.7, show GREEN, if > 0.3 && <= 0.7, show ORANGE, else show RED */}
+                { bedsRatio > 0.7 ?
+                    <img alt="marker" src={hospitalGreen} style={{ width: 18, height: 18 }} onClick={ this.openInfo } ></img>
+                : bedsRatio > 0.3 && bedsRatio <= 0.7 ?
+                    <img alt="marker" src={hospitalOrange} style={{ width: 18, height: 18 }} onClick={ this.openInfo } ></img>
+                :
+                    <img alt="marker" src={hospitalRed} style={{ width: 18, height: 18 }} onClick={ this.openInfo } ></img>
+                }
                 {this.state.isInfoDisplayed ?
                 <InfoBox
                     name = {this.props.name}
