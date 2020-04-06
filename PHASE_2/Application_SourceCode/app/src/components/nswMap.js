@@ -2,7 +2,7 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 import { MAPS_API_KEY } from "../config";
 import HospitalMarker from "./hospitalMarker";
-import { getRadius, getAvailableBeds, getTotalBeds } from "../helpers";
+import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb } from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
 import { suburbInfection } from "../datasets/suburbInfection";
@@ -61,6 +61,7 @@ class NSWMap extends React.Component {
         // Public hospitals in NSW
         let bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
         let totalBeds = getTotalBeds(h, hospitalDetail);
+        let suburb = getHospitalSuburb(h["name"], hospitalDetail)
 
         result.push(
           <HospitalMarker
@@ -68,7 +69,7 @@ class NSWMap extends React.Component {
             lng={h["longitude"]}
             name={h["name"]}
             key={h["name"]}
-            suburb={"Randwick"} //FOR TESTING ONLY
+            suburb={suburb} //FOR TESTING ONLY
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
           />
