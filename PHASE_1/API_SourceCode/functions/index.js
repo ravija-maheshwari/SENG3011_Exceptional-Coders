@@ -242,7 +242,8 @@ app.get('/api/v1/suburbs' , async(req, res) =>{
         snapshot.forEach(doc => {
             let suburb = {
                 count: doc.data().count,
-                name: doc.data().name
+                name: doc.data().name,
+                date: doc.data().date
             };
             allSuburbs.push(suburb);
         });

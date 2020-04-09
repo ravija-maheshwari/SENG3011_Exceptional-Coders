@@ -41,6 +41,7 @@ class MenuBar extends React.Component {
           <Nav className="mr-auto">
             <Nav.Link onClick={this.switchToArticlesMaps}>Articles</Nav.Link>
             <Nav.Link onClick={this.switchToNSWMaps}>NSW Map</Nav.Link>
+            <input type="text" className="search-bar" placeholder="Search Hospital"></input>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
