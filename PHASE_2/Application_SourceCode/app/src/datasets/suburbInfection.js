@@ -1,398 +1,803 @@
 exports.suburbInfection = [
+
     {
         "count": "6",
-        "name": "Albury"
+        "name": "Albury",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "1-4",
-        "name": "Armidale Regional"
+        "name": "Armidale Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "1-4",
-        "name": "Ballina"
+        "name": "Ballina",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "9",
-        "name": "Bathurst Regional"
+        "name": "Bathurst Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "39",
-        "name": "Bayside"
+        "count": "49",
+        "name": "Bayside",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "9",
-        "name": "Bega Valley"
+        "name": "Bega Valley",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "1-4",
-        "name": "Bellingen"
+        "name": "Bellingen",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "5",
+        "name": "Berrigan",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "95",
+        "name": "Blacktown",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "1-4",
-        "name": "Berrigan"
+        "name": "Blayney",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "85",
-        "name": "Blacktown"
+        "count": "22",
+        "name": "Blue Mountains",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "1-4",
-        "name": "Blayney"
-    },
-    {
-        "count": "21",
-        "name": "Blue Mountains"
-    },
-    {
-        "count": "1-4",
-        "name": "Broken Hill"
+        "name": "Broken Hill",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "7",
-        "name": "Burwood"
+        "name": "Burwood",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "13",
-        "name": "Byron"
-    },
-    {
-        "count": "1-4",
-        "name": "Cabonne"
-    },
-    {
-        "count": "29",
-        "name": "Camden"
-    },
-    {
-        "count": "27",
-        "name": "Campbelltown"
-    },
-    {
-        "count": "16",
-        "name": "Canada Bay"
-    },
-    {
-        "count": "77",
-        "name": "Canterbury-Bankstown"
-    },
-    {
-        "count": "98",
-        "name": "Central Coast"
-    },
-    {
-        "count": "24",
-        "name": "Cessnock"
-    },
-    {
-        "count": "8",
-        "name": "Clarence Valley"
-    },
-    {
-        "count": "11",
-        "name": "Coffs Harbour"
-    },
-    {
-        "count": "1-4",
-        "name": "Coonamble"
-    },
-    {
-        "count": "1-4",
-        "name": "Cootamundra-Gundagai Regional"
-    },
-    {
-        "count": "52",
-        "name": "Cumberland"
+        "name": "Byron",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "5",
-        "name": "Dubbo Regional"
+        "name": "Cabonne",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "5",
-        "name": "Dungog"
-    },
-    {
-        "count": "9",
-        "name": "Eurobodalla"
-    },
-    {
-        "count": "14",
-        "name": "Fairfield"
-    },
-    {
-        "count": "7",
-        "name": "Federation"
-    },
-    {
-        "count": "40",
-        "name": "Georges River"
-    },
-    {
-        "count": "1-4",
-        "name": "Glen Innes Severn"
-    },
-    {
-        "count": "8",
-        "name": "Goulburn Mulwaree"
-    },
-    {
-        "count": "1-4",
-        "name": "Greater Hume Shire"
-    },
-    {
-        "count": "1-4",
-        "name": "Griffith"
-    },
-    {
-        "count": "1-4",
-        "name": "Gunnedah"
-    },
-    {
-        "count": "24",
-        "name": "Hawkesbury"
-    },
-    {
-        "count": "1-4",
-        "name": "Hay"
-    },
-    {
-        "count": "1-4",
-        "name": "Hilltops"
-    },
-    {
-        "count": "43",
-        "name": "Hornsby"
-    },
-    {
-        "count": "14",
-        "name": "Hunters Hill"
-    },
-    {
-        "count": "59",
-        "name": "Inner West"
-    },
-    {
-        "count": "1-4",
-        "name": "Inverell"
-    },
-    {
-        "count": "1-4",
-        "name": "Kempsey"
-    },
-    {
-        "count": "5",
-        "name": "Kiama"
-    },
-    {
-        "count": "55",
-        "name": "Ku-ring-gai"
-    },
-    {
-        "count": "1-4",
-        "name": "Lachlan"
-    },
-    {
-        "count": "40",
-        "name": "Lake Macquarie"
-    },
-    {
-        "count": "29",
-        "name": "Lane Cove"
-    },
-    {
-        "count": "5",
-        "name": "Lismore"
-    },
-    {
-        "count": "1-4",
-        "name": "Lithgow"
-    },
-    {
-        "count": "34",
-        "name": "Liverpool"
-    },
-    {
-        "count": "1-4",
-        "name": "Liverpool Plains"
-    },
-    {
-        "count": "27",
-        "name": "Maitland"
-    },
-    {
-        "count": "35",
-        "name": "Mid-Coast"
-    },
-    {
-        "count": "5",
-        "name": "Mid-Western Regional"
-    },
-    {
-        "count": "31",
-        "name": "Mosman"
-    },
-    {
-        "count": "1-4",
-        "name": "Murrumbidgee"
-    },
-    {
-        "count": "1-4",
-        "name": "Muswellbrook"
-    },
-    {
-        "count": "1-4",
-        "name": "Nambucca"
-    },
-    {
-        "count": "1-4",
-        "name": "Narrandera"
-    },
-    {
-        "count": "1-4",
-        "name": "Narromine"
-    },
-    {
-        "count": "47",
-        "name": "Newcastle"
-    },
-    {
-        "count": "42",
-        "name": "North Sydney"
-    },
-    {
-        "count": "130",
-        "name": "Northern Beaches"
-    },
-    {
-        "count": "7",
-        "name": "Orange"
-    },
-    {
-        "count": "40",
-        "name": "Parramatta"
-    },
-    {
-        "count": "54",
-        "name": "Penrith"
-    },
-    {
-        "count": "27",
-        "name": "Port Macquarie-Hastings"
+        "count": "33",
+        "name": "Camden",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "30",
-        "name": "Port Stephens"
+        "name": "Campbelltown",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "9",
-        "name": "Queanbeyan-Palerang Regional"
+        "count": "17",
+        "name": "Canada Bay",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "58",
-        "name": "Randwick"
+        "count": "82",
+        "name": "Canterbury-Bankstown",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "58",
-        "name": "Ryde"
+        "count": "100",
+        "name": "Central Coast",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "19",
-        "name": "Shellharbour"
+        "count": "24",
+        "name": "Cessnock",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "27",
-        "name": "Shoalhaven"
+        "count": "8",
+        "name": "Clarence Valley",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "13",
+        "name": "Coffs Harbour",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "1-4",
-        "name": "Singleton"
+        "name": "Coonamble​",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "6",
-        "name": "Snowy Monaro Regional"
+        "count": "1-4",
+        "name": "Cootamundra-Gundagai Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "64",
+        "name": "Cumberland",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "5",
-        "name": "Strathfield"
+        "name": "Dubbo Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "70",
-        "name": "Sutherland Shire"
-    },
-    {
-        "count": "122",
-        "name": "Sydney"
-    },
-    {
-        "count": "12",
-        "name": "Tamworth Regional"
-    },
-    {
-        "count": "1-4",
-        "name": "Tenterfield"
-    },
-    {
-        "count": "53",
-        "name": "The Hills Shire"
-    },
-    {
-        "count": "12",
-        "name": "Tweed"
-    },
-    {
-        "count": "1-4",
-        "name": "Upper Hunter Shire"
-    },
-    {
-        "count": "1-4",
-        "name": "Upper Lachlan Shire"
-    },
-    {
-        "count": "1-4",
-        "name": "Uralla"
+        "count": "5",
+        "name": "Dungog",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "10",
-        "name": "Wagga Wagga"
-    },
-    {
-        "count": "1-4",
-        "name": "Warren"
-    },
-    {
-        "count": "1-4",
-        "name": "Warrumbungle Shire"
-    },
-    {
-        "count": "156",
-        "name": "Waverley"
-    },
-    {
-        "count": "1-4",
-        "name": "Weddin"
+        "name": "Eurobodalla",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "21",
-        "name": "Willoughby"
+        "name": "Fairfield",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "18",
-        "name": "Wingecarribee"
+        "count": "7",
+        "name": "Federation",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "50",
+        "name": "Georges River",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "1-4",
-        "name": "Wollondilly"
+        "name": "Glen Innes Severn",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "48",
-        "name": "Wollongong"
+        "count": "8",
+        "name": "Goulburn Mulwaree",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
-        "count": "84",
-        "name": "Woollahra"
+        "count": "1-4",
+        "name": "Greater Hume Shire",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Griffith",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Gunnedah",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "23",
+        "name": "Hawkesbury",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Hay",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Hilltops",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "45",
+        "name": "Hornsby",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "17",
+        "name": "Hunters Hill",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "70",
+        "name": "Inner West",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Inverell",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Kempsey",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "7",
+        "name": "Kiama",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "59",
+        "name": "Ku-ring-gai",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Lachlan",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "44",
+        "name": "Lake Macquarie",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "37",
+        "name": "Lane Cove",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "5",
+        "name": "Lismore",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Lithgow",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "34",
+        "name": "Liverpool",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Liverpool Plains",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "28",
+        "name": "Maitland",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "37",
+        "name": "Mid-Coast",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "5",
+        "name": "Mid-Western Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "39",
+        "name": "Mosman",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Murrumbidgee",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Muswellbrook",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Nambucca",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Narrandera",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Narromine",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "47",
+        "name": "Newcastle",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "44",
+        "name": "North Sydney",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "142",
+        "name": "Northern Beaches",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "8",
+        "name": "Orange",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "42",
+        "name": "Parramatta",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "58",
+        "name": "Penrith",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "29",
+        "name": "Port Macquarie-Hastings",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "30",
+        "name": "Port Stephens",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "10",
+        "name": "Queanbeyan-Palerang Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "71",
+        "name": "Randwick",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Richmond Valley",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "66",
+        "name": "Ryde",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "21",
+        "name": "Shellharbour",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "30",
+        "name": "Shoalhaven",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Singleton",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     },
     {
         "count": "6",
-        "name": "Yass Valley"
+        "name": "Snowy Monaro Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "7",
+        "name": "Strathfield",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "81",
+        "name": "Sutherland Shire",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "145",
+        "name": "Sydney",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "12",
+        "name": "Tamworth Regional",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Tenterfield",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "56",
+        "name": "The Hills Shire",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "13",
+        "name": "Tweed",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Upper Hunter Shire",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Upper Lachlan Shire",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Uralla",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "10",
+        "name": "Wagga Wagga",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Warren",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Warrumbungle Shire",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "165",
+        "name": "Waverley",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Weddin",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "21",
+        "name": "Willoughby",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "20",
+        "name": "Wingecarribee",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "1-4",
+        "name": "Wollondilly",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "51",
+        "name": "Wollongong",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "86",
+        "name": "Woollahra",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
+    },
+    {
+        "count": "6",
+        "name": "Yass Valley",
+        "date": {
+            "_seconds": 1586212779,
+            "_nanoseconds": 775723000
+        }
     }
 ]
