@@ -3,6 +3,7 @@ from requests import get
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+from datetime import datetime
 
 url = "https://www.health.nsw.gov.au/Infectious/diseases/Pages/covid-19-lga.aspx?fbclid=IwAR1B-9uKNvIPDLvn9viZy5e80bwLX7g67RHNBLrAlfwihifICsT2anFPwMI"
 page = get(url)
@@ -37,5 +38,14 @@ db = firestore.client()
 
 # for area in all_areas:
 #     print(area)
+today = datetime.now()
+
 for case in cases.keys():
-    db.collection(u'nsw_cases').document(case).set({'name': case, 'count': cases[case]})
+    # Creating document with date so that prediction graphs can be made
+    case_id = case + " (" + today.date().strftime("%d-%m-%y") + ")"
+    doc = {
+        'name': case,
+        'count': cases[case],
+        'date': today 
+    }
+    db.collection(u'nsw_cases').document(case_id).set(doc)

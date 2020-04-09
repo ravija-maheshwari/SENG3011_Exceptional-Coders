@@ -493,5 +493,7 @@ exports.graphData = [
     {'name': 'Wollondilly', 'count': '2', 'date': 'April 5'},
     {'name': 'Wollongong', 'count': '48', 'date': 'April 5'},
     {'name': 'Woollahra', 'count': '84', 'date': 'April 5'},
-    {'name': 'Yass Valley', 'count': '6', 'date': 'April 5'}
+    {'name': 'Yass Valley', 'count': '6', 'date': 'April 5'},
+    {'name': 'Randwick', 'count': '115', 'date': 'April 6'},
+    {'name': 'Randwick', 'count': '120', 'date': 'April 7'}
 ]

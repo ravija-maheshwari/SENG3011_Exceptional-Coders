@@ -240,10 +240,11 @@ app.get('/api/v1/suburbs' , async(req, res) =>{
         let allSuburbs = []
         const snapshot = await db.collection('nsw_cases').get()
         snapshot.forEach(doc => {
+            let formattedDate = helpers.getFormattedDatetime(doc.data().date).slice(0,10)
             let suburb = {
-                count: doc.data().count,
                 name: doc.data().name,
-                date: doc.data().date
+                count: doc.data().count,
+                date: formattedDate
             };
             allSuburbs.push(suburb);
         });

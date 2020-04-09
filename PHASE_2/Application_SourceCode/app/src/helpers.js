@@ -64,3 +64,12 @@ exports.getBedsCapacityRatio = function(bedsAvailable, totalBeds) {
     let ratio = bedsAvailable/totalBeds
     return ratio
 }
+
+
+exports.getHospitalSuburb = function(hospital, hospitalDetail) {
+    for (var i=0; i<hospitalDetail.length; i++) {
+        if (hospital.includes(hospitalDetail[i].name)) {
+            return hospitalDetail[i].suburb
+        }
+    }
+}
