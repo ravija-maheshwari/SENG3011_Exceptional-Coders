@@ -184,7 +184,9 @@ h1 {
     left: 1%;
     max-height: 60%;
     width: 18%;
+    overflow-y: auto;
 }
+
 
 .search-suburb > input {
     padding: 2px;
