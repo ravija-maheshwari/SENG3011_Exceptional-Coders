@@ -2,6 +2,7 @@ import React from 'react'
 import { suburbInfection } from '../datasets/suburbInfection'
 import Chart from "chart.js"
 import regression from "regression"
+import {findAllInRenderedTree} from "react-dom/test-utils";
 
 class Graph extends React.Component{
     constructor(props) {
@@ -43,24 +44,72 @@ class Graph extends React.Component{
             let date = this.getIntegerDate(matchingSuburbs[i].date)
             let count = this.getIntegerCases(matchingSuburbs[i].count)
             let dateString = matchingSuburbs[i].date
-            points.push( [dateString, date, count] )
+            points.push( [date, count, dateString] )
         }
         return points
     }
 
 
-    componentDidMount() {
+    //Predicted cases coordinates
+    getPredictedPoints(){
+        let currentPoints = this.getCurrentPoints()
+        if(currentPoints.length === 0){
+            return currentPoints
+        }
 
+        currentPoints = currentPoints.sort( (a,b) => (a[0] < b[0] ? 1: -1))
+        let latestDate = currentPoints[0][0]
+
+        const result = regression.linear(currentPoints.map( point => [point[0], point[1]] ) )
+        const firstPredictedPoint = result.predict(latestDate + 2 )
+        const secondPredictedPoint = result.predict(latestDate + 4 )
+        const thirdPredictedPoint = result.predict(latestDate + 6 )
+        const fourthPredictedPoint = result.predict(latestDate + 8 )
+
+        let predictedPoints = []
+        predictedPoints.push(firstPredictedPoint, secondPredictedPoint, thirdPredictedPoint, fourthPredictedPoint)
+        predictedPoints = this.formatPoints(predictedPoints, currentPoints[0][2])
+        for(var i = 0; i < predictedPoints.length; i++){
+            currentPoints.push(predictedPoints[i])
+        }
+        return currentPoints
+    }
+
+
+    formatPoints(predictedPoints, dateString){
+        let finalPoints = []
+        var count =  2;
+        for(var i = 0; i < predictedPoints.length; i++){
+            let finalDate = new Date(dateString)
+            finalDate.setDate(finalDate.getDate() + count)
+            finalDate = this.formatDate(finalDate)
+            finalPoints.push([predictedPoints[i][0], predictedPoints[i][1], finalDate.toString()])
+            count += 2
+        }
+        return finalPoints
+    }
+
+    formatDate(date){
+
+        let month = date.getMonth() + 1;
+        let day = date.getDay()
+
+        if (month < 10) { month = "0" + month; }
+        if (day < 10) { day = "0" + day; }
+        return date.getFullYear() + "-" + month + "-" + day
+    }
+
+    componentDidMount() {
         const node = this.node
         // let data = this.getMatchingData(this.props.suburb)
-        let currentPoints = this.getCurrentPoints()
+        let currentPoints = this.getPredictedPoints()
         this.myChart = new Chart(node, {
             type: 'line',
             data: {
-                labels: currentPoints.map(obj => obj[0]),
+                labels: currentPoints.map(obj => obj[2]),
                 datasets: [{
                     label: "cases in " + this.props.suburb,
-                    data: currentPoints.map(obj => obj[2]),
+                    data: currentPoints.map(obj => obj[1]),
                     backgroundColor: "#70CAD1"
                 }]
             }
