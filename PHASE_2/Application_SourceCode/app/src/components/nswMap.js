@@ -16,7 +16,7 @@ const SUBURBS_API_URL =
 function createMapOptions() {
   return {
     restriction: {
-      latLngBounds: { north: -27, south: -38, west: 140, east: 155 },
+      latLngBounds: { north: -20, south: -45, west: 130, east: 165 },
       strictBounds: false
     },
     gestureHandling: "greedy",
@@ -27,7 +27,7 @@ function createMapOptions() {
 
 class NSWMap extends React.Component {
   constructor(props) {
-    super(props);
+		super(props);
 
     this.handleHospitalSearch = this.handleHospitalSearch.bind(this);
     this.submitHospitalSearch = this.submitHospitalSearch.bind(this);
@@ -37,7 +37,7 @@ class NSWMap extends React.Component {
 
     // To hold all hospital data from myhospitals API
     this.state = {
-      mapCenter: { lat: -33.5, lng: 149 },
+			mapCenter: { lat: -33.5, lng: 149 },
       hospitals: [],
       suburbCases: [],
       potentialHospitals: [],
@@ -64,7 +64,7 @@ class NSWMap extends React.Component {
 
   displayHospitals() {
     let hospitals = this.state.hospitals;
-    let result = [];
+		let result = [];
     //const suburbCases =  this.state.suburbCases
     const suburbCases = suburbInfection;
     // Adding markers for each hospital
@@ -132,9 +132,11 @@ class NSWMap extends React.Component {
   }
 
   handleHospitalSearch(evt){
+		let hospitalsInNSW = this.state.hospitals.filter(h => h["ispublic"] && h["state"] === "NSW")
     this.setState({
+			hospitalSearched: "",
       hospitalInput: evt.target.value,
-      potentialHospitals: getPotentialHospitalList(evt.target.value,hospitalDetail)
+      potentialHospitals: getPotentialHospitalList(evt.target.value, hospitalsInNSW)
     });
   }
 
@@ -151,7 +153,23 @@ class NSWMap extends React.Component {
   }
 
   setHospitalSearched(hospital) {
-    this.setState({hospitalSearched: hospital})
+		let position
+		let { hospitals } = this.state
+
+		for (var i=0; i<hospitals.length; i++) {
+			if (hospitals[i].name.includes(hospital)) {
+				position = { lat: hospitals[i].latitude, lng: hospitals[i].longitude }
+			}
+		}
+
+		let hospitalMarker = document.getElementById(hospital)
+		hospitalMarker.click()
+
+    this.setState({
+			mapCenter: position,
+			hospitalSearched: hospital,
+			hospitalInput: hospital
+		})
   }
 
   displaySearchBar() {
