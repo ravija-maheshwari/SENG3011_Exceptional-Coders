@@ -182,7 +182,7 @@ h1 {
     position: absolute;
     top: 20%;
     left: 1%;
-    height: 30px;
+    max-height: 60%;
     width: 18%;
 }
 
@@ -229,6 +229,10 @@ h1 {
     transition: background-color 0.15s, color 0.15s;
 }
 
+.suburb-list {
+    z-index: 99999;
+    /* height: 80%; */
+}
 
 
 /* Animations/Transitions */

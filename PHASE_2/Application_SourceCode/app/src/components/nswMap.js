@@ -154,6 +154,26 @@ class NSWMap extends React.Component {
     this.setState({ searchingForHospital: false })
   }
 
+  handleSuburbSearch(evt){
+    this.setState({
+      suburbInput: evt.target.value,
+      potentialSuburbs: getPotentialSuburbList(evt.target.value, allNswAreas)
+    });
+  }
+
+  setSuburbSearched(suburb){
+    this.setState({suburbSearched: suburb})
+    console.log(suburb)
+  }
+
+  suburbSearchFocus() {
+    this.setState({ searchingForSuburb: true })
+  }
+
+  suburbSearchOutOfFocus() {
+    this.setState({ searchingForSuburb: false })
+  }
+
   setHospitalSearched(hospital) {
 		let position
 		let { hospitals } = this.state
@@ -190,33 +210,20 @@ class NSWMap extends React.Component {
       )
   }
 
-  handleSuburbSearch(evt){
-    this.setState({
-      suburbInput: evt.target.value,
-      potentialSuburbs: getPotentialSuburbList(evt.target.value, allNswAreas)
-    });
-  }
 
-  setSuburbSearched(suburb){
-    this.setState({suburbSearched: suburb})
-    console.log(suburb)
-  }
-
-  suburbSearchFocus() {
-    this.setState({ searchingForSuburb: true })
-  }
-
-  suburbSearchOutOfFocus() {
-    this.setState({ searchingForSuburb: false })
-  }
 
   displaySuburbBar() {
     return (
         <div className="search-suburb">
-          <input onFocus={this.suburbSearchFocus} onBlur={this.suburbSearchOutOfFocus} type="text" value={ this.state.suburbInput }  onChange={evt => this.handleSuburbSearch(evt)} placeholder="Search for a Suburb..."></input>
-            <div className="suburb-list">
-              {this.state.potentialSuburbs.map((suburb) => <p value={suburb} onMouseDown={ () => this.setSuburbSearched(suburb)} className="suburb-option">{suburb}</p>)}
-            </div>
+          <input onFocus={this.suburbSearchFocus} onBlur={this.suburbSearchOutOfFocus} type="text" value={ this.state.suburbInput }  onChange={evt => this.handleSuburbSearch(evt)} placeholder="Set a Suburb..."></input>
+          {this.state.searchingForSuburb
+            ?
+              <div className="suburb-list">
+                {this.state.potentialSuburbs.map((suburb) => <p value={suburb} onMouseDown={() => this.setSuburbSearched(suburb)} className="suburb-option">{suburb}</p>)}
+              </div>
+            :
+              null
+          }
         </div>
     )
   }
