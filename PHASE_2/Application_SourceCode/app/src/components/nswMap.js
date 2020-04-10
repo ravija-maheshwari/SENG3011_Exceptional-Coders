@@ -47,7 +47,7 @@ class NSWMap extends React.Component {
       searchingForHospital: false,
       hospitalSearched: '',
       suburbInput:'',
-      suburbSearched:'',
+      selectedSuburb:'',
       potentialSuburbs: [],
       searchingForSuburb: false
     };
@@ -90,7 +90,7 @@ class NSWMap extends React.Component {
             suburb={suburb} //FOR TESTING ONLY
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
-            selectedSuburb={"Randwick"}
+            selectedSuburb={this.state.suburbSearched}
           />
         );
       }
