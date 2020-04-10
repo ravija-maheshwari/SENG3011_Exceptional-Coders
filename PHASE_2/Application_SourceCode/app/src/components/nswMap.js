@@ -31,13 +31,16 @@ class NSWMap extends React.Component {
 
     this.handleHospitalSearch = this.handleHospitalSearch.bind(this);
     this.submitHospitalSearch = this.submitHospitalSearch.bind(this);
+    this.hospitalSearchFocus = this.hospitalSearchFocus.bind(this);
+    this.hospitalSearchOutOfFocus = this.hospitalSearchOutOfFocus.bind(this);
 
     // To hold all hospital data from myhospitals API
     this.state = {
       hospitals: [],
       suburbCases: [],
       potentialHospitals: [],
-      hospitalSearched: ''
+      hospitalSearched: '',
+      searchingForHospital: false
     };
   }
 
@@ -139,14 +142,26 @@ class NSWMap extends React.Component {
     console.log(this.state.hospitalSearched)
   }
 
+  hospitalSearchFocus() {
+    this.setState({ searchingForHospital: true })
+  }
+
+  hospitalSearchOutOfFocus() {
+    this.setState({ searchingForHospital: false })
+  }
+
   displaySearchBar() {
       return (
           <div className="search-hospital">
-            <input type= "text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Search for a Hospital..."></input>
-            {/* <button onClick={ this.submitHospitalSearch }> Search </button> */}
-            <ul>
-              {this.state.potentialHospitals.map((hospital) => <ul>{hospital}</ul>)}
-            </ul>
+            <input onFocus={this.hospitalSearchFocus} onBlur={this.hospitalSearchOutOfFocus} type="text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Search for a Hospital..."></input>
+            {this.state.searchingForHospital
+            ?
+                <div className="hospital-list">
+                    {this.state.potentialHospitals.map((hospital) => <p value={hospital} className="hospital-option">{hospital}</p>)}
+                </div>
+            :
+                null
+            }
           </div>
       )
   }
