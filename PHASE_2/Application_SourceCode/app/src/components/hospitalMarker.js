@@ -3,7 +3,8 @@ import hospitalRed from '../mapIcons/hospitalRed.png'
 import hospitalOrange from '../mapIcons/hospitalOrange.png'
 import hospitalGreen from '../mapIcons/hospitalGreen.png'
 import InfoBox from './infoBox'
-import { getBedsCapacityRatio } from '../helpers'
+import { getBedsCapacityRatio, getDistanceToSelectedSuburb } from '../helpers'
+import allNswAreas from '../datasets/nswAreas'
 
 class HospitalMarker extends React.Component {
 
@@ -27,9 +28,15 @@ class HospitalMarker extends React.Component {
     }
 
     render() {
+        let { lat, lng, selectedSuburb } = this.props
         let bedsAvailable = this.props.bedsAvailable
         let totalBeds = this.props.totalBeds
         let bedsRatio = getBedsCapacityRatio(bedsAvailable, totalBeds)
+        let distanceToSuburb = 0
+        
+        if (selectedSuburb.length !== 0) {
+            distanceToSuburb = getDistanceToSelectedSuburb(lat, lng, selectedSuburb, allNswAreas)
+        }
 
         return (
             <div className="hospital-marker">
@@ -48,6 +55,7 @@ class HospitalMarker extends React.Component {
                     totalBeds = {this.props.totalBeds}
                     bedsAvailable = {this.props.bedsAvailable}
                     suburb = {this.props.suburb}
+                    distanceToSuburb = {distanceToSuburb}
                 />
                 :
                 null}

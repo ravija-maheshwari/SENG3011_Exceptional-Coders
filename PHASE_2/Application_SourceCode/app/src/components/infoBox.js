@@ -15,6 +15,12 @@ class InfoBox extends React.Component{
                 <div className="hospital-detail">
                     <p> Total beds = {this.props.totalBeds}</p>
                     <p> Beds Available = {this.props.bedsAvailable}</p>
+                    {this.props.distanceToSuburb
+                    ?
+                        <p> Distance to home suburb = {this.props.distanceToSuburb} kms </p>
+                    :
+                        null
+                    }
                     <Graph suburb={this.props.suburb}/>
                 </div>
             </div>

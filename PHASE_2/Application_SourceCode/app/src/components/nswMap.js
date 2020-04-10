@@ -78,6 +78,7 @@ class NSWMap extends React.Component {
             suburb={suburb} //FOR TESTING ONLY
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
+            selectedSuburb={"Randwick"}
           />
         );
       }
@@ -141,7 +142,7 @@ class NSWMap extends React.Component {
   displaySearchBar() {
       return (
           <div className="search-bar">
-            <input  type= "text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Enter Hospital Name"></input>
+            <input type= "text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Enter Hospital Name"></input>
             <button onClick={ this.submitHospitalSearch }> Search </button>
             <ul>
               {this.state.potentialHospitals.map((hospital) => <ul>{hospital}</ul>)}
@@ -165,7 +166,6 @@ class NSWMap extends React.Component {
 
           {this.displayHospitals()}
           {this.displaySearchBar()}
-
         </GoogleMapReact>
       </div>
     );
