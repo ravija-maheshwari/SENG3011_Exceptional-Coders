@@ -149,6 +149,16 @@ h1 {
     animation: halfOpacity 0.2s;
 }
 
+.search-suburb {
+    z-index: 999999;
+    position: absolute;
+    top: 15%;
+    left: 1%;
+    height: 30px;
+    width: 18%;
+}
+
+
 .hospital-option {
     padding: 10px;
     background-color: white;
