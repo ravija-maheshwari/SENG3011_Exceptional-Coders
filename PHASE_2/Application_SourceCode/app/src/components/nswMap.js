@@ -39,7 +39,7 @@ class NSWMap extends React.Component {
 
     // To hold all hospital data from myhospitals API
     this.state = {
-			mapCenter: { lat: -33.5, lng: 149 },
+      mapCenter: { lat: -33.5, lng: 149 },
       hospitals: [],
       suburbCases: [],
       potentialHospitals: [],
