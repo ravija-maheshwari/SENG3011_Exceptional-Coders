@@ -2,7 +2,6 @@ import React from 'react'
 import { suburbInfection } from '../datasets/suburbInfection'
 import Chart from "chart.js"
 import regression from "regression"
-import {findAllInRenderedTree} from "react-dom/test-utils";
 
 class Graph extends React.Component{
     constructor(props) {
