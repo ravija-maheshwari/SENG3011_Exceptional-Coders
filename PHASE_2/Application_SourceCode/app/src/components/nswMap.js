@@ -141,9 +141,9 @@ class NSWMap extends React.Component {
 
   displaySearchBar() {
       return (
-          <div className="search-bar">
-            <input type= "text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Enter Hospital Name"></input>
-            <button onClick={ this.submitHospitalSearch }> Search </button>
+          <div className="search-hospital">
+            <input type= "text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Search for a Hospital..."></input>
+            {/* <button onClick={ this.submitHospitalSearch }> Search </button> */}
             <ul>
               {this.state.potentialHospitals.map((hospital) => <ul>{hospital}</ul>)}
             </ul>
@@ -155,6 +155,7 @@ class NSWMap extends React.Component {
   render() {
     return (
       <div style={{ height: "100vh", width: "100%" }}>
+        {this.displaySearchBar()}
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           defaultCenter={{ lat: -33.5, lng: 149 }}
@@ -163,9 +164,7 @@ class NSWMap extends React.Component {
           onGoogleApiLoaded={({ map, maps }) => this.displayCircles(map, maps)}
           options={createMapOptions}
         >
-
           {this.displayHospitals()}
-          {this.displaySearchBar()}
         </GoogleMapReact>
       </div>
     );
