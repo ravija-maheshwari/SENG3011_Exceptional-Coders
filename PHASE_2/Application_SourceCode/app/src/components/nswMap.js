@@ -90,7 +90,7 @@ class NSWMap extends React.Component {
             suburb={suburb} //FOR TESTING ONLY
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
-            selectedSuburb={this.state.suburbSearched}
+            selectedSuburb={this.state.selectedSuburb}
           />
         );
       }
@@ -162,7 +162,7 @@ class NSWMap extends React.Component {
   }
 
   setSuburbSearched(suburb){
-    this.setState({suburbSearched: suburb})
+    this.setState({selectedSuburb: suburb})
     console.log(suburb)
   }
 
