@@ -33,14 +33,16 @@ class NSWMap extends React.Component {
     this.submitHospitalSearch = this.submitHospitalSearch.bind(this);
     this.hospitalSearchFocus = this.hospitalSearchFocus.bind(this);
     this.hospitalSearchOutOfFocus = this.hospitalSearchOutOfFocus.bind(this);
+    this.setHospitalSearched = this.setHospitalSearched.bind(this);
 
     // To hold all hospital data from myhospitals API
     this.state = {
       hospitals: [],
       suburbCases: [],
       potentialHospitals: [],
-      hospitalSearched: '',
-      searchingForHospital: false
+      hospitalInput: '',
+      searchingForHospital: false,
+      hospitalSearched: ''
     };
   }
 
@@ -130,7 +132,7 @@ class NSWMap extends React.Component {
 
   handleHospitalSearch(evt){
     this.setState({
-      hospitalSearched: evt.target.value,
+      hospitalInput: evt.target.value,
       potentialHospitals: getPotentialHospitalList(evt.target.value,hospitalDetail)
     });
 
@@ -150,17 +152,24 @@ class NSWMap extends React.Component {
     this.setState({ searchingForHospital: false })
   }
 
+  setHospitalSearched(e){
+    this.setState({hospitalSearched: e.target.value})
+    console.log(e.target.value)
+    // console.log(this.state.hospitalSearched)
+  }
+
   displaySearchBar() {
+
       return (
           <div className="search-hospital">
-            <input onFocus={this.hospitalSearchFocus} onBlur={this.hospitalSearchOutOfFocus} type="text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Search for a Hospital..."></input>
+            <input onFocus={this.hospitalSearchFocus} onBlur={this.hospitalSearchOutOfFocus} type="text" value={ this.state.hospitalInput } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Search for a Hospital..."></input>
             {this.state.searchingForHospital
             ?
                 <div className="hospital-list">
-                    {this.state.potentialHospitals.map((hospital) => <p value={hospital} className="hospital-option">{hospital}</p>)}
+                    {this.state.potentialHospitals.map((hospital) => <p value={hospital} onMouseDown={ this.setHospitalSearched } className="hospital-option">{hospital}</p>)}
                 </div>
             :
-                null
+               null
             }
           </div>
       )
