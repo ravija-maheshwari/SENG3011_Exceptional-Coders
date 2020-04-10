@@ -191,6 +191,18 @@ h1 {
     opacity: 0.5;
 }
 
+.search-suburb > input:hover:not(:focus) {
+    animation: fullOpacity 0.2s;
+    opacity: 1;
+}
+
+.search-suburb > input:focus {
+    opacity: 1;
+}
+
+.search-suburb > input:not(:focus) {
+    animation: halfOpacity 0.2s;
+}
 
 .suburb-option {
     padding: 10px;
