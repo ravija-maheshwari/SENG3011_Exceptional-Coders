@@ -162,7 +162,10 @@ class NSWMap extends React.Component {
   }
 
   setSuburbSearched(suburb){
-    this.setState({selectedSuburb: suburb})
+    this.setState({
+        selectedSuburb: suburb,
+        suburbInput: suburb
+    })
     console.log(suburb)
   }
 

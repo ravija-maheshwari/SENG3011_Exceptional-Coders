@@ -68,6 +68,7 @@ class Graph extends React.Component{
         let predictedPoints = []
         predictedPoints.push(firstPredictedPoint, secondPredictedPoint, thirdPredictedPoint, fourthPredictedPoint)
         predictedPoints = this.formatPoints(predictedPoints, currentPoints[0][2])
+        currentPoints = currentPoints.sort( (a,b) => (a[0] > b[0] ? 1: -1))
         for(var i = 0; i < predictedPoints.length; i++){
             currentPoints.push(predictedPoints[i])
         }
@@ -91,7 +92,7 @@ class Graph extends React.Component{
     formatDate(date){
 
         let month = date.getMonth() + 1;
-        let day = date.getDay()
+        let day = date.getDate()
 
         if (month < 10) { month = "0" + month; }
         if (day < 10) { day = "0" + day; }
