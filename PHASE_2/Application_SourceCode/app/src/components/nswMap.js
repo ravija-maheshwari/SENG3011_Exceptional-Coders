@@ -2,10 +2,11 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 import { MAPS_API_KEY } from "../config";
 import HospitalMarker from "./hospitalMarker";
-import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb } from "../helpers";
+import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb, getPotentialHospitalList } from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
 import { suburbInfection } from "../datasets/suburbInfection";
+import {Nav} from "react-bootstrap";
 
 const HOSPITALS_API_URL =
   "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals";
@@ -28,10 +29,15 @@ class NSWMap extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleHospitalSearch = this.handleHospitalSearch.bind(this);
+    this.submitHospitalSearch = this.submitHospitalSearch.bind(this);
+
     // To hold all hospital data from myhospitals API
     this.state = {
       hospitals: [],
-      suburbCases: []
+      suburbCases: [],
+      potentialHospitals: [],
+      hospitalSearched: ''
     };
   }
 
@@ -118,6 +124,32 @@ class NSWMap extends React.Component {
     }
   }
 
+  handleHospitalSearch(evt){
+    this.setState({
+      hospitalSearched: evt.target.value,
+      potentialHospitals: getPotentialHospitalList(evt.target.value,hospitalDetail)
+    });
+
+    // console.log("Search string = " + evt.target.value)
+    // console.log(getPotentialHospitalList(evt.target.value,hospitalDetail))
+  }
+
+  submitHospitalSearch(){
+    console.log(this.state.hospitalSearched)
+  }
+
+  displaySearchBar() {
+      return (
+          <div className="search-bar">
+            <input  type= "text" value={ this.state.hospitalSearched } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Enter Hospital Name"></input>
+            <button onClick={ this.submitHospitalSearch }> Search </button>
+            <ul>
+              {this.state.potentialHospitals.map((hospital) => <ul>{hospital}</ul>)}
+            </ul>
+          </div>
+      )
+  }
+
   // Render Map and use displayHospitals() to render markers
   render() {
     return (
@@ -130,7 +162,10 @@ class NSWMap extends React.Component {
           onGoogleApiLoaded={({ map, maps }) => this.displayCircles(map, maps)}
           options={createMapOptions}
         >
+
           {this.displayHospitals()}
+          {this.displaySearchBar()}
+
         </GoogleMapReact>
       </div>
     );

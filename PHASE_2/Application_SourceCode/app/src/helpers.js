@@ -1,3 +1,5 @@
+// import {hospitalDetail} from "datasets/hospitalDetail"
+
 //Returns the radius of the display circle on the map
 exports.getRadius = function(suburbCases, suburb){
     let radius = 0
@@ -65,11 +67,27 @@ exports.getBedsCapacityRatio = function(bedsAvailable, totalBeds) {
     return ratio
 }
 
-
+//Given the hospital name, it returns a suburb
 exports.getHospitalSuburb = function(hospital, hospitalDetail) {
     for (var i=0; i<hospitalDetail.length; i++) {
         if (hospital.includes(hospitalDetail[i].name)) {
             return hospitalDetail[i].suburb
         }
     }
+}
+
+//Returns of list of hospitals matching the searchString
+exports.getPotentialHospitalList = function(searchString, hospitalDetail){
+    var result = []
+
+    if(searchString.length === 0){
+        return result
+    }
+
+    for(var i = 0; i < hospitalDetail.length; i++){
+        if(hospitalDetail[i].name.startsWith(searchString)){
+            result.push(hospitalDetail[i].name)
+        }
+    }
+    return result
 }
