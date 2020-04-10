@@ -7,7 +7,7 @@ class Homepage extends React.Component {
     super(props);
 
     this.state = {
-      currPage: "articles-map",
+      currPage: "nsw-map",
     };
 
     this.switchToNSWMaps = this.switchToNSWMaps.bind(this);
