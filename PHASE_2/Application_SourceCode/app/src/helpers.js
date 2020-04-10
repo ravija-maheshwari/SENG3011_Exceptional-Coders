@@ -92,6 +92,22 @@ exports.getPotentialHospitalList = function(searchString, hospitalDetail){
     return result
 }
 
+//Returns of list of suburbs matching the searchString
+exports.getPotentialSuburbList = function(searchString, nswAreas){
+    var result = []
+
+    if(searchString.length === 0){
+        return result
+    }
+
+    for(var i = 0; i < nswAreas.length; i++){
+        if(nswAreas[i].name.startsWith(searchString)){
+            result.push(nswAreas[i].name)
+        }
+    }
+    return result
+}
+
 // Returns distance to the suburb that user selected
 exports.getDistanceToSelectedSuburb = function(subLat, subLng, selectedSuburb, areas) {
     let subObj = {}
