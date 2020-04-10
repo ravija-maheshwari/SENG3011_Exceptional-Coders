@@ -91,3 +91,53 @@ exports.getPotentialHospitalList = function(searchString, hospitalDetail){
     }
     return result
 }
+
+// Returns distance to the suburb that user selected
+exports.getDistanceToSelectedSuburb = function(subLat, subLng, selectedSuburb, areas) {
+    let subObj = {}
+    for (var i=0; i<areas.allNswAreas.length; i++) {
+        if (areas.allNswAreas[i].name === selectedSuburb) {
+            subObj = areas.allNswAreas[i]
+            break
+        }
+    }
+
+    let dist = getDistance(subLat, subLng, subObj.lat, subObj.lng)
+    return dist
+}
+
+
+exports.getSortedHospitals = function(selectedSuburb, areas, allHospitals) {
+    let sorted = []
+    let subObj = {}
+    for (var i=0; i<areas.allNswAreas.length; i++) {
+        if (areas.allNswAreas[i].name === selectedSuburb) {
+            subObj = areas.allNswAreas[i]
+            break
+        }
+    }
+
+    for (var i=0; i<allHospitals.length; i++) {
+        if (allHospitals[i].ispublic === true) {
+            let dist = getDistance(subObj.lat, subObj.lng, allHospitals[i].latitude, allHospitals[i].longitude)
+            sorted.push({
+                'name': allHospitals[i].name,
+                'distance': dist
+            })
+        }
+    }
+
+    let result = sorted.sort((a, b) => (Number(a.distance) > Number(b.distance)) ? 1 : -1)
+    return result
+}
+
+function getDistance(lat1, lon1, lat2, lon2) {
+    let p = Math.PI / 180;    // Math.PI / 180
+    let c = Math.cos;
+    let a = 0.5 - c((lat2 - lat1) * p)/2 + 
+            c(lat1 * p) * c(lat2 * p) * 
+            (1 - c((lon2 - lon1) * p))/2;
+  
+    let result = 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+    return result.toFixed(1)
+}
