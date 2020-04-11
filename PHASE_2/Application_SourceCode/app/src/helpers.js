@@ -70,7 +70,7 @@ exports.getBedsCapacityRatio = function(bedsAvailable, totalBeds) {
 //Given the hospital name, it returns a suburb
 exports.getHospitalSuburb = function(hospital, hospitalDetail) {
     for (var i=0; i<hospitalDetail.length; i++) {
-        if (hospital.includes(hospitalDetail[i].name)) {
+        if (hospital.toLowerCase().includes(hospitalDetail[i].name.toLowerCase())) {
             return hospitalDetail[i].suburb
         }
     }
