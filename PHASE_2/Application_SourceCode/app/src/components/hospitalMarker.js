@@ -56,6 +56,7 @@ class HospitalMarker extends React.Component {
                     bedsAvailable = {this.props.bedsAvailable}
                     suburb = {this.props.suburb}
                     distanceToSuburb = {distanceToSuburb}
+                    allSuburbCases = {this.props.allSuburbCases}
                 />
                 :
                 null}

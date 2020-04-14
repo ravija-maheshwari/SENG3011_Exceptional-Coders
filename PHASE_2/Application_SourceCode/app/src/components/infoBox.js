@@ -21,7 +21,7 @@ class InfoBox extends React.Component{
                     :
                         null
                     }
-                    <Graph suburb={this.props.suburb}/>
+                    <Graph suburb={this.props.suburb} allSuburbCases={this.props.allSuburbCases} />
                 </div>
             </div>
         );
