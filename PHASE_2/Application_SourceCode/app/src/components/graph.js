@@ -95,7 +95,12 @@ class Graph extends React.Component{
             let beds = Math.floor( this.props.totalBeds - cases)
             let date = this.getIntegerDate(suburbData[i].date)
             let dateString = suburbData[i].date
-            currentPoints.push([date, beds, dateString])
+            if(beds > 0){
+                currentPoints.push([date, beds, dateString])
+            }else{
+                currentPoints.push([date, 0, dateString])
+            }
+
         }
         if(currentPoints.length === 0){
             return currentPoints
