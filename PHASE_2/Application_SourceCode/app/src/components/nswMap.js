@@ -59,7 +59,9 @@ class NSWMap extends React.Component {
     try {
       const response = await fetch(HOSPITALS_API_URL);
       const hospitals = await response.json();
-      // COMMENTED DUE TO QUOTA LIMITS
+      
+      // Uncomment when testing real data from Firestore,
+      // and add in 'suburbCases' in this.setState()
       // const suburbResponse = await fetch(SUBURBS_API_URL)
       // const suburbCases = await suburbResponse.json()
 
@@ -92,6 +94,7 @@ class NSWMap extends React.Component {
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
             selectedSuburb={this.state.selectedSuburb}
+            allSuburbCases={this.state.suburbCases}
           />
         );
       }
