@@ -169,14 +169,14 @@ class Graph extends React.Component{
                     data: allPoints,
                     showLine: true,
                     fill: false,
-                    borderColor: 'rgba(0, 200, 0, 1)'
+                    borderColor: 'rgb(200,58,74)'
                 },
                     {
                         label: 'Predicted Beds Available',
                         data: bedsCoordinates,
                         showLine: true,
                         fill: false,
-                        borderColor: 'rgba(200, 0, 0, 1)'
+                        borderColor: 'rgb(16,200,187)'
 
                 }]
             }
