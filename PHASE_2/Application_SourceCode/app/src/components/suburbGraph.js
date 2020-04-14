@@ -3,7 +3,9 @@ import { suburbInfection } from '../datasets/suburbInfection'
 import Chart from "chart.js"
 import regression from "regression"
 
-class Graph extends React.Component{
+//A graph representing the suburb wide cases of infections
+//Graph classes need refactoring and shifting to another file of graph helper functions
+class SuburbGraph extends React.Component{
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
@@ -36,7 +38,6 @@ class Graph extends React.Component{
             return Number(caseCount)
         }
     }
-
     //Confirmed cases co-ordinates
     getCurrentPoints(){
         let points = []
@@ -49,7 +50,6 @@ class Graph extends React.Component{
         }
         return points
     }
-
 
     //Predicted cases coordinates
     getPredictedPoints(){
@@ -74,61 +74,17 @@ class Graph extends React.Component{
         for(var i = 0; i < predictedPoints.length; i++){
             currentPoints.push(predictedPoints[i])
         }
-        // console.log(currentPoints)
-        //Convert array to object for scatter plot
-        let finalData = []
-        for(var i = 0; i < currentPoints.length; i++){
-            let val = {x: currentPoints[i][2], y: currentPoints[i][1]}
-            finalData.push(val)
-        }
-        // console.log(finalData)
-        return finalData
-
+       return currentPoints
     }
 
-    getBedCoordinates(){
-        let currentPoints = []
-        let suburbData = this.getMatchingData(this.props.suburb)
-        //Get current points
-        for(var i = 0; i < suburbData.length; i++){
-            let cases = this.getIntegerCases(suburbData[i].count)
-            let beds = Math.floor( this.props.totalBeds - cases)
-            let date = this.getIntegerDate(suburbData[i].date)
-            let dateString = suburbData[i].date
-            if(beds > 0){
-                currentPoints.push([date, beds, dateString])
-            }else{
-                currentPoints.push([date, 0, dateString])
-            }
+    formatDate(date){
 
-        }
-        if(currentPoints.length === 0){
-            return currentPoints
-        }
-        //Get predicted points
-        currentPoints.sort( (a,b) => (a[0] < b[0] ? 1: -1))
-        let latestDate = currentPoints[0][0]
-        const result = regression.linear(currentPoints.map( point => [point[0], point[1]] ) )
-        const firstPredictedPoint = result.predict(latestDate + 2 )
-        const secondPredictedPoint = result.predict(latestDate + 4 )
-        const thirdPredictedPoint = result.predict(latestDate + 6 )
-        const fourthPredictedPoint = result.predict(latestDate + 8 )
-        let predictedPoints = []
-        predictedPoints.push(firstPredictedPoint, secondPredictedPoint, thirdPredictedPoint, fourthPredictedPoint)
-        predictedPoints = this.formatPoints(predictedPoints, currentPoints[0][2])
-        currentPoints = currentPoints.sort( (a,b) => (a[0] > b[0] ? 1: -1))
+        let month = date.getMonth() + 1;
+        let day = date.getDate()
 
-        for(var i = 0; i < predictedPoints.length; i++){
-            currentPoints.push(predictedPoints[i])
-        }
-
-        let finalData = []
-        for(var i = 0; i < currentPoints.length; i++){
-            let val = {x: currentPoints[i][2], y: Math.floor(currentPoints[i][1])}
-            finalData.push(val)
-        }
-        console.log(finalData)
-        return finalData
+        if (month < 10) { month = "0" + month; }
+        if (day < 10) { day = "0" + day; }
+        return date.getFullYear() + "-" + month + "-" + day
     }
 
 
@@ -145,44 +101,17 @@ class Graph extends React.Component{
         return finalPoints
     }
 
-    formatDate(date){
-
-        let month = date.getMonth() + 1;
-        let day = date.getDate()
-
-        if (month < 10) { month = "0" + month; }
-        if (day < 10) { day = "0" + day; }
-        return date.getFullYear() + "-" + month + "-" + day
-    }
-
-
     componentDidMount() {
+        console.log("From sub graph " + this.props.suburb)
         const node = this.node
-        // let data = this.getMatchingData(this.props.suburb)
         let allPoints = this.getPredictedPoints()
-        let bedsCoordinates = this.getBedCoordinates()
-
         this.myChart = new Chart(node, {
             type: 'line',
             data: {
-                labels: allPoints.map(obj => obj.x),
+                labels: allPoints.map(obj => obj[2]),
                 datasets: [{
-                    // label: "cases in " + this.props.suburb,
-                    // data: currentPoints.map(obj => obj[1]),
-                    // backgroundColor: "#70CAD1"
-                    label: 'Predicted Cases',
-                    data: allPoints,
-                    showLine: true,
-                    fill: false,
-                    borderColor: 'rgb(200,58,74)'
-                },
-                    {
-                        label: 'Predicted Beds Available',
-                        data: bedsCoordinates,
-                        showLine: true,
-                        fill: false,
-                        borderColor: 'rgb(16,200,187)'
-
+                    label: "Graph",
+                    data: allPoints.map(obj => obj[1])
                 }]
             }
         });
@@ -196,5 +125,7 @@ class Graph extends React.Component{
             />
         );
     }
+
 }
-export default Graph
+
+export default SuburbGraph

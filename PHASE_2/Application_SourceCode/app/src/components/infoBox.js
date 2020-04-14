@@ -1,5 +1,5 @@
 import React from 'react'
-import Graph from './graph'
+import HospitalGraph from './hospitalGraph'
 
 class InfoBox extends React.Component{
 
@@ -21,7 +21,7 @@ class InfoBox extends React.Component{
                     :
                         null
                     }
-                    <Graph
+                    <HospitalGraph
                         suburb={this.props.suburb}
                         hospitalName = {this.props.name}
                         bedsAvailable={this.props.bedsAvailable}

@@ -260,3 +260,21 @@ h1 {
     from { opacity: 1; }
     to { opacity: 0.6; }
 }
+
+/* Side Panel */
+.side-panel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 80%;
+    overflow: auto;
+    z-index: 999;
+    color: #000;
+    box-sizing: border-box;
+    background-color: #ECEFF1;
+}

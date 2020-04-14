@@ -2,6 +2,7 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 import { MAPS_API_KEY } from "../config";
 import HospitalMarker from "./hospitalMarker";
+import SidePanel from "./sidePanel";
 import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb, getPotentialHospitalList, getPotentialSuburbList } from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
@@ -231,12 +232,24 @@ class NSWMap extends React.Component {
     )
   }
 
+  displaySidePanel(){
+     return(
+         <div>
+           <SidePanel
+              //suburb={this.state.selectedSuburb}
+               suburb={"Randwick"} //FOR TESTING
+           />
+         </div>
+     )
+  }
+
   // Render Map and use displayHospitals() to render markers
   render() {
     return (
       <div style={{ height: "100vh", width: "100%" }}>
         {this.displaySearchBar()}
         {this.displaySuburbBar()}
+        {this.displaySidePanel()}
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           center={this.state.mapCenter}
