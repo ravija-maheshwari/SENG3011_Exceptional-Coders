@@ -87,7 +87,7 @@ class NSWMap extends React.Component {
             lng={h["longitude"]}
             name={h["name"]}
             key={h["name"]}
-            suburb={suburb} //FOR TESTING ONLY
+            suburb={suburb}
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
             selectedSuburb={this.state.selectedSuburb}
