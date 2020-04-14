@@ -85,7 +85,7 @@ exports.getPotentialHospitalList = function(searchString, hospitalDetail){
     }
 
     for(var i = 0; i < hospitalDetail.length; i++){
-        if(hospitalDetail[i].name.startsWith(searchString)){
+        if(hospitalDetail[i].name.toLowerCase().startsWith(searchString.toLowerCase())){
             result.push(hospitalDetail[i].name)
         }
     }
@@ -101,7 +101,7 @@ exports.getPotentialSuburbList = function(searchString, nswAreas){
     }
 
     for(var i = 0; i < nswAreas.length; i++){
-        if(nswAreas[i].name.startsWith(searchString)){
+        if(nswAreas[i].name.toLowerCase().startsWith(searchString.toLowerCase())){
             result.push(nswAreas[i].name)
         }
     }
