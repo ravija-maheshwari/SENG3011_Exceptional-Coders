@@ -132,11 +132,11 @@ h1 {
     z-index: 999999;
     position: absolute;
     top: 10%;
-    left: 1%;
+    left: 4%;
     /* height: 70%; */
     overflow-y: auto;
     max-height: 60%;
-    width: 18%;
+    width: 90%;
 }
 
 .search-hospital > input {
@@ -194,9 +194,9 @@ h1 {
     z-index: 88888;
     position: absolute;
     top: 17%;
-    left: 1%;
+    left: 4%;
     max-height: 60%;
-    width: 18%;
+    width: 90%;
     overflow-y: auto;
 }
 

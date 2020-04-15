@@ -3,11 +3,10 @@ import GoogleMapReact from "google-map-react";
 import { MAPS_API_KEY } from "../config";
 import HospitalMarker from "./hospitalMarker";
 import SidePanel from "./sidePanel";
-import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb, getPotentialHospitalList, getPotentialSuburbList } from "../helpers";
+import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb } from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
 import { suburbInfection } from "../datasets/suburbInfection";
-import {Nav} from "react-bootstrap";
 
 const HOSPITALS_API_URL =
   "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals";
@@ -30,27 +29,13 @@ class NSWMap extends React.Component {
   constructor(props) {
 		super(props);
 
-    this.handleHospitalSearch = this.handleHospitalSearch.bind(this);
-    this.hospitalSearchFocus = this.hospitalSearchFocus.bind(this);
-    this.hospitalSearchOutOfFocus = this.hospitalSearchOutOfFocus.bind(this);
-    this.setHospitalSearched = this.setHospitalSearched.bind(this);
-    this.setSuburbSearched = this.setSuburbSearched.bind(this);
-    this.suburbSearchFocus = this.suburbSearchFocus.bind(this);
-    this.suburbSearchOutOfFocus = this.suburbSearchOutOfFocus.bind(this);
-
     // To hold all hospital data from myhospitals API
     this.state = {
       mapCenter: { lat: -33.5, lng: 149 },
       hospitals: [],
       suburbCases: [],
-      potentialHospitals: [],
-      hospitalInput: '',
-      searchingForHospital: false,
       hospitalSearched: '',
-      suburbInput:'',
       selectedSuburb:'',
-      potentialSuburbs: [],
-      searchingForSuburb: false
     };
   }
 
@@ -73,7 +58,7 @@ class NSWMap extends React.Component {
 
   displayHospitals() {
     let hospitals = this.state.hospitals;
-		let result = [];
+	let result = [];
     //const suburbCases =  this.state.suburbCases
     const suburbCases = suburbInfection;
     // Adding markers for each hospital
@@ -141,118 +126,29 @@ class NSWMap extends React.Component {
     }
   }
 
-  handleHospitalSearch(evt){
-		let hospitalsInNSW = this.state.hospitals.filter(h => h["ispublic"] && h["state"] === "NSW")
+  setHospitalSearched(position, hospital) {
     this.setState({
-			hospitalSearched: "",
-      hospitalInput: evt.target.value,
-      potentialHospitals: getPotentialHospitalList(evt.target.value, hospitalsInNSW)
-    });
-  }
-
-  hospitalSearchFocus() {
-    this.setState({ searchingForHospital: true })
-  }
-
-  hospitalSearchOutOfFocus() {
-    this.setState({ searchingForHospital: false })
-  }
-
-  handleSuburbSearch(evt){
-    this.setState({
-      suburbInput: evt.target.value,
-      potentialSuburbs: getPotentialSuburbList(evt.target.value, allNswAreas)
-    });
-  }
-
-  setSuburbSearched(suburb){
-    this.setState({
-        selectedSuburb: suburb,
-        suburbInput: suburb
+      mapCenter: position,
+      hospitalSearched: hospital    
     })
-    console.log(suburb)
   }
 
-  suburbSearchFocus() {
-    this.setState({ searchingForSuburb: true })
-  }
-
-  suburbSearchOutOfFocus() {
-    this.setState({ searchingForSuburb: false })
-  }
-
-  setHospitalSearched(hospital) {
-		let position
-		let { hospitals } = this.state
-
-		for (var i=0; i<hospitals.length; i++) {
-			if (hospitals[i].name.includes(hospital)) {
-				position = { lat: hospitals[i].latitude, lng: hospitals[i].longitude }
-			}
-		}
-
-		let hospitalMarker = document.getElementById(hospital)
-		hospitalMarker.click()
-
+  setSuburbSearched(selectedSuburb) {
     this.setState({
-			mapCenter: position,
-			hospitalSearched: hospital,
-			hospitalInput: hospital
-		})
-  }
-
-  displaySearchBar() {
-      return (
-          <div className="search-hospital">
-            <input onFocus={this.hospitalSearchFocus} onBlur={this.hospitalSearchOutOfFocus} type="text" value={ this.state.hospitalInput } onChange={ evt => this.handleHospitalSearch(evt) } placeholder="Search for a Hospital..."></input>
-            {this.state.searchingForHospital
-            ?
-                <div className="hospital-list">
-                        {this.state.potentialHospitals.map((hospital) => <p value={hospital} onMouseDown={() => this.setHospitalSearched(hospital)} className="hospital-option">{hospital}</p>)}
-                </div>
-            :
-              null
-            }
-          </div>
-      )
-  }
-
-
-
-  displaySuburbBar() {
-    return (
-        <div className="search-suburb">
-          <input onFocus={this.suburbSearchFocus} onBlur={this.suburbSearchOutOfFocus} type="text" value={ this.state.suburbInput }  onChange={evt => this.handleSuburbSearch(evt)} placeholder="Set a Suburb..."></input>
-          {this.state.searchingForSuburb
-            ?
-              <div className="suburb-list">
-                {this.state.potentialSuburbs.map((suburb) => <p value={suburb} onMouseDown={() => this.setSuburbSearched(suburb)} className="suburb-option">{suburb}</p>)}
-              </div>
-            :
-              null
-          }
-        </div>
-    )
-  }
-
-  displaySidePanel(){
-     return(
-         <div>
-           <SidePanel
-              //suburb={this.state.selectedSuburb}
-               suburb={"Randwick"} //FOR TESTING
-           />
-         </div>
-     )
+      selectedSuburb: selectedSuburb
+    })
   }
 
   // Render Map and use displayHospitals() to render markers
   render() {
     return (
       <div style={{ height: "100vh", width: "100%" }}>
-        {this.displaySearchBar()}
-        {this.displaySuburbBar()}
-        {this.displaySidePanel()}
+        <SidePanel 
+            suburb={"Randwick"} // FOR TESTING
+            hospitals={this.state.hospitals}
+            setHospitalSearched={this.setHospitalSearched.bind(this)}
+            setSuburbSearched={this.setSuburbSearched.bind(this)}
+        />
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           center={this.state.mapCenter}
