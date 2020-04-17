@@ -7,13 +7,19 @@ class HospitalGraph extends React.Component{
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
+
+        this.state = {
+            casesDataset: {},
+            bedsDataset: {},
+            allPoints: []
+        }
     }
 
     //Gets all data about one suburb
     getMatchingData(suburb){
         let allData = []
         suburbInfection.forEach(doc => {
-            if(doc.name === suburb){
+            if(doc.name.includes(suburb)){
                 allData.push(doc)
             }
         })
@@ -160,32 +166,63 @@ class HospitalGraph extends React.Component{
         const node = this.node
         // let data = this.getMatchingData(this.props.suburb)
         let allPoints = this.getPredictedPoints()
+        this.setState({ allPoints: allPoints })
         let bedsCoordinates = this.getBedCoordinates()
+
+        let casesDataset = {
+            label: 'Predicted Cases',
+            data: allPoints,
+            showLine: true,
+            fill: false,
+            borderColor: 'rgb(200,58,74)'
+        }
+
+        let bedsDataset = {
+            label: 'Predicted Beds Available',
+            data: bedsCoordinates,
+            showLine: true,
+            fill: false,
+            borderColor: 'rgb(16,200,187)'
+        }
+        
+        this.setState({
+            casesDataset: casesDataset,
+            bedsDataset: bedsDataset
+        })
 
         this.myChart = new Chart(node, {
             type: 'line',
             data: {
                 labels: allPoints.map(obj => obj.x),
-                datasets: [{
-                    // label: "cases in " + this.props.suburb,
-                    // data: currentPoints.map(obj => obj[1]),
-                    // backgroundColor: "#70CAD1"
-                    label: 'Predicted Cases',
-                    data: allPoints,
-                    showLine: true,
-                    fill: false,
-                    borderColor: 'rgb(200,58,74)'
-                },
-                    {
-                        label: 'Predicted Beds Available',
-                        data: bedsCoordinates,
-                        showLine: true,
-                        fill: false,
-                        borderColor: 'rgb(16,200,187)'
-
-                }]
+                datasets: [casesDataset]
             }
         });
+    }
+
+    componentDidUpdate(prevProps) {
+        const node = this.node
+        if (this.props.casesOrBeds !== prevProps.casesOrBeds) {
+            if (this.props.casesOrBeds === "cases") {
+                this.myChart.clear()
+                this.myChart = new Chart(node, {
+                    type: 'line',
+                    data: {
+                        labels: this.state.allPoints.map(obj => obj.x),
+                        datasets: [this.state.casesDataset]
+                    }
+                });
+            }
+            else {
+                this.myChart.clear()
+                this.myChart = new Chart(node, {
+                    type: 'line',
+                    data: {
+                        labels: this.state.allPoints.map(obj => obj.x),
+                        datasets: [this.state.bedsDataset]
+                    }
+                });   
+            }
+        }
     }
 
     render(){
