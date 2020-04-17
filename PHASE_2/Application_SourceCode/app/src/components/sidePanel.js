@@ -2,6 +2,8 @@ import React from "react";
 import SuburbGraph from "./suburbGraph"
 import { getPotentialHospitalList, getPotentialSuburbList } from '../helpers'
 import { allNswAreas } from "../datasets/nswAreas";
+import downArrow from '../mapIcons/down-arrow.png'
+import upArrow from '../mapIcons/up-arrow.png'
 
 class SidePanel extends React.Component{
     constructor(props) {
@@ -13,7 +15,8 @@ class SidePanel extends React.Component{
             searchingForHospital: false,
             searchingForSuburb: false,
             potentialHospitals: [],
-            potentialSuburbs: []
+            potentialSuburbs: [],
+            isSidePanelOpen: false
         }
 
         this.handleHospitalSearch = this.handleHospitalSearch.bind(this);
@@ -23,6 +26,8 @@ class SidePanel extends React.Component{
         this.setSuburbSearched = this.setSuburbSearched.bind(this);
         this.suburbSearchFocus = this.suburbSearchFocus.bind(this);
         this.suburbSearchOutOfFocus = this.suburbSearchOutOfFocus.bind(this);
+        this.openSidePanel = this.openSidePanel.bind(this)
+        this.closeSidePanel = this.closeSidePanel.bind(this)
     }
 
     handleHospitalSearch(evt){
@@ -120,28 +125,57 @@ class SidePanel extends React.Component{
         )
     }
 
+    openSidePanel() {
+        this.setState({ isSidePanelOpen: true })
+    }
+
+    closeSidePanel() {
+        this.setState({ isSidePanelOpen: false })
+    }
+
+    displayOpenSidePanel() {
+        return (
+            <div className="open-side-panel" onClick={this.openSidePanel}>
+                {/* <img src={sidePanelIcon} className="open-side-panel-icon"/> */}
+                <img src={downArrow} className="down-arrow" />
+                <p> Set suburb, view statewide trends and nearest hospitals </p>
+            </div>
+        )
+    }
+
     render(){
         let { selectedSuburb } = this.props
 
         return (
-            <div className = "side-panel">
-                {this.displayHospitalSearchBar()}
-                {this.displaySuburbSearchBar()}
-                {/* {selectedSuburb.length !== 0 ?
-                    <div className="selected-suburb-indicator">
-                        <p> Your suburb is {selectedSuburb} </p>
+            !this.state.isSidePanelOpen ?
+                <div className = "side-panel-mini">
+                    {this.displayHospitalSearchBar()}
+                    {this.displayOpenSidePanel()}
+                </div>
+            :
+                <div className = "side-panel">
+                    {this.displayHospitalSearchBar()}
+                    {this.displaySuburbSearchBar()}
+                    {/* {this.displaySuburbSearchBar()} */}
+                        {/* {selectedSuburb.length !== 0 ?
+                            <div className="selected-suburb-indicator">
+                                <p> Your suburb is {selectedSuburb} </p>
+                            </div>
+                        :
+                            null
+                        } */}
+                        {selectedSuburb.length !== 0 ?
+                            <SuburbGraph
+                                selectedSuburb={selectedSuburb}
+                            />
+                        :
+                            null
+                        }
+                    <div className="close-side-panel" onClick={this.closeSidePanel}>
+                        <img src={upArrow} className="up-arrow" />
+                        <p> Hide Side Panel </p>
                     </div>
-                :
-                    null
-                } */}
-                {selectedSuburb.length !== 0 ?
-                    <SuburbGraph
-                        selectedSuburb={selectedSuburb}
-                    />
-                :
-                    null
-                }
-            </div>
+                </div>
         )
     }
 }

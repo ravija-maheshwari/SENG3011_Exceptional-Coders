@@ -36,7 +36,7 @@ class NSWMap extends React.Component {
       suburbCases: [],
       hospitalSearched: '',
       selectedSuburb:'',
-    };
+		};
   }
 
   // Fetching hospital locations before map is mounted on DOM
@@ -143,11 +143,14 @@ class NSWMap extends React.Component {
   render() {
     return (
       <div style={{ height: "100vh", width: "100%" }}>
-        <SidePanel 
+				<SidePanel 
             selectedSuburb={this.state.selectedSuburb}
             hospitals={this.state.hospitals}
             setHospitalSearched={this.setHospitalSearched.bind(this)}
-            setSuburbSearched={this.setSuburbSearched.bind(this)}
+						setSuburbSearched={this.setSuburbSearched.bind(this)}
+						isSidePanelOpen={this.state.isSidePanelOpen}
+						openSidePanel={this.openSidePanel}
+						closeSidePanel={this.closeSidePanel}
         />
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
