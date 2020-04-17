@@ -1,17 +1,17 @@
 import React from "react";
 import NSWMap from "./nswMap";
-import MenuBar from "./menuBar";
-import Articles from "./article";
+import LandingPage from "./landingPage";
+
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currPage: "nsw-map",
+      currPage: "landing-page",
     };
 
     this.switchToNSWMaps = this.switchToNSWMaps.bind(this);
-    this.switchToArticlesMaps = this.switchToArticlesMaps.bind(this);
+    //this.switchToArticlesMaps = this.switchToArticlesMaps.bind(this);
   }
 
   switchToNSWMaps() {
@@ -21,10 +21,10 @@ class Homepage extends React.Component {
     }
   }
 
-  switchToArticlesMaps() {
+  switchToLandingPage() {
     let currPage = this.state.currPage;
-    if (currPage !== "articles-map") {
-      this.setState({ currPage: "articles-map" });
+    if(currPage !== "landing-page") {
+      this.setState({ currPage: "landing-page" });
     }
   }
 
@@ -33,14 +33,14 @@ class Homepage extends React.Component {
 
     return (
       <>
-        {/* <MenuBar
-          switchToNSWMaps={this.switchToNSWMaps}
-          switchToArticlesMaps={this.switchToArticlesMaps}
-        /> */}
         {currPage === "nsw-map" ? (
           <NSWMap />
         ) : (
-          <div className="articles">{<Articles />}</div>
+          <div className="landing-page">{
+            <LandingPage
+              switchToMap={this.switchToNSWMaps}
+            />}
+          </div>
         )}
       </>
     );
