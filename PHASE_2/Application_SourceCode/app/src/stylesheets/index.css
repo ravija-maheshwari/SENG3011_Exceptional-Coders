@@ -27,16 +27,22 @@ code {
     width: 22px;
 }
 
+.hospital-marker-selected > img {
+    height: 22px;
+    width: 22px;
+}
+
 .info-box {
     cursor: default;
     width: 60em;
     height: 35em;
     position: absolute;
     border: 1px solid gray;
-    border-radius: 9px;
+    border-radius: 3px;
     background-color: #000000;
     z-index: 9999;
     opacity: 0.8;
+    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
 }
 
 .close-info-box {

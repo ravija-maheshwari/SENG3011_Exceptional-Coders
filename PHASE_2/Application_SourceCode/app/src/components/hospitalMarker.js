@@ -12,7 +12,8 @@ class HospitalMarker extends React.Component {
         super(props)
 
         this.state = {
-            isInfoDisplayed: false
+            isInfoDisplayed: false,
+            markerClass: "hospital-marker"
         }
 
         this.openInfo = this.openInfo.bind(this)
@@ -20,11 +21,11 @@ class HospitalMarker extends React.Component {
     }
 
     openInfo(){
-        this.setState({isInfoDisplayed: true})
+        this.setState({isInfoDisplayed: true, markerClass: "hospital-marker-selected" })
     }
 
     closeInfo(){
-        this.setState({isInfoDisplayed: false})
+        this.setState({isInfoDisplayed: false, markerClass: "hospital-marker" })
     }
 
     render() {
@@ -39,7 +40,7 @@ class HospitalMarker extends React.Component {
         }
 
         return (
-            <div className="hospital-marker">
+            <div className={this.state.markerClass}>
                 {/* If bedsRatio > 0.7, show GREEN, if > 0.3 && <= 0.7, show ORANGE, else show RED */}
                 { bedsRatio > 0.7 ?
                     <img id={this.props.name} alt="marker" src={hospitalGreen} onClick={ this.openInfo } ></img>
