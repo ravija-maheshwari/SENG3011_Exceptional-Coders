@@ -5,6 +5,30 @@ class InfoBox extends React.Component{
 
     constructor(props) {
         super(props)
+
+        this.state = {
+            casesOrBeds: "cases"
+        }
+
+        this.switchGraph = this.switchGraph.bind(this)
+    }
+
+    switchGraph(evt) {
+        if (evt.target.checked) {
+            this.setState({ casesOrBeds: "beds" })
+        }
+        else {
+            this.setState({ casesOrBeds: "cases" })
+        }
+    }
+
+    displayToggleSwitch() {
+        return (
+            <label class="switch">
+                <input type="checkbox" onChange={this.switchGraph}/>
+                <span className="slider round"></span>
+            </label>
+        )
     }
 
     render(){
@@ -21,10 +45,16 @@ class InfoBox extends React.Component{
                     :
                         null
                     }
+                    <div className="toggle">
+                        <p className="toggle-text"> Predicted Cases </p>
+                        {this.displayToggleSwitch()}
+                        <p className="toggle-text"> Predicted Beds </p>
+                    </div>
                     <HospitalGraph
                         suburb={this.props.suburb}
                         allSuburbCases={this.props.allSuburbCases}
                         totalBeds={this.props.totalBeds}
+                        casesOrBeds={this.state.casesOrBeds}
                     />
                 </div>
             </div>
