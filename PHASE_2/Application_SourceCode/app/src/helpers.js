@@ -5,7 +5,7 @@ exports.getRadius = function(suburbCases, suburb){
     let radius = 0
 
     for(var i=0; i<suburbCases.length; i++) {
-        if(suburb.name === suburbCases[i].name){
+        if(suburb.name === suburbCases[i].name && suburbCases[i+1].name !== suburbCases[i].name){
             let caseCount = getIntegerCases(suburbCases[i].count)
             radius = caseCount/10 * 300
             break
@@ -36,7 +36,9 @@ exports.getAvailableBeds = function(hospital, hospitalDetail, suburbCases){
         if (hospital.name.includes(hospitalDetail[i].name) || hospitalDetail[i].name.includes(hospital.name)) {
             //Found a match
             for (let j = 0; j < suburbCases.length ; j++) {
-                if(hospitalDetail[i].suburb.includes(suburbCases[j].name) || suburbCases[j].name.includes(hospitalDetail[i].suburb)) {
+                let hospDetailSub = hospitalDetail[i].suburb
+                let subName = suburbCases[j].name
+                if((hospDetailSub.includes(subName) || subName.includes(hospDetailSub)) && subName !== suburbCases[j+1].name) {
                     beds = Math.floor(hospitalDetail[i].total_beds) - getIntegerCases(suburbCases[j].count)
                     break
                 }
@@ -70,7 +72,9 @@ exports.getBedsCapacityRatio = function(bedsAvailable, totalBeds) {
 //Given the hospital name, it returns a suburb
 exports.getHospitalSuburb = function(hospital, hospitalDetail) {
     for (var i=0; i<hospitalDetail.length; i++) {
-        if (hospital.toLowerCase().includes(hospitalDetail[i].name.toLowerCase())) {
+        let hospDetailName = hospitalDetail[i].name.toLowerCase()
+        hospital = hospital.toLowerCase()
+        if (hospital.includes(hospDetailName) || hospDetailName.includes(hospital)) {
             return hospitalDetail[i].suburb
         }
     }
