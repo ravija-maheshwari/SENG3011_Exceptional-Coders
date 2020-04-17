@@ -144,7 +144,7 @@ class NSWMap extends React.Component {
     return (
       <div style={{ height: "100vh", width: "100%" }}>
         <SidePanel 
-            suburb={"Randwick"} // FOR TESTING
+            selectedSuburb={this.state.selectedSuburb}
             hospitals={this.state.hospitals}
             setHospitalSearched={this.setHospitalSearched.bind(this)}
             setSuburbSearched={this.setSuburbSearched.bind(this)}

@@ -148,7 +148,7 @@ h1 {
     border: 1px solid white;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .search-hospital > input:hover:not(:focus) {
@@ -170,9 +170,10 @@ h1 {
     background-color: white;
     font-size: 12pt;
     border-left: 1px solid rgb(94, 94, 94);
-    border-bottom: 1px solid rgb(94, 94, 94);
+    border-top: 1px solid rgb(94, 94, 94);
     margin-bottom: 0;
     transition: background-color 0.15s, color 0.15s;
+    animation: fadeIn 0.2s
 }
 
 .hospital-option:hover {
@@ -184,6 +185,7 @@ h1 {
 
 .hospital-list {
     z-index: 99999;
+    margin-top: 1px;
     /* height: 80%; */
 }
 
@@ -232,9 +234,10 @@ h1 {
     height: 50px;
     font-size: 12pt;
     border-left: 1px solid rgb(94, 94, 94);
-    border-bottom: 1px solid rgb(94, 94, 94);
+    border-top: 1px solid rgb(94, 94, 94);
     margin-bottom: 0;
     transition: background-color 0.15s, color 0.15s;
+    animation: fadeIn 0.25s
 }
 
 .suburb-option:hover {
@@ -247,6 +250,17 @@ h1 {
 .suburb-list {
     z-index: 99999;
     /* height: 80%; */
+    margin-top: 1px;
+}
+
+.selected-suburb-indicator {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background-color: green;
+    color: white;
+    border-radius: 3px;
+    margin-bottom: 10%;
 }
 
 /* Side Panel */
@@ -259,12 +273,14 @@ h1 {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 80%;
+    right: 75%;
     overflow: auto;
     z-index: 999;
     color: #000;
     box-sizing: border-box;
-    background-color: #ECEFF1;
+    background-color: rgb(224, 224, 224);
+    box-shadow: 4px 0px 5px -2px grey;
+    /* animation: panelOpen 0.5s ease; */
 }
 
 
@@ -281,4 +297,20 @@ h1 {
 @keyframes halfOpacity {
     from { opacity: 1; }
     to { opacity: 0.6; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes panelOpen {
+    from { 
+        left: -20%;
+        right: 100%; 
+    }
+    to { 
+        left: 0%; 
+        right: 80%;
+    }
 }

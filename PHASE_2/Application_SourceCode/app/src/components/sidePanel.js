@@ -121,13 +121,26 @@ class SidePanel extends React.Component{
     }
 
     render(){
+        let { selectedSuburb } = this.props
+
         return (
             <div className = "side-panel">
                 {this.displayHospitalSearchBar()}
                 {this.displaySuburbSearchBar()}
-                <SuburbGraph
-                    suburb={this.props.suburb}
-                />
+                {/* {selectedSuburb.length !== 0 ?
+                    <div className="selected-suburb-indicator">
+                        <p> Your suburb is {selectedSuburb} </p>
+                    </div>
+                :
+                    null
+                } */}
+                {selectedSuburb.length !== 0 ?
+                    <SuburbGraph
+                        selectedSuburb={selectedSuburb}
+                    />
+                :
+                    null
+                }
             </div>
         )
     }

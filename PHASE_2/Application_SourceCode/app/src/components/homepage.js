@@ -33,10 +33,10 @@ class Homepage extends React.Component {
 
     return (
       <>
-        <MenuBar
+        {/* <MenuBar
           switchToNSWMaps={this.switchToNSWMaps}
           switchToArticlesMaps={this.switchToArticlesMaps}
-        />
+        /> */}
         {currPage === "nsw-map" ? (
           <NSWMap />
         ) : (

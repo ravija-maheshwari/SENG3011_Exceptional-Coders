@@ -41,7 +41,7 @@ class SuburbGraph extends React.Component{
     //Confirmed cases co-ordinates
     getCurrentPoints(){
         let points = []
-        let matchingSuburbs = this.getMatchingData(this.props.suburb)
+        let matchingSuburbs = this.getMatchingData(this.props.selectedSuburb)
         for(var i = 0; i < matchingSuburbs.length; i++){
             let date = this.getIntegerDate(matchingSuburbs[i].date)
             let count = this.getIntegerCases(matchingSuburbs[i].count)
@@ -102,7 +102,7 @@ class SuburbGraph extends React.Component{
     }
 
     componentDidMount() {
-        console.log("From sub graph " + this.props.suburb)
+        console.log("From sub graph " + this.props.selectedSuburb)
         const node = this.node
         let allPoints = this.getPredictedPoints()
         this.myChart = new Chart(node, {
@@ -110,17 +110,35 @@ class SuburbGraph extends React.Component{
             data: {
                 labels: allPoints.map(obj => obj[2]),
                 datasets: [{
-                    label: "Graph",
+                    label: "Predicted Cases",
                     data: allPoints.map(obj => obj[1])
                 }]
             }
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.selectedSuburb !== prevProps.selectedSuburb) {
+            console.log("From sub graph " + this.props.selectedSuburb)
+            const node = this.node
+            let allPoints = this.getPredictedPoints()
+            this.myChart = new Chart(node, {
+                type: 'line',
+                data: {
+                    labels: allPoints.map(obj => obj[2]),
+                    datasets: [{
+                        label: "Predicted Cases",
+                        data: allPoints.map(obj => obj[1])
+                    }]
+                }
+            });
+        }
+    }
+
     render(){
         return(
             <canvas
-                style={{ width: 800, height: 300 }}
+                style={{ width: 800, height: 500 }}
                 ref={node => (this.node = node)}
             />
         );
