@@ -19,7 +19,7 @@ class HospitalGraph extends React.Component{
     getMatchingData(suburb){
         let allData = []
         suburbInfection.forEach(doc => {
-            if(doc.name.includes(suburb)){
+            if(doc.name.includes(suburb) && suburb.includes(doc.name)){
                 allData.push(doc)
             }
         })
