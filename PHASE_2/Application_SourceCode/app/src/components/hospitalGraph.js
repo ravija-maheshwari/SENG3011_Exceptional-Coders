@@ -133,7 +133,7 @@ class HospitalGraph extends React.Component{
             let val = {x: currentPoints[i][2], y: Math.floor(currentPoints[i][1])}
             finalData.push(val)
         }
-        console.log(finalData)
+        // console.log(finalData)
         return finalData
     }
 
@@ -192,6 +192,30 @@ class HospitalGraph extends React.Component{
 
         this.myChart = new Chart(node, {
             type: 'line',
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: 'black',
+                        fontWeight: "bold"
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 12,
+                            fontColor: 'black',
+                            fontWeight: "bold"
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 10,
+                            fontColor: 'black',
+                            fontWeight: "bold"
+                        }
+                    }]
+                }
+            },
             data: {
                 labels: allPoints.map(obj => obj.x),
                 datasets: [casesDataset]
@@ -227,10 +251,13 @@ class HospitalGraph extends React.Component{
 
     render(){
         return(
-            <canvas
-                style={{ width: 800, height: 300 }}
-                ref={node => (this.node = node)}
-            />
+            <div className="info-box-hospital-graph">
+                <canvas
+                    style={{ width: 800, height: 300,  backgroundColor: 'white' }}
+                    ref={node => (this.node = node)}
+                />
+            </div>
+
         );
     }
 }

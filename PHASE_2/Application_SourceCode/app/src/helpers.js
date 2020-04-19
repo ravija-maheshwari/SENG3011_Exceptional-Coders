@@ -127,12 +127,12 @@ exports.getDistanceToSelectedSuburb = function(subLat, subLng, selectedSuburb, a
 }
 
 
-exports.getSortedHospitals = function(selectedSuburb, areas, allHospitals) {
+exports.getSortedHospitals = function(selectedSuburb, allNswAreas , allHospitals) {
     let sorted = []
     let subObj = {}
-    for (var i=0; i<areas.allNswAreas.length; i++) {
-        if (areas.allNswAreas[i].name === selectedSuburb) {
-            subObj = areas.allNswAreas[i]
+    for (var i=0; i<allNswAreas.length; i++) {
+        if (allNswAreas[i].name === selectedSuburb) {
+            subObj = allNswAreas[i]
             break
         }
     }

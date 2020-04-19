@@ -7,6 +7,9 @@ import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb } from "..
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
 import { suburbInfection } from "../datasets/suburbInfection";
+import hospitalRed from '../mapIcons/hospitalRed.png'
+import hospitalOrange from '../mapIcons/hospitalOrange.png'
+import hospitalGreen from '../mapIcons/hospitalGreen.png'
 
 const HOSPITALS_API_URL =
   "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals";
@@ -133,6 +136,12 @@ class NSWMap extends React.Component {
     })
   }
 
+  openClosestHospital(position){
+    this.setState({
+      mapCenter: position
+    })
+  }
+
   setSuburbSearched(selectedSuburb) {
     this.setState({
       selectedSuburb: selectedSuburb
@@ -147,10 +156,11 @@ class NSWMap extends React.Component {
             selectedSuburb={this.state.selectedSuburb}
             hospitals={this.state.hospitals}
             setHospitalSearched={this.setHospitalSearched.bind(this)}
-						setSuburbSearched={this.setSuburbSearched.bind(this)}
-						isSidePanelOpen={this.state.isSidePanelOpen}
-						openSidePanel={this.openSidePanel}
-						closeSidePanel={this.closeSidePanel}
+            setSuburbSearched={this.setSuburbSearched.bind(this)}
+            isSidePanelOpen={this.state.isSidePanelOpen}
+            openSidePanel={this.openSidePanel}
+            closeSidePanel={this.closeSidePanel}
+            openClosestHospital={this.openClosestHospital.bind(this)}
         />
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
@@ -162,6 +172,11 @@ class NSWMap extends React.Component {
         >
           {this.displayHospitals()}
         </GoogleMapReact>
+        <div className="marker-legend">
+          <p className="legend-text"> <img className="legend-icon" src={hospitalRed}/> Hospital has low availability of beds (totalBeds/availableBeds &lt;= 0.3) </p>
+          <p className="legend-text"> <img className="legend-icon" src={hospitalOrange}/> Hospital has some availability of beds (0.3 &lt; totalBeds/availableBeds &lt;= 0.7) </p>
+          <p className="legend-text"> <img className="legend-icon" src={hospitalGreen}/> Hospital has high availability of beds (totalBeds/availableBeds &gt; 0.7)  </p>
+        </div>
       </div>
     );
   }

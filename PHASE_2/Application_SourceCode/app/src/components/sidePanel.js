@@ -1,9 +1,11 @@
 import React from "react";
 import SuburbGraph from "./suburbGraph"
-import { getPotentialHospitalList, getPotentialSuburbList } from '../helpers'
+import { getPotentialHospitalList, getPotentialSuburbList, getSortedHospitals } from '../helpers'
 import { allNswAreas } from "../datasets/nswAreas";
 import downArrow from '../mapIcons/down-arrow.png'
 import upArrow from '../mapIcons/up-arrow.png'
+import NswGraph from "./nswGraph";
+import { allHospitals } from "../datasets/allHospitals"
 
 class SidePanel extends React.Component{
     constructor(props) {
@@ -28,6 +30,7 @@ class SidePanel extends React.Component{
         this.suburbSearchOutOfFocus = this.suburbSearchOutOfFocus.bind(this);
         this.openSidePanel = this.openSidePanel.bind(this)
         this.closeSidePanel = this.closeSidePanel.bind(this)
+        this.openClosestHospital = this.openClosestHospital.bind(this)
     }
 
     handleHospitalSearch(evt){
@@ -66,6 +69,21 @@ class SidePanel extends React.Component{
         this.props.setHospitalSearched(position, hospital)
     }
 
+    openClosestHospital(hospital){
+        let position
+        let hospitals = this.props.hospitals
+
+        for (var i=0; i<hospitals.length; i++) {
+            if (hospitals[i].name.includes(hospital)) {
+                position = { lat: hospitals[i].latitude, lng: hospitals[i].longitude }
+            }
+        }
+
+        let hospitalMarker = document.getElementById(hospital)
+        hospitalMarker.click()
+        this.props.openClosestHospital(position)
+    }
+
     handleSuburbSearch(evt){
         this.setState({
             suburbInput: evt.target.value,
@@ -77,7 +95,6 @@ class SidePanel extends React.Component{
         this.setState({
             suburbInput: suburb
         })
-        
         this.props.setSuburbSearched(suburb)
     }
 
@@ -144,7 +161,14 @@ class SidePanel extends React.Component{
     }
 
     render(){
+
         let { selectedSuburb } = this.props
+        let closeHospitals = getSortedHospitals(this.props.selectedSuburb, allNswAreas, allHospitals)
+        let closeHospital1 = closeHospitals[0].name
+        let closeHospital2 = closeHospitals[1].name
+        let closeHospital3 = closeHospitals[2].name
+        let closeHospital4 = closeHospitals[3].name
+
 
         return (
             !this.state.isSidePanelOpen ?
@@ -156,21 +180,35 @@ class SidePanel extends React.Component{
                 <div className = "side-panel">
                     {this.displayHospitalSearchBar()}
                     {this.displaySuburbSearchBar()}
-                    {/* {this.displaySuburbSearchBar()} */}
-                        {/* {selectedSuburb.length !== 0 ?
-                            <div className="selected-suburb-indicator">
-                                <p> Your suburb is {selectedSuburb} </p>
+
+                    {selectedSuburb.length !== 0 ?
+                        <div className="closest-hospitals">
+                            <div className="closest-hospital-list">
+                                <p> Hospitals near {this.props.selectedSuburb}: </p>
+                                <li onClick={ () => this.openClosestHospital(closeHospital1)} > {closeHospital1}({closeHospitals[0].distance} kms)</li>
+                                <li onClick={ () => this.openClosestHospital(closeHospital2)} > {closeHospital2} ({closeHospitals[1].distance} kms)</li>
+                                <li  onClick={ () => this.openClosestHospital(closeHospital3)} > {closeHospital3} ({closeHospitals[2].distance} kms)</li>
+                                <li  onClick={ () => this.openClosestHospital(closeHospital4)}> {closeHospital4} ({closeHospitals[3].distance} kms)</li>
                             </div>
+                        </div>
                         :
-                            null
-                        } */}
-                        {selectedSuburb.length !== 0 ?
-                            <SuburbGraph
-                                selectedSuburb={selectedSuburb}
-                            />
-                        :
-                            null
-                        }
+                        null
+                    }
+
+                        <div className="graph-rectangle">
+                            {selectedSuburb.length !== 0 ?
+                                <SuburbGraph
+                                    selectedSuburb={selectedSuburb}
+                                />
+                                :
+                                <NswGraph/>
+                            }
+                        <p className="disclaimer"> <p className="disclaimer-red">Disclaimer:</p> Last updated /date/ This model updates every 3 days and is intended to help make fast decisions, not predict the future </p>
+                        </div>
+                        <div className="quiz-button">
+                            <button> Take the quiz </button>
+                        </div>
+
                     <div className="close-side-panel" onClick={this.closeSidePanel}>
                         <img src={upArrow} className="up-arrow" />
                         <p> Hide Side Panel </p>
