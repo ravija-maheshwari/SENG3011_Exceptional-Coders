@@ -4,6 +4,7 @@ import { getPotentialHospitalList, getPotentialSuburbList } from '../helpers'
 import { allNswAreas } from "../datasets/nswAreas";
 import downArrow from '../mapIcons/down-arrow.png'
 import upArrow from '../mapIcons/up-arrow.png'
+import NswGraph from "./nswGraph";
 
 class SidePanel extends React.Component{
     constructor(props) {
@@ -167,13 +168,13 @@ class SidePanel extends React.Component{
                         <div className="closest-hospitals">
                             <p> List of hospitals closest to {this.props.selectedSuburb}</p>
                         </div>
-                        <div className="rectangle">
+                        <div className="graph-rectangle">
                             {selectedSuburb.length !== 0 ?
                                 <SuburbGraph
                                     selectedSuburb={selectedSuburb}
                                 />
                                 :
-                                null
+                                <NswGraph />
                             }
                         </div>
                         <div className="quiz-button">
