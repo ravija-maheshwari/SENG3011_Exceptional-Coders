@@ -330,10 +330,10 @@ h1 {
     z-index: 999;
     color: #000;
     box-sizing: border-box;
-    background-color: #1D809E;
+    background-color: rgba(29,128,158,0.8);
     box-shadow: 4px 0px 4px -2px grey;
     animation: fadeIn 0.3s ease;
-    opacity: 80%;
+    /*opacity: 80%;*/
 }
 
 .open-side-panel {
@@ -344,7 +344,7 @@ h1 {
     left: 1%;
     width: 28%;
     height: 45px;
-    /* background-color: #1D809E; */
+    /*background-color: #1D809E;*/
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     text-align: center;
@@ -356,7 +356,7 @@ h1 {
 }
 
 .graph-rectangle{
-    margin-top: 50px;
+    margin-top: 35%;
     width: 92%;
     height: 325px;
     background-color: white;
@@ -365,16 +365,18 @@ h1 {
 
 .closest-hospitals{
     width: 92%;
-    height: 135px;
-    background-color: white;
+    height: 17%;
     border-radius: 3px;
-    margin-top: 150px;
+    margin-top: 31%;
+    margin-bottom: -25%;
     border-radius: 3px;
 }
+
 .closest-hospital-list{
     font-family: "Arial";
     font-size: 12pt;
     font-weight: normal;
+    background-color: white;
 }
 
 .quiz-button{
@@ -519,7 +521,7 @@ input:checked + .slider:before {
 
 @keyframes fadeIn {
     from { background-color: rgba(0,0,0,0.0); }
-    to { background-color: rgba(29,128,158,1.0); }
+    to { background-color: rgba(29,128,158,0.8); }
 }
 
 @keyframes panelOpen {

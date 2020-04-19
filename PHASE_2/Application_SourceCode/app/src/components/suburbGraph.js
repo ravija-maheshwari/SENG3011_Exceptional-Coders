@@ -180,7 +180,7 @@ class SuburbGraph extends React.Component{
                 data: {
                     labels: allPoints.map(obj => obj[2]),
                     datasets: [{
-                        label: "Predicted COVID Cases",
+                        label: "Predicted COVID-19 Cases in " + this.props.selectedSuburb,
                         data: allPoints.map(obj => obj[1]),
                         fill: true,
                         backgroundColor: "#F9C52F"

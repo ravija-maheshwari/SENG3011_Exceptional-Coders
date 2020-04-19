@@ -12,14 +12,14 @@ class NswGraph extends React.Component{
     getIntegerCases(caseCount){
         if(caseCount.indexOf('-') > -1){
             //1-4 type of caseCount
-            return Number(caseCount.split("-")[0])
+            return Number(caseCount.split("-")[1])- 3
         }else{
             return Number(caseCount)
         }
     }
 
     getCurrentPoints(){
-        const NUM_DAYS = 5; //This is number of points on x axis. UPDATE THIS IF DATASET IS UPDATED
+        const NUM_DAYS = 4; //This is number of points on x axis. UPDATE THIS IF DATASET IS UPDATED
         let points = []
         for(let i = 0; i < NUM_DAYS; i++){
             let day = suburbInfection[i].date;
@@ -70,7 +70,7 @@ class NswGraph extends React.Component{
             data: {
                 labels: allPoints.map(obj => obj.x),
                 datasets: [{
-                    label: "COVID Cases NSW",
+                    label: "COVID-19 Cases in NSW",
                     data: allPoints.map(obj => obj.y),
                     fill: true,
                     backgroundColor: "#F9C52F",
@@ -83,7 +83,7 @@ class NswGraph extends React.Component{
     render(){
         return(
             <canvas
-                style={{ width: 800, height: 300 }}
+                style={{ width: 800, height: 500 }}
                 ref={node => (this.node = node)}
             />
         );

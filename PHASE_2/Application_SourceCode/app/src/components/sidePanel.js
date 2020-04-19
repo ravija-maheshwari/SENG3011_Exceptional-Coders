@@ -181,19 +181,19 @@ class SidePanel extends React.Component{
                     {this.displayHospitalSearchBar()}
                     {this.displaySuburbSearchBar()}
 
+                    {selectedSuburb.length !== 0 ?
                         <div className="closest-hospitals">
-                            {selectedSuburb.length !== 0 ?
-                                <div className="closest-hospital-list">
-                                    <p> Hospitals near {this.props.selectedSuburb}: </p>
-                                    <li onClick={ () => this.openClosestHospital(closeHospital1)} > {closeHospital1}({closeHospitals[0].distance} kms)</li>
-                                    <li onClick={ () => this.openClosestHospital(closeHospital2)} > {closeHospital2} ({closeHospitals[1].distance} kms)</li>
-                                    <li  onClick={ () => this.openClosestHospital(closeHospital3)} > {closeHospital3} ({closeHospitals[2].distance} kms)</li>
-                                    <li  onClick={ () => this.openClosestHospital(closeHospital4)}> {closeHospital4} ({closeHospitals[3].distance} kms)</li>
-                                </div>
-                                :
-                                null
-                            }
+                            <div className="closest-hospital-list">
+                                <p> Hospitals near {this.props.selectedSuburb}: </p>
+                                <li onClick={ () => this.openClosestHospital(closeHospital1)} > {closeHospital1}({closeHospitals[0].distance} kms)</li>
+                                <li onClick={ () => this.openClosestHospital(closeHospital2)} > {closeHospital2} ({closeHospitals[1].distance} kms)</li>
+                                <li  onClick={ () => this.openClosestHospital(closeHospital3)} > {closeHospital3} ({closeHospitals[2].distance} kms)</li>
+                                <li  onClick={ () => this.openClosestHospital(closeHospital4)}> {closeHospital4} ({closeHospitals[3].distance} kms)</li>
+                            </div>
                         </div>
+                        :
+                        null
+                    }
 
                         <div className="graph-rectangle">
                             {selectedSuburb.length !== 0 ?
