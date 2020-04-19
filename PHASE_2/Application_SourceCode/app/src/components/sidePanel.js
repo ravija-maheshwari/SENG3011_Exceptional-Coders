@@ -168,7 +168,7 @@ class SidePanel extends React.Component{
                         } */}
                         <div className="closest-hospitals">
                             {selectedSuburb.length !== 0 ?
-                                <div>
+                                <div className="closest-hospital-list">
                                     <p> Hospitals near {this.props.selectedSuburb}: </p>
                                     <li> {closeHospitals[0].name}({closeHospitals[0].distance} kms)</li>
                                     <li> {closeHospitals[1].name} ({closeHospitals[1].distance} kms)</li>
