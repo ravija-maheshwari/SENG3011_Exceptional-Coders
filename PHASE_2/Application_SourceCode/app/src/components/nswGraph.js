@@ -38,7 +38,7 @@ class NswGraph extends React.Component{
     componentDidMount() {
         const node = this.node
         let allPoints = this.getCurrentPoints()
-        console.log(allPoints)
+        // console.log(allPoints)
 
         this.myChart = new Chart(node, {
             type: 'line',

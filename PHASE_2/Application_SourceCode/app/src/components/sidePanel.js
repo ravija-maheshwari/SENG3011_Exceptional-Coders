@@ -1,10 +1,11 @@
 import React from "react";
 import SuburbGraph from "./suburbGraph"
-import { getPotentialHospitalList, getPotentialSuburbList } from '../helpers'
+import { getPotentialHospitalList, getPotentialSuburbList, getSortedHospitals } from '../helpers'
 import { allNswAreas } from "../datasets/nswAreas";
 import downArrow from '../mapIcons/down-arrow.png'
 import upArrow from '../mapIcons/up-arrow.png'
 import NswGraph from "./nswGraph";
+import { allHospitals } from "../datasets/allHospitals"
 
 class SidePanel extends React.Component{
     constructor(props) {
@@ -78,7 +79,6 @@ class SidePanel extends React.Component{
         this.setState({
             suburbInput: suburb
         })
-        
         this.props.setSuburbSearched(suburb)
     }
 
@@ -146,7 +146,8 @@ class SidePanel extends React.Component{
 
     render(){
         let { selectedSuburb } = this.props
-
+        let closeHospitals = getSortedHospitals(this.props.selectedSuburb, allNswAreas, allHospitals)
+        console.log(closeHospitals)
         return (
             !this.state.isSidePanelOpen ?
                 <div className = "side-panel-mini">
@@ -166,8 +167,19 @@ class SidePanel extends React.Component{
                             null
                         } */}
                         <div className="closest-hospitals">
-                            <p> List of hospitals closest to {this.props.selectedSuburb}</p>
+                            {selectedSuburb.length !== 0 ?
+                                <div>
+                                    <p> Hospitals near {this.props.selectedSuburb}: </p>
+                                    <li> {closeHospitals[0].name}({closeHospitals[0].distance} kms)</li>
+                                    <li> {closeHospitals[1].name} ({closeHospitals[1].distance} kms)</li>
+                                    <li> {closeHospitals[2].name} ({closeHospitals[2].distance} kms)</li>
+                                    <li> {closeHospitals[3].name} ({closeHospitals[3].distance} kms)</li>
+                                </div>
+                                :
+                                null
+                            }
                         </div>
+
                         <div className="graph-rectangle">
                             {selectedSuburb.length !== 0 ?
                                 <SuburbGraph

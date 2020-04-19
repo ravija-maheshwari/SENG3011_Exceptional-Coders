@@ -133,7 +133,7 @@ class HospitalGraph extends React.Component{
             let val = {x: currentPoints[i][2], y: Math.floor(currentPoints[i][1])}
             finalData.push(val)
         }
-        console.log(finalData)
+        // console.log(finalData)
         return finalData
     }
 
