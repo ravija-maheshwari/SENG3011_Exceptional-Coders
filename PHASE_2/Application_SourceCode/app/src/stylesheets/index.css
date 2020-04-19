@@ -332,6 +332,7 @@ h1 {
     background-color: #1D809E;
     box-shadow: 4px 0px 4px -2px grey;
     animation: fadeIn 0.3s ease;
+    opacity: 80%;
 }
 
 .open-side-panel {
@@ -351,6 +352,13 @@ h1 {
     box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
     transition: background-color 0.1s;
     /* animation: fadeIn 0.3s ease; */
+}
+
+.rectangle{
+    width: 92%;
+    height: 325px;
+    background-color: white;
+    border-radius: 3px;
 }
 
 .open-side-panel > p {
@@ -501,3 +509,4 @@ input:checked + .slider:before {
         right: 73%;
     }
 }
+

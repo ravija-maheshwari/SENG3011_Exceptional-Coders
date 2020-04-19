@@ -107,11 +107,39 @@ class SuburbGraph extends React.Component{
         let allPoints = this.getPredictedPoints()
         this.myChart = new Chart(node, {
             type: 'line',
+            options: {
+                legend: {
+                    labels: {
+                        // This more specific font property overrides the global property
+                        fontColor: 'black',
+                        fontWeight: "bold"
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 12,
+                            fontColor: 'black',
+                            fontWeight: "bold"
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontSize: 10,
+                            fontColor: 'black',
+                            fontWeight: "bold"
+                        }
+                    }]
+                }
+            },
             data: {
                 labels: allPoints.map(obj => obj[2]),
                 datasets: [{
-                    label: "Predicted Cases",
-                    data: allPoints.map(obj => obj[1])
+                    label: "Predicted COVID Cases",
+                    data: allPoints.map(obj => obj[1]),
+                    fill: true,
+                    backgroundColor: "#F9C52F",
+                    responsive: true
                 }]
             }
         });
@@ -128,7 +156,9 @@ class SuburbGraph extends React.Component{
                     labels: allPoints.map(obj => obj[2]),
                     datasets: [{
                         label: "Predicted Cases",
-                        data: allPoints.map(obj => obj[1])
+                        data: allPoints.map(obj => obj[1]),
+                        fill: true,
+                        backgroundColor: "#F9C52F"
                     }]
                 }
             });

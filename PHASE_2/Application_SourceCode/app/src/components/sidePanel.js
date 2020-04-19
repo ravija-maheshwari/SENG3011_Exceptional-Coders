@@ -164,13 +164,16 @@ class SidePanel extends React.Component{
                         :
                             null
                         } */}
-                        {selectedSuburb.length !== 0 ?
-                            <SuburbGraph
-                                selectedSuburb={selectedSuburb}
-                            />
-                        :
-                            null
-                        }
+                        <div className="rectangle">
+                            {selectedSuburb.length !== 0 ?
+                                <SuburbGraph
+                                    selectedSuburb={selectedSuburb}
+                                />
+                                :
+                                null
+                            }
+                        </div>
+
                     <div className="close-side-panel" onClick={this.closeSidePanel}>
                         <img src={upArrow} className="up-arrow" />
                         <p> Hide Side Panel </p>
