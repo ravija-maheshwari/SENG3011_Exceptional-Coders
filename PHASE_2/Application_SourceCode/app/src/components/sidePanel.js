@@ -201,8 +201,9 @@ class SidePanel extends React.Component{
                                     selectedSuburb={selectedSuburb}
                                 />
                                 :
-                                <NswGraph />
+                                <NswGraph/>
                             }
+                        <p className="disclaimer"> <p className="disclaimer-red">Disclaimer:</p> Last updated /date/ This model updates every 3 days and is intended to help make fast decisions, not predict the future </p>
                         </div>
                         <div className="quiz-button">
                             <button> Take the quiz </button>

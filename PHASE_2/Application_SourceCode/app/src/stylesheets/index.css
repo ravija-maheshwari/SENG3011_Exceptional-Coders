@@ -434,6 +434,19 @@ h1 {
     margin-right: 5px;
 }
 
+.disclaimer{
+    /*display: inline-block;*/
+    margin-top: 1%;
+    margin-left: 2%;
+    font-size: 8pt;
+    color: rgba(0,0,0,0.54);
+}
+
+.disclaimer-red{
+    color: darkred;
+    display: inline;
+}
+
 /* Toggle Switch for InfoBox graphs */
 /* Source: https://www.w3schools.com/howto/howto_css_switch.asp */
 .switch {
@@ -529,6 +542,7 @@ input:checked + .slider:before {
     height: 16px;
     width: 16px;
 }
+
 
 /* End of class styles */
 /* Only add custom animations/transitions after this */
