@@ -71,6 +71,8 @@ code {
     width: 22px;
 }
 
+
+
 .info-box {
     cursor: default;
     width: 60em;
@@ -501,6 +503,33 @@ input:checked + .slider:before {
     margin-left: 5px;
     display: inline-block;
 }
+
+.marker-legend {
+    background-color: rgba(0, 0, 0, 0.09);
+    z-index: 999999;
+    position: fixed;
+    bottom: 3%;
+    right: 3.5%;
+    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+    opacity: 0.6;
+}
+
+.marker-legend:hover{
+    opacity: 1;
+}
+
+.legend-text{
+    margin-bottom: 2px;
+    z-index: 999999;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 10pt;
+}
+
+.legend-icon{
+    height: 16px;
+    width: 16px;
+}
+
 /* End of class styles */
 /* Only add custom animations/transitions after this */
 
