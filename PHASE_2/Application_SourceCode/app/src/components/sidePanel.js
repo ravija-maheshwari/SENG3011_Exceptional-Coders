@@ -30,6 +30,7 @@ class SidePanel extends React.Component{
         this.suburbSearchOutOfFocus = this.suburbSearchOutOfFocus.bind(this);
         this.openSidePanel = this.openSidePanel.bind(this)
         this.closeSidePanel = this.closeSidePanel.bind(this)
+        this.openClosestHospital = this.openClosestHospital.bind(this)
     }
 
     handleHospitalSearch(evt){
@@ -66,6 +67,21 @@ class SidePanel extends React.Component{
         })
 
         this.props.setHospitalSearched(position, hospital)
+    }
+
+    openClosestHospital(hospital){
+        let position
+        let hospitals = this.props.hospitals
+
+        for (var i=0; i<hospitals.length; i++) {
+            if (hospitals[i].name.includes(hospital)) {
+                position = { lat: hospitals[i].latitude, lng: hospitals[i].longitude }
+            }
+        }
+
+        let hospitalMarker = document.getElementById(hospital)
+        hospitalMarker.click()
+        this.props.openClosestHospital(position)
     }
 
     handleSuburbSearch(evt){
@@ -145,9 +161,15 @@ class SidePanel extends React.Component{
     }
 
     render(){
+
         let { selectedSuburb } = this.props
         let closeHospitals = getSortedHospitals(this.props.selectedSuburb, allNswAreas, allHospitals)
-        console.log(closeHospitals)
+        let closeHospital1 = closeHospitals[0].name
+        let closeHospital2 = closeHospitals[1].name
+        let closeHospital3 = closeHospitals[2].name
+        let closeHospital4 = closeHospitals[3].name
+
+
         return (
             !this.state.isSidePanelOpen ?
                 <div className = "side-panel-mini">
@@ -158,22 +180,15 @@ class SidePanel extends React.Component{
                 <div className = "side-panel">
                     {this.displayHospitalSearchBar()}
                     {this.displaySuburbSearchBar()}
-                    {/* {this.displaySuburbSearchBar()} */}
-                        {/* {selectedSuburb.length !== 0 ?
-                            <div className="selected-suburb-indicator">
-                                <p> Your suburb is {selectedSuburb} </p>
-                            </div>
-                        :
-                            null
-                        } */}
+
                         <div className="closest-hospitals">
                             {selectedSuburb.length !== 0 ?
                                 <div className="closest-hospital-list">
                                     <p> Hospitals near {this.props.selectedSuburb}: </p>
-                                    <li> {closeHospitals[0].name}({closeHospitals[0].distance} kms)</li>
-                                    <li> {closeHospitals[1].name} ({closeHospitals[1].distance} kms)</li>
-                                    <li> {closeHospitals[2].name} ({closeHospitals[2].distance} kms)</li>
-                                    <li> {closeHospitals[3].name} ({closeHospitals[3].distance} kms)</li>
+                                    <li onClick={ () => this.openClosestHospital(closeHospital1)} > {closeHospital1}({closeHospitals[0].distance} kms)</li>
+                                    <li onClick={ () => this.openClosestHospital(closeHospital2)} > {closeHospital2} ({closeHospitals[1].distance} kms)</li>
+                                    <li  onClick={ () => this.openClosestHospital(closeHospital3)} > {closeHospital3} ({closeHospitals[2].distance} kms)</li>
+                                    <li  onClick={ () => this.openClosestHospital(closeHospital4)}> {closeHospital4} ({closeHospitals[3].distance} kms)</li>
                                 </div>
                                 :
                                 null

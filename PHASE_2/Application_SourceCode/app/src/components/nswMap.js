@@ -133,6 +133,12 @@ class NSWMap extends React.Component {
     })
   }
 
+  openClosestHospital(position){
+    this.setState({
+      mapCenter: position
+    })
+  }
+
   setSuburbSearched(selectedSuburb) {
     this.setState({
       selectedSuburb: selectedSuburb
@@ -147,10 +153,11 @@ class NSWMap extends React.Component {
             selectedSuburb={this.state.selectedSuburb}
             hospitals={this.state.hospitals}
             setHospitalSearched={this.setHospitalSearched.bind(this)}
-						setSuburbSearched={this.setSuburbSearched.bind(this)}
-						isSidePanelOpen={this.state.isSidePanelOpen}
-						openSidePanel={this.openSidePanel}
-						closeSidePanel={this.closeSidePanel}
+            setSuburbSearched={this.setSuburbSearched.bind(this)}
+            isSidePanelOpen={this.state.isSidePanelOpen}
+            openSidePanel={this.openSidePanel}
+            closeSidePanel={this.closeSidePanel}
+            openClosestHospital={this.openClosestHospital.bind(this)}
         />
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
