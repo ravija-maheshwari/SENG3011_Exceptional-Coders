@@ -164,6 +164,9 @@ class SidePanel extends React.Component{
                         :
                             null
                         } */}
+                        <div className="closest-hospitals">
+                            <p> List of hospitals closest to {this.props.selectedSuburb}</p>
+                        </div>
                         <div className="rectangle">
                             {selectedSuburb.length !== 0 ?
                                 <SuburbGraph
@@ -172,6 +175,9 @@ class SidePanel extends React.Component{
                                 :
                                 null
                             }
+                        </div>
+                        <div className="quiz-button">
+                            <button> Take the quiz </button>
                         </div>
 
                     <div className="close-side-panel" onClick={this.closeSidePanel}>

@@ -242,7 +242,7 @@ h1 {
     /* box-shadow: 2px 2px 2px rgb(184, 184, 184); */
     z-index: 99998;
     position: absolute;
-    top: 12%;
+    top: 9%;
     left: 3.5%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -251,6 +251,7 @@ h1 {
     border-radius: 3px;
     box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
 }
+
 
 
 .search-suburb > input {
@@ -318,7 +319,7 @@ h1 {
 .side-panel{
     display: flex;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
     flex-direction: column;
     position: absolute;
     top: 0;
@@ -355,12 +356,26 @@ h1 {
 }
 
 .rectangle{
+    margin-top: 50px;
     width: 92%;
     height: 325px;
     background-color: white;
     border-radius: 3px;
 }
 
+.closest-hospitals{
+    width: 92%;
+    height: 100px;
+    background-color: white;
+    border-radius: 3px;
+    margin-top: 150px;
+    border-radius: 3px;
+}
+.quiz-button{
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 3px;
+}
 .open-side-panel > p {
     padding-top: 5px;
     margin-left: 5px;
