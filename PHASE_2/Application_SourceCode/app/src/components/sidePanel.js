@@ -184,7 +184,9 @@ class SidePanel extends React.Component{
                     {selectedSuburb.length !== 0 ?
                         <div className="closest-hospitals">
                             <div className="closest-hospital-list">
-                                <p> Hospitals near {this.props.selectedSuburb}: </p>
+                                <div className="closest-hospital-title">
+                                    <p > Hospitals near {this.props.selectedSuburb}: </p>
+                                </div>
                                 <li onClick={ () => this.openClosestHospital(closeHospital1)} > {closeHospital1}({closeHospitals[0].distance} kms)</li>
                                 <li onClick={ () => this.openClosestHospital(closeHospital2)} > {closeHospital2} ({closeHospitals[1].distance} kms)</li>
                                 <li  onClick={ () => this.openClosestHospital(closeHospital3)} > {closeHospital3} ({closeHospitals[2].distance} kms)</li>
