@@ -19,7 +19,7 @@ const SUBURBS_API_URL =
 function createMapOptions() {
   return {
     restriction: {
-      latLngBounds: { north: -20, south: -45, west: 130, east: 165 },
+      latLngBounds: { north: -20, south: -45, west: 120, east: 175 },
       strictBounds: false
     },
     gestureHandling: "greedy",
@@ -35,11 +35,17 @@ class NSWMap extends React.Component {
     // To hold all hospital data from myhospitals API
     this.state = {
       mapCenter: { lat: -33.5, lng: 149 },
+      mapZoom: 6,
       hospitals: [],
       suburbCases: [],
       hospitalSearched: '',
       selectedSuburb:'',
-		};
+      whichInfoBoxOpen: null
+    };
+
+    this.autoCloseInfoBox = this.autoCloseInfoBox.bind(this)
+    this.closedInfoBoxes = this.closedInfoBoxes.bind(this)
+    this.setMapZoom = this.setMapZoom.bind(this)
   }
 
   // Fetching hospital locations before map is mounted on DOM
@@ -79,16 +85,42 @@ class NSWMap extends React.Component {
             name={h["name"]}
             key={h["name"]}
             suburb={suburb}
+            hospitals={this.state.hospitals}
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
             selectedSuburb={this.state.selectedSuburb}
             allSuburbCases={this.state.suburbCases}
+            autoCloseInfoBox={this.autoCloseInfoBox}
+            closedInfoBoxes={this.closedInfoBoxes}
+            setCenter={this.openClosestHospital.bind(this)}
           />
         );
       }
     });
 
     return result;
+  }
+
+  setMapZoom = ({zoom}) => {
+      this.setState({ mapZoom: zoom })
+  }
+
+  closedInfoBoxes() {
+      this.setState({ whichInfoBoxOpen: null })
+  }
+
+  autoCloseInfoBox(infoBoxID) {
+      let { whichInfoBoxOpen } = this.state
+
+      if (whichInfoBoxOpen !== null) {
+          let infoBox = document.getElementById(whichInfoBoxOpen)
+          infoBox.click()
+          this.setState({ whichInfoBoxOpen: infoBoxID })
+      }
+
+      else {
+        this.setState({ whichInfoBoxOpen: infoBoxID })
+      }
   }
 
   // Only for displayCircles() cos of weird behaviour
@@ -132,13 +164,15 @@ class NSWMap extends React.Component {
   setHospitalSearched(position, hospital) {
     this.setState({
       mapCenter: position,
-      hospitalSearched: hospital    
+      hospitalSearched: hospital,
+      mapZoom: 10 
     })
   }
 
   openClosestHospital(position){
     this.setState({
-      mapCenter: position
+      mapCenter: position,
+      mapZoom: 10
     })
   }
 
@@ -165,7 +199,8 @@ class NSWMap extends React.Component {
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           center={this.state.mapCenter}
-          defaultZoom={6}
+          zoom={this.state.mapZoom}
+          onChange={this.setMapZoom}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => this.displayCircles(map, maps)}
           options={createMapOptions}
@@ -173,9 +208,9 @@ class NSWMap extends React.Component {
           {this.displayHospitals()}
         </GoogleMapReact>
         <div className="marker-legend">
-          <p className="legend-text"> <img className="legend-icon" src={hospitalRed}/> Hospital has low availability of beds (totalBeds/availableBeds &lt;= 0.3) </p>
-          <p className="legend-text"> <img className="legend-icon" src={hospitalOrange}/> Hospital has some availability of beds (0.3 &lt; totalBeds/availableBeds &lt;= 0.7) </p>
-          <p className="legend-text"> <img className="legend-icon" src={hospitalGreen}/> Hospital has high availability of beds (totalBeds/availableBeds &gt; 0.7)  </p>
+          <p className="legend-text"> <img className="legend-icon" src={hospitalRed}/> Hospital has low availability of beds (availableBeds/totalBeds) &lt;= 0.3) </p>
+          <p className="legend-text"> <img className="legend-icon" src={hospitalOrange}/> Hospital has some availability of beds (0.3 &lt; availableBeds/totalBeds &lt;= 0.7) </p>
+          <p className="legend-text"> <img className="legend-icon" src={hospitalGreen}/> Hospital has high availability of beds (availableBeds/totalBeds &gt; 0.7)  </p>
         </div>
       </div>
     );

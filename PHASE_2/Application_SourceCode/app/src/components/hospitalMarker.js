@@ -22,10 +22,23 @@ class HospitalMarker extends React.Component {
 
     openInfo(){
         this.setState({isInfoDisplayed: true, markerClass: "hospital-marker-selected" })
+        this.props.autoCloseInfoBox("close-info-" + this.props.name)
+
+        let position
+        let hospitals = this.props.hospitals
+
+        for (var i=0; i<hospitals.length; i++) {
+            if (hospitals[i].name.includes(this.props.name)) {
+                position = { lat: hospitals[i].latitude - 0.25, lng: hospitals[i].longitude + 0.35 }
+            }
+        }
+
+        this.props.setCenter(position)
     }
 
     closeInfo(){
         this.setState({isInfoDisplayed: false, markerClass: "hospital-marker" })
+        this.props.closedInfoBoxes()
     }
 
     render() {
