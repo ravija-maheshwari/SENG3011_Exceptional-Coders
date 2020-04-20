@@ -36,12 +36,13 @@ class InfoBox extends React.Component{
             <div className="info-box">
                 <span id={"close-info-" + this.props.name} className="close-info-box" onClick={this.props.closeInfoDisplayed}> &#x2715; </span>
                 <p className="hospital-name"> {this.props.name} </p>
+                <hr></hr>
                 <div className="hospital-detail">
-                    <p> Total beds = {this.props.totalBeds}</p>
-                    <p> Beds Available = {this.props.bedsAvailable}</p>
+                    <p> Total beds: <p className="detail-value"> {this.props.totalBeds} </p></p>
+                    <p> Beds Available: <p className="detail-value"> {this.props.bedsAvailable} </p></p>
                     {this.props.distanceToSuburb
                     ?
-                        <p> Distance to home suburb = {this.props.distanceToSuburb} kms </p>
+                        <p> Distance to home suburb: <p className="detail-value"> {this.props.distanceToSuburb} kms </p> </p>
                     :
                         null
                     }
