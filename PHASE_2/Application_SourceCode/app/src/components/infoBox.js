@@ -24,7 +24,7 @@ class InfoBox extends React.Component{
 
     displayToggleSwitch() {
         return (
-            <label class="switch">
+            <label className="switch">
                 <input type="checkbox" onChange={this.switchGraph}/>
                 <span className="slider round"></span>
             </label>
@@ -34,7 +34,7 @@ class InfoBox extends React.Component{
     render(){
         return(
             <div className="info-box">
-                <span className="close-info-box" onClick={this.props.closeInfoDisplayed}> &#x2715; </span>
+                <span id={"close-info-" + this.props.name} className="close-info-box" onClick={this.props.closeInfoDisplayed}> &#x2715; </span>
                 <p className="hospital-name"> {this.props.name} </p>
                 <div className="hospital-detail">
                     <p> Total beds = {this.props.totalBeds}</p>

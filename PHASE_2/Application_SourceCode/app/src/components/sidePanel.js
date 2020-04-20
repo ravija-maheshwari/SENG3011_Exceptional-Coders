@@ -55,7 +55,7 @@ class SidePanel extends React.Component{
 
         for (var i=0; i<hospitals.length; i++) {
             if (hospitals[i].name.includes(hospital)) {
-                position = { lat: hospitals[i].latitude, lng: hospitals[i].longitude }
+                position = { lat: hospitals[i].latitude - 0.25, lng: hospitals[i].longitude + 0.35 }
             }
         }
 
@@ -75,13 +75,13 @@ class SidePanel extends React.Component{
 
         for (var i=0; i<hospitals.length; i++) {
             if (hospitals[i].name.includes(hospital)) {
-                position = { lat: hospitals[i].latitude, lng: hospitals[i].longitude }
+                position = { lat: hospitals[i].latitude - 0.25, lng: hospitals[i].longitude + 0.35 }
             }
         }
 
+        this.props.openClosestHospital(position)
         let hospitalMarker = document.getElementById(hospital)
         hospitalMarker.click()
-        this.props.openClosestHospital(position)
     }
 
     handleSuburbSearch(evt){
