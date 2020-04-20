@@ -193,7 +193,7 @@ class SuburbGraph extends React.Component{
     render(){
         return(
             <canvas
-                style={{ width: 800, height: 500 }}
+                style={{ width: 800, height: 400 }}
                 ref={node => (this.node = node)}
             />
         );
