@@ -589,6 +589,17 @@ input:checked + .slider:before {
     width: 16px;
 }
 
+.contribute-form{
+    height:70%;
+    width:15%;
+    top: 10%;
+    margin-top: 10%;
+    margin-left: 20%;
+    position: center;
+    background-color: #F9C52F;
+    font-size: 14px;
+}
+
 
 /* End of class styles */
 /* Only add custom animations/transitions after this */
