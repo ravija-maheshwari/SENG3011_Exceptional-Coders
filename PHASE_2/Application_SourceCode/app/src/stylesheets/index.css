@@ -374,7 +374,7 @@ h1 {
     height: 17%;
     border-radius: 3px;
     margin-top: 31%;
-    margin-bottom: -23%;
+    margin-bottom: -20%;
 }
 
 .closest-hospital-title{
@@ -576,6 +576,17 @@ input:checked + .slider:before {
 .legend-icon{
     height: 16px;
     width: 16px;
+}
+
+.contribute-form{
+    height:70%;
+    width:15%;
+    top: 10%;
+    margin-top: 10%;
+    margin-left: 20%;
+    position: center;
+    background-color: #F9C52F;
+    font-size: 14px;
 }
 
 

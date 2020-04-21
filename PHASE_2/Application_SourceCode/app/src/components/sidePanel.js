@@ -31,6 +31,7 @@ class SidePanel extends React.Component{
         this.openSidePanel = this.openSidePanel.bind(this)
         this.closeSidePanel = this.closeSidePanel.bind(this)
         this.openClosestHospital = this.openClosestHospital.bind(this)
+
     }
 
     handleHospitalSearch(evt){
@@ -160,6 +161,8 @@ class SidePanel extends React.Component{
         )
     }
 
+
+
     render(){
 
         let { selectedSuburb } = this.props
@@ -210,6 +213,7 @@ class SidePanel extends React.Component{
                         <div className="quiz-button">
                             <button> Take the quiz </button>
                         </div>
+
 
                     <div className="close-side-panel" onClick={this.closeSidePanel}>
                         <img src={upArrow} className="up-arrow" />

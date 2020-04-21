@@ -80,6 +80,15 @@ exports.getHospitalSuburb = function(hospital, hospitalDetail) {
     }
 }
 
+//Given hospital name, it returns the Hospital JSON object
+exports.getHospitalObject = function(hospitalName, hospitalDetail){
+    for(var i = 0; i < hospitalDetail.length; i++){
+        if (hospitalName.includes(hospitalDetail[i].name) || hospitalDetail[i].name.includes(hospitalName)) {
+            return hospitalDetail[i];
+        }
+    }
+}
+
 //Returns of list of hospitals matching the searchString
 exports.getPotentialHospitalList = function(searchString, hospitalDetail){
     var result = []
@@ -161,3 +170,4 @@ function getDistance(lat1, lon1, lat2, lon2) {
     let result = 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
     return result.toFixed(1)
 }
+
