@@ -210,28 +210,30 @@ class NSWMap extends React.Component {
   render() {
     return (
       <div style={{ height: "100vh", width: "100%" }}>
-				<SidePanel 
-            selectedSuburb={this.state.selectedSuburb}
-            hospitals={this.state.hospitals}
-            setHospitalSearched={this.setHospitalSearched.bind(this)}
-            setSuburbSearched={this.setSuburbSearched.bind(this)}
-            isSidePanelOpen={this.state.isSidePanelOpen}
-            openSidePanel={this.openSidePanel}
-            closeSidePanel={this.closeSidePanel}
-						openClosestHospital={this.openClosestHospital.bind(this)}
-						openQuizModal={this.openQuizModal.bind(this)}
-        />
-				<Quiz 
-					isVisible={this.state.isQuizOpen}
-					closeQuizModal={this.closeQuizModal.bind(this)}
-				/>
-				<ContributeForm
-                  isFormOpen = {this.state.isFormOpen}
-
-                />
-                <div className="contribute-button">
-                  <button onClick={() => this.openForm()}> <img className="bed-icon" src = {hospitalBedIcon} /></button>
-                </div>
+            <SidePanel 
+                selectedSuburb={this.state.selectedSuburb}
+                hospitals={this.state.hospitals}
+                setHospitalSearched={this.setHospitalSearched.bind(this)}
+                setSuburbSearched={this.setSuburbSearched.bind(this)}
+                isSidePanelOpen={this.state.isSidePanelOpen}
+                openSidePanel={this.openSidePanel}
+                closeSidePanel={this.closeSidePanel}
+                openClosestHospital={this.openClosestHospital.bind(this)}
+                openQuizModal={this.openQuizModal.bind(this)}
+           />
+            <Quiz 
+                isVisible={this.state.isQuizOpen}
+                closeQuizModal={this.closeQuizModal.bind(this)}
+            />
+            <ContributeForm
+                isFormOpen = {this.state.isFormOpen}
+                hospitals = {this.state.hospitals}
+                closeForm = {this.closeForm.bind(this)}
+            />
+            <div className="contribute-button">
+                <p onClick={() => this.openForm()}> <img className="bed-icon" src = {hospitalBedIcon} /></p>
+                <span class="tooltiptext"> Are you a hospital? Contribute to our data </span>
+            </div>
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           center={this.state.mapCenter}
