@@ -40,6 +40,7 @@ class ContributeForm extends React.Component{
             })
 
             if (response.status === 200) {
+                this.props.addUpdatedHospitalInfo(postBody)
                 alert("Information Updated for " + hospitalEntered + ".")
             }
             else {

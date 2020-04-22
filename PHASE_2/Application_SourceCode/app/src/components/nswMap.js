@@ -18,6 +18,8 @@ const HOSPITALS_API_URL =
   "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals";
 const SUBURBS_API_URL =
   "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/suburbs";
+const HOSPITAL_INFO_URL = 
+    "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/hospital"
 
 function createMapOptions() {
   return {
@@ -47,7 +49,8 @@ class NSWMap extends React.Component {
       bedsInput: 0,
       hospitalInput: '',
       isFormOpen: false,
-      isQuizOpen: false
+      isQuizOpen: false,
+      updatedHospitalInfo: []
     };
 
     this.autoCloseInfoBox = this.autoCloseInfoBox.bind(this)
@@ -61,19 +64,31 @@ class NSWMap extends React.Component {
       const response = await fetch(HOSPITALS_API_URL);
       const hospitals = await response.json();
       
+      const hospInfoResponse = await fetch(HOSPITAL_INFO_URL)
+      const updatedHospitalInfo = await hospInfoResponse.json()
       // Uncomment when testing real data from Firestore,
       // and add in 'suburbCases' in this.setState()
       // const suburbResponse = await fetch(SUBURBS_API_URL)
       // const suburbCases = await suburbResponse.json()
 
-      this.setState({ hospitals: hospitals });
+      this.setState({ 
+          hospitals: hospitals,
+          updatedHospitalInfo: updatedHospitalInfo
+        });
     } catch (error) {
       console.log(error);
     }
   }
 
+  addUpdatedHospitalInfo(hospitalObject) {
+      let { updatedHospitalInfo } = this.state
+      updatedHospitalInfo.push(hospitalObject)
+
+      this.setState({ updatedHospitalInfo: updatedHospitalInfo })
+  }
+
   displayHospitals() {
-    let hospitals = this.state.hospitals;
+    let { hospitals, updatedHospitalInfo } = this.state;
 	let result = [];
     //const suburbCases =  this.state.suburbCases
     const suburbCases = suburbInfection;
@@ -81,8 +96,19 @@ class NSWMap extends React.Component {
     hospitals.forEach(h => {
       if (h["ispublic"] && h["state"] === "NSW") {
         // Public hospitals in NSW
-        let bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
-        let totalBeds = getTotalBeds(h, hospitalDetail);
+        let bedsAvailable
+        let totalBeds
+
+        for (var i=0; i<updatedHospitalInfo.length; i++) {
+            if (updatedHospitalInfo[i].name === h["name"]) {
+                bedsAvailable = getAvailableBeds(h, updatedHospitalInfo, suburbCases)
+                totalBeds = updatedHospitalInfo[i].beds
+            }
+            else {
+                bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
+                totalBeds = getTotalBeds(h, hospitalDetail);
+            }
+        }
         let suburb = getHospitalSuburb(h["name"], hospitalDetail)
 
         result.push(
@@ -229,6 +255,7 @@ class NSWMap extends React.Component {
                 isFormOpen = {this.state.isFormOpen}
                 hospitals = {this.state.hospitals}
                 closeForm = {this.closeForm.bind(this)}
+                addUpdatedHospitalInfo = {this.addUpdatedHospitalInfo.bind(this)}
             />
             <div className="contribute-button">
                 <p onClick={() => this.openForm()}> <img className="bed-icon" src = {hospitalBedIcon} /></p>
