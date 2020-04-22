@@ -93,30 +93,39 @@ class ContributeForm extends React.Component{
                 <div className="contribute-modal">
                     <div className="contribute-form">
                         <span className="close-info-box" onClick={this.closeForm.bind(this)}> &#x2715; </span>
+                        <p className="contribute-title"> Are you a hospital admin? Contribute to our data</p>
                         <form onSubmit={(evt) => this.submitHospitalInfo(evt)}>
-                           Hospital Name:
-                           <input placeholder="Enter hospital name"
-                                value={this.state.hospitalInput}
-                                onChange={evt => this.handleHospitalSearch(evt)}
-                                type="text"
-                                onFocus={this.hospitalSearchFocus.bind(this)}
-                                onBlur={this.hospitalSearchOutOfFocus.bind(this)}>
-                            </input>
-                            {this.state.isEnteringHospital ?
-                                <div className="hospital-list">
-                                    {potentialHospitals.map((hospital) => <p value={hospital} onMouseDown={() => this.setHospitalEntered(hospital)} className="hospital-option">{hospital}</p>)}
-                                </div>
-                            :
-                                null
-                            }
-                            Total beds:
-                            <input placeholder="Enter total beds"
-                                value={this.state.bedsInput}
-                                onChange={e => this.setState({bedsInput: e.target.value})}
-                                type="text"
-                                pattern="[0-9]+">
-                            </input>
-                            <input type="submit" value="Submit"/>
+                            <div className="hospital-form-name">
+                                <p> Hospital Name: </p>
+                                <input placeholder="Enter hospital name..."
+                                       value={this.state.hospitalInput}
+                                       onChange={evt => this.handleHospitalSearch(evt)}
+                                       type="text"
+                                       onFocus={this.hospitalSearchFocus.bind(this)}
+                                       onBlur={this.hospitalSearchOutOfFocus.bind(this)}>
+                                </input>
+                                {this.state.isEnteringHospital ?
+                                    <div className="hospital-list">
+                                        {potentialHospitals.map((hospital) => <p value={hospital} onMouseDown={() => this.setHospitalEntered(hospital)} className="hospital-option">{hospital}</p>)}
+                                    </div>
+                                    :
+                                    null
+                                }
+                            </div>
+
+                            <div className="hospital-form-beds">
+                                <p> Total beds: </p>
+                                <input placeholder="Enter total beds in hospital..."
+                                       value={this.state.bedsInput}
+                                       onChange={e => this.setState({bedsInput: e.target.value})}
+                                       type="text"
+                                       pattern="[0-9]+">
+                                </input>
+                            </div>
+                            <div className="submit-hospital">
+                                <input type="submit" value="Submit"/>
+                            </div>
+
                         </form>
                     </div>
                 </div>
