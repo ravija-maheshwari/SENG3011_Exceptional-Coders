@@ -27,6 +27,45 @@ admin.initializeApp({
 const db = admin.firestore()
 const serverErrorMsg = { error: "Internal server error, please try again." }
 
+//Gets all hospital objects
+app.get('/api/v1/hospital', async(req, res) => {
+    try{
+        let allHospitals = [];
+        const snapshot = await db.collection('hospital_details').get()
+        snapshot.forEach(doc => {
+
+            let hospital = {
+                name: doc.data().name,
+                suburb: doc.data().suburb,
+                beds: doc.data().beds
+            };
+
+            allHospitals.push(hospital);
+        });
+        return res.status(200).send(allHospitals);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(serverErrorMsg);
+    }
+})
+
+//Endpoint to put a hospital object into db
+app.post('/api/v1/hospital', async(req,res) => {
+    try{
+        const hospital = {
+            name: req.body['name'],
+            suburb: req.body['suburb'],
+            beds: req.body['beds']
+        }
+        console.log(hospital)
+        //Insert the hospital object
+        await db.collection('hospital_details').doc().create(hospital)
+        return res.status(200).send("Hospital added")
+    }catch(error){
+        console.log(error);
+        return res.status(500).send(serverErrorMsg);
+    }
+})
 
 //Endpoint to get all logs from Firestore
 app.get('/api/v1/logs', async(req, res) => {
