@@ -3,6 +3,7 @@ import GoogleMapReact from "google-map-react";
 import { MAPS_API_KEY } from "../config";
 import HospitalMarker from "./hospitalMarker";
 import SidePanel from "./sidePanel";
+import Quiz from './quiz'
 import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb } from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
@@ -43,7 +44,8 @@ class NSWMap extends React.Component {
       whichInfoBoxOpen: null,
       bedsInput: 0,
       hospitalInput: '',
-      isFormOpen: false
+      isFormOpen: false,
+      isQuizOpen: false
     };
 
     this.autoCloseInfoBox = this.autoCloseInfoBox.bind(this)
@@ -185,7 +187,15 @@ class NSWMap extends React.Component {
     this.setState({
       selectedSuburb: selectedSuburb
     })
-  }
+	}
+	
+	openQuizModal() {
+		this.setState({ isQuizOpen: true })
+	}
+
+	closeQuizModal() {
+		this.setState({ isQuizOpen: false })
+	}
 
   displayContributeForm(){
     return(
@@ -231,8 +241,13 @@ class NSWMap extends React.Component {
             isSidePanelOpen={this.state.isSidePanelOpen}
             openSidePanel={this.openSidePanel}
             closeSidePanel={this.closeSidePanel}
-            openClosestHospital={this.openClosestHospital.bind(this)}
+						openClosestHospital={this.openClosestHospital.bind(this)}
+						openQuizModal={this.openQuizModal.bind(this)}
         />
+				<Quiz 
+					isVisible={this.state.isQuizOpen}
+					closeQuizModal={this.closeQuizModal.bind(this)}
+				/>
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           center={this.state.mapCenter}
@@ -252,7 +267,6 @@ class NSWMap extends React.Component {
                 <button onClick={() => this.openForm()}> Are you a hospital? Contribute to our data </button>
               </div>
           }
-
         </GoogleMapReact>
         <div className="marker-legend">
           <p className="legend-text"> <img className="legend-icon" src={hospitalRed}/> Hospital has low availability of beds (availableBeds/totalBeds) &lt;= 0.3) </p>

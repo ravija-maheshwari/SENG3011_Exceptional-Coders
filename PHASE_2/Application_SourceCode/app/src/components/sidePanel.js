@@ -151,6 +151,10 @@ class SidePanel extends React.Component{
         this.setState({ isSidePanelOpen: false })
     }
 
+    openQuizModal() {
+        this.props.openQuizModal()
+    }
+
     displayOpenSidePanel() {
         return (
             <div className="open-side-panel" onClick={this.openSidePanel}>
@@ -160,8 +164,6 @@ class SidePanel extends React.Component{
             </div>
         )
     }
-
-
 
     render(){
 
@@ -211,7 +213,7 @@ class SidePanel extends React.Component{
                         <p className="disclaimer"> <p className="disclaimer-red">Disclaimer:</p> Last updated /date/ This model updates every 3 days and is intended to help make fast decisions, not predict the future </p>
                         </div>
                         <div className="quiz-button">
-                            <button> Take the quiz </button>
+                            <button onClick={this.openQuizModal.bind(this)}> Take the quiz </button>
                         </div>
 
 
