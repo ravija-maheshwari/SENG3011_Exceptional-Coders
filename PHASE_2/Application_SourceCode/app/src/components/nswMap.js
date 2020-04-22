@@ -4,6 +4,7 @@ import { MAPS_API_KEY } from "../config";
 import HospitalMarker from "./hospitalMarker";
 import SidePanel from "./sidePanel";
 import Quiz from './quiz'
+import ContributeForm from './contributeForm'
 import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb } from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
@@ -51,8 +52,6 @@ class NSWMap extends React.Component {
     this.autoCloseInfoBox = this.autoCloseInfoBox.bind(this)
     this.closedInfoBoxes = this.closedInfoBoxes.bind(this)
     this.setMapZoom = this.setMapZoom.bind(this)
-    this.displayContributeForm = this.displayContributeForm.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   // Fetching hospital locations before map is mounted on DOM
@@ -197,37 +196,14 @@ class NSWMap extends React.Component {
 		this.setState({ isQuizOpen: false })
 	}
 
-  displayContributeForm(){
-    return(
-        <div className="contribute-form">
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            Hospital Name:
-            <input placeholder="Enter hospital name"
-                   value={this.state.hospitalInput}
-                   onChange={e => this.setState({hospitalInput: e.target.value})}
-                   type="text">
-            </input>
-            Total beds:
-              <input placeholder="Enter total beds"
-                     value={this.state.bedsInput}
-                     onChange={e => this.setState({bedsInput: e.target.value})}
-                     type="text">
-              </input>
-            <input type="submit" value="Submit "/>
-          </form>
-        </div>
-    )
-  }
 
-  openForm(){
-    this.setState({isFormOpen: true})
-  }
+    openForm(){
+      this.setState({isFormOpen: true})
+    }
 
-  handleSubmit(event){
-    console.log(this.state.bedsInput)
-    console.log(this.state.hospitalInput)
-    event.preventDefault();
-  }
+    closeForm(){
+      this.setState({isFormOpen: false})
+    }
 
   // Render Map and use displayHospitals() to render markers
   render() {
@@ -248,6 +224,12 @@ class NSWMap extends React.Component {
 					isVisible={this.state.isQuizOpen}
 					closeQuizModal={this.closeQuizModal.bind(this)}
 				/>
+				<ContributeForm
+                  isFormOpen = {this.state.isFormOpen}
+                />
+                <div className="contribute-button">
+                  <button onClick={() => this.openForm()}> Are you a hospital? Contribute to our data </button>
+                </div>
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           center={this.state.mapCenter}
@@ -258,15 +240,6 @@ class NSWMap extends React.Component {
           options={createMapOptions}
         >
           {this.displayHospitals()}
-          {this.state.isFormOpen ?
-              <div>
-                {this.displayContributeForm()}
-              </div>
-              :
-              <div className="contribute-button">
-                <button onClick={() => this.openForm()}> Are you a hospital? Contribute to our data </button>
-              </div>
-          }
         </GoogleMapReact>
         <div className="marker-legend">
           <p className="legend-text"> <img className="legend-icon" src={hospitalRed}/> Hospital has low availability of beds (availableBeds/totalBeds) &lt;= 0.3) </p>
