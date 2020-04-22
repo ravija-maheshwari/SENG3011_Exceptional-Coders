@@ -12,6 +12,7 @@ import { suburbInfection } from "../datasets/suburbInfection";
 import hospitalRed from '../mapIcons/hospitalRed.png'
 import hospitalOrange from '../mapIcons/hospitalOrange.png'
 import hospitalGreen from '../mapIcons/hospitalGreen.png'
+import hospitalBedIcon from '../mapIcons/bedIcon.svg'
 
 const HOSPITALS_API_URL =
   "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals";
@@ -226,9 +227,10 @@ class NSWMap extends React.Component {
 				/>
 				<ContributeForm
                   isFormOpen = {this.state.isFormOpen}
+
                 />
                 <div className="contribute-button">
-                  <button onClick={() => this.openForm()}> Are you a hospital? Contribute to our data </button>
+                  <button onClick={() => this.openForm()}> <img className="bed-icon" src = {hospitalBedIcon} /></button>
                 </div>
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}

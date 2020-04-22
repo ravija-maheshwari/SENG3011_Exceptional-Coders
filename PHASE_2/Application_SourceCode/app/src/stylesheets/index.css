@@ -588,14 +588,17 @@ input:checked + .slider:before {
 }
 
 .contribute-form{
-    height:70%;
-    width:15%;
+    display: flex;
+    position: absolute;
+    padding-top: 80px;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2000000;
     top: 10%;
-    margin-top: 10%;
-    margin-left: 20%;
-    position: center;
-    background-color: #F9C52F;
-    font-size: 14px;
+    left: 40%;
+    right: 30%;
+    width: 50%;
+    height: 60%;;
 }
 
 .contribute-button{
@@ -617,6 +620,12 @@ input:checked + .slider:before {
 .contribute-button:hover{
     opacity: 1;
 }
+
+.bed-icon{
+    height: 50px;
+    width: 50px;
+}
+
 .quiz-modal {
     display: flex;
     position: absolute;
