@@ -132,9 +132,9 @@ class ContributeForm extends React.Component{
                         {this.state.isSubmittedCorrectly === 0 ?
                             null
                         : (this.state.isSubmittedCorrectly === 1) ?
-                            <p style={{ marginTop: "5%", color: "green", textAlign: "center", fontSize: "14pt" }}> Information Updated for {this.state.hospitalEntered}. </p>
+                            <p className="submit-message-green"> Information Updated for {this.state.hospitalEntered}. </p>
                         :
-                            <p style={{ marginTop: "5%", color: "red", textAlign: "center", fontSize: "14pt" }}> Something went wrong, please try again. </p>
+                            <p className="submit-message-red"> Something went wrong, please try again. </p>
                         }
                     </div>
                 </div>

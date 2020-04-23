@@ -644,6 +644,7 @@ input:checked + .slider:before {
     margin-right: auto;
     margin-bottom: 6%;
     font-weight: 600;
+    width: 85%;
 }
 
 .contribute-form > form > .close-h-info-box {
@@ -758,6 +759,30 @@ input:checked + .slider:before {
     color: green;
     border: 2px solid green;
     border-radius: 3px;
+}
+
+.submit-message-green {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    width: 80%;
+    margin-top: 5%;
+    text-align: center;
+    color: green;
+    background-color: rgb(189, 230, 198);
+    font-size: 14pt;
+}
+
+.submit-message-red {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    width: 80%;
+    margin-top: 5%;
+    text-align: center;
+    color: rgb(121, 25, 25);
+    background-color: #F8D7DA;
+    font-size: 14pt;
 }
 
 .contribute-button > p:hover {
