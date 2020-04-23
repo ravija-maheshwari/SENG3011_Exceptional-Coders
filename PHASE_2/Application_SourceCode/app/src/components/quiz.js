@@ -132,7 +132,7 @@ class Quiz extends React.Component {
       evidence: this.state.evidence,
     };
     console.log("CALLING WTIH THIS", data);
-    fetch("https://api.infermedica.com/v2/diagnosis", {
+    fetch("https://api.infermedica.com/covid19/diagnosis", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
