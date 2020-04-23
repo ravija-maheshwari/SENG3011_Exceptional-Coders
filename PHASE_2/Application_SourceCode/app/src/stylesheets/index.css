@@ -89,6 +89,27 @@ code {
     border-top: 2px solid #1D809E;
 }
 
+.info-box-hospital-graph {
+    position: relative;
+    height: 215px;
+    width: 100%;
+}
+
+.info-box-hospital-graph > canvas {
+    height: 100%;
+    width: 100%;
+}
+
+.side-panel-suburb-graph {
+    position: relative;
+    height: 185px;
+}
+
+.side-panel-suburb-graph > canvas {
+    height: 100%;
+    width: 100%;
+}
+
 .close-info-box {
     padding: 5px;
     margin-top: 5px;

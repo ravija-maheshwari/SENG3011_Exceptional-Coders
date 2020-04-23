@@ -193,6 +193,8 @@ class HospitalGraph extends React.Component{
         this.myChart = new Chart(node, {
             type: 'line',
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     labels: {
                         fontColor: 'black',
@@ -227,9 +229,35 @@ class HospitalGraph extends React.Component{
         const node = this.node
         if (this.props.casesOrBeds !== prevProps.casesOrBeds) {
             if (this.props.casesOrBeds === "cases") {
-                this.myChart.clear()
+                this.myChart.destroy()
                 this.myChart = new Chart(node, {
                     type: 'line',
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            labels: {
+                                fontColor: 'black',
+                                fontWeight: "bold"
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    fontSize: 12,
+                                    fontColor: 'black',
+                                    fontWeight: "bold"
+                                }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    fontSize: 10,
+                                    fontColor: 'black',
+                                    fontWeight: "bold"
+                                }
+                            }]
+                        }
+                    },
                     data: {
                         labels: this.state.allPoints.map(obj => obj.x),
                         datasets: [this.state.casesDataset]
@@ -237,9 +265,35 @@ class HospitalGraph extends React.Component{
                 });
             }
             else {
-                this.myChart.clear()
+                this.myChart.destroy()
                 this.myChart = new Chart(node, {
                     type: 'line',
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            labels: {
+                                fontColor: 'black',
+                                fontWeight: "bold"
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    fontSize: 12,
+                                    fontColor: 'black',
+                                    fontWeight: "bold"
+                                }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    fontSize: 10,
+                                    fontColor: 'black',
+                                    fontWeight: "bold"
+                                }
+                            }]
+                        }
+                    },
                     data: {
                         labels: this.state.allPoints.map(obj => obj.x),
                         datasets: [this.state.bedsDataset]
@@ -253,7 +307,7 @@ class HospitalGraph extends React.Component{
         return(
             <div className="info-box-hospital-graph">
                 <canvas
-                    style={{ width: 800, height: 300,  backgroundColor: 'white' }}
+                    style={{ backgroundColor: 'white' }}
                     ref={node => (this.node = node)}
                 />
             </div>
