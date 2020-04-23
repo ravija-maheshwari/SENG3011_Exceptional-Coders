@@ -608,12 +608,17 @@ input:checked + .slider:before {
     width: 16px;
 }
 
+.contribute-modal {
+    animation: optionFadeIn 0.2s;
+}
+
 .contribute-modal > .contribute-form {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 255, 255, 0.9);
     margin-left: auto;
     margin-right: auto;
     width: 37%;
     height: 80%;
+    min-height: 60%;
     border-radius: 3px;
     box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
 }
@@ -630,39 +635,87 @@ input:checked + .slider:before {
 }
 
 .contribute-title{
-    font-size: 25px;
-    color: #cffaff;
+    font-size: 20pt;
+    /* width: 100%; */
+    color: #272727;
     text-align: center;
-    margin-top: 2%;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 6%;
     font-weight: 600;
 }
 
-.hospital-form-name > p {
-    display:inline-block;
-    color: white;
-    font-weight: 600;
-    margin-right: 2%;
-    margin-left: 10%;
+.contribute-form > form > .close-h-info-box {
+    position: fixed;
+    cursor: pointer;
+    padding: 5px;
+    right: 32%;
+    bottom: 20%;
     font-size: 14pt;
+    color: rgb(88, 88, 88);
 }
 
+.contribute-form > form > .close-h-info-box:hover {
+    color: rgb(31, 31, 31);
+}
 
-.hospital-form-name {
+.contribute-form > form > .hospital-info-label--name {
+    display:inline-block;
+    position: fixed;
+    color: #272727;
+    font-weight: 600;
+    /* margin-right: 2%; */
+    margin-left: 2%;
+    font-size: 14pt;
+    width: 140px;
+}
+
+.contribute-form > form > .hospital-info-label--beds {
+    display:inline-block;
+    position: fixed;
+    color: #272727;
+    font-weight: 600;
+    margin-top: 1%;
+    /* margin-right: 2%; */
+    margin-left: 2%;
+    font-size: 14pt;
+    width: 140px;
+}
+
+.contribute-form > form > input {
+    display: inline-block;
+    position: fixed;
+    width: 20%;
+    margin-left: 12%;
+    /* margin-top: 2%; */
+    height: 35px;
+    border-radius: 3px;
+    padding: 3px;
+    border: 1px solid rgb(206, 206, 206);
+}
+
+.contribute-form > form > .hospital-beds-input {
+    margin-top: 1%;
+}
+
+.contribute-form > form > .hospital-list {
+    max-height: 250px;
+    width: 20%;
+    overflow-y: auto;
+    position: fixed;
+    margin-top: 25px;
+    margin-left: 12%;
+}
+/* .hospital-form-name {
     z-index: 999999;
 }
 
 
 .hospital-form-name > input, .hospital-form-beds > input{
-    /*display:inline-block;*/
-    /*color: white;*/
-    width: 50%;
-    height: 35px;
-}
-
-
-
-
+    display:inline-block;
+    color: white;
+} */
 
 .hospital-form-beds > p{
     display:inline-block;
@@ -677,7 +730,7 @@ input:checked + .slider:before {
 
 .submit-hospital{
     text-align: center;
-    background-color: #F9C52F;
+    /* background-color: #F9C52F; */
     width: 18%;
     height:40px;
     font-size: 18px;
@@ -685,7 +738,7 @@ input:checked + .slider:before {
     border-radius: 3px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5%;
+    margin-top: 15%;
 
 }
 
