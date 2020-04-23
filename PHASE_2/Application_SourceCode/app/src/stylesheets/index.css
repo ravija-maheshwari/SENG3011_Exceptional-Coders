@@ -771,6 +771,7 @@ input:checked + .slider:before {
     color: green;
     background-color: rgb(189, 230, 198);
     font-size: 14pt;
+    border-radius: 3px;
 }
 
 .submit-message-red {
@@ -783,6 +784,7 @@ input:checked + .slider:before {
     color: rgb(121, 25, 25);
     background-color: #F8D7DA;
     font-size: 14pt;
+    border-radius: 3px;
 }
 
 .contribute-button > p:hover {
