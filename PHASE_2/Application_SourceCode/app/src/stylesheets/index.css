@@ -14,41 +14,41 @@ code {
 
 /* Landing Page */
 .landing-page {
-    height: 100vh;
-    width: 100vw;
-    overflow-y: hidden;
-    overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
-.landing-image{
-    height: 100%;
-    width: 100%;
+.landing-image {
+  height: 100%;
+  width: 100%;
 }
 
 .get-started-button {
-    position:absolute;
-    top: 29.5%;
-    left:38.5%;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
-    height: 6%;
-    width: 22.5%;
-    border-radius: 20px;
-    background-color: #1D809E;
-    font-size: 27px;
-    /* font-family: "PT Sans Caption"; */
-    font-weight: bold;
-    font-size: 16pt;
-    color: white;
-    letter-spacing: 0.5px;
-    transition: background-color 0.2s;
-    cursor: pointer;
-    border: 1px solid #1D809E;
+  position: absolute;
+  top: 29.5%;
+  left: 38.5%;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
+  height: 6%;
+  width: 22.5%;
+  border-radius: 20px;
+  background-color: #1d809e;
+  font-size: 27px;
+  /* font-family: "PT Sans Caption"; */
+  font-weight: bold;
+  font-size: 16pt;
+  color: white;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border: 1px solid #1d809e;
 }
 
-.get-started-button:hover{
-    background-color: white;
-    color: #1D809E;
-    border: 1px solid #1D809E;
+.get-started-button:hover {
+  background-color: white;
+  color: #1d809e;
+  border: 1px solid #1d809e;
 }
 
 .hospital-marker {
@@ -56,86 +56,86 @@ code {
 }
 
 .hospital-marker > img {
-    height: 18px;
-    width: 18px;
-    transition: 0.2s;
+  height: 18px;
+  width: 18px;
+  transition: 0.2s;
 }
 
 .hospital-marker > img:hover {
-    height: 22px;
-    width: 22px;
+  height: 22px;
+  width: 22px;
 }
 
 .hospital-marker-selected > img {
-    height: 22px;
-    width: 22px;
+  height: 22px;
+  width: 22px;
 }
 
 .info-box {
-    cursor: default;
-    width: 60em;
-    height: 41em;
-    position: absolute;
-    border: 1px solid gray;
-    border-radius: 3px;
-    background-color: rgba(249,197,47, 0.9);
-    z-index: 9999;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+  cursor: default;
+  width: 60em;
+  height: 41em;
+  position: absolute;
+  border: 1px solid gray;
+  border-radius: 3px;
+  background-color: rgba(249, 197, 47, 0.9);
+  z-index: 9999;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
 }
 
 .info-box > hr {
-    margin-top: -8px;
-    width: 88%;
-    border-top: 2px solid #1D809E;
+  margin-top: -8px;
+  width: 88%;
+  border-top: 2px solid #1d809e;
 }
 
 .close-info-box {
-    padding: 5px;
-    margin-top: 5px;
-    margin-right: 10px;
-    font-size: 14pt;
-    float: right;
-    color: rgb(88, 88, 88);
+  padding: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  font-size: 14pt;
+  float: right;
+  color: rgb(88, 88, 88);
 }
 
 .close-info-box:hover {
-    cursor: pointer;
-    color: rgb(31, 31, 31);
+  cursor: pointer;
+  color: rgb(31, 31, 31);
 }
 
 .hospital-name {
-    margin-top: 3%;
-    color: black;
-    font-weight: 800;
-    font-size: 18pt;
-    padding-left: 40px;
-    padding-right: 40px;
-    text-align: center;
+  margin-top: 3%;
+  color: black;
+  font-weight: 800;
+  font-size: 18pt;
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: center;
 }
 
 .hospital-detail {
-    /* color: rgba(0, 0, 0, 0.8); */
-    font-size: 14pt;
-    font-weight: 400;
-    padding-left: 40px;
-    padding-right: 40px;
-    text-align: left;
+  /* color: rgba(0, 0, 0, 0.8); */
+  font-size: 14pt;
+  font-weight: 400;
+  padding-left: 40px;
+  padding-right: 40px;
+  text-align: left;
 }
 
 .hospital-detail > p > .detail-value {
-    display: inline;
-    font-weight: 600;
+  display: inline;
+  font-weight: 600;
 }
 
 .menu-bar {
-    position: absolute;
-    /* margin-top: -20px; */
-    height: 7vh;
-    min-height: 47px;
-    width: 100%;
-    z-index: 5000;
-    background-color: rgb(0, 0, 0);
-    opacity: 0.6;
+  position: absolute;
+  /* margin-top: -20px; */
+  height: 7vh;
+  min-height: 47px;
+  width: 100%;
+  z-index: 5000;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.6;
 }
 
 .menu-options {
@@ -182,34 +182,34 @@ h1 {
 }
 
 .navbar {
-    opacity: 0.85;
+  opacity: 0.85;
 }
 
 /* Hospital search bar*/
 .search-hospital {
-    /* box-shadow: 2px 2px 2px rgb(184, 184, 184); */
-    z-index: 999999;
-    position: fixed;
-    top: 3%;
-    left: 1%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 28%;
-    max-height: 60%;
-    border-radius: 3px;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+  /* box-shadow: 2px 2px 2px rgb(184, 184, 184); */
+  z-index: 999999;
+  position: fixed;
+  top: 3%;
+  left: 1%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 28%;
+  max-height: 60%;
+  border-radius: 3px;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
 }
 
 .search-hospital > input {
-    padding: 2px;
-    padding-left: 5px;
-    height: 35px;
-    width: 100%;
-    font-size: 10pt;
-    border: 1px solid white;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    /* opacity: 0.6; */
+  padding: 2px;
+  padding-left: 5px;
+  height: 35px;
+  width: 100%;
+  font-size: 10pt;
+  border: 1px solid white;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  /* opacity: 0.6; */
 }
 
 /* .search-hospital > input:hover:not(:focus) {
@@ -225,59 +225,55 @@ h1 {
     animation: halfOpacity 0.2s;
 } */
 
-
 .hospital-option {
-    padding: 10px;
-    background-color: white;
-    color: #1D809E;
-    font-size: 12pt;
-    font-weight: bold;
-    border-left: 1px solid #F9C52F;
-    border-top: 1px solid #F9C52F;
-    margin-bottom: 0;
-    transition: background-color 0.15s, color 0.15s;
-    animation: optionFadeIn 0.2s;
+  padding: 10px;
+  background-color: white;
+  color: #1d809e;
+  font-size: 12pt;
+  font-weight: bold;
+  border-left: 1px solid #f9c52f;
+  border-top: 1px solid #f9c52f;
+  margin-bottom: 0;
+  transition: background-color 0.15s, color 0.15s;
+  animation: optionFadeIn 0.2s;
 }
 
 .hospital-option:hover {
-    cursor: pointer;
-    background-color: #F9C52F;
-    color: #1D809E;
-    transition: background-color 0.15s, color 0.15s;
+  cursor: pointer;
+  background-color: #f9c52f;
+  color: #1d809e;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .hospital-list {
-    z-index: 99999;
+  z-index: 99999;
 }
-
 
 /*Suburb Search Bar*/
 .search-suburb {
-    /* box-shadow: 2px 2px 2px rgb(184, 184, 184); */
-    z-index: 99998;
-    position: fixed;
-    top: 9%;
-    left: 1%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 28%;
-    max-height: 60%;
-    border-radius: 3px;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+  /* box-shadow: 2px 2px 2px rgb(184, 184, 184); */
+  z-index: 99998;
+  position: fixed;
+  top: 9%;
+  left: 1%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 28%;
+  max-height: 60%;
+  border-radius: 3px;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
 }
 
-
-
 .search-suburb > input {
-    padding: 2px;
-    padding-left: 5px;
-    height: 35px;
-    width: 100%;
-    font-size: 10pt;
-    border: 1px solid white;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    /* opacity: 0.6; */
+  padding: 2px;
+  padding-left: 5px;
+  height: 35px;
+  width: 100%;
+  font-size: 10pt;
+  border: 1px solid white;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  /* opacity: 0.6; */
 }
 
 /* .search-suburb > input:hover:not(:focus) {
@@ -294,487 +290,496 @@ h1 {
 } */
 
 .suburb-option {
-    padding: 10px;
-    background-color: white;
-    color: #1D809E;
-    font-size: 12pt;
-    font-weight: bold;
-    border-left: 1px solid #F9C52F;
-    border-top: 1px solid #F9C52F;
-    margin-bottom: 0;
-    transition: background-color 0.15s, color 0.15s;
-    animation: optionFadeIn 0.2s;
+  padding: 10px;
+  background-color: white;
+  color: #1d809e;
+  font-size: 12pt;
+  font-weight: bold;
+  border-left: 1px solid #f9c52f;
+  border-top: 1px solid #f9c52f;
+  margin-bottom: 0;
+  transition: background-color 0.15s, color 0.15s;
+  animation: optionFadeIn 0.2s;
 }
 
 .suburb-option:hover {
-    cursor: pointer;
-    background-color: #F9C52F;
-    color: #1D809E;
-    transition: background-color 0.15s, color 0.15s;
+  cursor: pointer;
+  background-color: #f9c52f;
+  color: #1d809e;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .suburb-list {
-    z-index: 99999;
-    /* height: 80%; */
-    margin-top: 1px;
+  z-index: 99999;
+  /* height: 80%; */
+  margin-top: 1px;
 }
 
 .selected-suburb-indicator {
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 10px;
-    background-color: green;
-    color: white;
-    border-radius: 3px;
-    margin-bottom: 10%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  background-color: green;
+  color: white;
+  border-radius: 3px;
+  margin-bottom: 10%;
 }
 
 /* Side Panel */
-.side-panel{
-    display: flex;
-    align-items: center;
-    /*justify-content: center;*/
-    flex-direction: column;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 70%;
-    /* overflow: auto; */
-    z-index: 999;
-    color: #000;
-    box-sizing: border-box;
-    background-color: rgba(29,128,158,0.8);
-    box-shadow: 4px 0px 4px -2px grey;
-    animation: fadeIn 0.3s ease;
-    /*opacity: 80%;*/
+.side-panel {
+  display: flex;
+  align-items: center;
+  /*justify-content: center;*/
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 70%;
+  /* overflow: auto; */
+  z-index: 999;
+  color: #000;
+  box-sizing: border-box;
+  background-color: rgba(29, 128, 158, 0.8);
+  box-shadow: 4px 0px 4px -2px grey;
+  animation: fadeIn 0.3s ease;
+  /*opacity: 80%;*/
 }
 
 .open-side-panel {
-    cursor: pointer;
-    z-index: 88888;
-    position: absolute;
-    top: 8%;
-    left: 1%;
-    width: 28%;
-    height: 45px;
-    /*background-color: #1D809E;*/
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    text-align: center;
-    background-color: white;
-    color: grey;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
-    transition: background-color 0.1s;
-    /* animation: fadeIn 0.3s ease; */
+  cursor: pointer;
+  z-index: 88888;
+  position: absolute;
+  top: 8%;
+  left: 1%;
+  width: 28%;
+  height: 45px;
+  /*background-color: #1D809E;*/
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-align: center;
+  background-color: white;
+  color: grey;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
+  transition: background-color 0.1s;
+  /* animation: fadeIn 0.3s ease; */
 }
 
-
-.graph-rectangle{
-    margin-top: 35%;
-    width: 92%;
-    height: 33%;
-    background-color: white;
-    border-radius: 3px;
+.graph-rectangle {
+  margin-top: 35%;
+  width: 92%;
+  height: 33%;
+  background-color: white;
+  border-radius: 3px;
 }
 
-.closest-hospitals{
-    width: 100%;
-    height: 17%;
-    border-radius: 3px;
-    margin-top: 31%;
-    margin-bottom: -20%;
+.closest-hospitals {
+  width: 100%;
+  height: 17%;
+  border-radius: 3px;
+  margin-top: 31%;
+  margin-bottom: -20%;
 }
 
-.closest-hospital-title{
-    font-size: 14pt;
-    color: white;
-    font-weight: bold;
-    margin-left: 5%;
-    margin-bottom: -2%;
+.closest-hospital-title {
+  font-size: 14pt;
+  color: white;
+  font-weight: bold;
+  margin-left: 5%;
+  margin-bottom: -2%;
 }
 
-.closest-hospital-list{
-    font-size: 15pt;
-    font-weight: normal;
-    text-align: left;
+.closest-hospital-list {
+  font-size: 15pt;
+  font-weight: normal;
+  text-align: left;
 }
 
 .closest-hospital-list > p {
-    font-size: 15pt;
-    margin-bottom: 1%;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
+  font-size: 15pt;
+  margin-bottom: 1%;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
 }
 
 .closest-hospital-list > li {
-    list-style-type: none;
-    font-size: 12pt;
-    font-weight: 600;
-    background-color: white;
-    color: #1D809E;
-    border: 1px solid #F9C52F;
-    width: 90%;
-    padding: 3px;
-    margin-left: auto;
-    margin-right: auto;
+  list-style-type: none;
+  font-size: 12pt;
+  font-weight: 600;
+  background-color: white;
+  color: #1d809e;
+  border: 1px solid #f9c52f;
+  width: 90%;
+  padding: 3px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .closest-hospital-list > li:hover {
-    cursor: pointer;
-    background-color: #F9C52F;
-    color: #1D809E;
-    transition: background-color 0.15s, color 0.15s;
+  cursor: pointer;
+  background-color: #f9c52f;
+  color: #1d809e;
+  transition: background-color 0.15s, color 0.15s;
 }
 
-.quiz-button{
-    margin-top: 50px;
-    background-color: white;
-    border-radius: 3px;
-    width: 92%;
+.quiz-button {
+  margin-top: 50px;
+  background-color: white;
+  border-radius: 3px;
+  width: 92%;
 }
 
 .open-side-panel > p {
-    padding-top: 5px;
-    margin-left: 5px;
-    margin-top: 10px;
-    font-size: 10pt;
-    display: inline-block;
+  padding-top: 5px;
+  margin-left: 5px;
+  margin-top: 10px;
+  font-size: 10pt;
+  display: inline-block;
 }
 
 .open-side-panel-icon {
-    height: 20px;
-    width: 20px;
+  height: 20px;
+  width: 20px;
 }
 
 .close-side-panel {
-    cursor: pointer;
-    position: absolute;
-    bottom: 2%;
-    width: 40%;
-    height: 40px;
-    background-color: #00769e;
-    color: white;
-    border: 1px solid #1D809E;
-    border-radius: 3px;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
-    text-align: center;
-    transition: background-color 0.1s, color 0.1s;
+  cursor: pointer;
+  position: absolute;
+  bottom: 2%;
+  width: 40%;
+  height: 40px;
+  background-color: #00769e;
+  color: white;
+  border: 1px solid #1d809e;
+  border-radius: 3px;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  transition: background-color 0.1s, color 0.1s;
 }
 
 .close-side-panel:hover {
-    background-color: rgb(41, 152, 185);
-    border: 1px solid #1D809E;
+  background-color: rgb(41, 152, 185);
+  border: 1px solid #1d809e;
 }
 
 .close-side-panel > p {
-    margin-top: 5px;
-    display: inline-block;
+  margin-top: 5px;
+  display: inline-block;
 }
 
-.down-arrow, .up-arrow {
-    height: 15px;
-    width: 15px;
-    margin-right: 5px;
+.down-arrow,
+.up-arrow {
+  height: 15px;
+  width: 15px;
+  margin-right: 5px;
 }
 
-.disclaimer{
-    margin-top: 1%;
-    margin-left: 2%;
-    font-size: 8pt;
-    color: rgba(0,0,0,0.54);
+.disclaimer {
+  margin-top: 1%;
+  margin-left: 2%;
+  font-size: 8pt;
+  color: rgba(0, 0, 0, 0.54);
 }
 
-.disclaimer-red{
-    color: darkred;
-    display: inline;
+.disclaimer-red {
+  color: darkred;
+  display: inline;
 }
 
 /* Toggle Switch for InfoBox graphs */
 /* Source: https://www.w3schools.com/howto/howto_css_switch.asp */
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 20px;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
 }
-  
+
 .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-  
-  /* The slider */
+
+/* The slider */
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #C2596E;
-    transition: .4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #c2596e;
+  transition: 0.4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 13px;
-    width: 13px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
 }
-  
+
 input:checked + .slider {
-    background-color: #2ECBC8;
+  background-color: #2ecbc8;
 }
-  
+
 input:focus + .slider {
-    box-shadow: 0 0 1px #2ECBC8;
+  box-shadow: 0 0 1px #2ecbc8;
 }
-  
+
 input:checked + .slider:before {
-    transform: translateX(18px);
+  transform: translateX(18px);
 }
 
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
-  
+
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 /* End of Toggle Switch */
 .toggle {
-    text-align: center;
+  text-align: center;
 }
 
 .toggle-text {
-    font-size: 12pt;
-    margin-right: 5px;
-    margin-left: 5px;
-    display: inline-block;
+  font-size: 12pt;
+  margin-right: 5px;
+  margin-left: 5px;
+  display: inline-block;
 }
 
 .marker-legend {
-    cursor: default;
-    background-color: rgba(0, 0, 0, 0.09);
-    z-index: 999999;
-    position: fixed;
-    bottom: 3%;
-    right: 3.5%;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
-    opacity: 0.6;
+  cursor: default;
+  background-color: rgba(0, 0, 0, 0.09);
+  z-index: 999999;
+  position: fixed;
+  bottom: 3%;
+  right: 3.5%;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
+  opacity: 0.6;
 }
 
-.marker-legend:hover{
-    opacity: 1;
+.marker-legend:hover {
+  opacity: 1;
 }
 
-.legend-text{
-    margin-bottom: 2px;
-    z-index: 999999;
-    color: rgba(0, 0, 0, 0.75);
-    font-size: 10pt;
+.legend-text {
+  margin-bottom: 2px;
+  z-index: 999999;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 10pt;
 }
 
-.legend-icon{
-    height: 16px;
-    width: 16px;
+.legend-icon {
+  height: 16px;
+  width: 16px;
 }
 
 .contribute-modal > .contribute-form {
-    background-color: rgba(0, 0, 0, 0.7);
-    margin-left: auto;
-    margin-right: auto;
-    width: 37%;
-    height: 80%;
-    border-radius: 3px;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-left: auto;
+  margin-right: auto;
+  width: 37%;
+  height: 80%;
+  border-radius: 3px;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
 }
 
-.contribute-button{
-    cursor: default;
-    z-index: 999999;
-    position: fixed;
-    top: 2%;
-    right: 1.5%;
-    /* box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75); */
-    opacity: 1;
-    display: inline-block;
+.contribute-button {
+  cursor: default;
+  z-index: 999999;
+  position: fixed;
+  top: 2%;
+  right: 1.5%;
+  /* box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75); */
+  opacity: 1;
+  display: inline-block;
 }
 
-.contribute-title{
-    font-size: 25px;
-    color: #cffaff;
-    text-align: center;
-    margin-top: 2%;
-    margin-bottom: 6%;
-    font-weight: 600;
+.contribute-title {
+  font-size: 25px;
+  color: #cffaff;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 6%;
+  font-weight: 600;
 }
 
 .hospital-form-name > p {
-    display:inline-block;
-    color: white;
-    font-weight: 600;
-    margin-right: 2%;
-    margin-left: 10%;
-    font-size: 14pt;
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  margin-right: 2%;
+  margin-left: 10%;
+  font-size: 14pt;
 }
-
 
 .hospital-form-name {
-    z-index: 999999;
+  z-index: 999999;
 }
 
-
-.hospital-form-name > input, .hospital-form-beds > input{
-    /*display:inline-block;*/
-    /*color: white;*/
-    width: 50%;
-    height: 35px;
+.hospital-form-name > input,
+.hospital-form-beds > input {
+  /*display:inline-block;*/
+  /*color: white;*/
+  width: 50%;
+  height: 35px;
 }
 
-
-
-
-
-.hospital-form-beds > p{
-    display:inline-block;
-    color: white;
-    font-weight: 600;
-    margin-right: 2%;
-    margin-left: 10%;
-    font-size: 14pt;
-    margin-top: 5%;
-    margin-right: 8%;
+.hospital-form-beds > p {
+  display: inline-block;
+  color: white;
+  font-weight: 600;
+  margin-right: 2%;
+  margin-left: 10%;
+  font-size: 14pt;
+  margin-top: 5%;
+  margin-right: 8%;
 }
 
-.submit-hospital{
-    text-align: center;
-    background-color: #F9C52F;
-    width: 18%;
-    height:40px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 3px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-
+.submit-hospital {
+  text-align: center;
+  background-color: #f9c52f;
+  width: 18%;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
 }
 
-.submit-hospital > input{
-    width: 100%;
-    height:100%;
-    background-color: green;
-    color: white;
-    border: 2px solid green;
-    border-radius: 3px;
+.submit-hospital > input {
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  color: white;
+  border: 2px solid green;
+  border-radius: 3px;
 }
 
-.submit-hospital > input:hover{
-    width: 100%;
-    height:100%;
-    background-color: white;
-    color: green;
-    border: 2px solid green;
-    border-radius: 3px;
+.submit-hospital > input:hover {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: green;
+  border: 2px solid green;
+  border-radius: 3px;
 }
 
 .contribute-button > p:hover {
-    border-radius: 100px;
-    cursor: pointer;
-    box-shadow: 0px 2px 7px -1px rgba(0,0,0,0.75);    
-    opacity: 1;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
+  opacity: 1;
 }
 
 .contribute-button .tooltiptext {
-    visibility: hidden;
-    right: 105%;
-    top: 15%;
-    width: 120px;
-    font-size: 10pt;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-  
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
+  visibility: hidden;
+  right: 105%;
+  top: 15%;
+  width: 120px;
+  font-size: 10pt;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
 }
-  
+
 .contribute-button:hover .tooltiptext {
-    visibility: visible;
+  visibility: visible;
 }
 
-.bed-icon{
-    border-radius: 100px;
-    height: 50px;
-    width: 50px;
+.bed-icon {
+  border-radius: 100px;
+  height: 50px;
+  width: 50px;
 }
 
-.quiz-modal, .contribute-modal {
-    display: flex;
-    position: absolute;
-    padding-top: 80px;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.5);
-    z-index: 2000000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.quiz-modal,
+.contribute-modal {
+  display: flex;
+  position: absolute;
+  padding-top: 10px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .quiz-modal > .quiz-body {
-    text-align: center;
-    height: 70%;
-    background-color: white;
-    border-radius: 3px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60%;
+  text-align: center;
+  height: 95%;
+  background-color: white;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
 }
 /* End of class styles */
 /* Only add custom animations/transitions after this */
 
-
 /* Animations/Transitions */
 @keyframes fullOpacity {
-    from { opacity: 0.6; }
-    to { opacity: 1; }
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes halfOpacity {
-    from { opacity: 1; }
-    to { opacity: 0.6; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.6;
+  }
 }
 
 @keyframes optionFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-    from { background-color: rgba(0,0,0,0.0); }
-    to { background-color: rgba(29,128,158,0.8); }
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(29, 128, 158, 0.8);
+  }
 }
 
 @keyframes panelOpen {
-    from { 
-        left: -25%;
-        right: 100%; 
-    }
-    to { 
-        left: 0%; 
-        right: 73%;
-    }
+  from {
+    left: -25%;
+    right: 100%;
+  }
+  to {
+    left: 0%;
+    right: 73%;
+  }
 }
-

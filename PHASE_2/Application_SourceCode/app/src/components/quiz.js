@@ -1,20 +1,9 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Step1(props) {
-  console.log("@@@", props);
-  const symptoms = [
-    ["Fever"],
-    ["Cough"],
-    ["Sore Throat"],
-    ["Shortness of Breath"],
-    ["Fatigue"],
-  ];
-  const [fever, setFever] = useState(false);
-  const [cough, setCough] = useState(false);
-  const [sore, setSore] = useState(false);
-
   return (
     <>
       <Form onSubmit={props.handleSubmit}>
@@ -38,19 +27,7 @@ function Step1(props) {
             <option>Female</option>
           </Form.Control>
         </Form.Group>
-        Please select at least one symptom you are experiencing
-        <Form.Group>
-          <input onChange={props.updateFever} type="checkbox" value="fever" />
-          Fever
-          <input onChange={props.updateCough} type="checkbox" value="cough" />
-          Cough
-          <input onChange={props.updateThroat} type="checkbox" value="cough" />
-          Sore Throat
-          <input onChange={props.updateBreath} type="checkbox" value="cough" />
-          Shortness of Breath
-          <input onChange={props.updateFatigue} type="checkbox" value="cough" />
-          Fatigue
-        </Form.Group>
+
         <Button variant="primary" type="submit">
           Submit
         </Button>
@@ -64,9 +41,10 @@ class Quiz extends React.Component {
     super(props);
     this.state = {
       response: null,
-      age: "",
+      age: 0,
       sex: "",
       initalised: false,
+      triage: false,
       radio: "",
       evidence: [
         { id: "s_98", choice_id: "unknown" },
@@ -95,7 +73,7 @@ class Quiz extends React.Component {
   }
 
   updateAge(event) {
-    this.setState({ age: event.target.value });
+    this.setState({ age: parseInt(event.target.value) });
   }
   updateSex(event) {
     const sex = event.target.value === "Male" ? "male" : "female";
@@ -126,13 +104,42 @@ class Quiz extends React.Component {
   }
 
   callApi() {
+    var evidence = this.state.evidence;
+    evidence = evidence.filter(function (s) {
+      return s.choice_id !== "unknown";
+    });
     const data = {
       sex: this.state.sex,
       age: this.state.age,
-      evidence: this.state.evidence,
+      evidence: evidence,
     };
     console.log("CALLING WTIH THIS", data);
     fetch("https://api.infermedica.com/covid19/diagnosis", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "App-Id": "51d21264",
+        "App-Key": "262b5c53728e7763043616dd2e3d6f28",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => this.setState({ response: result }));
+  }
+
+  callTriageApi() {
+    var evidence = this.state.evidence;
+    evidence = evidence.filter(function (s) {
+      return s.choice_id !== "unknown";
+    });
+    const data = {
+      sex: this.state.sex,
+      age: this.state.age,
+      evidence: evidence,
+    };
+    console.log("CALLING TRIAGE WTIH THIS", data);
+    this.setState({ triage: true });
+    fetch("https://api.infermedica.com/covid19/triage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -176,6 +183,23 @@ class Quiz extends React.Component {
     event.preventDefault();
   }
 
+  getLevel(triage) {
+    var res;
+    switch (triage) {
+      case "no_risk":
+        res = "success";
+        break;
+      case "self_monitoring":
+      case "quarantine":
+        res = "warning";
+        break;
+      default:
+        res = "danger";
+        break;
+    }
+    return res;
+  }
+
   closeQuizModal() {
     this.props.closeQuizModal();
   }
@@ -183,13 +207,20 @@ class Quiz extends React.Component {
   render() {
     let single = false;
     let questions = [];
+    let stop = "";
     const myObject = this.state.response;
     console.log("ASDASD,", myObject);
-    if (this.state.initalised && myObject) {
-      questions = myObject["question"]["items"];
-      if (!single) {
-        console.log(myObject);
+    if (this.state.initalised && myObject && !this.state.triage) {
+      stop = myObject["should_stop"];
+      if (!stop) {
+        questions = myObject["question"]["items"];
+        if (!single) {
+          console.log(myObject);
+        }
+      } else {
+        this.callTriageApi();
       }
+
       //   var form = "";
       //   if (type === "single") {
       //     console.log("making radio q");
@@ -200,11 +231,46 @@ class Quiz extends React.Component {
       //   }
       //   console.log(myObject["question"]);
     }
+    if (this.state.triage) {
+      console.log(myObject);
+      const level = this.getLevel(myObject.triage_level);
+      return this.props.isVisible ? (
+        <div className="quiz-modal">
+          <div className="quiz-body">
+            {/* Close button has that className cos style is already there for close button */}
+            <span
+              className="close-info-box"
+              onClick={this.closeQuizModal.bind(this)}
+            >
+              {" "}
+              &#x2715;{" "}
+            </span>
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <Alert variant={level}>
+                <Alert.Heading>{myObject.description}</Alert.Heading>
+                <p>{myObject.label}</p>
+              </Alert>
+            </div>
+          </div>
+        </div>
+      ) : null;
+    }
     if (this.state.initalised && !myObject) {
       return <h1> Loading </h1>;
     }
-    return this.props.isVisible ? (
-      !this.state.initalised ? (
+    if (myObject && !myObject["question"]) {
+      return <h1> Loading </h1>;
+    }
+
+    if (!this.state.initalised) {
+      return this.props.isVisible ? (
         <div className="quiz-modal">
           <div className="quiz-body">
             {/* Close button has that className cos style is already there for close button */}
@@ -236,62 +302,66 @@ class Quiz extends React.Component {
             </div>
           </div>
         </div>
-      ) : (
-        <div className="quiz-modal">
-          <div className="quiz-body">
-            {/* Close button has that className cos style is already there for close button */}
-            <span
-              className="close-info-box"
-              onClick={this.closeQuizModal.bind(this)}
-            >
-              {" "}
-              &#x2715;{" "}
-            </span>
-            <div
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            >
-              <Form onSubmit={this.handleSubmit}>
+      ) : null;
+    }
+
+    return this.props.isVisible ? (
+      <div className="quiz-modal">
+        <div className="quiz-body">
+          {/* Close button has that className cos style is already there for close button */}
+          <span
+            className="close-info-box"
+            onClick={this.closeQuizModal.bind(this)}
+          >
+            {" "}
+            &#x2715;{" "}
+          </span>
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group>
+                <Form.Label>
+                  <h3>{myObject["question"]["text"]}</h3>
+                </Form.Label>
                 <Form.Group>
-                  <Form.Label>
-                    <h3>{myObject["question"]["text"]}</h3>
-                  </Form.Label>
-                  <Form.Group>
-                    {questions.map((question) => {
-                      return (
-                        <>
-                          <Form.Label>{question.name}</Form.Label>
-                          <p>
-                            {question.choices.map((choice) => {
-                              return (
-                                <Form.Check
-                                  inline
-                                  type="radio"
-                                  label={choice.label}
-                                  name={question.id}
-                                  id={choice.id}
-                                  onChange={this.myChangeHandler}
-                                />
-                              );
-                            })}
-                          </p>
-                        </>
-                      );
-                    })}
-                  </Form.Group>
-                  <Button variant="primary" type="submit">
-                    Submit
-                  </Button>
+                  {questions.type}
+                  {stop}
+                  {questions.map((question) => {
+                    return (
+                      <>
+                        <Form.Label>{question.name}</Form.Label>
+                        <p>
+                          {question.choices.map((choice) => {
+                            return (
+                              <Form.Check
+                                inline
+                                type="radio"
+                                label={choice.label}
+                                name={question.id}
+                                id={choice.id}
+                                onChange={this.myChangeHandler}
+                              />
+                            );
+                          })}
+                        </p>
+                      </>
+                    );
+                  })}
                 </Form.Group>
-              </Form>
-            </div>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+              </Form.Group>
+            </Form>
           </div>
         </div>
-      )
+      </div>
     ) : null;
   }
 }
