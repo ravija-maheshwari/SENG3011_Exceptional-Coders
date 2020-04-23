@@ -2,6 +2,7 @@ import React from 'react'
 import { suburbInfection } from '../datasets/suburbInfection'
 import Chart from "chart.js"
 import regression from "regression"
+import happyPic from "../mapIcons/happy.png"
 
 class HospitalGraph extends React.Component{
     constructor(props) {
@@ -11,7 +12,8 @@ class HospitalGraph extends React.Component{
         this.state = {
             casesDataset: {},
             bedsDataset: {},
-            allPoints: []
+            allPoints: [],
+            allData: []
         }
     }
 
@@ -23,6 +25,13 @@ class HospitalGraph extends React.Component{
                 allData.push(doc)
             }
         })
+        if (allData.length === 0) {
+            console.log("No cases")
+        }
+        else {
+            console.log("Yes cases")
+        }
+        this.setState({ allData: allData })
         return allData
     }
 
@@ -161,6 +170,9 @@ class HospitalGraph extends React.Component{
         return date.getFullYear() + "-" + month + "-" + day
     }
 
+    componentWillMount() {
+        this.getMatchingData(this.props.suburb)
+    }
 
     componentDidMount() {
         const node = this.node
@@ -169,149 +181,164 @@ class HospitalGraph extends React.Component{
         this.setState({ allPoints: allPoints })
         let bedsCoordinates = this.getBedCoordinates()
 
-        let casesDataset = {
-            label: 'Predicted Cases',
-            data: allPoints,
-            showLine: true,
-            fill: false,
-            borderColor: 'rgb(200,58,74)'
-        }
+        if (this.state.allData.length !== 0) {
+            let casesDataset = {
+                label: 'Predicted Cases in suburb',
+                data: allPoints,
+                showLine: true,
+                fill: false,
+                borderColor: 'rgb(200,58,74)'
+            }
 
-        let bedsDataset = {
-            label: 'Predicted Beds Available',
-            data: bedsCoordinates,
-            showLine: true,
-            fill: false,
-            borderColor: 'rgb(16,200,187)'
-        }
-        
-        this.setState({
-            casesDataset: casesDataset,
-            bedsDataset: bedsDataset
-        })
+            let bedsDataset = {
+                label: 'Predicted Beds Available',
+                data: bedsCoordinates,
+                showLine: true,
+                fill: false,
+                borderColor: 'rgb(16,200,187)'
+            }
+            
+            this.setState({
+                casesDataset: casesDataset,
+                bedsDataset: bedsDataset
+            })
 
-        this.myChart = new Chart(node, {
-            type: 'line',
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    labels: {
-                        fontColor: 'black',
-                        fontWeight: "bold"
+            this.myChart = new Chart(node, {
+                type: 'line',
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    legend: {
+                        labels: {
+                            fontColor: 'black',
+                            fontWeight: "bold"
+                        }
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                fontSize: 12,
+                                fontColor: 'black',
+                                fontWeight: "bold"
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontSize: 10,
+                                fontColor: 'black',
+                                fontWeight: "bold"
+                            }
+                        }]
                     }
                 },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            fontSize: 12,
-                            fontColor: 'black',
-                            fontWeight: "bold"
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            fontSize: 10,
-                            fontColor: 'black',
-                            fontWeight: "bold"
-                        }
-                    }]
+                data: {
+                    labels: allPoints.map(obj => obj.x),
+                    datasets: [casesDataset]
                 }
-            },
-            data: {
-                labels: allPoints.map(obj => obj.x),
-                datasets: [casesDataset]
-            }
-        });
+            });
+        }
     }
 
     componentDidUpdate(prevProps) {
         const node = this.node
         if (this.props.casesOrBeds !== prevProps.casesOrBeds) {
-            if (this.props.casesOrBeds === "cases") {
-                this.myChart.destroy()
-                this.myChart = new Chart(node, {
-                    type: 'line',
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        legend: {
-                            labels: {
-                                fontColor: 'black',
-                                fontWeight: "bold"
+            if (this.state.allData.length !== 0) {
+                if (this.props.casesOrBeds === "cases") {
+                    this.myChart.destroy()
+                    this.myChart = new Chart(node, {
+                        type: 'line',
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            legend: {
+                                labels: {
+                                    fontColor: 'black',
+                                    fontWeight: "bold"
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        fontSize: 12,
+                                        fontColor: 'black',
+                                        fontWeight: "bold"
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        fontSize: 10,
+                                        fontColor: 'black',
+                                        fontWeight: "bold"
+                                    }
+                                }]
                             }
                         },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    fontSize: 12,
-                                    fontColor: 'black',
-                                    fontWeight: "bold"
-                                }
-                            }],
-                            xAxes: [{
-                                ticks: {
-                                    fontSize: 10,
-                                    fontColor: 'black',
-                                    fontWeight: "bold"
-                                }
-                            }]
+                        data: {
+                            labels: this.state.allPoints.map(obj => obj.x),
+                            datasets: [this.state.casesDataset]
                         }
-                    },
-                    data: {
-                        labels: this.state.allPoints.map(obj => obj.x),
-                        datasets: [this.state.casesDataset]
-                    }
-                });
-            }
-            else {
-                this.myChart.destroy()
-                this.myChart = new Chart(node, {
-                    type: 'line',
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        legend: {
-                            labels: {
-                                fontColor: 'black',
-                                fontWeight: "bold"
+                    });
+                }
+                else {
+                    this.myChart.destroy()
+                    this.myChart = new Chart(node, {
+                        type: 'line',
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            legend: {
+                                labels: {
+                                    fontColor: 'black',
+                                    fontWeight: "bold"
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        fontSize: 12,
+                                        fontColor: 'black',
+                                        fontWeight: "bold"
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        fontSize: 10,
+                                        fontColor: 'black',
+                                        fontWeight: "bold"
+                                    }
+                                }]
                             }
                         },
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    fontSize: 12,
-                                    fontColor: 'black',
-                                    fontWeight: "bold"
-                                }
-                            }],
-                            xAxes: [{
-                                ticks: {
-                                    fontSize: 10,
-                                    fontColor: 'black',
-                                    fontWeight: "bold"
-                                }
-                            }]
+                        data: {
+                            labels: this.state.allPoints.map(obj => obj.x),
+                            datasets: [this.state.bedsDataset]
                         }
-                    },
-                    data: {
-                        labels: this.state.allPoints.map(obj => obj.x),
-                        datasets: [this.state.bedsDataset]
-                    }
-                });   
+                    });   
+                }
             }
         }
     }
 
     render(){
-        return(
-            <div className="info-box-hospital-graph">
-                <canvas
-                    style={{ backgroundColor: 'white' }}
-                    ref={node => (this.node = node)}
-                />
-            </div>
+        let suburb = this.props.suburb
+        
+        if (suburb === undefined) {
+            suburb = "this suburb"
+        }
 
+        return(
+            this.state.allData.length === 0 ?
+                <div className="no-data" style={{ textAlign: "center" }}>
+                    <img style={{ marginTop: "4%", height: "100px", width: "100px" }} src={happyPic} />
+                    <p style={{ marginTop: "2%", fontSize: "14pt" }}> No COVID-19 cases in {suburb}, continue practising social distancing to flatten the curve! </p>
+                </div>
+            :
+                <div className="info-box-hospital-graph">
+                    <canvas
+                        style={{ backgroundColor: 'white' }}
+                        ref={node => (this.node = node)}
+                    />
+                </div>
         );
     }
 }
