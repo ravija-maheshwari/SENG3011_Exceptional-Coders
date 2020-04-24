@@ -423,10 +423,10 @@ h1 {
 }
 
 .quiz-button {
-  margin-top: 50px;
-  background-color: white;
+  margin-top: 80px;
   border-radius: 3px;
   width: 92%;
+  text-align: center;
 }
 
 .open-side-panel > p {

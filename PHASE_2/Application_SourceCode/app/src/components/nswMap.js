@@ -3,39 +3,45 @@ import GoogleMapReact from "google-map-react";
 import { MAPS_API_KEY } from "../config";
 import HospitalMarker from "./hospitalMarker";
 import SidePanel from "./sidePanel";
-import Quiz from './quiz'
-import ContributeForm from './contributeForm'
-import { getRadius, getAvailableBeds, getTotalBeds, getHospitalSuburb } from "../helpers";
+import Quiz from "./quiz";
+import ContributeForm from "./contributeForm";
+import {
+  getRadius,
+  getAvailableBeds,
+  getTotalBeds,
+  getHospitalSuburb,
+} from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
 import { suburbInfection } from "../datasets/suburbInfection";
-import hospitalRed from '../mapIcons/hospitalRed.png'
-import hospitalOrange from '../mapIcons/hospitalOrange.png'
-import hospitalGreen from '../mapIcons/hospitalGreen.png'
-import hospitalBedIcon from '../mapIcons/bedIcon.svg'
+import hospitalRed from "../mapIcons/hospitalRed.png";
+import hospitalOrange from "../mapIcons/hospitalOrange.png";
+import hospitalGreen from "../mapIcons/hospitalGreen.png";
+import hospitalBedIcon from "../mapIcons/bedIcon.svg";
+import { Toast } from "react-bootstrap";
 
 const HOSPITALS_API_URL =
   "https://myhospitalsapi.aihw.gov.au/api/v0/retired-myhospitals-api/hospitals";
 const SUBURBS_API_URL =
   "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/suburbs";
-const HOSPITAL_INFO_URL = 
-    "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/hospital"
+const HOSPITAL_INFO_URL =
+  "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/hospital";
 
 function createMapOptions() {
   return {
     restriction: {
       latLngBounds: { north: -20, south: -45, west: 120, east: 175 },
-      strictBounds: false
+      strictBounds: false,
     },
     gestureHandling: "greedy",
     fullscreenControl: false,
-    minZoom: 6
+    minZoom: 6,
   };
 }
 
 class NSWMap extends React.Component {
   constructor(props) {
-		super(props);
+    super(props);
 
     // To hold all hospital data from myhospitals API
     this.state = {
@@ -43,19 +49,19 @@ class NSWMap extends React.Component {
       mapZoom: 6,
       hospitals: [],
       suburbCases: [],
-      hospitalSearched: '',
-      selectedSuburb:'',
+      hospitalSearched: "",
+      selectedSuburb: "",
       whichInfoBoxOpen: null,
       bedsInput: 0,
-      hospitalInput: '',
+      hospitalInput: "",
       isFormOpen: false,
       isQuizOpen: false,
-      updatedHospitalInfo: []
+      updatedHospitalInfo: [],
     };
 
-    this.autoCloseInfoBox = this.autoCloseInfoBox.bind(this)
-    this.closedInfoBoxes = this.closedInfoBoxes.bind(this)
-    this.setMapZoom = this.setMapZoom.bind(this)
+    this.autoCloseInfoBox = this.autoCloseInfoBox.bind(this);
+    this.closedInfoBoxes = this.closedInfoBoxes.bind(this);
+    this.setMapZoom = this.setMapZoom.bind(this);
   }
 
   // Fetching hospital locations before map is mounted on DOM
@@ -63,53 +69,56 @@ class NSWMap extends React.Component {
     try {
       const response = await fetch(HOSPITALS_API_URL);
       const hospitals = await response.json();
-      
-      const hospInfoResponse = await fetch(HOSPITAL_INFO_URL)
-      const updatedHospitalInfo = await hospInfoResponse.json()
+
+      const hospInfoResponse = await fetch(HOSPITAL_INFO_URL);
+      const updatedHospitalInfo = await hospInfoResponse.json();
       // Uncomment when testing real data from Firestore,
       // and add in 'suburbCases' in this.setState()
       // const suburbResponse = await fetch(SUBURBS_API_URL)
       // const suburbCases = await suburbResponse.json()
 
-      this.setState({ 
-          hospitals: hospitals,
-          updatedHospitalInfo: updatedHospitalInfo
-        });
+      this.setState({
+        hospitals: hospitals,
+        updatedHospitalInfo: updatedHospitalInfo,
+      });
     } catch (error) {
       console.log(error);
     }
   }
 
   addUpdatedHospitalInfo(hospitalObject) {
-      let { updatedHospitalInfo } = this.state
-      updatedHospitalInfo.push(hospitalObject)
+    let { updatedHospitalInfo } = this.state;
+    updatedHospitalInfo.push(hospitalObject);
 
-      this.setState({ updatedHospitalInfo: updatedHospitalInfo })
+    this.setState({ updatedHospitalInfo: updatedHospitalInfo });
   }
 
   displayHospitals() {
     let { hospitals, updatedHospitalInfo } = this.state;
-	let result = [];
+    let result = [];
     //const suburbCases =  this.state.suburbCases
     const suburbCases = suburbInfection;
     // Adding markers for each hospital
-    hospitals.forEach(h => {
+    hospitals.forEach((h) => {
       if (h["ispublic"] && h["state"] === "NSW") {
         // Public hospitals in NSW
-        let bedsAvailable
-        let totalBeds
+        let bedsAvailable;
+        let totalBeds;
 
-        for (var i=0; i<updatedHospitalInfo.length; i++) {
-            if (updatedHospitalInfo[i].name === h["name"]) {
-                bedsAvailable = getAvailableBeds(h, updatedHospitalInfo, suburbCases)
-                totalBeds = updatedHospitalInfo[i].beds
-            }
-            else {
-                bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
-                totalBeds = getTotalBeds(h, hospitalDetail);
-            }
+        for (var i = 0; i < updatedHospitalInfo.length; i++) {
+          if (updatedHospitalInfo[i].name === h["name"]) {
+            bedsAvailable = getAvailableBeds(
+              h,
+              updatedHospitalInfo,
+              suburbCases
+            );
+            totalBeds = updatedHospitalInfo[i].beds;
+          } else {
+            bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
+            totalBeds = getTotalBeds(h, hospitalDetail);
+          }
         }
-        let suburb = getHospitalSuburb(h["name"], hospitalDetail)
+        let suburb = getHospitalSuburb(h["name"], hospitalDetail);
 
         result.push(
           <HospitalMarker
@@ -134,26 +143,24 @@ class NSWMap extends React.Component {
     return result;
   }
 
-  setMapZoom = ({zoom}) => {
-      this.setState({ mapZoom: zoom })
-  }
+  setMapZoom = ({ zoom }) => {
+    this.setState({ mapZoom: zoom });
+  };
 
   closedInfoBoxes() {
-      this.setState({ whichInfoBoxOpen: null })
+    this.setState({ whichInfoBoxOpen: null });
   }
 
   autoCloseInfoBox(infoBoxID) {
-      let { whichInfoBoxOpen } = this.state
+    let { whichInfoBoxOpen } = this.state;
 
-      if (whichInfoBoxOpen !== null) {
-          let infoBox = document.getElementById(whichInfoBoxOpen)
-          infoBox.click()
-          this.setState({ whichInfoBoxOpen: infoBoxID })
-      }
-
-      else {
-        this.setState({ whichInfoBoxOpen: infoBoxID })
-      }
+    if (whichInfoBoxOpen !== null) {
+      let infoBox = document.getElementById(whichInfoBoxOpen);
+      infoBox.click();
+      this.setState({ whichInfoBoxOpen: infoBoxID });
+    } else {
+      this.setState({ whichInfoBoxOpen: infoBoxID });
+    }
   }
 
   // Only for displayCircles() cos of weird behaviour
@@ -175,7 +182,7 @@ class NSWMap extends React.Component {
       // COMMENTED DUE TO QUOTA LIMITS
       // const suburbCases = await this.fetchSuburbs()
       const suburbCases = suburbInfection;
-      allNswAreas.forEach(suburb => {
+      allNswAreas.forEach((suburb) => {
         // COMMENTED DUE TO QUOTA LIMITS
         let suburbRadius = getRadius(suburbCases, suburb);
         new maps.Circle({
@@ -186,7 +193,7 @@ class NSWMap extends React.Component {
           fillOpacity: 0.5,
           map,
           center: { lat: suburb.lat, lng: suburb.lng },
-          radius: suburbRadius // Default radius when not using fetchSuburbs()
+          radius: suburbRadius, // Default radius when not using fetchSuburbs()
         });
       });
     } catch (error) {
@@ -198,69 +205,75 @@ class NSWMap extends React.Component {
     this.setState({
       mapCenter: position,
       hospitalSearched: hospital,
-      mapZoom: 10 
-    })
+      mapZoom: 10,
+    });
   }
 
-  openClosestHospital(position){
+  openClosestHospital(position) {
     this.setState({
       mapCenter: position,
-      mapZoom: 10
-    })
+      mapZoom: 10,
+    });
   }
 
   setSuburbSearched(selectedSuburb) {
     this.setState({
-      selectedSuburb: selectedSuburb
-    })
-	}
-	
-	openQuizModal() {
-		this.setState({ isQuizOpen: true })
-	}
+      selectedSuburb: selectedSuburb,
+    });
+  }
 
-	closeQuizModal() {
-		this.setState({ isQuizOpen: false })
-	}
+  openQuizModal() {
+    this.setState({ isQuizOpen: true });
+  }
 
+  closeQuizModal() {
+    this.setState({ isQuizOpen: false });
+  }
 
-    openForm(){
-      this.setState({isFormOpen: true})
-    }
+  openForm() {
+    this.setState({ isFormOpen: true });
+  }
 
-    closeForm(){
-      this.setState({isFormOpen: false})
-    }
+  closeForm() {
+    this.setState({ isFormOpen: false });
+  }
 
   // Render Map and use displayHospitals() to render markers
   render() {
     return (
       <div style={{ height: "100vh", width: "100%" }}>
-            <SidePanel 
-                selectedSuburb={this.state.selectedSuburb}
-                hospitals={this.state.hospitals}
-                setHospitalSearched={this.setHospitalSearched.bind(this)}
-                setSuburbSearched={this.setSuburbSearched.bind(this)}
-                isSidePanelOpen={this.state.isSidePanelOpen}
-                openSidePanel={this.openSidePanel}
-                closeSidePanel={this.closeSidePanel}
-                openClosestHospital={this.openClosestHospital.bind(this)}
-                openQuizModal={this.openQuizModal.bind(this)}
-           />
-            <Quiz 
-                isVisible={this.state.isQuizOpen}
-                closeQuizModal={this.closeQuizModal.bind(this)}
-            />
-            <ContributeForm
-                isFormOpen = {this.state.isFormOpen}
-                hospitals = {this.state.hospitals}
-                closeForm = {this.closeForm.bind(this)}
-                addUpdatedHospitalInfo = {this.addUpdatedHospitalInfo.bind(this)}
-            />
-            <div className="contribute-button">
-                <p onClick={() => this.openForm()}> <img className="bed-icon" src = {hospitalBedIcon} /></p>
-                <span class="tooltiptext"> Are you a hospital? Contribute to our data </span>
-            </div>
+        <SidePanel
+          selectedSuburb={this.state.selectedSuburb}
+          hospitals={this.state.hospitals}
+          setHospitalSearched={this.setHospitalSearched.bind(this)}
+          setSuburbSearched={this.setSuburbSearched.bind(this)}
+          isSidePanelOpen={this.state.isSidePanelOpen}
+          openSidePanel={this.openSidePanel}
+          closeSidePanel={this.closeSidePanel}
+          openClosestHospital={this.openClosestHospital.bind(this)}
+          openQuizModal={this.openQuizModal.bind(this)}
+        />
+        <Quiz
+          isVisible={this.state.isQuizOpen}
+          closeQuizModal={this.closeQuizModal.bind(this)}
+        />
+        <ContributeForm
+          isFormOpen={this.state.isFormOpen}
+          hospitals={this.state.hospitals}
+          closeForm={this.closeForm.bind(this)}
+          addUpdatedHospitalInfo={this.addUpdatedHospitalInfo.bind(this)}
+        />
+        <div className="contribute-button">
+          <p onClick={() => this.openForm()}>
+            {" "}
+            <img className="bed-icon" src={hospitalBedIcon} />
+          </p>
+          <span class="tooltiptext">
+            {" "}
+            Are you a hospital? Contribute to our data{" "}
+          </span>
+        </div>
+
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_API_KEY }}
           center={this.state.mapCenter}
@@ -273,9 +286,22 @@ class NSWMap extends React.Component {
           {this.displayHospitals()}
         </GoogleMapReact>
         <div className="marker-legend">
-          <p className="legend-text"> <img className="legend-icon" src={hospitalRed}/> Hospital has low availability of beds (availableBeds/totalBeds) &lt;= 0.3) </p>
-          <p className="legend-text"> <img className="legend-icon" src={hospitalOrange}/> Hospital has some availability of beds (0.3 &lt; availableBeds/totalBeds &lt;= 0.7) </p>
-          <p className="legend-text"> <img className="legend-icon" src={hospitalGreen}/> Hospital has high availability of beds (availableBeds/totalBeds &gt; 0.7)  </p>
+          <p className="legend-text">
+            {" "}
+            <img className="legend-icon" src={hospitalRed} /> Hospital has low
+            availability of beds (availableBeds/totalBeds) &lt;= 0.3){" "}
+          </p>
+          <p className="legend-text">
+            {" "}
+            <img className="legend-icon" src={hospitalOrange} /> Hospital has
+            some availability of beds (0.3 &lt; availableBeds/totalBeds &lt;=
+            0.7){" "}
+          </p>
+          <p className="legend-text">
+            {" "}
+            <img className="legend-icon" src={hospitalGreen} /> Hospital has
+            high availability of beds (availableBeds/totalBeds &gt; 0.7){" "}
+          </p>
         </div>
       </div>
     );

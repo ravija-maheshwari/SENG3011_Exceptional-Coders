@@ -1,38 +1,55 @@
 import React from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, Spinner, Jumbotron } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Step1(props) {
   return (
-    <>
-      <Form onSubmit={props.handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Age</Form.Label>
-          <Form.Control
-            type="number"
-            min="0"
-            placeholder="Enter age"
-            onChange={props.updateAge}
-          />
+    <div>
+      <Alert variant="success">
+        <Alert.Heading>COVID-19 Screening Tool</Alert.Heading>
+        <p>This tool can help you understand what to do next about COVID-19.</p>
+        <hr />
+        <p className="mb-0">
+          Let’s all look out for each other by knowing our status, trying not to
+          infect others and reserving care for those in need.
+        </p>
+      </Alert>
+      <Jumbotron>
+        <Form onSubmit={props.handleSubmit}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>
+              <h2>Age</h2>
+            </Form.Label>
+            <Form.Control
+              required
+              type="number"
+              min="0"
+              placeholder="Enter age"
+              onChange={props.updateAge}
+            />
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>
+              <h2>Select Gender</h2>
+            </Form.Label>
+            <Form.Control required as="select" onChange={props.updateSex}>
+              <option>Male</option>
+              <option>Female</option>
+            </Form.Control>
+          </Form.Group>
           <Form.Text className="text-muted">
-            We'll never share your age with anyone else.
+            Your information will be shared with <i>Infermedica</i> purely for
+            the purpose of diagnosis. You can view their privacy policy{" "}
+            <a href="https://developer.infermedica.com/privacy-policy">here</a>.
+            We do not store your personal information
           </Form.Text>
-        </Form.Group>
-        <Form.Group controlId="exampleForm.ControlSelect1">
-          <Form.Label>Select Gender</Form.Label>
-          <Form.Control as="select" onChange={props.updateSex}>
-            <option>Prefer not to disclose</option>
-            <option>Male</option>
-            <option>Female</option>
-          </Form.Control>
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-    </>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Jumbotron>
+    </div>
   );
 }
 
@@ -42,7 +59,7 @@ class Quiz extends React.Component {
     this.state = {
       response: null,
       age: 0,
-      sex: "",
+      sex: "male",
       initalised: false,
       triage: false,
       radio: "",
@@ -280,10 +297,56 @@ class Quiz extends React.Component {
       ) : null;
     }
     if (this.state.initalised && !myObject) {
-      return <h1> Loading </h1>;
+      return (
+        <div className="quiz-modal">
+          <div className="quiz-body">
+            {/* Close button has that className cos style is already there for close button */}
+            <span
+              className="close-info-box"
+              onClick={this.closeQuizModal.bind(this)}
+            >
+              {" "}
+              &#x2715;{" "}
+            </span>
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <Spinner animation="border" />
+            </div>
+          </div>
+        </div>
+      );
     }
     if (myObject && !myObject["question"]) {
-      return <h1> Loading </h1>;
+      return (
+        <div className="quiz-modal">
+          <div className="quiz-body">
+            {/* Close button has that className cos style is already there for close button */}
+            <span
+              className="close-info-box"
+              onClick={this.closeQuizModal.bind(this)}
+            >
+              {" "}
+              &#x2715;{" "}
+            </span>
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <Spinner animation="border" />
+            </div>
+          </div>
+        </div>
+      );
     }
 
     if (!this.state.initalised) {
