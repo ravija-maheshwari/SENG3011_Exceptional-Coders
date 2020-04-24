@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -46,13 +46,8 @@ class Quiz extends React.Component {
       initalised: false,
       triage: false,
       radio: "",
-      evidence: [
-        { id: "s_98", choice_id: "unknown" },
-        { id: "s_102", choice_id: "unknown" },
-        { id: "s_252", choice_id: "unknown" },
-        { id: "s_1462", choice_id: "unknown" },
-        { id: "s_2100", choice_id: "present" },
-      ],
+      evidence: [],
+      singleEvidence: {},
       id: [],
     };
     this.updateFever = this.updateFever.bind(this);
@@ -61,10 +56,13 @@ class Quiz extends React.Component {
     this.updateBreath = this.updateBreath.bind(this);
     this.updateFatigue = this.updateFatigue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitSingle = this.handleSubmitSingle.bind(this);
     this.updateAge = this.updateAge.bind(this);
     this.updateSex = this.updateSex.bind(this);
     this.handleRadio = this.handleRadio.bind(this);
     this.myChangeHandler = this.myChangeHandler.bind(this);
+    this.mySingleChangeHandler = this.mySingleChangeHandler.bind(this);
+    this.closeQuizModal = this.closeQuizModal.bind(this);
   }
 
   handleRadio(event) {
@@ -87,8 +85,26 @@ class Quiz extends React.Component {
     event.target.reset();
   }
 
+  handleSubmitSingle(event) {
+    console.log("23424", this.state.evidence, this.state.singleEvidence);
+    let evidence = this.state.evidence;
+    evidence.push(this.state.singleEvidence);
+    this.setState({ evidence: evidence });
+    this.callApi();
+    this.setState({ singleEvidence: {} });
+
+    event.preventDefault();
+    event.target.reset();
+  }
+
   handleSecondSubmit(event) {
     event.preventDefault();
+  }
+
+  mySingleChangeHandler(event) {
+    console.log(event.target);
+    const myEvidence = { id: event.target.name, choice_id: "present" };
+    this.setState({ singleEvidence: myEvidence });
   }
 
   myChangeHandler(event) {
@@ -202,6 +218,7 @@ class Quiz extends React.Component {
 
   closeQuizModal() {
     this.props.closeQuizModal();
+    this.setState({ evidence: [] });
   }
 
   render() {
@@ -304,7 +321,61 @@ class Quiz extends React.Component {
         </div>
       ) : null;
     }
-
+    if (
+      this.props.isVisible &&
+      myObject["question"]["type"] === "group_single"
+    ) {
+      return (
+        <div className="quiz-modal">
+          <div className="quiz-body">
+            {/* Close button has that className cos style is already there for close button */}
+            <span
+              className="close-info-box"
+              onClick={this.closeQuizModal.bind(this)}
+            >
+              {" "}
+              &#x2715;{" "}
+            </span>
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <Form onSubmit={this.handleSubmitSingle}>
+                <Form.Group>
+                  <Form.Label>
+                    <h3>{myObject["question"]["text"]}</h3>
+                  </Form.Label>
+                  <Form.Group>
+                    {stop}
+                    {questions.map((question) => {
+                      return (
+                        <>
+                          <Form.Check
+                            inline
+                            type="radio"
+                            label={question.name}
+                            name={question.id}
+                            onChange={this.mySingleChangeHandler}
+                            autofocus
+                          />
+                        </>
+                      );
+                    })}
+                  </Form.Group>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Form.Group>
+              </Form>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return this.props.isVisible ? (
       <div className="quiz-modal">
         <div className="quiz-body">
@@ -330,7 +401,6 @@ class Quiz extends React.Component {
                   <h3>{myObject["question"]["text"]}</h3>
                 </Form.Label>
                 <Form.Group>
-                  {questions.type}
                   {stop}
                   {questions.map((question) => {
                     return (
@@ -340,6 +410,7 @@ class Quiz extends React.Component {
                           {question.choices.map((choice) => {
                             return (
                               <Form.Check
+                                autofocus
                                 inline
                                 type="radio"
                                 label={choice.label}
