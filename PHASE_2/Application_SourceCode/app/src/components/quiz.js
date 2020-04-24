@@ -103,7 +103,7 @@ class Quiz extends React.Component {
 
   mySingleChangeHandler(event) {
     console.log(event.target);
-    const myEvidence = { id: event.target.name, choice_id: "present" };
+    const myEvidence = { id: event.target.id, choice_id: "present" };
     this.setState({ singleEvidence: myEvidence });
   }
 
@@ -353,16 +353,16 @@ class Quiz extends React.Component {
                     {stop}
                     {questions.map((question) => {
                       return (
-                        <>
+                        <p>
                           <Form.Check
                             inline
                             type="radio"
                             label={question.name}
-                            name={question.id}
-                            onChange={this.mySingleChangeHandler}
-                            autofocus
+                            name="name"
+                            id={question.id}
+                            onClick={this.mySingleChangeHandler.bind(this)}
                           />
-                        </>
+                        </p>
                       );
                     })}
                   </Form.Group>
@@ -410,13 +410,12 @@ class Quiz extends React.Component {
                           {question.choices.map((choice) => {
                             return (
                               <Form.Check
-                                autofocus
                                 inline
                                 type="radio"
                                 label={choice.label}
                                 name={question.id}
                                 id={choice.id}
-                                onChange={this.myChangeHandler}
+                                onClick={this.myChangeHandler.bind(this)}
                               />
                             );
                           })}
