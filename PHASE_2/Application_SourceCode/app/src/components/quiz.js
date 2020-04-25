@@ -67,24 +67,14 @@ class Quiz extends React.Component {
       singleEvidence: {},
       id: [],
     };
-    this.updateFever = this.updateFever.bind(this);
-    this.updateCough = this.updateCough.bind(this);
-    this.updateThroat = this.updateThroat.bind(this);
-    this.updateBreath = this.updateBreath.bind(this);
-    this.updateFatigue = this.updateFatigue.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSubmitSingle = this.handleSubmitSingle.bind(this);
     this.updateAge = this.updateAge.bind(this);
     this.updateSex = this.updateSex.bind(this);
-    this.handleRadio = this.handleRadio.bind(this);
     this.myChangeHandler = this.myChangeHandler.bind(this);
     this.mySingleChangeHandler = this.mySingleChangeHandler.bind(this);
     this.closeQuizModal = this.closeQuizModal.bind(this);
-  }
-
-  handleRadio(event) {
-    console.log(event.target);
-    this.setState({ radio: event.target.value });
   }
 
   updateAge(event) {
@@ -112,10 +102,6 @@ class Quiz extends React.Component {
 
     event.preventDefault();
     event.target.reset();
-  }
-
-  handleSecondSubmit(event) {
-    event.preventDefault();
   }
 
   mySingleChangeHandler(event) {
@@ -185,37 +171,6 @@ class Quiz extends React.Component {
       .then((result) => this.setState({ response: result }));
   }
 
-  updateEvidence(index) {
-    let evidence = this.state.evidence;
-    const curr = evidence[0]["choice_id"];
-    evidence[index]["choice_id"] = curr == "unknown" ? "present" : "unknown";
-    this.setState({ evidence: evidence });
-    // console.log(this.state.evidence);
-  }
-
-  updateFever(event) {
-    this.updateEvidence(0);
-    event.preventDefault();
-  }
-
-  updateCough(event) {
-    this.updateEvidence(1);
-    event.preventDefault();
-  }
-  updateThroat(event) {
-    this.updateEvidence(2);
-    event.preventDefault();
-  }
-
-  updateBreath(event) {
-    this.updateEvidence(3);
-    event.preventDefault();
-  }
-  updateFatigue(event) {
-    this.updateEvidence(4);
-    event.preventDefault();
-  }
-
   getLevel(triage) {
     var res;
     switch (triage) {
@@ -235,6 +190,7 @@ class Quiz extends React.Component {
 
   closeQuizModal() {
     this.props.closeQuizModal();
+    this.setState({ initalised: false });
     this.setState({ evidence: [] });
   }
 
@@ -254,16 +210,6 @@ class Quiz extends React.Component {
       } else {
         this.callTriageApi();
       }
-
-      //   var form = "";
-      //   if (type === "single") {
-      //     console.log("making radio q");
-      //     form = `
-      //     <Form>
-      //       <Form.Label>{myObject["question"]["text"]}</Form.Label>
-      //     </Form>`;
-      //   }
-      //   console.log(myObject["question"]);
     }
     if (this.state.triage) {
       console.log(myObject);
@@ -271,7 +217,6 @@ class Quiz extends React.Component {
       return this.props.isVisible ? (
         <div className="quiz-modal">
           <div className="quiz-body">
-            {/* Close button has that className cos style is already there for close button */}
             <span
               className="close-info-box"
               onClick={this.closeQuizModal.bind(this)}
@@ -291,6 +236,13 @@ class Quiz extends React.Component {
                 <Alert.Heading>{myObject.description}</Alert.Heading>
                 <p>{myObject.label}</p>
               </Alert>
+              <p>
+                A full list of NSW COVID-19 testing locations can be found{" "}
+                <a href="https://www.health.nsw.gov.au/Infectious/covid-19/Pages/testing-locations.aspx">
+                  here
+                </a>
+                .
+              </p>
             </div>
           </div>
         </div>
@@ -300,7 +252,6 @@ class Quiz extends React.Component {
       return (
         <div className="quiz-modal">
           <div className="quiz-body">
-            {/* Close button has that className cos style is already there for close button */}
             <span
               className="close-info-box"
               onClick={this.closeQuizModal.bind(this)}
@@ -326,7 +277,6 @@ class Quiz extends React.Component {
       return (
         <div className="quiz-modal">
           <div className="quiz-body">
-            {/* Close button has that className cos style is already there for close button */}
             <span
               className="close-info-box"
               onClick={this.closeQuizModal.bind(this)}
@@ -353,7 +303,6 @@ class Quiz extends React.Component {
       return this.props.isVisible ? (
         <div className="quiz-modal">
           <div className="quiz-body">
-            {/* Close button has that className cos style is already there for close button */}
             <span
               className="close-info-box"
               onClick={this.closeQuizModal.bind(this)}
@@ -373,11 +322,6 @@ class Quiz extends React.Component {
                 updateAge={this.updateAge}
                 handleSubmit={this.handleSubmit}
                 updateSex={this.updateSex}
-                updateFever={this.updateFever}
-                updateCough={this.updateCough}
-                updateThroat={this.updateThroat}
-                updateBreath={this.updateBreath}
-                updateFatigue={this.updateFatigue}
               />
             </div>
           </div>
@@ -391,7 +335,6 @@ class Quiz extends React.Component {
       return (
         <div className="quiz-modal">
           <div className="quiz-body">
-            {/* Close button has that className cos style is already there for close button */}
             <span
               className="close-info-box"
               onClick={this.closeQuizModal.bind(this)}
@@ -419,6 +362,7 @@ class Quiz extends React.Component {
                         <p>
                           <Form.Check
                             inline
+                            required
                             type="radio"
                             label={question.name}
                             name="name"
@@ -474,6 +418,7 @@ class Quiz extends React.Component {
                             return (
                               <Form.Check
                                 inline
+                                required
                                 type="radio"
                                 label={choice.label}
                                 name={question.id}
