@@ -205,6 +205,9 @@ class SidePanel extends React.Component {
   }
 
   render() {
+    let currDate = new Date();
+    let month = currDate.getMonth() < 10 ? "0" + (currDate.getMonth()+1) : currDate.getMonth()+1
+    let currDateString = currDate.getDate() + "-" + month + "-" + currDate.getFullYear()
     let { selectedSuburb } = this.props;
     let closeHospitals = getSortedHospitals(
       this.props.selectedSuburb,
@@ -260,8 +263,8 @@ class SidePanel extends React.Component {
           )}
           <p className="disclaimer">
             {" "}
-            <p className="disclaimer-red">Disclaimer:</p> Last updated /date/
-            This model updates every 3 days and is intended to help make fast
+            <p className="disclaimer-red">Disclaimer:</p> Last updated {currDateString}. 
+            This model updates every 2 days and is intended to help make fast
             decisions, not predict the future{" "}
           </p>
         </div>
