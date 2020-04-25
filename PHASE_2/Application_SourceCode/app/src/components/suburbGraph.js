@@ -102,12 +102,14 @@ class SuburbGraph extends React.Component{
     }
 
     componentDidMount() {
-        console.log("From sub graph " + this.props.selectedSuburb)
+        // console.log("From sub graph " + this.props.selectedSuburb)
         const node = this.node
         let allPoints = this.getPredictedPoints()
         this.myChart = new Chart(node, {
             type: 'line',
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     labels: {
                         // This more specific font property overrides the global property
@@ -147,12 +149,15 @@ class SuburbGraph extends React.Component{
 
     componentDidUpdate(prevProps) {
         if(this.props.selectedSuburb !== prevProps.selectedSuburb) {
-            console.log("From sub graph " + this.props.selectedSuburb)
+            // console.log("From sub graph " + this.props.selectedSuburb)
             const node = this.node
             let allPoints = this.getPredictedPoints()
+            this.myChart.destroy()
             this.myChart = new Chart(node, {
                 type: 'line',
                 options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                     legend: {
                         labels: {
                             // This more specific font property overrides the global property
@@ -192,10 +197,12 @@ class SuburbGraph extends React.Component{
 
     render(){
         return(
-            <canvas
-                style={{ width: 800, height: 400 }}
-                ref={node => (this.node = node)}
-            />
+            <div className="side-panel-suburb-graph">
+                <canvas
+                    style={{ backgroundColor: 'white' }}
+                    ref={node => (this.node = node)}
+                />
+            </div>
         );
     }
 

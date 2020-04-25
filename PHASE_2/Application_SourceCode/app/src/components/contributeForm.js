@@ -14,7 +14,9 @@ class ContributeForm extends React.Component{
             bedsInput: "",
             isEnteringHospital: false,
             potentialHospitals: [],
-            hospitalSuburb: ""
+            hospitalSuburb: "",
+            // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
+            isSubmittedCorrectly: 0
         }
 
         this.submitHospitalInfo = this.submitHospitalInfo.bind(this)
@@ -41,14 +43,17 @@ class ContributeForm extends React.Component{
 
             if (response.status === 200) {
                 this.props.addUpdatedHospitalInfo(postBody)
-                alert("Information Updated for " + hospitalEntered + ".")
+                // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
+                this.setState({ isSubmittedCorrectly: 1 })
             }
             else {
-                alert("Something went wrong, please try again.")
+                // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
+                this.setState({ isSubmittedCorrectly: 2 })
             }
 
         } catch (error) {
-            alert("Something went wrong, please try again.")
+            // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
+            this.setState({ isSubmittedCorrectly: 2 })
         }
     }
 
@@ -92,41 +97,45 @@ class ContributeForm extends React.Component{
             this.props.isFormOpen?
                 <div className="contribute-modal">
                     <div className="contribute-form">
-                        <span className="close-info-box" onClick={this.closeForm.bind(this)}> &#x2715; </span>
                         <p className="contribute-title"> Are you a hospital admin? Contribute to our data</p>
                         <form onSubmit={(evt) => this.submitHospitalInfo(evt)}>
-                            <div className="hospital-form-name">
-                                <p> Hospital Name: </p>
-                                <input placeholder="Enter hospital name..."
-                                       value={this.state.hospitalInput}
-                                       onChange={evt => this.handleHospitalSearch(evt)}
-                                       type="text"
-                                       onFocus={this.hospitalSearchFocus.bind(this)}
-                                       onBlur={this.hospitalSearchOutOfFocus.bind(this)}>
-                                </input>
-                                {this.state.isEnteringHospital ?
-                                    <div className="hospital-list">
-                                        {potentialHospitals.map((hospital) => <p value={hospital} onMouseDown={() => this.setHospitalEntered(hospital)} className="hospital-option">{hospital}</p>)}
-                                    </div>
-                                    :
-                                    null
-                                }
-                            </div>
-
-                            <div className="hospital-form-beds">
-                                <p> Total beds: </p>
-                                <input placeholder="Enter total beds in hospital..."
-                                       value={this.state.bedsInput}
-                                       onChange={e => this.setState({bedsInput: e.target.value})}
-                                       type="text"
-                                       pattern="[0-9]+">
-                                </input>
-                            </div>
+                            {/* <div className="hospital-form-name"> */}
+                            <label className="hospital-info-label--name"> Hospital Name: </label>
+                            <input placeholder="Enter hospital name..."
+                                    value={this.state.hospitalInput}
+                                    onChange={evt => this.handleHospitalSearch(evt)}
+                                    type="text"
+                                    onFocus={this.hospitalSearchFocus.bind(this)}
+                                    onBlur={this.hospitalSearchOutOfFocus.bind(this)}>
+                            </input>
+                            {this.state.isEnteringHospital ?
+                                <div className="hospital-list">
+                                    {potentialHospitals.map((hospital) => <p value={hospital} onMouseDown={() => this.setHospitalEntered(hospital)} className="hospital-option">{hospital}</p>)}
+                                </div>
+                                :
+                                null
+                            }
+                            <br />
+                            <label className="hospital-info-label--beds"> Total beds: </label>
+                            <input placeholder="Enter total beds in hospital..."
+                                    className="hospital-beds-input"
+                                    value={this.state.bedsInput}
+                                    onChange={e => this.setState({bedsInput: e.target.value})}
+                                    type="text"
+                                    pattern="[0-9]+">
+                            </input>
                             <div className="submit-hospital">
                                 <input type="submit" value="Submit"/>
                             </div>
-
+                            <span className="close-h-info-box" onClick={this.closeForm.bind(this)}> Close </span>
                         </form>
+                        {this.state.isSubmittedCorrectly === 0 ?
+                            null
+                        : (this.state.isSubmittedCorrectly === 1) ?
+                            <p className="submit-message-green"> Information Updated for {this.state.hospitalEntered}. </p>
+                        :
+                            <p className="submit-message-red"> Something went wrong, please try again. </p>
+                        }
                     </div>
                 </div>
             :

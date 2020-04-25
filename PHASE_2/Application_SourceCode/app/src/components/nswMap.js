@@ -99,14 +99,21 @@ class NSWMap extends React.Component {
         let bedsAvailable
         let totalBeds
 
-        for (var i=0; i<updatedHospitalInfo.length; i++) {
-            if (updatedHospitalInfo[i].name === h["name"]) {
-                bedsAvailable = getAvailableBeds(h, updatedHospitalInfo, suburbCases)
-                totalBeds = updatedHospitalInfo[i].beds
-            }
-            else {
-                bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
-                totalBeds = getTotalBeds(h, hospitalDetail);
+        if (updatedHospitalInfo.length === 0) {
+            bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
+            totalBeds = getTotalBeds(h, hospitalDetail);
+        }
+
+        else {
+            for (var i=0; i<updatedHospitalInfo.length; i++) {
+                if (updatedHospitalInfo[i].name === h["name"]) {
+                    bedsAvailable = getAvailableBeds(h, updatedHospitalInfo, suburbCases)
+                    totalBeds = updatedHospitalInfo[i].beds
+                }
+                else {
+                    bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
+                    totalBeds = getTotalBeds(h, hospitalDetail);
+                }
             }
         }
         let suburb = getHospitalSuburb(h["name"], hospitalDetail)
