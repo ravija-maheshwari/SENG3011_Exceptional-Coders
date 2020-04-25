@@ -5,6 +5,7 @@ import HospitalMarker from "./hospitalMarker";
 import SidePanel from "./sidePanel";
 import Quiz from "./quiz";
 import ContributeForm from "./contributeForm";
+import { suburbInfection } from '../datasets/suburbInfection'
 import {
   getRadius,
   getAvailableBeds,
@@ -13,7 +14,6 @@ import {
 } from "../helpers";
 import { allNswAreas } from "../datasets/nswAreas";
 import { hospitalDetail } from "../datasets/hospitalDetail";
-import { suburbInfection } from "../datasets/suburbInfection";
 import hospitalRed from "../mapIcons/hospitalRed.png";
 import hospitalOrange from "../mapIcons/hospitalOrange.png";
 import hospitalGreen from "../mapIcons/hospitalGreen.png";
@@ -74,11 +74,12 @@ class NSWMap extends React.Component {
       const updatedHospitalInfo = await hospInfoResponse.json();
       // Uncomment when testing real data from Firestore,
       // and add in 'suburbCases' in this.setState()
-      // const suburbResponse = await fetch(SUBURBS_API_URL)
-      // const suburbCases = await suburbResponse.json()
+    //   const suburbResponse = await fetch(SUBURBS_API_URL)
+    //   const suburbCases = await suburbResponse.json()
 
       this.setState({
         hospitals: hospitals,
+        suburbCases: suburbInfection,
         updatedHospitalInfo: updatedHospitalInfo,
       });
     } catch (error) {
@@ -97,7 +98,7 @@ class NSWMap extends React.Component {
     let { hospitals, updatedHospitalInfo } = this.state;
     let result = [];
     //const suburbCases =  this.state.suburbCases
-    const suburbCases = suburbInfection;
+    const suburbCases = this.state.suburbCases;
     // Adding markers for each hospital
     hospitals.forEach((h) => {
       if (h["ispublic"] && h["state"] === "NSW") {
@@ -184,8 +185,8 @@ class NSWMap extends React.Component {
   async displayCircles(map, maps) {
     try {
       // COMMENTED DUE TO QUOTA LIMITS
-      // const suburbCases = await this.fetchSuburbs()
-      const suburbCases = suburbInfection;
+    //   const suburbCases = await this.fetchSuburbs()
+      const suburbCases = suburbInfection
       allNswAreas.forEach((suburb) => {
         // COMMENTED DUE TO QUOTA LIMITS
         let suburbRadius = getRadius(suburbCases, suburb);
@@ -256,6 +257,7 @@ class NSWMap extends React.Component {
           closeSidePanel={this.closeSidePanel}
           openClosestHospital={this.openClosestHospital.bind(this)}
           openQuizModal={this.openQuizModal.bind(this)}
+          allSuburbCases={this.state.suburbCases}
         />
         <Quiz
           isVisible={this.state.isQuizOpen}

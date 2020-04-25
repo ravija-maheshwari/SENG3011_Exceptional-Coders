@@ -1,5 +1,4 @@
 import React from 'react'
-import { suburbInfection } from '../datasets/suburbInfection'
 import Chart from "chart.js"
 import regression from "regression"
 
@@ -14,7 +13,7 @@ class SuburbGraph extends React.Component{
     //Gets all data about one suburb
     getMatchingData(suburb){
         let allData = []
-        suburbInfection.forEach(doc => {
+        this.props.allSuburbCases.forEach(doc => {
             if(doc.name === suburb){
                 allData.push(doc)
             }

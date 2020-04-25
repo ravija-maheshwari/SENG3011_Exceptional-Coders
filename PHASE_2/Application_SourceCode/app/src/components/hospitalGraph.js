@@ -1,5 +1,4 @@
 import React from 'react'
-import { suburbInfection } from '../datasets/suburbInfection'
 import Chart from "chart.js"
 import regression from "regression"
 import happyPic from "../mapIcons/happy.png"
@@ -20,7 +19,7 @@ class HospitalGraph extends React.Component{
     //Gets all data about one suburb
     getMatchingData(suburb){
         let allData = []
-        suburbInfection.forEach(doc => {
+        this.props.allSuburbCases.forEach(doc => {
             if(doc.name.includes(suburb) && suburb.includes(doc.name)){
                 allData.push(doc)
             }

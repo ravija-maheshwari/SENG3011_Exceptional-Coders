@@ -257,9 +257,11 @@ class SidePanel extends React.Component {
 
         <div className="graph-rectangle">
           {selectedSuburb.length !== 0 ? (
-            <SuburbGraph selectedSuburb={selectedSuburb} />
+            <SuburbGraph
+                allSuburbCases={this.props.allSuburbCases} 
+                selectedSuburb={selectedSuburb} />
           ) : (
-            <NswGraph />
+            <NswGraph allSuburbCases={this.props.allSuburbCases}/>
           )}
           <p className="disclaimer">
             {" "}

@@ -1,5 +1,20 @@
 // import {hospitalDetail} from "datasets/hospitalDetail"
 
+
+exports.getCasesDateCount = function(suburbCases) {
+    let count = 0
+
+    for (var i=0; i<suburbCases.length; i++) {
+        if(suburbCases[i].name === suburbCases[i+1].name) {
+            count++
+        }
+        else {
+            break
+        }
+    }
+
+    return count
+}
 //Returns the radius of the display circle on the map
 exports.getRadius = function(suburbCases, suburb){
     let radius = 0

@@ -1,6 +1,6 @@
 import React from 'react'
-import { suburbInfection } from '../datasets/suburbInfection'
 import Chart from "chart.js"
+import { getCasesDateCount } from '../helpers'
 import regression from "regression"
 
 class NswGraph extends React.Component{
@@ -19,15 +19,15 @@ class NswGraph extends React.Component{
     }
 
     getCurrentPoints(){
-        const NUM_DAYS = 4; //This is number of points on x axis. UPDATE THIS IF DATASET IS UPDATED
+        const NUM_DAYS = getCasesDateCount(this.props.allSuburbCases); //This is number of points on x axis. UPDATE THIS IF DATASET IS UPDATED
         let points = []
         for(let i = 0; i < NUM_DAYS; i++){
-            let day = suburbInfection[i].date;
+            let day = this.props.allSuburbCases[i].date;
             // console.log("Day  = " + day)
             let aggregate = 0;
-            for(let j = 0 ; j < suburbInfection.length; j++){
-                if(day === suburbInfection[j].date){
-                    aggregate = aggregate + this.getIntegerCases(suburbInfection[j].count);
+            for(let j = 0 ; j < this.props.allSuburbCases.length; j++){
+                if(day === this.props.allSuburbCases[j].date){
+                    aggregate = aggregate + this.getIntegerCases(this.props.allSuburbCases[j].count);
                 }
             }
             points.push({x: day, y: aggregate})
