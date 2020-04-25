@@ -33,13 +33,10 @@ class Homepage extends React.Component {
   render() {
     let currPage = this.state.currPage;
 
-    return (
-        currPage === "nsw-map" ?
-            <NSWMap />
-        :
-            <LandingPage
-                switchToMap={this.switchToNSWMaps}
-            />
+    return currPage === "nsw-map" ? (
+      <NSWMap />
+    ) : (
+      <LandingPage switchToMap={this.switchToNSWMaps} />
     );
   }
 }
