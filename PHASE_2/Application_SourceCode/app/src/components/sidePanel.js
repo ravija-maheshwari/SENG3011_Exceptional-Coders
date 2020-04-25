@@ -269,12 +269,7 @@ class SidePanel extends React.Component {
           </p>
         </div>
         <div className="quiz-button">
-          <p>
-            <Button variant="info" onClick={this.openQuizModal.bind(this)}>
-              {" "}
-              Take the quiz{" "}
-            </Button>
-          </p>
+            <button onClick={this.openQuizModal.bind(this)}> Take the COVID-19 Screening Quiz </button>
         </div>
 
         <div className="close-side-panel" onClick={this.closeSidePanel}>

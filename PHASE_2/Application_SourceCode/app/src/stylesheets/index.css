@@ -444,10 +444,27 @@ h1 {
 }
 
 .quiz-button {
-  margin-top: 80px;
+    width: 80%;
+}
+
+.quiz-button > button {
+  padding: 5px;
+  margin-top: 35px;
   border-radius: 3px;
-  width: 92%;
   text-align: center;
+  background-color: white;
+  color: black;
+  border: 1px solid white;
+  border-radius: 3px;
+  box-shadow: 0px 2px 7px -1px rgba(0, 0, 0, 0.75);
+  text-align: center;
+  transition: background-color 0.1s, color 0.1s, border 0.1s;
+  width: 100%;
+}
+
+.quiz-button > button:hover {
+    background-color: #f9c52f;
+    border: 1px solid #f9c52f;
 }
 
 .open-side-panel > p {
@@ -612,7 +629,7 @@ input:checked + .slider:before {
     background-color: rgba(255, 255, 255, 0.9);
     margin-left: auto;
     margin-right: auto;
-    width: 37%;
+    width: 55%;
     height: 80%;
     min-height: 60%;
     border-radius: 3px;
@@ -639,22 +656,8 @@ input:checked + .slider:before {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 6%;
-    font-weight: 600;
+    font-weight: 500;
     width: 85%;
-}
-
-.contribute-form > form > .close-h-info-box {
-    position: fixed;
-    cursor: pointer;
-    padding: 5px;
-    right: 32%;
-    bottom: 20%;
-    font-size: 14pt;
-    color: rgb(88, 88, 88);
-}
-
-.contribute-form > form > .close-h-info-box:hover {
-    color: rgb(31, 31, 31);
 }
 
 .contribute-form > form > .hospital-info-label--name {
@@ -663,7 +666,7 @@ input:checked + .slider:before {
     color: #272727;
     font-weight: 600;
     /* margin-right: 2%; */
-    margin-left: 2%;
+    margin-left: 5%;
     font-size: 14pt;
     width: 140px;
 }
@@ -673,9 +676,9 @@ input:checked + .slider:before {
     position: fixed;
     color: #272727;
     font-weight: 600;
-    margin-top: 1%;
+    margin-top: 2%;
     /* margin-right: 2%; */
-    margin-left: 2%;
+    margin-left: 5%;
     font-size: 14pt;
     width: 140px;
 }
@@ -683,8 +686,8 @@ input:checked + .slider:before {
 .contribute-form > form > input {
     display: inline-block;
     position: fixed;
-    width: 20%;
-    margin-left: 12%;
+    width: 30%;
+    margin-left: 16%;
     /* margin-top: 2%; */
     height: 35px;
     border-radius: 3px;
@@ -693,16 +696,16 @@ input:checked + .slider:before {
 }
 
 .contribute-form > form > .hospital-beds-input {
-    margin-top: 1%;
+    margin-top: 2%;
 }
 
 .contribute-form > form > .hospital-list {
     max-height: 250px;
-    width: 20%;
+    width: 30%;
     overflow-y: auto;
     position: fixed;
-    margin-top: 25px;
-    margin-left: 12%;
+    margin-top: 34px;
+    margin-left: 16%;
 }
 /* .hospital-form-name {
     z-index: 999999;
@@ -750,9 +753,8 @@ input:checked + .slider:before {
 .submit-hospital > input:hover {
   width: 100%;
   height: 100%;
-  background-color: white;
-  color: green;
-  border: 2px solid green;
+  background-color: rgb(20, 170, 20);
+  border: 2px solid rgb(20, 170, 20);
   border-radius: 3px;
 }
 
@@ -760,7 +762,7 @@ input:checked + .slider:before {
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
-    width: 80%;
+    width: 90%;
     margin-top: 5%;
     text-align: center;
     color: green;
@@ -773,7 +775,7 @@ input:checked + .slider:before {
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
-    width: 80%;
+    width: 90%;
     margin-top: 5%;
     text-align: center;
     color: rgb(121, 25, 25);
@@ -818,6 +820,7 @@ input:checked + .slider:before {
 
 .quiz-modal,
 .contribute-modal {
+  animation: optionFadeIn 0.2s;
   display: flex;
   position: absolute;
   padding-top: 10px;

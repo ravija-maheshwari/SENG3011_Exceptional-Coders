@@ -97,6 +97,7 @@ class ContributeForm extends React.Component{
             this.props.isFormOpen?
                 <div className="contribute-modal">
                     <div className="contribute-form">
+                        <span className="close-info-box" onClick={this.closeForm.bind(this)}> &#x2715; </span>
                         <p className="contribute-title"> Are you a hospital admin? Contribute to our data</p>
                         <form onSubmit={(evt) => this.submitHospitalInfo(evt)}>
                             {/* <div className="hospital-form-name"> */}
@@ -127,7 +128,6 @@ class ContributeForm extends React.Component{
                             <div className="submit-hospital">
                                 <input type="submit" value="Submit"/>
                             </div>
-                            <span className="close-h-info-box" onClick={this.closeForm.bind(this)}> Close </span>
                         </form>
                         {this.state.isSubmittedCorrectly === 0 ?
                             null
