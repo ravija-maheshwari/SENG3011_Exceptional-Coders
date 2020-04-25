@@ -19,7 +19,7 @@ exports.getCasesDateCount = function(suburbCases) {
 exports.getRadius = function(suburbCases, suburb){
     let radius = 0
 
-    for(var i=0; i<suburbCases.length; i++) {
+    for(var i=0; i<suburbCases.length-1; i++) {
         if(suburb.name === suburbCases[i].name && suburbCases[i+1].name !== suburbCases[i].name){
             let caseCount = getIntegerCases(suburbCases[i].count)
             radius = caseCount/10 * 300
@@ -50,7 +50,7 @@ exports.getAvailableBeds = function(hospital, hospitalDetail, suburbCases){
         //Going thru hospital details
         if (hospital.name.includes(hospitalDetail[i].name) || hospitalDetail[i].name.includes(hospital.name)) {
             //Found a match
-            for (let j = 0; j < suburbCases.length ; j++) {
+            for (let j = 0; j < suburbCases.length-1 ; j++) {
                 let hospDetailSub = hospitalDetail[i].suburb
                 let subName = suburbCases[j].name
                 if((hospDetailSub.includes(subName) || subName.includes(hospDetailSub)) && subName !== suburbCases[j+1].name) {

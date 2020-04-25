@@ -3446,6 +3446,11 @@ exports.suburbInfection = [
     },
     {
         "name": "Penrith",
+        "count": "63",
+        "date": "2020-04-14"
+    },
+    {
+        "name": "Penrith",
         "count": "77",
         "date": "2020-04-16"
     },
@@ -3741,7 +3746,7 @@ exports.suburbInfection = [
     },
     {
         "name": "Ryde",
-        "count": "65​",
+        "count": "65",
         "date": "2020-04-14"
     },
     {
@@ -4238,6 +4243,11 @@ exports.suburbInfection = [
         "name": "The Hills Shire",
         "count": "57",
         "date": "2020-04-12"
+    },
+    {
+        "name": "The Hills Shire",
+        "count": "59",
+        "date": "2020-04-14"
     },
     {
         "name": "The Hills Shire",
@@ -5013,15 +5023,5 @@ exports.suburbInfection = [
         "name": "Yass Valley",
         "count": "6",
         "date": "2020-04-24"
-    },
-    {
-        "name": "​Penrith",
-        "count": "63​",
-        "date": "2020-04-14"
-    },
-    {
-        "name": "​The Hills Shire",
-        "count": "58​",
-        "date": "2020-04-14"
     }
 ]

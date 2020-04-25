@@ -12,7 +12,7 @@ class NswGraph extends React.Component{
     getIntegerCases(caseCount){
         if(caseCount.indexOf('-') > -1){
             //1-4 type of caseCount
-            return Number(caseCount.split("-")[1])- 3
+            return 1
         }else{
             return Number(caseCount)
         }
