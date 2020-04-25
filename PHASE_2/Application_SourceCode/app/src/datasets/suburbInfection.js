@@ -25,6 +25,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Albury",
+        "count": "7",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Albury",
+        "count": "8",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Albury",
+        "count": "8",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Albury",
+        "count": "8",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Albury",
+        "count": "8",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Armidale Regional",
         "count": "1-4",
         "date": "2020-04-06"
@@ -50,6 +75,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Armidale Regional",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Armidale Regional",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Armidale Regional",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Armidale Regional",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Armidale Regional",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Ballina",
         "count": "1-4",
         "date": "2020-04-06"
@@ -75,6 +125,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Ballina",
+        "count": "9",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Ballina",
+        "count": "9",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Ballina",
+        "count": "9",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Ballina",
+        "count": "9",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Ballina",
+        "count": "9",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Bathurst Regional",
         "count": "9",
         "date": "2020-04-06"
@@ -98,6 +173,31 @@ exports.suburbInfection = [
         "name": "Bathurst Regional",
         "count": "9",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Bathurst Regional",
+        "count": "9",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Bathurst Regional",
+        "count": "9",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Bathurst Regional",
+        "count": "9",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Bathurst Regional",
+        "count": "9",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Bathurst Regional",
+        "count": "9",
+        "date": "2020-04-24"
     },
     {
         "name": "Bayside",
@@ -118,6 +218,31 @@ exports.suburbInfection = [
         "name": "Bayside",
         "count": "62",
         "date": "2020-04-12"
+    },
+    {
+        "name": "Bayside",
+        "count": "64",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Bayside",
+        "count": "65",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Bayside",
+        "count": "65",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Bayside",
+        "count": "65",
+        "date": "2020-04-24"
+    },
+    {
+        "name": "Bayside​",
+        "count": "65",
+        "date": "2020-04-18"
     },
     {
         "name": "Baysi​de",
@@ -150,6 +275,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Bega Valley",
+        "count": "9",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Bega Valley",
+        "count": "9",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Bega Valley",
+        "count": "9",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Bega Valley",
+        "count": "9",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Bega Valley",
+        "count": "9",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Bellingen",
         "count": "1-4",
         "date": "2020-04-06"
@@ -175,6 +325,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Bellingen",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Bellingen",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Bellingen",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Bellingen",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Bellingen",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Berrigan",
         "count": "5",
         "date": "2020-04-06"
@@ -198,6 +373,31 @@ exports.suburbInfection = [
         "name": "Berrigan",
         "count": "5",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Berrigan",
+        "count": "5",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Berrigan",
+        "count": "5",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Berrigan",
+        "count": "5",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Berrigan",
+        "count": "5",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Berrigan",
+        "count": "5",
+        "date": "2020-04-24"
     },
     {
         "name": "Blacktown",
@@ -225,6 +425,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Blacktown",
+        "count": "106",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Blacktown",
+        "count": "106",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Blacktown",
+        "count": "106",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Blacktown",
+        "count": "107",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Blacktown",
+        "count": "107",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Blayney",
         "count": "1-4",
         "date": "2020-04-06"
@@ -243,6 +468,31 @@ exports.suburbInfection = [
         "name": "Blayney",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Blayney",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Blayney",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Blayney",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Blayney",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Blayney",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Blayney​",
@@ -275,6 +525,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Blue Mountains",
+        "count": "22",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Blue Mountains",
+        "count": "22",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Blue Mountains",
+        "count": "22",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Blue Mountains",
+        "count": "22",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Blue Mountains",
+        "count": "22",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Broken Hill",
         "count": "1-4",
         "date": "2020-04-06"
@@ -300,6 +575,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Broken Hill",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Broken Hill",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Broken Hill",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Broken Hill",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
+        "name": "Broken Hill​",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
         "name": "Burwood",
         "count": "7",
         "date": "2020-04-06"
@@ -323,6 +623,31 @@ exports.suburbInfection = [
         "name": "Burwood",
         "count": "8",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Burwood",
+        "count": "8",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Burwood",
+        "count": "8",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Burwood",
+        "count": "8",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Burwood",
+        "count": "8",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Burwood",
+        "count": "8",
+        "date": "2020-04-24"
     },
     {
         "name": "Byron",
@@ -350,6 +675,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Byron",
+        "count": "16",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Byron",
+        "count": "16",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Byron",
+        "count": "16",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Byron",
+        "count": "16",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Byron",
+        "count": "16",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Cabonne",
         "count": "5",
         "date": "2020-04-06"
@@ -373,6 +723,31 @@ exports.suburbInfection = [
         "name": "Cabonne",
         "count": "5",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Cabonne",
+        "count": "5",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Cabonne",
+        "count": "5",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Cabonne",
+        "count": "5",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Cabonne",
+        "count": "5",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Cabonne",
+        "count": "5",
+        "date": "2020-04-24"
     },
     {
         "name": "Camden",
@@ -400,6 +775,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Camden",
+        "count": "36",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Camden",
+        "count": "38",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Camden",
+        "count": "38",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Camden",
+        "count": "38",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Camden",
+        "count": "38",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Campbelltown",
         "count": "30",
         "date": "2020-04-06"
@@ -423,6 +823,31 @@ exports.suburbInfection = [
         "name": "Campbelltown",
         "count": "33",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Campbelltown",
+        "count": "33",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Campbelltown",
+        "count": "34",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Campbelltown",
+        "count": "34",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Campbelltown",
+        "count": "34",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Campbelltown",
+        "count": "34",
+        "date": "2020-04-24"
     },
     {
         "name": "Canada Bay",
@@ -450,6 +875,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Canada Bay",
+        "count": "21",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Canada Bay",
+        "count": "23",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Canada Bay",
+        "count": "24",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Canada Bay",
+        "count": "24",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Canada Bay",
+        "count": "24",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Canterbury-Bankstown",
         "count": "82",
         "date": "2020-04-06"
@@ -473,6 +923,31 @@ exports.suburbInfection = [
         "name": "Canterbury-Bankstown",
         "count": "85",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Canterbury-Bankstown",
+        "count": "88",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Canterbury-Bankstown",
+        "count": "87",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Canterbury-Bankstown",
+        "count": "89",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Canterbury-Bankstown",
+        "count": "89",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Canterbury-Bankstown",
+        "count": "89",
+        "date": "2020-04-24"
     },
     {
         "name": "Central Coast",
@@ -500,6 +975,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Central Coast",
+        "count": "115",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Central Coast",
+        "count": "115",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Central Coast",
+        "count": "116",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Central Coast",
+        "count": "116",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Central Coast",
+        "count": "116",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Cessnock",
         "count": "24",
         "date": "2020-04-06"
@@ -525,6 +1025,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Cessnock",
+        "count": "24",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Cessnock",
+        "count": "24",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Cessnock",
+        "count": "24",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Cessnock",
+        "count": "24",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Cessnock",
+        "count": "24",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Clarence Valley",
         "count": "8",
         "date": "2020-04-06"
@@ -548,6 +1073,31 @@ exports.suburbInfection = [
         "name": "Clarence Valley",
         "count": "8",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Clarence Valley",
+        "count": "8",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Clarence Valley",
+        "count": "8",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Clarence Valley",
+        "count": "8",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Clarence Valley",
+        "count": "8",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Clarence Valley",
+        "count": "8",
+        "date": "2020-04-24"
     },
     {
         "name": "Coffs Harbour",
@@ -573,6 +1123,31 @@ exports.suburbInfection = [
         "name": "Coffs Harbour",
         "count": "14",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Coffs Harbour",
+        "count": "14",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Coffs Harbour",
+        "count": "14",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Coffs Harbour",
+        "count": "14",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Coffs Harbour",
+        "count": "14",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Coffs Harbour",
+        "count": "14",
+        "date": "2020-04-24"
     },
     {
         "name": "Coonamble",
@@ -595,9 +1170,34 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Coonamble",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Coonamble",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Coonamble",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Coonamble",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Coonamble​",
         "count": "1-4",
         "date": "2020-04-06"
+    },
+    {
+        "name": "Coonamble​",
+        "count": "1-4",
+        "date": "2020-04-22"
     },
     {
         "name": "Cootamundra-Gundagai Regional",
@@ -618,6 +1218,31 @@ exports.suburbInfection = [
         "name": "Cootamundra-Gundagai Regional",
         "count": "1-4",
         "date": "2020-04-12"
+    },
+    {
+        "name": "Cootamundra-Gundagai Regional",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Cootamundra-Gundagai Regional",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Cootamundra-Gundagai Regional",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Cootamundra-Gundagai Regional",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Cootamundra-Gundagai Regional",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Cootamundra-Gundagai Regional​​",
@@ -650,6 +1275,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Cumberland",
+        "count": "66",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Cumberland",
+        "count": "66",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Cumberland",
+        "count": "66",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Cumberland",
+        "count": "66",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Cumberland",
+        "count": "66",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Dubbo Regional",
         "count": "5",
         "date": "2020-04-06"
@@ -675,6 +1325,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Dubbo Regional",
+        "count": "5",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Dubbo Regional",
+        "count": "5",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Dubbo Regional",
+        "count": "5",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Dubbo Regional",
+        "count": "5",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Dubbo Regional",
+        "count": "5",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Dungog",
         "count": "5",
         "date": "2020-04-06"
@@ -700,6 +1375,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Dungog",
+        "count": "5",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Dungog",
+        "count": "5",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Dungog",
+        "count": "5",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Dungog",
+        "count": "5",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Dungog",
+        "count": "5",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Eurobodalla",
         "count": "10",
         "date": "2020-04-06"
@@ -723,6 +1423,31 @@ exports.suburbInfection = [
         "name": "Eurobodalla",
         "count": "10",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Eurobodalla",
+        "count": "10",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Eurobodalla",
+        "count": "10",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Eurobodalla",
+        "count": "10",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Eurobodalla",
+        "count": "10",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Eurobodalla",
+        "count": "10",
+        "date": "2020-04-24"
     },
     {
         "name": "Fairfield",
@@ -750,6 +1475,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Fairfield",
+        "count": "29",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Fairfield",
+        "count": "29",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Fairfield",
+        "count": "29",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Fairfield",
+        "count": "29",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Fairfield",
+        "count": "30",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Federation",
         "count": "7",
         "date": "2020-04-06"
@@ -773,6 +1523,31 @@ exports.suburbInfection = [
         "name": "Federation",
         "count": "8",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Federation",
+        "count": "8",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Federation",
+        "count": "8",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Federation",
+        "count": "8",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Federation",
+        "count": "8",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Federation",
+        "count": "8",
+        "date": "2020-04-24"
     },
     {
         "name": "Georges River",
@@ -800,6 +1575,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Georges River",
+        "count": "59",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Georges River",
+        "count": "59",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Georges River",
+        "count": "60",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Georges River",
+        "count": "59",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Georges River",
+        "count": "59",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Glen Innes Severn",
         "count": "1-4",
         "date": "2020-04-06"
@@ -823,6 +1623,31 @@ exports.suburbInfection = [
         "name": "Glen Innes Severn",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Glen Innes Severn",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Glen Innes Severn",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Glen Innes Severn",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Glen Innes Severn",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Glen Innes Severn",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Goulburn Mulwaree",
@@ -850,6 +1675,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Goulburn Mulwaree",
+        "count": "8",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Goulburn Mulwaree",
+        "count": "9",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Goulburn Mulwaree",
+        "count": "9",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Goulburn Mulwaree",
+        "count": "9",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Goulburn Mulwaree",
+        "count": "9",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Greater Hume Shire",
         "count": "1-4",
         "date": "2020-04-06"
@@ -875,6 +1725,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Greater Hume Shire",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Greater Hume Shire",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Greater Hume Shire",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Greater Hume Shire",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Greater Hume Shire",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Griffith",
         "count": "1-4",
         "date": "2020-04-06"
@@ -900,6 +1775,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Griffith",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Griffith",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Griffith",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Griffith",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Griffith",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Gunnedah",
         "count": "1-4",
         "date": "2020-04-06"
@@ -923,6 +1823,31 @@ exports.suburbInfection = [
         "name": "Gunnedah",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Gunnedah",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Gunnedah",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Gunnedah",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Gunnedah",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Gunnedah",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Hawkesbury",
@@ -950,6 +1875,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Hawkesbury",
+        "count": "24",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Hawkesbury",
+        "count": "25",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Hawkesbury",
+        "count": "25",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Hawkesbury",
+        "count": "25",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Hawkesbury",
+        "count": "25",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Hay",
         "count": "1-4",
         "date": "2020-04-06"
@@ -975,6 +1925,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Hay",
+        "count": "​1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Hay",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Hay",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Hay",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Hay",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Hilltops",
         "count": "1-4",
         "date": "2020-04-06"
@@ -998,6 +1973,31 @@ exports.suburbInfection = [
         "name": "Hilltops",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Hilltops",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Hilltops",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Hilltops",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Hilltops",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Hilltops",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Hornsby",
@@ -1025,6 +2025,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Hornsby",
+        "count": "49",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Hornsby",
+        "count": "49",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Hornsby",
+        "count": "51",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Hornsby",
+        "count": "54",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Hornsby",
+        "count": "54",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Hunters Hill",
         "count": "17",
         "date": "2020-04-06"
@@ -1048,6 +2073,31 @@ exports.suburbInfection = [
         "name": "Hunters Hill",
         "count": "21",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Hunters Hill",
+        "count": "21",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Hunters Hill",
+        "count": "21",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Hunters Hill",
+        "count": "22",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Hunters Hill",
+        "count": "22",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Hunters Hill",
+        "count": "22",
+        "date": "2020-04-24"
     },
     {
         "name": "Inner West",
@@ -1075,6 +2125,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Inner West",
+        "count": "70",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Inner West",
+        "count": "70",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Inner West",
+        "count": "70",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Inner West",
+        "count": "72",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Inner West",
+        "count": "72",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Inverell",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1100,6 +2175,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Inverell",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Inverell",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Inverell",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Inverell",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Inverell",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Kempsey",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1125,6 +2225,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Kempsey",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Kempsey",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Kempsey",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Kempsey",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Kempsey",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Kiama",
         "count": "7",
         "date": "2020-04-06"
@@ -1148,6 +2273,31 @@ exports.suburbInfection = [
         "name": "Kiama",
         "count": "7",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Kiama",
+        "count": "7",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Kiama",
+        "count": "7",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Kiama",
+        "count": "7",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Kiama",
+        "count": "7",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Kiama",
+        "count": "7",
+        "date": "2020-04-24"
     },
     {
         "name": "Ku-ring-gai",
@@ -1173,6 +2323,31 @@ exports.suburbInfection = [
         "name": "Ku-ring-gai",
         "count": "69",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Ku-ring-gai",
+        "count": "69",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Ku-ring-gai",
+        "count": "69",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Ku-ring-gai",
+        "count": "69",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Ku-ring-gai",
+        "count": "69",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Ku-ring-gai",
+        "count": "69",
+        "date": "2020-04-24"
     },
     {
         "name": "Lachlan",
@@ -1210,6 +2385,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Lake Macquarie",
+        "count": "55",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Lake Macquarie",
+        "count": "56",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Lake Macquarie",
+        "count": "57",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Lake Macquarie",
+        "count": "57",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Lake Macquarie",
+        "count": "57",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Lane Cove",
         "count": "37",
         "date": "2020-04-06"
@@ -1233,6 +2433,31 @@ exports.suburbInfection = [
         "name": "Lane Cove",
         "count": "37",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Lane Cove",
+        "count": "37",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Lane Cove",
+        "count": "37",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Lane Cove",
+        "count": "37",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Lane Cove",
+        "count": "38",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Lane Cove",
+        "count": "38",
+        "date": "2020-04-24"
     },
     {
         "name": "Lismore",
@@ -1260,6 +2485,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Lismore",
+        "count": "5",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Lismore",
+        "count": "5",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Lismore",
+        "count": "5",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Lismore",
+        "count": "5",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Lismore",
+        "count": "5",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Lithgow",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1283,6 +2533,31 @@ exports.suburbInfection = [
         "name": "Lithgow",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Lithgow",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Lithgow",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Lithgow",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Lithgow",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Lithgow",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Liverpool",
@@ -1310,6 +2585,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Liverpool",
+        "count": "47",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Liverpool",
+        "count": "48",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Liverpool",
+        "count": "49",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Liverpool",
+        "count": "49",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Liverpool",
+        "count": "49",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Liverpool Plains",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1333,6 +2633,31 @@ exports.suburbInfection = [
         "name": "Liverpool Plains",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Liverpool Plains",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Liverpool Plains",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Liverpool Plains",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Liverpool Plains",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Liverpool Plains",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Maitland",
@@ -1360,6 +2685,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Maitland",
+        "count": "31",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Maitland",
+        "count": "33",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Maitland",
+        "count": "33",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Maitland",
+        "count": "33",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Maitland",
+        "count": "33",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Mid-Coast",
         "count": "37",
         "date": "2020-04-06"
@@ -1385,6 +2735,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Mid-Coast",
+        "count": "37",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Mid-Coast",
+        "count": "37",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Mid-Coast",
+        "count": "37",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Mid-Coast",
+        "count": "37",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Mid-Coast",
+        "count": "37",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Mid-Western Regional",
         "count": "5",
         "date": "2020-04-06"
@@ -1408,6 +2783,51 @@ exports.suburbInfection = [
         "name": "Mid-Western Regional",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Mid-Western Regional",
+        "count": "5",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Mid-Western Regional",
+        "count": "6",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Mid-Western Regional",
+        "count": "6",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Mid-Western Regional",
+        "count": "6",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Mid-Western Regional",
+        "count": "6",
+        "date": "2020-04-24"
+    },
+    {
+        "name": "Moree Plains",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Moree Plains",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Moree Plains",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Moree Plains",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Mosman",
@@ -1435,6 +2855,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Mosman",
+        "count": "42",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Mosman",
+        "count": "42",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Mosman",
+        "count": "42",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Mosman",
+        "count": "42",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Mosman",
+        "count": "42",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Murrumbidgee",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1458,6 +2903,31 @@ exports.suburbInfection = [
         "name": "Murrumbidgee",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Murrumbidgee",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Murrumbidgee",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Murrumbidgee",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Murrumbidgee",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Murrumbidgee",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Muswellbrook",
@@ -1485,6 +2955,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Muswellbrook",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Muswellbrook",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Muswellbrook",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Muswellbrook",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Muswellbrook",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Nambucca",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1510,6 +3005,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Nambucca",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Nambucca",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Nambucca",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Nambucca",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Nambucca",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Narrandera",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1535,6 +3055,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Narrandera",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Narrandera",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Narrandera",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Narrandera",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Narrandera",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Narromine",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1558,6 +3103,31 @@ exports.suburbInfection = [
         "name": "Narromine",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Narromine",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Narromine",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Narromine",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Narromine",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Narromine",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Newcastle",
@@ -1585,6 +3155,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Newcastle",
+        "count": "54",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Newcastle",
+        "count": "54",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Newcastle",
+        "count": "55",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Newcastle",
+        "count": "55",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Newcastle",
+        "count": "55",
+        "date": "2020-04-24"
+    },
+    {
         "name": "North Sydney",
         "count": "44",
         "date": "2020-04-06"
@@ -1608,6 +3203,31 @@ exports.suburbInfection = [
         "name": "North Sydney",
         "count": "46",
         "date": "2020-04-14"
+    },
+    {
+        "name": "North Sydney",
+        "count": "47",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "North Sydney",
+        "count": "47",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "North Sydney",
+        "count": "47",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "North Sydney",
+        "count": "48",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "North Sydney",
+        "count": "48",
+        "date": "2020-04-24"
     },
     {
         "name": "Northern Beaches",
@@ -1635,6 +3255,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Northern Beaches",
+        "count": "150",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Northern Beaches",
+        "count": "150",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Northern Beaches",
+        "count": "152",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Northern Beaches",
+        "count": "154",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Northern Beaches",
+        "count": "154",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Orange",
         "count": "8",
         "date": "2020-04-06"
@@ -1653,6 +3298,31 @@ exports.suburbInfection = [
         "name": "Orange",
         "count": "9",
         "date": "2020-04-12"
+    },
+    {
+        "name": "Orange",
+        "count": "10",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Orange",
+        "count": "10",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Orange",
+        "count": "11",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Orange",
+        "count": "10",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Orange",
+        "count": "10",
+        "date": "2020-04-24"
     },
     {
         "name": "Orang​e",
@@ -1680,6 +3350,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Parkes",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Parkes",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Parkes",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Parkes",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Parkes",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Parramatta",
         "count": "42",
         "date": "2020-04-06"
@@ -1705,6 +3400,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Parramatta",
+        "count": "45",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Parramatta",
+        "count": "45",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Parramatta",
+        "count": "45",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Parramatta",
+        "count": "45",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Parramatta",
+        "count": "45",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Penrith",
         "count": "58",
         "date": "2020-04-06"
@@ -1723,6 +3443,31 @@ exports.suburbInfection = [
         "name": "Penrith",
         "count": "60",
         "date": "2020-04-12"
+    },
+    {
+        "name": "Penrith",
+        "count": "77",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Penrith",
+        "count": "91",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Penrith",
+        "count": "100",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Penrith",
+        "count": "101",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Penrith",
+        "count": "102",
+        "date": "2020-04-24"
     },
     {
         "name": "Port Macquarie-Hastings",
@@ -1750,6 +3495,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Port Macquarie-Hastings",
+        "count": "28",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Port Macquarie-Hastings",
+        "count": "28",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Port Macquarie-Hastings",
+        "count": "26",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Port Macquarie-Hastings",
+        "count": "26",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Port Macquarie-Hastings",
+        "count": "26",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Port Stephens",
         "count": "30",
         "date": "2020-04-06"
@@ -1775,6 +3545,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Port Stephens",
+        "count": "34",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Port Stephens",
+        "count": "34",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Port Stephens",
+        "count": "34",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Port Stephens",
+        "count": "34",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Port Stephens",
+        "count": "34",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Queanbeyan-Palerang Regional",
         "count": "10",
         "date": "2020-04-06"
@@ -1798,6 +3593,31 @@ exports.suburbInfection = [
         "name": "Queanbeyan-Palerang Regional",
         "count": "10",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Queanbeyan-Palerang Regional",
+        "count": "10",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Queanbeyan-Palerang Regional",
+        "count": "10",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Queanbeyan-Palerang Regional",
+        "count": "10",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Queanbeyan-Palerang Regional",
+        "count": "10",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Queanbeyan-Palerang Regional",
+        "count": "10",
+        "date": "2020-04-24"
     },
     {
         "name": "Randwick",
@@ -1825,6 +3645,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Randwick",
+        "count": "84",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Randwick",
+        "count": "85",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Randwick",
+        "count": "86",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Randwick",
+        "count": "85",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Randwick",
+        "count": "85",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Richmond Valley",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1848,6 +3693,31 @@ exports.suburbInfection = [
         "name": "Richmond Valley",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Richmond Valley",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Richmond Valley",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Richmond Valley",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Richmond Valley",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Richmond Valley",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Ryde",
@@ -1875,6 +3745,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Ryde",
+        "count": "66",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Ryde",
+        "count": "66",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Ryde",
+        "count": "66",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Ryde",
+        "count": "66",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Ryde",
+        "count": "66",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Shellharbour",
         "count": "21",
         "date": "2020-04-06"
@@ -1898,6 +3793,31 @@ exports.suburbInfection = [
         "name": "Shellharbour",
         "count": "21",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Shellharbour",
+        "count": "21",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Shellharbour",
+        "count": "21",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Shellharbour",
+        "count": "21",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Shellharbour",
+        "count": "21",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Shellharbour",
+        "count": "21",
+        "date": "2020-04-24"
     },
     {
         "name": "Shoalhaven",
@@ -1925,6 +3845,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Shoalhaven",
+        "count": "31",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Shoalhaven",
+        "count": "31",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Shoalhaven",
+        "count": "31",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Shoalhaven",
+        "count": "32",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Shoalhaven",
+        "count": "32",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Singleton",
         "count": "1-4",
         "date": "2020-04-06"
@@ -1950,6 +3895,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Singleton",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Singleton",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Singleton",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Singleton",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Singleton",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Snowy Monaro Regional",
         "count": "6",
         "date": "2020-04-06"
@@ -1973,6 +3943,31 @@ exports.suburbInfection = [
         "name": "Snowy Monaro Regional",
         "count": "6",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Snowy Monaro Regional",
+        "count": "6",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Snowy Monaro Regional",
+        "count": "6",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Snowy Monaro Regional",
+        "count": "6",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Snowy Monaro Regional",
+        "count": "6",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Snowy Monaro Regional",
+        "count": "6",
+        "date": "2020-04-24"
     },
     {
         "name": "Strathfield",
@@ -2000,6 +3995,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Strathfield",
+        "count": "13",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Strathfield",
+        "count": "13",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Strathfield",
+        "count": "13",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Strathfield",
+        "count": "13",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Strathfield",
+        "count": "13",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Sutherland Shire",
         "count": "81",
         "date": "2020-04-06"
@@ -2023,6 +4043,31 @@ exports.suburbInfection = [
         "name": "Sutherland Shire",
         "count": "88",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Sutherland Shire",
+        "count": "112",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Sutherland Shire",
+        "count": "114",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Sutherland Shire",
+        "count": "115",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Sutherland Shire",
+        "count": "113",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Sutherland Shire",
+        "count": "113",
+        "date": "2020-04-24"
     },
     {
         "name": "Sydney",
@@ -2050,6 +4095,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Sydney",
+        "count": "155",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Sydney",
+        "count": "156",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Sydney",
+        "count": "157",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Sydney",
+        "count": "157",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Sydney",
+        "count": "158",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Tamworth Regional",
         "count": "12",
         "date": "2020-04-06"
@@ -2075,6 +4145,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Tamworth Regional",
+        "count": "12",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Tamworth Regional",
+        "count": "13",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Tamworth Regional",
+        "count": "13",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Tamworth Regional",
+        "count": "13",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Tamworth Regional",
+        "count": "13",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Tenterfield",
         "count": "1-4",
         "date": "2020-04-06"
@@ -2098,6 +4193,31 @@ exports.suburbInfection = [
         "name": "Tenterfield",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Tenterfield",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Tenterfield",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Tenterfield",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Tenterfield",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Tenterfield",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "The Hills Shire",
@@ -2120,13 +4240,38 @@ exports.suburbInfection = [
         "date": "2020-04-12"
     },
     {
-        "name": "Tweed",
-        "count": "13",
-        "date": "2020-04-06"
+        "name": "The Hills Shire",
+        "count": "58",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "The Hills Shire",
+        "count": "59",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "The Hills Shire",
+        "count": "59",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "The Hills Shire",
+        "count": "60",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "The Hills Shire",
+        "count": "61",
+        "date": "2020-04-24"
     },
     {
         "name": "Tweed",
         "count": "13",
+        "date": "2020-04-06"
+    },
+    {
+        "name": "Tweed",
+        "count": "13",
         "date": "2020-04-08"
     },
     {
@@ -2145,6 +4290,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Tweed",
+        "count": "15",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Tweed",
+        "count": "15",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Tweed",
+        "count": "15",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Tweed",
+        "count": "15",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Tweed",
+        "count": "15",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Upper Hunter Shire",
         "count": "1-4",
         "date": "2020-04-06"
@@ -2168,6 +4338,31 @@ exports.suburbInfection = [
         "name": "Upper Hunter Shire",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Upper Hunter Shire",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Upper Hunter Shire",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Upper Hunter Shire",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Upper Hunter Shire",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Upper Hunter Shire",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Upper Lachlan Shire",
@@ -2195,6 +4390,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Upper Lachlan Shire",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Upper Lachlan Shire",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Upper Lachlan Shire",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Upper Lachlan Shire",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Upper Lachlan Shire",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Uralla",
         "count": "1-4",
         "date": "2020-04-06"
@@ -2220,6 +4440,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Uralla",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Uralla",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Uralla",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Uralla",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Uralla",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Wagga Wagga",
         "count": "10",
         "date": "2020-04-06"
@@ -2245,6 +4490,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Wagga Wagga",
+        "count": "10",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Wagga Wagga",
+        "count": "10",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Wagga Wagga",
+        "count": "10",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Wagga Wagga",
+        "count": "10",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Wagga Wagga",
+        "count": "10",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Warren",
         "count": "1-4",
         "date": "2020-04-06"
@@ -2270,6 +4540,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Warren",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Warren",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Warren",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Warren",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Warren",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Warrumbungle Shire",
         "count": "1-4",
         "date": "2020-04-06"
@@ -2293,6 +4588,31 @@ exports.suburbInfection = [
         "name": "Warrumbungle Shire",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Warrumbungle Shire",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Warrumbungle Shire",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Warrumbungle Shire",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Warrumbungle Shire",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Warrumbungle Shire",
+        "count": "1-4",
+        "date": "2020-04-24"
     },
     {
         "name": "Waverley",
@@ -2320,6 +4640,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Waverley",
+        "count": "177",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Waverley",
+        "count": "178",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Waverley",
+        "count": "180",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Waverley",
+        "count": "180",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Waverley",
+        "count": "181",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Weddin",
         "count": "1-4",
         "date": "2020-04-06"
@@ -2345,6 +4690,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Weddin",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Weddin",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Weddin",
+        "count": "1-4",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Weddin",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Weddin",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Willoughby",
         "count": "21",
         "date": "2020-04-06"
@@ -2368,6 +4738,31 @@ exports.suburbInfection = [
         "name": "Willoughby",
         "count": "21",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Willoughby",
+        "count": "22",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Willoughby",
+        "count": "22",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Willoughby",
+        "count": "22",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Willoughby",
+        "count": "22",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Willoughby",
+        "count": "22",
+        "date": "2020-04-24"
     },
     {
         "name": "Wingecarribee",
@@ -2395,6 +4790,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Wingecarribee",
+        "count": "23",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Wingecarribee",
+        "count": "23",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Wingecarribee",
+        "count": "23",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Wingecarribee",
+        "count": "25",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Wingecarribee",
+        "count": "24",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Wollondilly",
         "count": "1-4",
         "date": "2020-04-06"
@@ -2418,6 +4838,31 @@ exports.suburbInfection = [
         "name": "Wollondilly",
         "count": "1-4",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Wollondilly",
+        "count": "1-4",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Wollondilly",
+        "count": "1-4",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Wollondilly",
+        "count": "1-4",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Wollondilly",
+        "count": "1-4",
+        "date": "2020-04-24"
+    },
+    {
+        "name": "Wollondilly​",
+        "count": "1-4",
+        "date": "2020-04-20"
     },
     {
         "name": "Wollongong",
@@ -2445,6 +4890,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Wollongong",
+        "count": "51",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Wollongong",
+        "count": "51",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Wollongong",
+        "count": "52",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Wollongong",
+        "count": "52",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Wollongong",
+        "count": "52",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Woollahra",
         "count": "86",
         "date": "2020-04-06"
@@ -2470,6 +4940,31 @@ exports.suburbInfection = [
         "date": "2020-04-14"
     },
     {
+        "name": "Woollahra",
+        "count": "92",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Woollahra",
+        "count": "92",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Woollahra",
+        "count": "92",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Woollahra",
+        "count": "92",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Woollahra",
+        "count": "92",
+        "date": "2020-04-24"
+    },
+    {
         "name": "Yass Valley",
         "count": "6",
         "date": "2020-04-06"
@@ -2493,6 +4988,31 @@ exports.suburbInfection = [
         "name": "Yass Valley",
         "count": "6",
         "date": "2020-04-14"
+    },
+    {
+        "name": "Yass Valley",
+        "count": "6",
+        "date": "2020-04-16"
+    },
+    {
+        "name": "Yass Valley",
+        "count": "6",
+        "date": "2020-04-18"
+    },
+    {
+        "name": "Yass Valley",
+        "count": "6",
+        "date": "2020-04-20"
+    },
+    {
+        "name": "Yass Valley",
+        "count": "6",
+        "date": "2020-04-22"
+    },
+    {
+        "name": "Yass Valley",
+        "count": "6",
+        "date": "2020-04-24"
     },
     {
         "name": "​Penrith",
