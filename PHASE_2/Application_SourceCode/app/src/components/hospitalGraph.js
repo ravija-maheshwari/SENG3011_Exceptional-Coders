@@ -24,12 +24,12 @@ class HospitalGraph extends React.Component{
                 allData.push(doc)
             }
         })
-        if (allData.length === 0) {
-            console.log("No cases")
-        }
-        else {
-            console.log("Yes cases")
-        }
+        // if (allData.length === 0) {
+        //     console.log("No cases")
+        // }
+        // else {
+        //     console.log("Yes cases")
+        // }
         this.setState({ allData: allData })
         return allData
     }

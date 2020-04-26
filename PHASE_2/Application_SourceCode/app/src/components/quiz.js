@@ -93,7 +93,7 @@ class Quiz extends React.Component {
   }
 
   handleSubmitSingle(event) {
-    console.log("23424", this.state.evidence, this.state.singleEvidence);
+    // console.log("23424", this.state.evidence, this.state.singleEvidence);
     let evidence = this.state.evidence;
     evidence.push(this.state.singleEvidence);
     this.setState({ evidence: evidence });
@@ -105,21 +105,21 @@ class Quiz extends React.Component {
   }
 
   mySingleChangeHandler(event) {
-    console.log(event.target);
+    // console.log(event.target);
     const myEvidence = { id: event.target.id, choice_id: "present" };
     this.setState({ singleEvidence: myEvidence });
   }
 
   myChangeHandler(event) {
     let evidence = this.state.evidence;
-    console.log("@@@, ", evidence);
+    // console.log("@@@, ", evidence);
     evidence = evidence.filter(function (s) {
       return s.id !== event.target.name;
     });
     evidence.push({ id: event.target.name, choice_id: event.target.id });
-    console.log(evidence);
+    // console.log(evidence);
     this.setState({ evidence: evidence });
-    console.log(event.target);
+    // console.log(event.target);
   }
 
   callApi() {
@@ -132,7 +132,7 @@ class Quiz extends React.Component {
       age: this.state.age,
       evidence: evidence,
     };
-    console.log("CALLING WTIH THIS", data);
+    // console.log("CALLING WTIH THIS", data);
     fetch("https://api.infermedica.com/covid19/diagnosis", {
       method: "POST",
       headers: {
@@ -156,7 +156,7 @@ class Quiz extends React.Component {
       age: this.state.age,
       evidence: evidence,
     };
-    console.log("CALLING TRIAGE WTIH THIS", data);
+    // console.log("CALLING TRIAGE WTIH THIS", data);
     this.setState({ triage: true });
     fetch("https://api.infermedica.com/covid19/triage", {
       method: "POST",
@@ -199,20 +199,20 @@ class Quiz extends React.Component {
     let questions = [];
     let stop = "";
     const myObject = this.state.response;
-    console.log("ASDASD,", myObject);
+    // console.log("ASDASD,", myObject);
     if (this.state.initalised && myObject && !this.state.triage) {
       stop = myObject["should_stop"];
       if (!stop) {
         questions = myObject["question"]["items"];
         if (!single) {
-          console.log(myObject);
+        //   console.log(myObject);
         }
       } else {
         this.callTriageApi();
       }
     }
     if (this.state.triage) {
-      console.log(myObject);
+    //   console.log(myObject);
       const level = this.getLevel(myObject.triage_level);
       return this.props.isVisible ? (
         <div className="quiz-modal">
