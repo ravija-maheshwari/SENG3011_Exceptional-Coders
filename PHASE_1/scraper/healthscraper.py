@@ -38,14 +38,14 @@ db = firestore.client()
 
 # for area in all_areas:
 #     print(area)
-today = datetime.now()
+today = datetime.now().date().strftime("%Y-%m-%d")
 
 for case in cases.keys():
     # Creating document with date so that prediction graphs can be made
-    case_id = case + " (" + today.date().strftime("%d-%m-%y") + ")"
+    case_id = str(case) + " (" + today + ")"
     doc = {
-        'name': case,
-        'count': cases[case],
-        'date': today 
+        'name': str(case),
+        'count': str(cases[case]),
+        'date': str(today)
     }
     db.collection(u'nsw_cases').document(case_id).set(doc)

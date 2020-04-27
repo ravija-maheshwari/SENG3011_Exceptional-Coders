@@ -277,12 +277,18 @@ app.get('/api/v1/suburbs' , async(req, res) =>{
 
     try{
         let allSuburbs = []
-        const snapshot = await db.collection('nsw_cases').get()
+        const snapshot = await db.collection('nsw_cases').orderBy('name').get()
         snapshot.forEach(doc => {
-            let formattedDate = helpers.getFormattedDatetime(doc.data().date).slice(0,10)
+            // No need to use helper to format once database has been changed
+            // let formattedDate = helpers.getFormattedDatetime(doc.data().date).slice(0,10)
+            let formattedDate = doc.data().date
+            // Extra checks to ensure no "red dots" in values
+            let subName = doc.data().name.toString().replace(/[^A-Za-z -]/g, '')
+            let subCount = doc.data().count.toString().replace(/[^0-9 -]/g, '')
+
             let suburb = {
-                name: doc.data().name,
-                count: doc.data().count,
+                name: subName,
+                count: subCount,
                 date: formattedDate
             };
             allSuburbs.push(suburb);
