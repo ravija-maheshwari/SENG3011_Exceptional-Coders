@@ -5,7 +5,7 @@ import HospitalMarker from "./hospitalMarker";
 import SidePanel from "./sidePanel";
 import Quiz from "./quiz";
 import ContributeForm from "./contributeForm";
-import { suburbInfection } from '../datasets/suburbInfection'
+// import { suburbInfection } from '../datasets/suburbInfection'
 import {
   getRadius,
   getAvailableBeds,
@@ -79,7 +79,6 @@ class NSWMap extends React.Component {
 
       this.setState({
         hospitals: hospitals,
-        suburbCases: suburbInfection,
         updatedHospitalInfo: updatedHospitalInfo,
       });
     } catch (error) {
@@ -182,28 +181,59 @@ class NSWMap extends React.Component {
     }
   }
 
-  async displayCircles(map, maps) {
-    try {
-      // COMMENTED DUE TO QUOTA LIMITS
-    //   const suburbCases = await this.fetchSuburbs()
-      const suburbCases = suburbInfection
-      allNswAreas.forEach((suburb) => {
-        // COMMENTED DUE TO QUOTA LIMITS
-        let suburbRadius = getRadius(suburbCases, suburb);
-        new maps.Circle({
-          // strokeColor: '#FF0000',
-          // strokeOpacity: 0.8,
-          strokeWeight: 0,
-          fillColor: "#d13431",
-          fillOpacity: 0.5,
-          map,
-          center: { lat: suburb.lat, lng: suburb.lng },
-          radius: suburbRadius, // Default radius when not using fetchSuburbs()
-        });
-      });
+  // Checks if suburbCases exists in localStorage
+  // Gets value from localStorage if 1) suburbs exists in LS 2) suburbs_set_on is less than a day old
+  // Fetches /suburbs endpoint otherwise
+  async handleSuburbsInLocalStorage() {
+      // Duration of a single day in milliseconds
+      const oneDay = 1000 * 60 * 60 * 24
+
+      try {
+        //  First-time user visiting our app
+        if (localStorage.getItem('suburbs') === null) {
+            const suburbCases = await this.fetchSuburbs()
+            localStorage.setItem('suburbs', JSON.stringify(suburbCases))
+            localStorage.setItem('suburbs_set_on', +new Date)
+            return suburbCases
+        }
+        //  Old user visiting after one day
+        else if (new Date - new Date(parseInt(localStorage.getItem('suburbs_set_on'))) > oneDay) {
+            const suburbCases = await this.fetchSuburbs()
+            localStorage.setItem('suburbs', JSON.stringify(suburbCases))
+            localStorage.setItem('suburbs_set_on', +new Date)
+            return suburbCases
+        }
+        // Old user visiting on the same day (ie. within 24 hours of last localStorage update)
+        else {
+            let currSuburbs = JSON.parse(localStorage.getItem('suburbs'))
+            return currSuburbs
+        }
     } catch (error) {
-      console.log(error);
+        console.log(error)
     }
+  }
+
+  async displayCircles(map, maps) {
+    // COMMENTED DUE TO QUOTA LIMITS
+//   const suburbCases = await this.fetchSuburbs()
+    const suburbCases = await this.handleSuburbsInLocalStorage()
+    this.setState({ suburbCases: suburbCases })
+
+//   const suburbCases = suburbInfection
+    allNswAreas.forEach((suburb) => {
+    // COMMENTED DUE TO QUOTA LIMITS
+    let suburbRadius = getRadius(suburbCases, suburb);
+    new maps.Circle({
+        // strokeColor: '#FF0000',
+        // strokeOpacity: 0.8,
+        strokeWeight: 0,
+        fillColor: "#d13431",
+        fillOpacity: 0.5,
+        map,
+        center: { lat: suburb.lat, lng: suburb.lng },
+        radius: suburbRadius, // Default radius when not using fetchSuburbs()
+    });
+    });
   }
 
   setHospitalSearched(position, hospital) {

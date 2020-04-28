@@ -21,7 +21,7 @@ class NswGraph extends React.Component{
     getCurrentPoints(){
         const NUM_DAYS = getCasesDateCount(this.props.allSuburbCases); //This is number of points on x axis. UPDATE THIS IF DATASET IS UPDATED
         let points = []
-        for(let i = 0; i < NUM_DAYS; i++){
+        for(let i = 0; i <= NUM_DAYS; i++){
             let day = this.props.allSuburbCases[i].date;
             // console.log("Day  = " + day)
             let aggregate = 0;
