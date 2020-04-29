@@ -37,7 +37,8 @@ app.get('/api/v1/hospital', async(req, res) => {
             let hospital = {
                 name: doc.data().name,
                 suburb: doc.data().suburb,
-                beds: doc.data().beds
+                beds: doc.data().beds,
+                kits: doc.data().kits
             };
 
             allHospitals.push(hospital);
@@ -55,9 +56,10 @@ app.post('/api/v1/hospital', async(req,res) => {
         const hospital = {
             name: req.body['name'],
             suburb: req.body['suburb'],
-            beds: req.body['beds']
+            beds: req.body['beds'],
+            kits: req.body['kits']
         }
-        console.log(hospital)
+        // console.log(hospital)
         //Insert the hospital object
         await db.collection('hospital_details').doc().create(hospital)
         return res.status(200).send("Hospital added")
