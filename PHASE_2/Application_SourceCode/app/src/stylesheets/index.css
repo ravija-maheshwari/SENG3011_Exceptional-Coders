@@ -74,7 +74,7 @@ code {
 .info-box {
   cursor: default;
   width: 60em;
-  height: 41em;
+  height: 45em;
   position: absolute;
   border: 1px solid gray;
   border-radius: 3px;
@@ -660,12 +660,22 @@ input:checked + .slider:before {
     width: 85%;
 }
 
+.contribute-form > form > .hospital-info-label--auth {
+    display:inline-block;
+    position: fixed;
+    color: #272727;
+    font-weight: 600;
+    margin-left: 5%;
+    font-size: 14pt;
+    width: 140px;
+}
+
 .contribute-form > form > .hospital-info-label--name {
     display:inline-block;
     position: fixed;
     color: #272727;
     font-weight: 600;
-    /* margin-right: 2%; */
+    margin-top: 40px;
     margin-left: 5%;
     font-size: 14pt;
     width: 140px;
@@ -676,14 +686,25 @@ input:checked + .slider:before {
     position: fixed;
     color: #272727;
     font-weight: 600;
-    margin-top: 2%;
-    /* margin-right: 2%; */
+    margin-top: 55px;
     margin-left: 5%;
     font-size: 14pt;
     width: 140px;
 }
 
-.contribute-form > form > input {
+.contribute-form > form > .hospital-info-label--kits {
+    display:inline-block;
+    position: fixed;
+    color: #272727;
+    font-weight: 600;
+    margin-top: 95px;
+    margin-left: 5%;
+    font-size: 14pt;
+    width: 140px;
+}
+
+
+.contribute-form > form > .hospital-auth-input {
     display: inline-block;
     position: fixed;
     width: 30%;
@@ -695,16 +716,49 @@ input:checked + .slider:before {
     border: 1px solid rgb(206, 206, 206);
 }
 
-.contribute-form > form > .hospital-beds-input {
-    margin-top: 2%;
+.contribute-form > form > .hospital-name-input {
+    display: inline-block;
+    position: fixed;
+    width: 30%;
+    margin-left: 16%;
+    margin-top: 40px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 3px;
+    border: 1px solid rgb(206, 206, 206);
 }
+
+.contribute-form > form > .hospital-beds-input {
+    display: inline-block;
+    position: fixed;
+    width: 30%;
+    margin-left: 16%;
+    margin-top: 55px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 3px;
+    border: 1px solid rgb(206, 206, 206);
+}
+
+.contribute-form > form > .hospital-kits-input {
+    display: inline-block;
+    position: fixed;
+    width: 30%;
+    margin-left: 16%;
+    margin-top: 95px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 3px;
+    border: 1px solid rgb(206, 206, 206);
+}
+
 
 .contribute-form > form > .hospital-list {
     max-height: 250px;
     width: 30%;
     overflow-y: auto;
     position: fixed;
-    margin-top: 34px;
+    margin-top: 75px;
     margin-left: 16%;
 }
 /* .hospital-form-name {
@@ -738,7 +792,7 @@ input:checked + .slider:before {
     border-radius: 3px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15%;
+    margin-top: 20%;
 }
 
 .submit-hospital > input {

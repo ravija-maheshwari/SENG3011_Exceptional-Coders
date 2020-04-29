@@ -104,10 +104,12 @@ class NSWMap extends React.Component {
         // Public hospitals in NSW
         let bedsAvailable;
         let totalBeds;
+        let kitsAvailable;
 
         if (updatedHospitalInfo.length === 0) {
             bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
             totalBeds = getTotalBeds(h, hospitalDetail);
+            kitsAvailable = null
         }
 
         else {
@@ -115,10 +117,12 @@ class NSWMap extends React.Component {
                 if (updatedHospitalInfo[i].name === h["name"]) {
                     bedsAvailable = getAvailableBeds(h, updatedHospitalInfo, suburbCases)
                     totalBeds = updatedHospitalInfo[i].beds
+                    kitsAvailable = updatedHospitalInfo[i].kits
                 }
                 else {
                     bedsAvailable = getAvailableBeds(h, hospitalDetail, suburbCases);
                     totalBeds = getTotalBeds(h, hospitalDetail);
+                    kitsAvailable = null
                 }
             }
         }
@@ -134,6 +138,7 @@ class NSWMap extends React.Component {
             hospitals={this.state.hospitals}
             totalBeds={totalBeds}
             bedsAvailable={bedsAvailable}
+            kitsAvailable={kitsAvailable}
             selectedSuburb={this.state.selectedSuburb}
             allSuburbCases={this.state.suburbCases}
             autoCloseInfoBox={this.autoCloseInfoBox}

@@ -40,6 +40,11 @@ class InfoBox extends React.Component{
                 <div className="hospital-detail">
                     <p> Total beds: <p className="detail-value"> {this.props.totalBeds} </p></p>
                     <p> Beds Available: <p className="detail-value"> {this.props.bedsAvailable} </p></p>
+                    {this.props.kitsAvailable !== null ?
+                        <p> Total COVID-19 Test Kits Available: <p className="detail-value"> {this.props.kitsAvailable} </p></p>    
+                    :
+                        null
+                    }
                     {this.props.distanceToSuburb
                     ?
                         <p> Distance to home suburb: <p className="detail-value"> {this.props.distanceToSuburb} kms </p> </p>

@@ -66,7 +66,7 @@ class SidePanel extends React.Component {
     for (var i = 0; i < hospitals.length; i++) {
       if (hospitals[i].name.includes(hospital)) {
         position = {
-          lat: hospitals[i].latitude - 0.25,
+          lat: hospitals[i].latitude - 0.31,
           lng: hospitals[i].longitude + 0.35,
         };
       }
@@ -89,7 +89,7 @@ class SidePanel extends React.Component {
     for (var i = 0; i < hospitals.length; i++) {
       if (hospitals[i].name.includes(hospital)) {
         position = {
-          lat: hospitals[i].latitude - 0.25,
+          lat: hospitals[i].latitude - 0.31,
           lng: hospitals[i].longitude + 0.35,
         };
       }

@@ -29,7 +29,7 @@ class HospitalMarker extends React.Component {
 
         for (var i=0; i<hospitals.length; i++) {
             if (hospitals[i].name.includes(this.props.name)) {
-                position = { lat: hospitals[i].latitude - 0.25, lng: hospitals[i].longitude + 0.35 }
+                position = { lat: hospitals[i].latitude - 0.31, lng: hospitals[i].longitude + 0.35 }
             }
         }
 
@@ -68,6 +68,7 @@ class HospitalMarker extends React.Component {
                     closeInfoDisplayed = {this.closeInfo}
                     totalBeds = {this.props.totalBeds}
                     bedsAvailable = {this.props.bedsAvailable}
+                    kitsAvailable = {this.props.kitsAvailable}
                     suburb = {this.props.suburb}
                     distanceToSuburb = {distanceToSuburb}
                     allSuburbCases = {this.props.allSuburbCases}
