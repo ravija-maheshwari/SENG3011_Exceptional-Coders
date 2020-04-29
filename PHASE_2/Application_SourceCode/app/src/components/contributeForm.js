@@ -3,15 +3,18 @@ import { getPotentialHospitalList, getHospitalSuburb } from '../helpers'
 import { hospitalDetail } from '../datasets/hospitalDetail'
 
 const HOSPITAL_INFO_URL = "https://us-central1-seng3011-859af.cloudfunctions.net/app/api/v1/hospital"
+const ADMIN_PASS = "hospadmin123"
 
 class ContributeForm extends React.Component{
     constructor(props) {
         super(props);
 
         this.state = {
+            passwordInput: "",
             hospitalInput: "",
             hospitalEntered: "",
             bedsInput: "",
+            kitsInput: "",
             isEnteringHospital: false,
             potentialHospitals: [],
             hospitalSuburb: "",
@@ -24,37 +27,57 @@ class ContributeForm extends React.Component{
 
     async submitHospitalInfo(evt) {
         evt.preventDefault()
-        let { hospitalEntered, bedsInput, hospitalSuburb } = this.state
+        let { passwordInput, hospitalEntered, bedsInput, kitsInput, hospitalSuburb } = this.state
 
-        try {
-            let postBody = {
-                name: hospitalEntered,
-                suburb: hospitalSuburb,
-                beds: bedsInput
-            }
+        if (passwordInput !== ADMIN_PASS) {
+            this.setState({ isSubmittedCorrectly: 2 })
+        }
 
-            const response = await fetch(HOSPITAL_INFO_URL, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(postBody)
-            })
+        else if (hospitalEntered.length === 0 || bedsInput.length === 0 || kitsInput.length === 0) {
+            this.setState({ isSubmittedCorrectly: 0 })
+            // Since we don't want to show any message if they haven't entered all the info
+        }
 
-            if (response.status === 200) {
-                this.props.addUpdatedHospitalInfo(postBody)
-                // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
-                this.setState({ isSubmittedCorrectly: 1 })
-            }
-            else {
+        else {
+            try {
+                let postBody = {
+                    name: hospitalEntered,
+                    suburb: hospitalSuburb,
+                    beds: bedsInput,
+                    kits: kitsInput
+                }
+
+                const response = await fetch(HOSPITAL_INFO_URL, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postBody)
+                })
+
+                if (response.status === 200) {
+                    this.props.addUpdatedHospitalInfo(postBody)
+                    // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
+                    this.setState({ isSubmittedCorrectly: 1 })
+                }
+                else {
+                    // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
+                    this.setState({ isSubmittedCorrectly: 2 })
+                }
+
+            } catch (error) {
                 // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
                 this.setState({ isSubmittedCorrectly: 2 })
             }
-
-        } catch (error) {
-            // isSubmittedCorrectly -> 0: No message, 1: submitted successfully 2: submission gave error
-            this.setState({ isSubmittedCorrectly: 2 })
         }
+    }
+
+    handlePasswordChange(evt) {
+        this.setState({ passwordInput: evt.target.value })
+    }
+
+    handleKitsChange(evt) {
+        this.setState({ kitsInput: evt.target.value })
     }
 
     handleHospitalSearch(evt){
@@ -87,6 +110,7 @@ class ContributeForm extends React.Component{
     }
 
     closeForm() {
+        this.setState({ isSubmittedCorrectly: 0 })
         this.props.closeForm()
     }
 
@@ -100,9 +124,16 @@ class ContributeForm extends React.Component{
                         <span className="close-info-box" onClick={this.closeForm.bind(this)}> &#x2715; </span>
                         <p className="contribute-title"> Are you a hospital admin? Contribute to our data</p>
                         <form onSubmit={(evt) => this.submitHospitalInfo(evt)}>
-                            {/* <div className="hospital-form-name"> */}
+                            <label className="hospital-info-label--auth"> Password: </label>
+                            <input placeholder="Enter password..."
+                                    className="hospital-auth-input"
+                                    value={this.state.passwordInput}
+                                    onChange={evt => this.handlePasswordChange(evt)}
+                                    type="password">
+                            </input>
                             <label className="hospital-info-label--name"> Hospital Name: </label>
                             <input placeholder="Enter hospital name..."
+                                    className="hospital-name-input"
                                     value={this.state.hospitalInput}
                                     onChange={evt => this.handleHospitalSearch(evt)}
                                     type="text"
@@ -125,6 +156,14 @@ class ContributeForm extends React.Component{
                                     type="text"
                                     pattern="[0-9]+">
                             </input>
+                            <label className="hospital-info-label--kits"> Test kits: </label>
+                            <input placeholder="Enter kits available..."
+                                    className="hospital-kits-input"
+                                    value={this.state.kitsInput}
+                                    onChange={evt => this.handleKitsChange(evt)}
+                                    type="text"
+                                    pattern="[0-9]+">
+                            </input>
                             <div className="submit-hospital">
                                 <input type="submit" value="Submit"/>
                             </div>
@@ -134,7 +173,7 @@ class ContributeForm extends React.Component{
                         : (this.state.isSubmittedCorrectly === 1) ?
                             <p className="submit-message-green"> Information Updated for {this.state.hospitalEntered}. </p>
                         :
-                            <p className="submit-message-red"> Something went wrong, please try again. </p>
+                            <p className="submit-message-red"> Invalid Credentials. </p>
                         }
                     </div>
                 </div>
