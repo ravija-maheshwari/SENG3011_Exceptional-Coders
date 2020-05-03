@@ -50,13 +50,18 @@ exports.getAvailableBeds = function(hospital, hospitalDetail, suburbCases){
         //Going thru hospital details
         if (hospital.name.includes(hospitalDetail[i].name) || hospitalDetail[i].name.includes(hospital.name)) {
             //Found a match
+            let hasCases = false
             for (let j = 0; j < suburbCases.length-1 ; j++) {
                 let hospDetailSub = hospitalDetail[i].suburb
                 let subName = suburbCases[j].name
                 if((hospDetailSub.includes(subName) || subName.includes(hospDetailSub)) && subName !== suburbCases[j+1].name) {
                     beds = Math.floor(hospitalDetail[i].beds) - getIntegerCases(suburbCases[j].count)
+                    hasCases = true
                     break
                 }
+            }
+            if (!hasCases) {
+                return Math.floor(hospitalDetail[i].beds)
             }
         }
     }
